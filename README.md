@@ -14,3 +14,7 @@ In addition, the folder [material/](material) contains (also from the previous t
 
 * [TOC.md](https://github.com/albertoacerbi/IBM-cultevo-bookdown/blob/master/material/TOC.md): Table of content draft 
 
+* [TODO_chapters.md](https://github.com/albertoacerbi/IBM-cultevo-bookdown/blob/master/material/TODO_chapters.md): we can record here tasks to do in specific chapters (and who is taking care of them at the moment)   
+
+* [TODO_general.md](https://github.com/albertoacerbi/IBM-cultevo-bookdown/blob/master/material/TODO_general.md): we can record here general tasks to do (and who is taking care of them at the moment)   
+ 
