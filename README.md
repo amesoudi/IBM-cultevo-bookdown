@@ -8,7 +8,7 @@ The repository contains so far a minimal working structure of the book, realised
 
 The first two chapters are copied (unmdofied) from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo).
 
-In addition, the folder [material/](material) contains (also from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo): 
+In addition, the folder [material/](material) contains (also from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo)): 
 
 * [General.md](General.md): a document with general considerations about the project
 
