@@ -1,9 +1,5 @@
----
-title: "Simulation Models of Cultural Evolution"
-author: "Alex Mesoudi"
----
 
-### Model 4: Biased transmission (conformist bias)
+# Biased transmission (conformist bias)
 
 Model 3 looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will look at another kind of biased transmission: conformity (or 'positive frequency dependent bias'). Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics. 
 
@@ -229,7 +225,7 @@ When $A$ starts off in a minority ($p_0 = 0.45$), most if not all runs should re
 
 ***
 
-### Summary of Model 4
+## Summary of Model 4
 
 Model 4 explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this with the direct or content biased transmission from Model 4, where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.
 
@@ -239,7 +235,7 @@ The major programming innovation in Model 4 was the use of an intermediate dataf
 
 ***
 
-### Analytic Appendix
+## Analytic appendix
 
 An alternative way of doing all the above is with deterministic recursions, as Boyd & Richerson (1985) originally did.
 

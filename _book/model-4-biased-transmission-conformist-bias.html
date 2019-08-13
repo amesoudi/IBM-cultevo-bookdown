@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Model 4: Biased transmission (conformist bias) | Individual-based models of cultural evolution</title>
+  <meta name="description" content="A minimal working structure for the book" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Model 4: Biased transmission (conformist bias) | Individual-based models of cultural evolution" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A minimal working structure for the book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Model 4: Biased transmission (conformist bias) | Individual-based models of cultural evolution" />
+  
+  <meta name="twitter:description" content="A minimal working structure for the book" />
+  
+
+<meta name="author" content="Alberto Acerbi" />
+<meta name="author" content="Alex Mesoudi" />
+<meta name="author" content="Marco Smolla" />
+
+
+<meta name="date" content="2019-08-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="biased-transmission-directcontent-bias.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Individual-based models of cultural evolution</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html"><i class="fa fa-check"></i><b>2</b> Unbiased transmission</a><ul>
+<li class="chapter" data-level="2.1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>2.1</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="2.2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#plotting-the-model-results"><i class="fa fa-check"></i><b>2.2</b> Plotting the model results</a></li>
+<li class="chapter" data-level="2.3" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>2.3</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="2.4" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>2.4</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="2.5" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#varying-initial-conditions"><i class="fa fa-check"></i><b>2.5</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="2.6" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#summary-of-the-model"><i class="fa fa-check"></i><b>2.6</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.7" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#analytical-appendix"><i class="fa fa-check"></i><b>2.7</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>3</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="3.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>3.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="3.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>3.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="3.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>3.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>3.4</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-directcontent-bias.html"><a href="biased-transmission-directcontent-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission (direct/content bias)</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-directcontent-bias.html"><a href="biased-transmission-directcontent-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>4.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-directcontent-bias.html"><a href="biased-transmission-directcontent-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>4.2</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="model-4-biased-transmission-conformist-bias.html"><a href="model-4-biased-transmission-conformist-bias.html"><i class="fa fa-check"></i><b>5</b> Model 4: Biased transmission (conformist bias)</a><ul>
+<li class="chapter" data-level="5.1" data-path="model-4-biased-transmission-conformist-bias.html"><a href="model-4-biased-transmission-conformist-bias.html#summary-of-model-4"><i class="fa fa-check"></i><b>5.1</b> Summary of Model 4</a></li>
+<li class="chapter" data-level="5.2" data-path="model-4-biased-transmission-conformist-bias.html"><a href="model-4-biased-transmission-conformist-bias.html#analytic-appendix"><i class="fa fa-check"></i><b>5.2</b> Analytic appendix</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Individual-based models of cultural evolution</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-4-biased-transmission-conformist-bias" class="section level1">
+<h1><span class="header-section-number">5</span> Model 4: Biased transmission (conformist bias)</h1>
+<p>Model 3 looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will look at another kind of biased transmission: conformity (or ‘positive frequency dependent bias’). Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics.</p>
+<p>For example, imagine trait <span class="math inline">\(A\)</span> has a frequency of 0.7 in the population, with the rest possessing trait <span class="math inline">\(B\)</span>. An unbiased learner would adopt trait <span class="math inline">\(A\)</span> with a probability exactly equal to 0.7. This is unbiased transmission, and is what happens in Model 1: by picking a member of the previous generation at random, the probability of adoption in Model 1 is equal to the frequency of that trait amongst the previous generation.</p>
+<p>A conformist learner, on the other hand, would adopt trait <span class="math inline">\(A\)</span> with a probability greater than 0.7. In other words, common traits get an ‘adoption boost’ relative to unbiased transmission. Uncommon traits get an equivalent ‘adoption penalty’. The magnitude of this boost or penalty can be controlled by a parameter, which we will call <span class="math inline">\(D\)</span>.</p>
+<p>Let’s keep things simple in our model. Rather than assuming that individuals sample across the entire population, which in any case might be implausible in large populations, let’s assume they pick only three demonstrators at random. Why three? This is the minimum number of demonstrators that can yield a majority (i.e. 2 vs 1), which we need in order to implement conformity. When two demonstrators have one trait and the other demonstrator has a different trait, we want to boost the probability of adoption for the majority trait, and reduce it for the minority trait.</p>
+<p>Following Boyd and Richerson (1985), we can specify the probability of adoption as follows:</p>
+<p><strong>Table 1: Probability of adopting trait <span class="math inline">\(A\)</span> for each possible combination of traits amongst three demonstrators</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+<col width="43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Demonstrator 1</th>
+<th>Demonstrator 2</th>
+<th>Demonstrator 3</th>
+<th>Probability of adopting trait <span class="math inline">\(A\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(2/3 + D/3\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(1/3 - D/3\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The first row says that when all demonstrators have trait <span class="math inline">\(A\)</span>, then trait <span class="math inline">\(A\)</span> is definitely adopted. Similarly, the bottom row says that when all demonstrators have trait <span class="math inline">\(B\)</span>, then trait <span class="math inline">\(A\)</span> is never adopted, and by implication trait <span class="math inline">\(B\)</span> is always adopted.</p>
+<p>For the three combinations where there are two <span class="math inline">\(A\)</span>s and one <span class="math inline">\(B\)</span>, the probability of adopting trait <span class="math inline">\(A\)</span> is <span class="math inline">\(2/3\)</span>, which it would be under unbiased transmission (because two out of three demonstrators have <span class="math inline">\(A\)</span>), plus the conformist adoption boost specified by <span class="math inline">\(D\)</span>. <span class="math inline">\(D\)</span> is divided by three so that it varies from 0 to 1.</p>
+<p>Similarly, for the three combinations where there are two <span class="math inline">\(B\)</span>s and one <span class="math inline">\(A\)</span>, the probability of adopting <span class="math inline">\(A\)</span> is 1/3 minus the conformist adoption penalty specified by <span class="math inline">\(D\)</span>.</p>
+<p>Let’s implement these assumptions in the kind of agent-based model we’ve been building so far. As before, assume <span class="math inline">\(N\)</span> agents each of whom possess one of two traits <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. The frequency of <span class="math inline">\(A\)</span> is denoted by <span class="math inline">\(p\)</span>. The initial frequency of <span class="math inline">\(A\)</span> in generation <span class="math inline">\(t = 1\)</span> is <span class="math inline">\(p_0\)</span>. Rather than going straight to a function, let’s go step by step.</p>
+<p>First we’ll specify our parameters, <span class="math inline">\(N\)</span> and <span class="math inline">\(p_0\)</span> as before, plus the new conformity parameter <span class="math inline">\(D\)</span>. We can also create an <em>agent</em> dataframe and fill it with <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s in the proportion specified by <span class="math inline">\(p_0\)</span>, again exactly as before. To remind ourselves what <em>agent</em> looks like, we use the <strong>head</strong> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
+p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span>
+D &lt;-<span class="st"> </span><span class="dv">1</span>
+
+agent &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>,<span class="dv">1</span><span class="op">-</span>p_<span class="dv">0</span>)), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)  <span class="co"># create first generation</span>
+
+<span class="kw">head</span>(agent)</code></pre></div>
+<pre><code>##   trait
+## 1     A
+## 2     B
+## 3     A
+## 4     A
+## 5     A
+## 6     A</code></pre>
+<p>Now we’ll create a dataframe called <em>demonstrators</em> that picks, for each new agent in the next generation, three demonstrators at random from the current population of agents. It therefore needs three columns/variables, one for each of the demonstrators, and <span class="math inline">\(N\)</span> rows, one for each new agent. We fill each column with randomly chosen traits from the <em>agent</em> dataframe. We can view this with <strong>head</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span>
+demonstrators &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">stringsAsFactors =</span> F)
+
+<span class="kw">head</span>(demonstrators)</code></pre></div>
+<pre><code>##   dem1 dem2 dem3
+## 1    A    A    A
+## 2    B    B    A
+## 3    A    B    B
+## 4    B    B    A
+## 5    B    A    A
+## 6    A    A    B</code></pre>
+<p>Think of each row here as containing the traits of three randomly-chosen demonstrators chosen by each new next-generation agent. Now we want to calculate the probability of adoption of <span class="math inline">\(A\)</span> for each of these three-trait demonstrator combinations.</p>
+<p>First we need to get the number of <span class="math inline">\(A\)</span>s in each combination. Then we can replace the traits in <em>agent</em> based on the probabilities in Table 1. When all demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span>. When no demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(B\)</span>. When two out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(2/3 + D/3\)</span> and <span class="math inline">\(B\)</span> otherwise. When one out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(1/3 - D/3\)</span> and <span class="math inline">\(B\)</span> otherwise.</p>
+<p>To check it works, we can add the new <em>agent</em> dataframe as a column to <em>demonstrators</em> and view the latter with <strong>head</strong>. This will let us see the three demonstrators and the resulting new trait side by side.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the number of As in each 3-dem combo</span>
+numAs &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)
+
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span>
+
+prob &lt;-<span class="st"> </span><span class="kw">runif</span>(N)
+
+<span class="co"># when A is a majority, 2/3</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="co"># when A is a minority, 1/3</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="co"># for testing only, add the new traits to the demonstrator dataframe and show it</span>
+demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>agent<span class="op">$</span>trait
+<span class="kw">head</span>(demonstrators, <span class="dv">20</span>)</code></pre></div>
+<pre><code>##    dem1 dem2 dem3 newtrait
+## 1     A    A    A        A
+## 2     B    B    A        B
+## 3     A    B    B        B
+## 4     B    B    A        B
+## 5     B    A    A        A
+## 6     A    A    B        A
+## 7     B    B    B        B
+## 8     A    B    B        B
+## 9     B    A    B        B
+## 10    A    A    B        A
+## 11    B    B    B        B
+## 12    B    B    B        B
+## 13    B    A    B        B
+## 14    A    A    A        A
+## 15    A    A    B        A
+## 16    B    B    B        B
+## 17    B    B    B        B
+## 18    B    A    B        B
+## 19    A    B    B        B
+## 20    A    B    B        B</code></pre>
+<p>Because we set <span class="math inline">\(D=1\)</span> above, we should see above that the new trait is always the majority trait amongst the three demonstrators. This is perfect conformity. We can weaken conformity by reducing <span class="math inline">\(D\)</span>, in the code below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
+p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span>
+D &lt;-<span class="st"> </span><span class="fl">0.1</span>
+
+agent &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>,<span class="dv">1</span><span class="op">-</span>p_<span class="dv">0</span>)), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)  <span class="co"># create first generation</span>
+
+<span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span>
+demonstrators &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">stringsAsFactors =</span> F)
+
+<span class="co"># get the number of As in each 3-dem combo</span>
+numAs &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)
+
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span>
+
+prob &lt;-<span class="st"> </span><span class="kw">runif</span>(N)
+
+<span class="co"># when A is a majority, 2/3</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="co"># when A is a minority, 1/3</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="co"># for testing only, add the new traits to the demonstrator dataframe and show it</span>
+demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>agent<span class="op">$</span>trait
+<span class="kw">head</span>(demonstrators, <span class="dv">20</span>)</code></pre></div>
+<pre><code>##    dem1 dem2 dem3 newtrait
+## 1     B    B    B        B
+## 2     B    B    B        B
+## 3     A    A    A        A
+## 4     B    B    A        B
+## 5     A    A    B        B
+## 6     A    B    A        A
+## 7     B    A    A        B
+## 8     B    A    B        B
+## 9     A    B    A        A
+## 10    B    A    A        A
+## 11    A    A    A        A
+## 12    A    B    B        A
+## 13    A    B    B        B
+## 14    A    A    B        A
+## 15    B    A    B        B
+## 16    A    A    A        A
+## 17    B    A    B        A
+## 18    B    A    B        A
+## 19    B    B    A        B
+## 20    A    B    A        A</code></pre>
+<p>Now that conformity is weaker, sometimes the new trait is not the majority amongst the three demonstrators. With the small sample shown above, it’s perhaps not possible to notice it. Hopefully when we put it all together now into a function and run it over multiple generations, we will notice an effect. The code below is a combination of Model 1 (unbiased transmission) and the code above for conformity.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ConformistTransmission &lt;-<span class="st"> </span><span class="cf">function</span> (N, p_<span class="dv">0</span>, D, t_max, r_max) {
+  
+  output &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">matrix</span>(<span class="ot">NA</span>,t_max,r_max))  <span class="co"># create a matrix with t_max rows and r_max columns, filled with NAs, then convert to data.frame</span>
+  
+  <span class="kw">names</span>(output) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;run&quot;</span>, <span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)  <span class="co"># purely cosmetic: rename the columns with run1, run2 etc.</span>
+  
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    
+    agent &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>,<span class="dv">1</span><span class="op">-</span>p_<span class="dv">0</span>)), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)  <span class="co"># create first generation</span>
+    
+    output[<span class="dv">1</span>,r] &lt;-<span class="st"> </span><span class="kw">sum</span>(agent<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N  <span class="co"># add first generation&#39;s p to first row of column r</span>
+  
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+  
+      <span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span>
+      demonstrators &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(agent<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">stringsAsFactors =</span> F)
+
+      <span class="co"># get the number of As in each 3-dem combo</span>
+      numAs &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)
+
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span>
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span>
+
+      prob &lt;-<span class="st"> </span><span class="kw">runif</span>(N)
+      
+      <span class="co"># when A is a majority, 2/3</span>
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+      <span class="co"># when A is a minority, 1/3</span>
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&lt;</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;A&quot;</span>
+      agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>prob <span class="op">&gt;=</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)] &lt;-<span class="st"> &quot;B&quot;</span>
+
+      output[t,r] &lt;-<span class="st"> </span><span class="kw">sum</span>(agent<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N  <span class="co"># get p and put it into output slot for this generation t and run r</span>
+  
+    }
+    
+  }
+  
+  <span class="co"># first plot a thick line for the mean p</span>
+  <span class="kw">plot</span>(<span class="kw">rowMeans</span>(output), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;p, proportion of agents with trait A&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;generation&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;N =&quot;</span>, N, <span class="st">&quot;, D =&quot;</span>, D, <span class="st">&quot;, p_0 =&quot;</span>, p_<span class="dv">0</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))
+ 
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {  
+    
+    <span class="kw">lines</span>(output[,r], <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)  <span class="co"># add lines for each run, up to r_max</span>
+    
+  }
+  
+  output  <span class="co"># export data from function</span>
+}</code></pre></div>
+<p>Note that we omit the testing code above (we’ve tested it and it works!), and there’s no need to put <em>agent</em> into <em>previous_agent</em> because we have the <em>demonstrator</em> dataframe doing that job. Let’s run the function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>Here we should see some lines going to <span class="math inline">\(p = 1\)</span>, and some lines going to <span class="math inline">\(p = 0\)</span>. Conformity acts to favour the majority trait. This will depend on the initial frequency of <span class="math inline">\(A\)</span> in the population. In different runs with <span class="math inline">\(p_0 = 0.5\)</span>, sometimes there will be slightly more <span class="math inline">\(A\)</span>s, sometimes slightly more <span class="math inline">\(B\)</span>s (remember, in our model this is probabilistic, like flipping coins, so initial frequencies will rarely be precisely 0.5).</p>
+<p>Let’s compare conformity to unbiased transmission, by setting <span class="math inline">\(D = 0\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>As in Model 1 with a sufficiently large <span class="math inline">\(N\)</span>, we should see frequencies fluctuating around <span class="math inline">\(p = 0.5\)</span>. This underlines the effect of conformity: it drives traits to fixation as they become more and more common.</p>
+<p>As an aside, note that the last two graphs have roughly the same thick black mean frequency line, which hovers around <span class="math inline">\(p = 0.5\)</span>. This highlights the dangers of looking at means alone. If we hadn’t plotted the individual runs and relied solely on mean frequencies, we might think that <span class="math inline">\(D = 0\)</span> and <span class="math inline">\(D = 1\)</span> gave identical results. But in fact, they are very different. Always look at the underlying distribution that generates means.</p>
+<p>Now let’s explore the effect of changing the initial frequencies by changing <span class="math inline">\(p_0\)</span>, and adding conformity back in.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.55</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>When <span class="math inline">\(A\)</span> starts off in a slight majority (<span class="math inline">\(p_0 = 0.55\)</span>), most if not all of the runs should result in <span class="math inline">\(A\)</span> going to fixation. Now let’s try the reverse.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.45</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>When <span class="math inline">\(A\)</span> starts off in a minority (<span class="math inline">\(p_0 = 0.45\)</span>), most if not all runs should result in <span class="math inline">\(A\)</span> disappearing. These last two graphs show how initial conditions affect conformity. Whichever trait is more common is favoured by conformist transmission.</p>
+<hr />
+<div id="summary-of-model-4" class="section level2">
+<h2><span class="header-section-number">5.1</span> Summary of Model 4</h2>
+<p>Model 4 explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this with the direct or content biased transmission from Model 4, where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.</p>
+<p>We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This in turn makes stochasticity important, which in small populations can affect initial frequencies.</p>
+<p>The major programming innovation in Model 4 was the use of an intermediate dataframe to hold the demonstrators. We then created the next generation using a table of probabilities (Table 1), which specified for each combination of demonstrators the probability of adopting each trait.</p>
+<hr />
+</div>
+<div id="analytic-appendix" class="section level2">
+<h2><span class="header-section-number">5.2</span> Analytic appendix</h2>
+<p>An alternative way of doing all the above is with deterministic recursions, as Boyd &amp; Richerson (1985) originally did.</p>
+<p>Let’s revise Table 1 to add the probabilities of each combination of three demonstrators coming together, assuming they are picked at random. These probabilities can be expressed in terms of <span class="math inline">\(p\)</span>, the frequency of <span class="math inline">\(A\)</span>, and <span class="math inline">\((1 - p)\)</span>, the frequency of <span class="math inline">\(B\)</span>. Table 2 adds this column.</p>
+<p><strong>Table 2: Full adoption probability table for trait <span class="math inline">\(A\)</span> under conformist transmission</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Dem 1</th>
+<th>Dem 2</th>
+<th>Dem 3</th>
+<th>Prob of adopting <span class="math inline">\(A\)</span></th>
+<th>Prob of combination forming</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td>1</td>
+<td><span class="math inline">\(p^3\)</span></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(2/3 + D/3\)</span></td>
+<td><span class="math inline">\(p^2(1-p)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(1/3 - D/3\)</span></td>
+<td><span class="math inline">\(p(1-p)^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td>0</td>
+<td>(1-p)^3</td>
+</tr>
+</tbody>
+</table>
+<p>To get the frequency of <span class="math inline">\(A\)</span> in the next generation, <span class="math inline">\(p&#39;\)</span>, we multiply, for each of the eight rows in Table 2, the probability of adopting <span class="math inline">\(A\)</span> by the probability of that combination forming (i.e. the final two columns in Table 2), and add up all of these eight products. After rearranging, this gives the following recursion:</p>
+<p><span class="math display">\[p&#39; = p + Dp(1-p)(2p-1)            \hspace{30 mm}(4.1)\]</span></p>
+<p>Now we can create a function for this recursion:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ConformityRecursion &lt;-<span class="st"> </span><span class="cf">function</span>(D, t_max, p_<span class="dv">0</span>) {
+  
+  p &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,t_max)
+  p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span>
+  
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+    p[i] &lt;-<span class="st"> </span>p[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>D<span class="op">*</span>p[i<span class="op">-</span><span class="dv">1</span>]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p[i<span class="op">-</span><span class="dv">1</span>])<span class="op">*</span>(<span class="dv">2</span><span class="op">*</span>p[i<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+  }
+  
+  <span class="kw">plot</span>(p, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;frequency of p&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;generation&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;D = &quot;</span>, D, <span class="st">&quot;, p_0 = &quot;</span>, p_<span class="dv">0</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))
+
+}</code></pre></div>
+<p>Here, we use a <strong>for</strong> loop to cycle through each generation, each time updating <span class="math inline">\(p\)</span> according to the recursion equation above. Remember, there is no <span class="math inline">\(N\)</span> here because the recursion is deterministic and assumes an infinite population size; hence there is no stochasticity due to finite population sizes. There is also no need to have multiple runs as each run is identical, hence no <span class="math inline">\(r_{max}\)</span>.</p>
+<p>The following code runs the <strong>ConformityRecursion</strong> function with weak conformity (<span class="math inline">\(D = 0.1\)</span>) and slightly more <span class="math inline">\(A\)</span> in the initial generation (<span class="math inline">\(p_0 = 0.51\)</span>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ConformityRecursion</span>(<span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">p_0 =</span> <span class="fl">0.51</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>As in the agent-based model, the initially most-frequent trait, here <span class="math inline">\(A\)</span>, goes to fixation. Let’s compare to the agent-based model with the same parameters, and a large enough <span class="math inline">\(N\)</span> to make stochasticity unimportant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">100000</span>, <span class="dt">p_0 =</span> <span class="fl">0.51</span>, <span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">r_max =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>It should be a pretty good match. Try playing around with smaller <span class="math inline">\(N\)</span> to show that stochastic agent-based models are most likely to match deterministic recursion models when <span class="math inline">\(N\)</span> is large.</p>
+<p>Let’s modify the <strong>ConformityRecursion</strong> function to accept multiple values of <span class="math inline">\(p_0\)</span>, so we can plot different starting frequencies on the same graph.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ConformityRecursion &lt;-<span class="st"> </span><span class="cf">function</span>(D, t_max, p_<span class="dv">0</span>) {
+  
+  numSims &lt;-<span class="st"> </span><span class="kw">length</span>(p_<span class="dv">0</span>)
+  
+  p &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> numSims))
+  p[<span class="dv">1</span>,] &lt;-<span class="st"> </span>p_<span class="dv">0</span>
+  
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+    p[i,] &lt;-<span class="st"> </span>p[i<span class="op">-</span><span class="dv">1</span>,] <span class="op">+</span><span class="st"> </span>D<span class="op">*</span>p[i<span class="op">-</span><span class="dv">1</span>,]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p[i<span class="op">-</span><span class="dv">1</span>,])<span class="op">*</span>(<span class="dv">2</span><span class="op">*</span>p[i<span class="op">-</span><span class="dv">1</span>,] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+  }
+  
+  <span class="kw">plot</span>(p[,<span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;frequency of p&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;generation&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;D =&quot;</span>, D))
+  <span class="cf">if</span> (numSims <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {
+    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>numSims) {
+      <span class="kw">lines</span>(p[,i], <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)
+    }
+  }
+
+}</code></pre></div>
+<p>The following command plots three different values of <span class="math inline">\(p_0\)</span>, one less than 0.5, one equal to 0.5, and one greater than 0.5. This should confirm that conformity favours whichever trait is initially most frequent.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ConformityRecursion</span>(<span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">p_0 =</span> <span class="kw">c</span>(<span class="fl">0.49</span>,<span class="fl">0.5</span>,<span class="fl">0.51</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>Again, this matches the simulations above where some runs are randomly initially above 0.5 and others below 0.5.</p>
+<p>Finally, we can use the recursion equation to generate a plot that has become a signature for conformity in the cultural evolution literature. The following code plots, for all possible values of <span class="math inline">\(p\)</span>, the probability of adopting <span class="math inline">\(p\)</span> in the next generation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out =</span> <span class="dv">101</span>)
+
+D &lt;-<span class="st"> </span><span class="dv">1</span>
+p_next &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span>D<span class="op">*</span>p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>(<span class="dv">2</span><span class="op">*</span>p<span class="op">-</span><span class="dv">1</span>)
+
+<span class="kw">plot</span>(p, p_next, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;probability of adopting A (p&#39;)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;frequency of A (p)&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;D =&quot;</span>, D))
+<span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>This encapsulates the process of conformity. The dotted line shows unbiased transmission: the probability of adopting <span class="math inline">\(A\)</span> is exactly equal to the frequency of <span class="math inline">\(A\)</span> in the population. The s-shaped solid curve shows conformist transmission. When <span class="math inline">\(A\)</span> is common (<span class="math inline">\(p &gt; 0.5\)</span>), then the curve is higher than the dotted line: there is a disproportionately higher probability of adopting <span class="math inline">\(A\)</span>. When <span class="math inline">\(A\)</span> is uncommon (<span class="math inline">\(p &lt; 0.5\)</span>), then the curve is lower than the dotted line: there is a disproportionately lower probability of adopting <span class="math inline">\(A\)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="biased-transmission-directcontent-bias.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

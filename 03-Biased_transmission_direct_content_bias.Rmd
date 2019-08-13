@@ -1,9 +1,5 @@
----
-title: "Simulation Models of Cultural Evolution"
-author: "Alex Mesoudi"
----
 
-### Model 3: Biased transmission (direct/content bias)
+# Biased transmission (direct/content bias)
 
 So far we have looked at unbiased transmission (Model 1) and unbiased/biased mutation (Model 2). Let's complete the set by looking at biased transmission. This occurs when one trait or one demonstrator is more likely to be copied than another trait or demonstrator. Trait-based copying is often called 'direct' or 'content' bias, while demonstrator-based copying is often called 'indirect' or 'context' bias. Both are sometimes also called 'cultural selection' because one thing (trait or demonstrator) is selected to be copied over another. In Model 3 we'll look at trait-based (direct, content) bias.
 
@@ -89,13 +85,13 @@ As we might expect, increasing the strength of selection increases the speed wit
 
 ***
 
-### Summary of Model 3
+## Summary of the model
 
 In Model 3 we saw how biased transmission causes a trait favoured by the selection bias to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of $A$ and $B$ at $p = 0.5$), and weakest when there is little variation (when $p$ is close to 0 or 1).
 
 ***
 
-### Analytical Appendix
+## Analytical appendix
 
 As before, we have $p$ agents with trait $A$, and $1 - p$ agents with trait $B$. The $p$ agents with trait $A$ keep their $A$s, because $A$ is favoured by biased transmission. The $1 - p$ agents with trait $B$ pick another agent at random, hence with probability $p$, and with probability $s$ they switch to trait $A$. We can therefore write the recursion for $p$ under biased transmission as:
 
