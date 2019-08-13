@@ -16,8 +16,8 @@
 
 #### The evolution of cultural evolution
 
-* Roger's model
-* 'Solutions' to Roger's model
+* Rogers' model
+* 'Solutions' to Rogers' model
 
 #### Culture and populations
 
