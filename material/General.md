@@ -44,3 +44,5 @@ Let's add here other options, or discuss if you prefer something else.
   2. individual should not be intended necessary in biological sense, an individual can be a firm, an organisation, etc. 
 
 * It may be useful to have at the end of each model (or chapter) a section that briefly describes the relevant literature.
+
+* We might also want to make it clear in the introduction _when_ IBM is actually useful or superior over an analytical approach. 
