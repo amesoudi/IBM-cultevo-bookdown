@@ -6,7 +6,7 @@ Repository for the book project "Individual-based models of cultural evolution. 
 
 The repository contains so far a minimal working structure of the book, realised with [bookdown](https://bookdown.org). 
 
-The first two chapters are copied (unmdofied) from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo).
+The first two chapters are copied (unmodified) from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo).
 
 In addition, the folder [material/](material) contains (also from the previous temporary [repository](https://github.com/albertoacerbi/IBM-cultevo)): 
 
