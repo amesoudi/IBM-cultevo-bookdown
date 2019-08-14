@@ -37,7 +37,7 @@ Let's implement these assumptions in the kind of agent-based model we've been bu
 
 First we'll specify our parameters, $N$ and $p_0$ as before, plus the new conformity parameter $D$. We can also create an *agent* dataframe and fill it with $A$s and $B$s in the proportion specified by $p_0$, again exactly as before. To remind ourselves what *agent* looks like, we use the **head** command.
 
-```{r}
+```{r 4.1}
 
 N <- 100
 p_0 <- 0.5
@@ -51,7 +51,7 @@ head(agent)
 
 Now we'll create a dataframe called *demonstrators* that picks, for each new agent in the next generation, three demonstrators at random from the current population of agents. It therefore needs three columns/variables, one for each of the demonstrators, and $N$ rows, one for each new agent. We fill each column with randomly chosen traits from the *agent* dataframe. We can view this with **head**.
 
-```{r}
+```{r 4.2}
 
 # create dataframe with a set of 3 randomly-picked demonstrators for each agent
 demonstrators <- data.frame(dem1 = sample(agent$trait, N, replace = TRUE), dem2 = sample(agent$trait, N, replace = TRUE), dem3 = sample(agent$trait, N, replace = TRUE), stringsAsFactors = F)
@@ -66,7 +66,7 @@ First we need to get the number of $A$s in each combination. Then we can replace
 
 To check it works, we can add the new *agent* dataframe as a column to *demonstrators* and view the latter with **head**. This will let us see the three demonstrators and the resulting new trait side by side.
 
-```{r}
+```{r 4.3}
 
 # get the number of As in each 3-dem combo
 numAs <- rowSums(demonstrators == "A")
@@ -92,7 +92,7 @@ head(demonstrators, 20)
 
 Because we set $D=1$ above, we should see above that the new trait is always the majority trait amongst the three demonstrators. This is perfect conformity. We can weaken conformity by reducing $D$, in the code below.
 
-```{r}
+```{r 4.4}
 
 N <- 100
 p_0 <- 0.5
@@ -127,7 +127,7 @@ head(demonstrators, 20)
 
 Now that conformity is weaker, sometimes the new trait is not the majority amongst the three demonstrators. With the small sample shown above, it's perhaps not possible to notice it. Hopefully when we put it all together now into a function and run it over multiple generations, we will notice an effect. The code below is a combination of Model 1 (unbiased transmission) and the code above for conformity.
 
-```{r}
+```{r 4.5}
 
 ConformistTransmission <- function (N, p_0, D, t_max, r_max) {
   
@@ -184,7 +184,7 @@ ConformistTransmission <- function (N, p_0, D, t_max, r_max) {
 
 Note that we omit the testing code above (we've tested it and it works!), and there's no need to put *agent* into *previous_agent* because we have the *demonstrator* dataframe doing that job. Let's run the function.
 
-```{r}
+```{r 4.6}
 
 data_model4 <- ConformistTransmission(N = 1000, p_0 = 0.5, D = 1, t_max = 50, r_max = 10)
 
@@ -194,7 +194,7 @@ Here we should see some lines going to $p = 1$, and some lines going to $p = 0$.
 
 Let's compare conformity to unbiased transmission, by setting $D = 0$.
 
-```{r}
+```{r 4.7}
 
 data_model4 <- ConformistTransmission(N = 1000, p_0 = 0.5, D = 0, t_max = 50, r_max = 10)
 
@@ -206,7 +206,7 @@ As an aside, note that the last two graphs have roughly the same thick black mea
 
 Now let's explore the effect of changing the initial frequencies by changing $p_0$, and adding conformity back in.
 
-```{r}
+```{r 4.8}
 
 data_model4 <- ConformistTransmission(N = 1000, p_0 = 0.55, D = 1, t_max = 50, r_max = 10)
 
@@ -214,7 +214,7 @@ data_model4 <- ConformistTransmission(N = 1000, p_0 = 0.55, D = 1, t_max = 50, r
 
 When $A$ starts off in a slight majority ($p_0 = 0.55$), most if not all of the runs should result in $A$ going to fixation. Now let's try the reverse.
 
-```{r}
+```{r 4.9}
 
 data_model4 <- ConformistTransmission(N = 1000, p_0 = 0.45, D = 1, t_max = 50, r_max = 10)
 
@@ -263,7 +263,7 @@ $$p' = p + Dp(1-p)(2p-1)            \hspace{30 mm}(4.1)$$
 
 Now we can create a function for this recursion:
 
-```{r}
+```{r 4.10}
 
 ConformityRecursion <- function(D, t_max, p_0) {
   
@@ -284,7 +284,7 @@ Here, we use a **for** loop to cycle through each generation, each time updating
 
 The following code runs the **ConformityRecursion** function with weak conformity ($D = 0.1$) and slightly more $A$ in the initial generation ($p_0 = 0.51$).
 
-```{r}
+```{r 4.11}
 
 ConformityRecursion(D = 0.1, t_max = 150, p_0 = 0.51)
 
@@ -292,7 +292,7 @@ ConformityRecursion(D = 0.1, t_max = 150, p_0 = 0.51)
 
 As in the agent-based model, the initially most-frequent trait, here $A$, goes to fixation. Let's compare to the agent-based model with the same parameters, and a large enough $N$ to make stochasticity unimportant.
 
-```{r}
+```{r 4.12}
 
 data_model4 <- ConformistTransmission(N = 100000, p_0 = 0.51, D = 0.1, t_max = 150, r_max = 1)
 
@@ -302,7 +302,7 @@ It should be a pretty good match. Try playing around with smaller $N$ to show th
 
 Let's modify the **ConformityRecursion** function to accept multiple values of $p_0$, so we can plot different starting frequencies on the same graph.
 
-```{r}
+```{r 4.13}
 
 ConformityRecursion <- function(D, t_max, p_0) {
   
@@ -328,7 +328,7 @@ ConformityRecursion <- function(D, t_max, p_0) {
 
 The following command plots three different values of $p_0$, one less than 0.5, one equal to 0.5, and one greater than 0.5. This should confirm that conformity favours whichever trait is initially most frequent.
 
-```{r}
+```{r 4.14}
 
 ConformityRecursion(D = 0.1, t_max = 150, p_0 = c(0.49,0.5,0.51))
 
@@ -338,7 +338,7 @@ Again, this matches the simulations above where some runs are randomly initially
 
 Finally, we can use the recursion equation to generate a plot that has become a signature for conformity in the cultural evolution literature. The following code plots, for all possible values of $p$, the probability of adopting $p$ in the next generation.
 
-```{r}
+```{r 4.15}
 
 p <- seq(0,1,length.out = 101)
 

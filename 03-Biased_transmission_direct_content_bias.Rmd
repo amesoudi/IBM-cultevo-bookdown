@@ -11,7 +11,7 @@ To simulate biased transmission, following Model 1, we assume that each agent ch
 
 Below is a function **BiasedTransmission** that implements all of these processes. 
 
-```{r}
+```{r 3.1}
 
 BiasedTransmission <- function (N, s, p_0, t_max, r_max) {
   
@@ -62,7 +62,7 @@ The major change is that we now include biased transmission from the second gene
 
 Let's run our **BiasedTransmission** model. Remember we are starting with a population with a small number of $A$s, so $p_0 = 0.01$.
 
-```{r}
+```{r 3.2}
 
 data_model3 <- BiasedTransmission(N = 10000, s = 0.1, p_0 = 0.01, t_max = 150, r_max = 5)
 
@@ -74,7 +74,7 @@ Note the difference to biased mutation. Where biased mutation was r-shaped, with
 
 Let's double the selection strength, to $s = 0.2$, below.
 
-```{r}
+```{r 3.3}
 
 data_model3 <- BiasedTransmission(N = 10000, s = 0.2, p_0 = 0.01, t_max = 150, r_max = 5)
 
@@ -101,7 +101,7 @@ The first term on the right-hand side is the unchanged $A$ bearers, and the seco
 
 Here is some code to plot this biased transmission recursion:
 
-```{r}
+```{r 3.4}
 p <- rep(0, 150)
 p[1] <- 0.01
 s <- 0.1

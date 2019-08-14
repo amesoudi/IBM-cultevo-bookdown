@@ -252,10 +252,10 @@ agent &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span cla
 
 <span class="kw">head</span>(agent)</code></pre></div>
 <pre><code>##   trait
-## 1     A
+## 1     B
 ## 2     B
-## 3     A
-## 4     A
+## 3     B
+## 4     B
 ## 5     B
 ## 6     A</code></pre>
 <p>Now we’ll create a dataframe called <em>demonstrators</em> that picks, for each new agent in the next generation, three demonstrators at random from the current population of agents. It therefore needs three columns/variables, one for each of the demonstrators, and <span class="math inline">\(N\)</span> rows, one for each new agent. We fill each column with randomly chosen traits from the <em>agent</em> dataframe. We can view this with <strong>head</strong>.</p>
@@ -264,12 +264,12 @@ demonstrators &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<
 
 <span class="kw">head</span>(demonstrators)</code></pre></div>
 <pre><code>##   dem1 dem2 dem3
-## 1    A    B    A
-## 2    B    B    A
-## 3    A    A    B
-## 4    A    A    B
-## 5    B    A    A
-## 6    A    A    A</code></pre>
+## 1    A    A    A
+## 2    B    A    B
+## 3    B    A    B
+## 4    B    A    B
+## 5    B    B    B
+## 6    B    B    B</code></pre>
 <p>Think of each row here as containing the traits of three randomly-chosen demonstrators chosen by each new next-generation agent. Now we want to calculate the probability of adoption of <span class="math inline">\(A\)</span> for each of these three-trait demonstrator combinations.</p>
 <p>First we need to get the number of <span class="math inline">\(A\)</span>s in each combination. Then we can replace the traits in <em>agent</em> based on the probabilities in Table 1. When all demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span>. When no demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(B\)</span>. When two out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(2/3 + D/3\)</span> and <span class="math inline">\(B\)</span> otherwise. When one out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(1/3 - D/3\)</span> and <span class="math inline">\(B\)</span> otherwise.</p>
 <p>To check it works, we can add the new <em>agent</em> dataframe as a column to <em>demonstrators</em> and view the latter with <strong>head</strong>. This will let us see the three demonstrators and the resulting new trait side by side.</p>
@@ -293,26 +293,26 @@ agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class=
 demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>agent<span class="op">$</span>trait
 <span class="kw">head</span>(demonstrators, <span class="dv">20</span>)</code></pre></div>
 <pre><code>##    dem1 dem2 dem3 newtrait
-## 1     A    B    A        A
-## 2     B    B    A        B
-## 3     A    A    B        A
-## 4     A    A    B        A
-## 5     B    A    A        A
-## 6     A    A    A        A
-## 7     B    B    B        B
-## 8     A    A    B        A
-## 9     A    A    A        A
-## 10    A    B    A        A
-## 11    B    A    A        A
-## 12    A    A    A        A
-## 13    A    B    B        B
-## 14    B    A    B        B
-## 15    A    A    B        A
-## 16    B    A    A        A
-## 17    A    B    B        B
-## 18    A    A    A        A
-## 19    B    B    B        B
-## 20    B    A    B        B</code></pre>
+## 1     A    A    A        A
+## 2     B    A    B        B
+## 3     B    A    B        B
+## 4     B    A    B        B
+## 5     B    B    B        B
+## 6     B    B    B        B
+## 7     A    A    B        A
+## 8     B    B    B        B
+## 9     B    A    A        A
+## 10    A    B    B        B
+## 11    A    B    B        B
+## 12    B    B    B        B
+## 13    B    A    B        B
+## 14    B    B    B        B
+## 15    B    B    A        B
+## 16    A    B    A        A
+## 17    A    B    A        A
+## 18    B    B    B        B
+## 19    A    B    B        B
+## 20    B    A    A        A</code></pre>
 <p>Because we set <span class="math inline">\(D=1\)</span> above, we should see above that the new trait is always the majority trait amongst the three demonstrators. This is perfect conformity. We can weaken conformity by reducing <span class="math inline">\(D\)</span>, in the code below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
 p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span>
@@ -343,26 +343,26 @@ agent<span class="op">$</span>trait[numAs <span class="op">==</span><span class=
 demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>agent<span class="op">$</span>trait
 <span class="kw">head</span>(demonstrators, <span class="dv">20</span>)</code></pre></div>
 <pre><code>##    dem1 dem2 dem3 newtrait
-## 1     A    A    B        A
-## 2     B    B    A        B
-## 3     A    B    A        B
-## 4     B    A    A        A
-## 5     A    A    A        A
-## 6     B    B    A        A
-## 7     A    B    A        A
-## 8     A    B    B        B
-## 9     A    A    A        A
+## 1     A    A    A        A
+## 2     A    A    A        A
+## 3     A    A    B        A
+## 4     B    A    B        B
+## 5     A    B    B        A
+## 6     B    B    A        B
+## 7     B    A    B        B
+## 8     B    A    A        B
+## 9     B    A    B        B
 ## 10    B    B    A        A
-## 11    A    A    B        A
-## 12    B    B    B        B
-## 13    A    B    B        A
-## 14    B    A    A        A
-## 15    B    A    B        B
-## 16    A    A    B        A
+## 11    B    B    B        B
+## 12    A    A    A        A
+## 13    A    A    A        A
+## 14    A    A    A        A
+## 15    B    B    B        B
+## 16    B    A    A        A
 ## 17    B    B    B        B
-## 18    B    B    B        B
-## 19    A    B    B        B
-## 20    A    B    B        B</code></pre>
+## 18    B    A    A        B
+## 19    A    A    A        A
+## 20    B    A    A        A</code></pre>
 <p>Now that conformity is weaker, sometimes the new trait is not the majority amongst the three demonstrators. With the small sample shown above, it’s perhaps not possible to notice it. Hopefully when we put it all together now into a function and run it over multiple generations, we will notice an effect. The code below is a combination of Model 1 (unbiased transmission) and the code above for conformity.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ConformistTransmission &lt;-<span class="st"> </span><span class="cf">function</span> (N, p_<span class="dv">0</span>, D, t_max, r_max) {
   
@@ -416,19 +416,19 @@ demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>age
 }</code></pre></div>
 <p>Note that we omit the testing code above (we’ve tested it and it works!), and there’s no need to put <em>agent</em> into <em>previous_agent</em> because we have the <em>demonstrator</em> dataframe doing that job. Let’s run the function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.6-1.png" width="672" /></p>
 <p>Here we should see some lines going to <span class="math inline">\(p = 1\)</span>, and some lines going to <span class="math inline">\(p = 0\)</span>. Conformity acts to favour the majority trait. This will depend on the initial frequency of <span class="math inline">\(A\)</span> in the population. In different runs with <span class="math inline">\(p_0 = 0.5\)</span>, sometimes there will be slightly more <span class="math inline">\(A\)</span>s, sometimes slightly more <span class="math inline">\(B\)</span>s (remember, in our model this is probabilistic, like flipping coins, so initial frequencies will rarely be precisely 0.5).</p>
 <p>Let’s compare conformity to unbiased transmission, by setting <span class="math inline">\(D = 0\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.7-1.png" width="672" /></p>
 <p>As in Model 1 with a sufficiently large <span class="math inline">\(N\)</span>, we should see frequencies fluctuating around <span class="math inline">\(p = 0.5\)</span>. This underlines the effect of conformity: it drives traits to fixation as they become more and more common.</p>
 <p>As an aside, note that the last two graphs have roughly the same thick black mean frequency line, which hovers around <span class="math inline">\(p = 0.5\)</span>. This highlights the dangers of looking at means alone. If we hadn’t plotted the individual runs and relied solely on mean frequencies, we might think that <span class="math inline">\(D = 0\)</span> and <span class="math inline">\(D = 1\)</span> gave identical results. But in fact, they are very different. Always look at the underlying distribution that generates means.</p>
 <p>Now let’s explore the effect of changing the initial frequencies by changing <span class="math inline">\(p_0\)</span>, and adding conformity back in.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.55</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.8-1.png" width="672" /></p>
 <p>When <span class="math inline">\(A\)</span> starts off in a slight majority (<span class="math inline">\(p_0 = 0.55\)</span>), most if not all of the runs should result in <span class="math inline">\(A\)</span> going to fixation. Now let’s try the reverse.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.45</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.9-1.png" width="672" /></p>
 <p>When <span class="math inline">\(A\)</span> starts off in a minority (<span class="math inline">\(p_0 = 0.45\)</span>), most if not all runs should result in <span class="math inline">\(A\)</span> disappearing. These last two graphs show how initial conditions affect conformity. Whichever trait is more common is favoured by conformist transmission.</p>
 <hr />
 <div id="summary-of-model-4" class="section level2">
@@ -548,10 +548,10 @@ demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>age
 <p>Here, we use a <strong>for</strong> loop to cycle through each generation, each time updating <span class="math inline">\(p\)</span> according to the recursion equation above. Remember, there is no <span class="math inline">\(N\)</span> here because the recursion is deterministic and assumes an infinite population size; hence there is no stochasticity due to finite population sizes. There is also no need to have multiple runs as each run is identical, hence no <span class="math inline">\(r_{max}\)</span>.</p>
 <p>The following code runs the <strong>ConformityRecursion</strong> function with weak conformity (<span class="math inline">\(D = 0.1\)</span>) and slightly more <span class="math inline">\(A\)</span> in the initial generation (<span class="math inline">\(p_0 = 0.51\)</span>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ConformityRecursion</span>(<span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">p_0 =</span> <span class="fl">0.51</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.11-1.png" width="672" /></p>
 <p>As in the agent-based model, the initially most-frequent trait, here <span class="math inline">\(A\)</span>, goes to fixation. Let’s compare to the agent-based model with the same parameters, and a large enough <span class="math inline">\(N\)</span> to make stochasticity unimportant.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model4 &lt;-<span class="st"> </span><span class="kw">ConformistTransmission</span>(<span class="dt">N =</span> <span class="dv">100000</span>, <span class="dt">p_0 =</span> <span class="fl">0.51</span>, <span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">r_max =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.12-1.png" width="672" /></p>
 <p>It should be a pretty good match. Try playing around with smaller <span class="math inline">\(N\)</span> to show that stochastic agent-based models are most likely to match deterministic recursion models when <span class="math inline">\(N\)</span> is large.</p>
 <p>Let’s modify the <strong>ConformityRecursion</strong> function to accept multiple values of <span class="math inline">\(p_0\)</span>, so we can plot different starting frequencies on the same graph.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ConformityRecursion &lt;-<span class="st"> </span><span class="cf">function</span>(D, t_max, p_<span class="dv">0</span>) {
@@ -575,7 +575,7 @@ demonstrators<span class="op">$</span>newtrait &lt;-<span class="st"> </span>age
 }</code></pre></div>
 <p>The following command plots three different values of <span class="math inline">\(p_0\)</span>, one less than 0.5, one equal to 0.5, and one greater than 0.5. This should confirm that conformity favours whichever trait is initially most frequent.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ConformityRecursion</span>(<span class="dt">D =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">p_0 =</span> <span class="kw">c</span>(<span class="fl">0.49</span>,<span class="fl">0.5</span>,<span class="fl">0.51</span>))</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.14-1.png" width="672" /></p>
 <p>Again, this matches the simulations above where some runs are randomly initially above 0.5 and others below 0.5.</p>
 <p>Finally, we can use the recursion equation to generate a plot that has become a signature for conformity in the cultural evolution literature. The following code plots, for all possible values of <span class="math inline">\(p\)</span>, the probability of adopting <span class="math inline">\(p\)</span> in the next generation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length.out =</span> <span class="dv">101</span>)
@@ -585,7 +585,7 @@ p_next &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"
 
 <span class="kw">plot</span>(p, p_next, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;probability of adopting A (p&#39;)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;frequency of A (p)&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;D =&quot;</span>, D))
 <span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/4.15-1.png" width="672" /></p>
 <p>This encapsulates the process of conformity. The dotted line shows unbiased transmission: the probability of adopting <span class="math inline">\(A\)</span> is exactly equal to the frequency of <span class="math inline">\(A\)</span> in the population. The s-shaped solid curve shows conformist transmission. When <span class="math inline">\(A\)</span> is common (<span class="math inline">\(p &gt; 0.5\)</span>), then the curve is higher than the dotted line: there is a disproportionately higher probability of adopting <span class="math inline">\(A\)</span>. When <span class="math inline">\(A\)</span> is uncommon (<span class="math inline">\(p &lt; 0.5\)</span>), then the curve is lower than the dotted line: there is a disproportionately lower probability of adopting <span class="math inline">\(A\)</span>.</p>
 
 </div>

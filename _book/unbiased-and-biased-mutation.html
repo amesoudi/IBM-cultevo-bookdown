@@ -193,13 +193,13 @@ unbiased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>
 <p>Let’s now run and plot the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.3-1.png" width="672" /></p>
 <p>As one might expect, unbiased mutation produces random fluctuations over time, and does not alter the overall frequency of <span class="math inline">\(A\)</span> which stays around <span class="math inline">\(p = 0.5\)</span>. Because mutations from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> are as equally likely as <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span>, there is no overall directional trend.</p>
 <p>But what if we were to start at different initial frequencies of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>? Say, <span class="math inline">\(p=0.2\)</span> or <span class="math inline">\(p=0.9\)</span>? Would unbiased mutation keep <span class="math inline">\(p\)</span> at these initial values, like we saw unbiased transmission does in Model 1?</p>
 <p>To find out, let’s change <span class="math inline">\(p_0\)</span>, which, as you may recall, specifies the initial probability of drawing an <span class="math inline">\(A\)</span> rather than a <span class="math inline">\(B\)</span> in the first generation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.4-1.png" width="672" /></p>
 <p>You should see <span class="math inline">\(p\)</span> go from 0.1 up to 0.5. In fact, whatever the initial starting frequencies of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, unbiased mutation always leads to <span class="math inline">\(p = 0.5\)</span>. Unlike the unbiased transmission simulated in Model 1, with unbiased mutation it is impossible for one trait to be lost and the other go to fixation. Why is that the case? A way to think about it is that, whereas the probability to mutate is the same in both directions, the more <span class="math inline">\(A\)</span>s there are in the population, the more likely they will be picked to become <span class="math inline">\(B\)</span>s and viceversa, so that unbiased mutation always tends to balance the proportion of <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s.</p>
 </div>
 <div id="biased-mutation" class="section level2">
@@ -230,15 +230,15 @@ unbiased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>
 <p>Let’s see what effect this has by running <code>biased_mutation()</code>. We’ll start with the population entirely composed of individuals with <span class="math inline">\(B\)</span>, i.e. <span class="math inline">\(p_0 = 0\)</span>, to see how quickly and in what manner <span class="math inline">\(A\)</span> spreads via biased mutation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.6-1.png" width="672" /></p>
 <p>The plot should show a steep increase that slows and plateaus at <span class="math inline">\(p = 1\)</span> by around generation <span class="math inline">\(t = 100\)</span>. There should be a bit of fluctuation in the different runs, but not much. Now let’s try a larger sample size.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.7-1.png" width="672" /></p>
 <p>With <span class="math inline">\(N = 10000\)</span> the line should be smooth with little (if any) fluctuation across the runs. But notice that it plateaus at about the same generation, around <span class="math inline">\(t = 100\)</span>. Population size has little effect on the rate at which a novel trait spreads via biased mutation. <span class="math inline">\(\mu_b\)</span>, on the other hand, does affect this speed. Let’s double the biased mutation rate to 0.1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.1</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.8-1.png" width="672" /></p>
 <p>Now trait <span class="math inline">\(A\)</span> reaches fixation around generation <span class="math inline">\(t = 50\)</span>. Play around with <span class="math inline">\(N\)</span> and <span class="math inline">\(\mu_b\)</span> to confirm that the latter determines the rate of diffusion of trait <span class="math inline">\(A\)</span>, and that it takes the same form each time - roughly an ‘r’ shape with an initial steep increase followed by a plateauing at <span class="math inline">\(p = 1\)</span>.</p>
 <hr />
 </div>
@@ -276,7 +276,7 @@ pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span c
 <span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.9-1.png" width="672" /></p>
 <p>Again, this should resemble the figure generated by the simulations above, and confirm that <span class="math inline">\(p^* = 0.5\)</span>.</p>
 <p>For biased mutation, assume that only <span class="math inline">\(B\)</span>s are switching to <span class="math inline">\(A\)</span>, and with probability <span class="math inline">\(\mu_b\)</span> instead of <span class="math inline">\(\mu\)</span>. The first term on the right hand side becomes simply <span class="math inline">\(p\)</span>, because <span class="math inline">\(A\)</span>s do not switch. The second term remains the same, but with <span class="math inline">\(\mu_b\)</span>. Thus,</p>
 <p><span class="math display">\[p&#39; = p + (1-p)\mu_b \hspace{30 mm}(2.4)\]</span></p>
@@ -298,7 +298,7 @@ pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span c
 <span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/2.10-1.png" width="672" /></p>
 <p>Hopefully, this looks identical to the final simulation plot with the same value of <span class="math inline">\(\mu_b\)</span>.</p>
 <p>Furthermore, we can specify an equation for the change in <span class="math inline">\(p\)</span> from one generation to the next, or <span class="math inline">\(\Delta p\)</span>. We do this by subtracting <span class="math inline">\(p\)</span> from both sides of Equation 2.4, giving:</p>
 <p><span class="math display">\[\Delta p = p&#39; - p = (1-p)\mu_b            \hspace{30 mm}(2.5)\]</span></p>
