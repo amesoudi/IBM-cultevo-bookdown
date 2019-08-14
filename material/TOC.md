@@ -12,7 +12,7 @@
 * Model of the above with multiple traits (here we will need a chapter for performance/matrices, etc.)
 * Vertical/horizontal/oblique transmission
 
-### Adavanced topics
+### Advanced topics
 
 #### The evolution of cultural evolution
 
