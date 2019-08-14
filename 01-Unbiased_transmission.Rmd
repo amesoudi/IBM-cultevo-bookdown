@@ -1,4 +1,4 @@
-# (PART) Basics {-} 
+# (PART\*) Basics {-} 
 
 # Unbiased transmission
 
