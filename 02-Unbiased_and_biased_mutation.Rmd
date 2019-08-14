@@ -5,16 +5,17 @@ Evolution doesn't work without a source of variation that introduces new variati
 
 ## Unbiased mutation
 
-First we will simulate unbiased mutation in the same basic model as used in Model 1. We'll remove unbiased transmission to see the effect of unbiased mutation alone. 
+First we will simulate unbiased mutation in the same basic model as used in the previous chapter. We'll remove unbiased transmission to see the effect of unbiased mutation alone. 
 
 As in the previous model, we assume $N$ individuals each of whom possesses one of two cultural traits, denoted $A$ and $B$. In each generation from $t = 1$ to $t = t_{\text{max}}$, the $N$ individuals are replaced with $N$ new individuals Instead of random copying, each individual now gives rise to a new individual with exactly the same cultural trait as them. (Another way of looking at this is in terms of timesteps, such as years: the same $N$ individual live for $t_{\text{max}}$ years, and keep their cultural trait from one year to the next.)
 
-Each generation, there is a probability $\mu$ that each individual mutates from their current trait to the other trait. This probability applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, that means that $\mu N$ individuals mutate each generation. Like in Model 1, we are interested in tracking the proportion $p$ of agents with trait $A$ over time.
+Each generation, there is a probability $\mu$ that each individual mutates from their current trait to the other trait. This probability applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, that means that $\mu N$ individuals mutate each generation. Like in the previous model, we are interested in tracking the proportion $p$ of agents with trait $A$ over time.
 
-We'll wrap this in a function called `unbiased_mutation()`, using much of the same code as `unbiased_transmission_3()`. Now though we have an extra parameter, $\mu$, to specify the probability of mutation.
+We'll wrap this in a function called `unbiased_mutation()`, using much of the same code as `unbiased_transmission_3()`. Now though we have an extra parameter, $\mu$, to specify the probability of mutation. As before, we need to call the tidyverse library, and set a seed for the random number genrator, so the results will be exactly the same each time we rerun the code.
 
 ```{r 2.1, message = FALSE}
 library(tidyverse)
+set.seed(100)
 
 unbiased_mutation <- function(N, mu, p_0, t_max, r_max) {
   output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
@@ -42,15 +43,15 @@ unbiased_mutation <- function(N, mu, p_0, t_max, r_max) {
 }
 ```
 
-The only changes from Model 1 are the addition of $\mu$ in the function definition and new lines of code within the $t$ `for` loop which replace the random copying command with unbiased mutation. Let's examine these lines to see how they work.
+The only changes from the previous model are the addition of $\mu$ in the function definition and new lines of code within the `for` loop on $t$ which replace the random copying command with unbiased mutation. Let's examine these lines to see how they work.
 
-The most obvious way of implementing unbiased mutation - which is NOT done above - would have been to set up another `for` loop. We would cycle through each individual one by one, each time calculating whether it should mutate or not based on $mu$. This would certainly work, but R is notoriously slow at loops. It's always preferable in R, where possible, to use 'vectorised' code. That's what is done above in our three added lines. 
+The most obvious way of implementing unbiased mutation - which is not done above - would have been to set up another `for` loop. We would cycle through each individual one by one, each time calculating whether it should mutate or not based on $mu$. This would certainly work, but R is notoriously slow at loops. It's always preferable in R, where possible, to use 'vectorised' code. That's what is done above in our three added lines. 
 
 Thus, we pre-specify the probability of mutating for each individual For that, we use again the function `sample()`, picking $TRUE$ (corresponding to be a mutant) or $FALSE$ (keeping the same cultural trait) for $N$ times. The draw, however, is not random: the probability of drawing $TRUE$ is equal to $\mu$, and the probability to draw $FALSE$ is $1-\mu$. You can think about the procedure in this way: each individual in the population flips a biased coin that has $\mu$ probability to land on, say, head, and $1-\mu$ to land on tail. If it land on head they change their cultural trait.
 
 After that, in the following  lines, we actually change the traits for the 'mutant' individuals. We need to check (using the `if` conditional) whether there are individuals that change their trait, both from "A" to "B" and viceversa. This is because if there are not individuals changing their traits, we are trying to assign a new value to an empty tibble, and we get an error. To check, we make sure that the number of rows is higher than 0 (using `nrow()>0` within the `if`). 
 
-To plot the results, we can use the same function `plot_multiple_runs()` we already wrote for Model 1. We can call it in the R markdown document with the option `echo=FALSE`, meaning that is run, but not shown in the html document:
+To plot the results, we can use the same function `plot_multiple_runs()` we already wrote for the previous model.
 
 ```{r 2.2, echo=FALSE}
 plot_multiple_runs <- function(data_model) {

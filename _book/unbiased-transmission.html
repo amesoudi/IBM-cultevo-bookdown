@@ -158,18 +158,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>First, we need to specify the fixed parameters of the model. These are <span class="math inline">\(N\)</span> (the number of individuals) and <span class="math inline">\(t_{\text{max}}\)</span> (the number of generations). Let’s start with <span class="math inline">\(N=100\)</span> and <span class="math inline">\(t_{\text{max}}=200\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
 t_max &lt;-<span class="st"> </span><span class="dv">200</span></code></pre></div>
-<p>If you are using R Studio you can run this code snippet using the green ‘Run Current Chunk’ triangle in the top right of the snippet. If you have the ‘Environment’ pane visible on the right, you should be able to see <span class="math inline">\(N\)</span> and <span class="math inline">\(t_{max}\)</span> appear, with their assigned values. The Environment pane is useful for keeping track of active variables and their current values.</p>
-<p>Now we need to create our individuals. These will be stored in a vector of length <span class="math inline">\(N\)</span>. The only information we need to keep about our individuals is their cultural trait (<span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>). We’ll call this vector <strong>population</strong>. Initially, we will give each individual either an <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> at random, using the <code>sample()</code> command. The first part of the <code>sample()</code> command lists the elements to pick at random, in our case, the traits <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The second part gives the number of times to pick, in our case <span class="math inline">\(N\)</span> times, once for each individual. The final part says to replace or reuse the elements after they’ve been picked (otherwise there would only be one copy of <span class="math inline">\(A\)</span> and one copy of <span class="math inline">\(B\)</span>, so we could only give two individuals traits before running out).</p>
+<p>Now we need to create our individuals. The only information we need to keep about our individuals is their cultural trait (<span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>). We’ll call <strong>population</strong> the data structure containing the individuals. Initially, we will give each individual either an <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> at random, using the <code>sample()</code> command. The first part of the <code>sample()</code> command lists the elements to pick at random, in our case, the traits <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The second part gives the number of times to pick, in our case <span class="math inline">\(N\)</span> times, once for each individual. The final part says to replace or reuse the elements after they’ve been picked (otherwise there would only be one copy of <span class="math inline">\(A\)</span> and one copy of <span class="math inline">\(B\)</span>, so we could only give two individuals traits before running out). There are two other lines before. First, we also need to call the tidyverse library, that we will use throughout the chapter. Second, we use the function <code>set.seed()</code> to make sure that the results shown in the book are the same you obtain in your session. You can try and change the seed of the random number generator (the number <span class="math inline">\(100\)</span> has nothing special, you can replace it with any other number), and you will see the traits of the individuals will be created differently.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">set.seed</span>(<span class="dv">100</span>)
 population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</code></pre></div>
-<p>We can see the cultural traits of our population by simply entering its name:</p>
+<p>We can see the cultural traits of our population by simply entering its name in the R console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">population</code></pre></div>
 <pre><code>## # A tibble: 100 x 1
 ##    trait
 ##    &lt;chr&gt;
-##  1 B    
+##  1 A    
 ##  2 A    
-##  3 A    
+##  3 B    
 ##  4 A    
 ##  5 A    
 ##  6 A    
@@ -178,8 +178,8 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 ##  9 B    
 ## 10 A    
 ## # … with 90 more rows</code></pre>
-<p>As expected, there is a single column called <span class="math inline">\(trait\)</span> containing <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s. The type of the column, in this case “chr” (i.e. character) is reported below the name. Note that the table only shows the first 10 rows for brevity; the other 90 are not shown. Depending on how you are reading this, you may be able to see the traits of the other 90 individuals by clicking on the numbers on the bottom right of the table.</p>
-<p>A specific individual’s trait can be retrieved using the square bracket notation in <code>R</code>. For example, individual 4’s trait can be retrieved by typing:</p>
+<p>As expected, there is a single column called <span class="math inline">\(trait\)</span> containing <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s. The type of the column, in this case “chr” (i.e. character) is reported below the name.</p>
+<p>A specific individual’s trait can be retrieved using the square bracket notation in R. For example, individual 4’s trait can be retrieved by typing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">population<span class="op">$</span>trait[<span class="dv">4</span>]</code></pre></div>
 <pre><code>## [1] &quot;A&quot;</code></pre>
 <p>This should match the fourth row in the table above.</p>
@@ -192,18 +192,18 @@ output</code></pre></div>
 <pre><code>## # A tibble: 200 x 2
 ##    generation     p
 ##         &lt;int&gt; &lt;dbl&gt;
-##  1          1  0.52
-##  2          2 NA   
-##  3          3 NA   
-##  4          4 NA   
-##  5          5 NA   
-##  6          6 NA   
-##  7          7 NA   
-##  8          8 NA   
-##  9          9 NA   
-## 10         10 NA   
+##  1          1   0.5
+##  2          2  NA  
+##  3          3  NA  
+##  4          4  NA  
+##  5          5  NA  
+##  6          6  NA  
+##  7          7  NA  
+##  8          8  NA  
+##  9          9  NA  
+## 10         10  NA  
 ## # … with 190 more rows</code></pre>
-<p>This first <span class="math inline">\(p\)</span> value should be approximately 0.5: maybe not exactly, because we have a finite and relatively small population size. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes it would give 51 heads, sometimes 52 heads, sometimes 48. Similarly, sometimes we will have 51 <span class="math inline">\(A\)</span>s, sometimes 48, etc.</p>
+<p>This first <span class="math inline">\(p\)</span> value should be approximately 0.5 (you can try by varying the seed of the random number generator): maybe not exactly, because we have a finite and relatively small population size. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes it would give 51 heads, sometimes 52 heads, sometimes 48. Similarly, sometimes we will have 51 <span class="math inline">\(A\)</span>s, sometimes 48, etc.</p>
 <div id="execute-generation-turn-over-many-times" class="section level2">
 <h2><span class="header-section-number">1.1</span> Execute generation turn-over many times</h2>
 <p>Now we need to iterate our population over <span class="math inline">\(t_{\text{max}}\)</span> generations. In each generation, we need to:</p>
@@ -234,7 +234,7 @@ output</code></pre></div>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/1.8-1.png" width="672" /></p>
-<p>Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code you’ll get something different again. It probably starts off hovering around 0.5 (the approximate starting value of <span class="math inline">\(p\)</span>), and might go to 0 or 1 at some point. At <span class="math inline">\(p = 0\)</span> there are no <span class="math inline">\(A\)</span>s and every individual possesses <span class="math inline">\(B\)</span>. At <span class="math inline">\(p = 1\)</span> there are no <span class="math inline">\(B\)</span>s and every individual possesses <span class="math inline">\(A\)</span>. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance.</p>
+<p>Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code, trying different seeds of the random number generator, you’ll get something different again. It probably starts off hovering around 0.5 (the approximate starting value of <span class="math inline">\(p\)</span>), and might go to 0 or 1 at some point. At <span class="math inline">\(p = 0\)</span> there are no <span class="math inline">\(A\)</span>s and every individual possesses <span class="math inline">\(B\)</span>. At <span class="math inline">\(p = 1\)</span> there are no <span class="math inline">\(B\)</span>s and every individual possesses <span class="math inline">\(A\)</span>. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance.</p>
 </div>
 <div id="write-a-function-to-wrap-the-model-code" class="section level2">
 <h2><span class="header-section-number">1.3</span> Write a function to wrap the model code</h2>
@@ -333,16 +333,16 @@ output</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 3
 ##    generation     p run  
 ##         &lt;int&gt; &lt;dbl&gt; &lt;fct&gt;
-##  1          1 0.55  1    
-##  2          2 0.48  1    
-##  3          3 0.5   1    
-##  4          4 0.570 1    
-##  5          5 0.47  1    
-##  6          6 0.570 1    
-##  7          7 0.63  1    
-##  8          8 0.66  1    
-##  9          9 0.74  1    
-## 10         10 0.76  1    
+##  1          1  0.55 1    
+##  2          2  0.59 1    
+##  3          3  0.66 1    
+##  4          4  0.6  1    
+##  5          5  0.62 1    
+##  6          6  0.59 1    
+##  7          7  0.63 1    
+##  8          8  0.64 1    
+##  9          9  0.68 1    
+## 10         10  0.77 1    
 ## # … with 990 more rows</code></pre>
 <p>Now let’s run the updated <code>unbiased_transmission_2()</code> model with <span class="math inline">\(N = 10000\)</span>, to compare with <span class="math inline">\(N = 100\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_transmission_2</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
