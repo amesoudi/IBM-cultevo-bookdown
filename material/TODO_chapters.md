@@ -9,7 +9,7 @@
   * ~~remove references to R markdown features (AA)~~
   
 * 03-Biased_transmission_direct_content_bias:
-  * everything - just copied from previous Alex's repository (AA)
+  * analytic section (AA)
 
 * 04-Biased_transmission_indirect_bias:
   * everything - just copied from previous Alex's repository (AA)

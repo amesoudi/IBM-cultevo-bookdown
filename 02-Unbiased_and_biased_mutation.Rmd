@@ -51,7 +51,7 @@ First, we pre-specify the probability of mutating for each individual For that, 
 
 After that, in the following  lines, we actually change the traits for the 'mutant' individuals. We need to check whether there are individuals that change their trait, both from $A$ to $B$ and viceversa, using the two `if` conditionals. This is because if there are not individuals changing their traits, we are trying to assign a new value to an empty tibble, and we get an error. To check, we make sure that the number of rows is higher than 0 (using `nrow()>0` within the `if`). 
 
-To plot the results, we can use the same function `plot_multiple_runs()` we wrote in the previous chapter.
+To plot the results, we can use the same function `plot_multiple_runs()` we wrote in the [previous chapter][Unbiased transmission].
 
 ```{r 2.2, echo=FALSE}
 plot_multiple_runs <- function(data_model) {
