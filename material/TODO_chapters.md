@@ -2,8 +2,8 @@
 
 
 * 01-Unbiased_transmission: 
-  * adjust subsections names (AA)
-  * remove references to R markdown features (e.g. "run this code using the green triangle...") (AA)
+  * ~~adjust subsections names~~ (AA)
+  * ~~remove references to R markdown features (e.g. "run this code using the green triangle...")~~ (AA)
   
 * 02-Unbiased_and_biased_mutation:
   * remove references to R markdown features (AA)
