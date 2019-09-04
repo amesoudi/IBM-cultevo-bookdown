@@ -9,6 +9,7 @@
 * Biased transmission (direct/content bias)
 * Biased transmission (indirect bias)
 * Biased transmission (conformity and anti-conformity)
+* Biased transmission (model bias)
 * Model of the above with multiple traits (here we will need a chapter for performance/matrices, etc.)
 * Vertical/horizontal/oblique transmission
 

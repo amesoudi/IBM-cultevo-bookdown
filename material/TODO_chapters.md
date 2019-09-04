@@ -9,7 +9,10 @@
   * ~~remove references to R markdown features (AA)~~
   
 * 03-Biased_transmission_direct_content_bias:
-  * analytic section (AA)
+  * ~~analytic section (AA)~~
 
-* 04-Biased_transmission_indirect_bias:
+* 04-Biased_transmission_indirect_bias_frequency:
   * everything - just copied from previous Alex's repository (AA)
+  
+* 05-Biased_transmission_indirect_bias_model:
+  * any *standard* model? (AA)
