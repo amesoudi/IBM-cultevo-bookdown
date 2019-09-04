@@ -1,5 +1,5 @@
 
-# Biased transmission (direct/content bias)
+# Biased transmission (direct bias)
 
 So far we have looked at unbiased transmission ([Chapter 1][Unbiased transmission]) and mutation, both unbiased and biased ([Chapter 2][Unbiased and biased mutation]). Let's complete the set by looking at biased transmission. This occurs when one trait or one demonstrator is more likely to be copied than another trait or demonstrator. Trait-based copying is often called 'direct' or 'content' bias, while demonstrator-based copying is often called 'indirect' or 'context' bias. Both are sometimes also called 'cultural selection' because one thing (trait or demonstrator) is selected to be copied over another. In this chapter, we wil look at trait-based (direct, content) bias.
 
