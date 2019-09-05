@@ -15,4 +15,5 @@
   * everything - just copied from previous Alex's repository (AA)
   
 * 05-Biased_transmission_indirect_bias_model:
-  * any *standard* model? (AA)
+  * is there any *standard* model? (AA)
+  * what about guided variation?
