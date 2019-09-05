@@ -340,7 +340,9 @@ ggplot(data = pop_analytical, aes(y = p, x = generation)) +
   labs(y = "p (proportion of individuals with trait A)")
 ```
 
-Don't worry, it gets more complicated than this in later chapters. The key point here is that analytical (or deterministic) models assume infinite populations (note there is no $N$ in the above recursion) and no stochasticity. Simulations with very large populations should give the same results as analytical models. Basically, the closer we can get in stochastic models to the assumption of infinite populations, the closer the match to infinite-population deterministic models. Deterministic models give the ideal case; stochastic models permit more realistic dynamics based on finite populations.
+Here, we use a **for** loop to cycle through each generation, each time updating $p$ according to the recursion equation above. Remember, there is no $N$ here because the recursion is deterministic and assumes an infinite population size; hence there is no stochasticity due to finite population sizes. There is also no need to have multiple runs as each run is identical, hence no $r_{max}$.
+
+Don't worry, it gets more complicated than this in later chapters. The key point here is that analytical (or deterministic) models assume infinite populations and no stochasticity. Simulations with very large populations should give the same results as analytical models. Basically, the closer we can get in stochastic models to the assumption of infinite populations, the closer the match to infinite-population deterministic models. Deterministic models give the ideal case; stochastic models permit more realistic dynamics based on finite populations.
 
 More generally, creating deterministic recursion-based models can be a good way of verifying simulation models, and vice versa: if the same dynamics occur in both individuals-based and recursion-based models, then we can be more confident that those dynamics are genuine and not the result of a programming error or mathematical mistake. 
 
