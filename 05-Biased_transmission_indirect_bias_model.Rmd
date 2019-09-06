@@ -1,0 +1,102 @@
+
+# Biased transmission (indirect bias: model)
+
+In the two previous chapters, we started to examine biased transmission, both based on the characteristics of the traits (or [direct bias][Biased transmission (direct bias)]) and on the characteristics of the population. The latter can result from taking into account the frequency of a trait (as we did for [conformity][Biased transmission (indirect bias: frequency)]) or from taking into account specific features of the demonstrators, or model bias, which we will look at in this chapter. 
+
+Whereas the simulations we realised previously are fairly standard, indirect, model-based, biased transmission can be implemented in several different ways. Model biases can result when individuals copy preferentially from any features of the demonstrators, as long as it is not directly tied to the traits. The most studied model bias is prestige bias, where individuals are more likely to copy from demonstrators that are considered more 'prestigious', for example because other individuals show deference to them. Alternatively, individuals can copy the demonstrators that are more successful, independently from how others judge them, or they can copy individuals that are more similar to them, or older (or younger), and so on. The crux is that the decision is not directly linked to the cultural trait itself.
+
+## A generic model bias
+
+To implement a generic version of model-biased cultural transmission, we first need to assume that there are some intrinsic differences in the population. Up until now, our populations were described only by the traits they possessed. We now want that each individuals have some feature by which can be distinguished from others, and classified at a particular level with respect of all others. We can call thes feature 'grade'. An individual's grade could stand for their prestige, their age (assuming that the time frame of the simulations is sufficienlty short) or any other features that do not change, and that other individuals can use to decide whether to copy from them or not. How can we implement it? Again, there is not a standard way. We can assume that grade is distributed exponentially among individuals, meaning that few of them have an high grade, and the majority have a lower one (this may be similar to how prestige is distributed in human societies).   
+
+```{r 5.1}
+library(tidyverse)
+set.seed(111)
+
+N <- 100
+p_0 <- 0.5
+
+population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)),
+                     grade = rexp(N)) 
+```
+
+The only difference in the initialisation of the population is that we have now another variable, $grade$, where the function `rexp()` draws $N$ random numbers from an exponential distribution. We can inspect the tibble by  typing its name in the R console
+
+```{r 5.2}
+population
+```
+
+Individual 4 has a grade of $4.71$, higher comparing to the others, so can be one of the individuals that will be likely to be copied from. We can plot an histogram of all grades to have a better grasp of the situation, using the new `geom_histogram()` ggplot geom (Notice the parameter `binwidth = 1` that specifies the width of the bins, and `scale_x_continuous(breaks = 0 : max(population$grade))` which tells ggplot to use breaks of size 1, starting from 0).
+
+```{r 5.3}
+ggplot(data = population, aes(x = grade)) +
+  geom_histogram(binwidth = 1, fill = "white", colour = "black") +
+  scale_x_continuous(breaks = 0 : max(population$grade)) + 
+  labs(y = "Number of individuals") +
+  theme_bw()
+```
+
+We can see that the majority of individuals has a grade between 0 and 1, and almost all of them have a grade below 3 (incidentally our individual 4 is not the highest grade in the population). Of course, other distributions are possible, you can experiment for example with `rnorm(N)`, a normal distribution, that produces few high-grades and few low-grades individuals, and the majority of them close to the mean, or even `runif(N)`, a uniform distribution, that produces an 'egualitarian' grade assignment. 
+
+TO DO FROM HERE:
+
+How should 'grade' be used to decide whether to copy or not? Again, there are various possibilities. An intuitive way is to assume that individuals with an higher grade are preferentially chosen as demonstrators, and individuals compare their grade with the grade of the demonstrator and copy only when the grade of the demonstrator is higher. This would be equivalent to assess if the demonstrator is older (younger, more prestigious, etc.) than yourself. Below the code that does this (?):
+
+```{r 5.4}
+  demonstrator_index <- sample(1:N, N, replace = TRUE, prob=population$grade)
+  demonstrators <- tibble( trait = population$trait[demonstrator_index],
+                                     grade = population$grade[demonstrator_index])
+  
+  copy <- population$grade < demonstrators$grade
+
+  population$trait[copy] <- demonstrators$trait[copy]
+```
+
+EXPLAIN THE INDEXING
+
+```{r 5.5}
+biased_transmission_model <- function(N, p_0, t_max, r_max) {
+  
+  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  
+  for (r in 1:r_max) {
+    
+    population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)),
+                     grade = rexp(N))     # create first generation
+    
+    output[output$generation == 1 & output$run == r, ]$p <- sum(population$trait == "A") / N # add first generation's p for run r
+    
+    for (t in 2:t_max) {
+      demonstrator_index <- sample(1:N, N, replace = TRUE, prob=population$grade)
+      demonstrators <- tibble( trait = population$trait[demonstrator_index],
+                               grade = population$grade[demonstrator_index])
+      
+      copy <- demonstrators$grade > population$grade
+      
+      population$trait[copy] <- demonstrators$trait[copy]
+      
+      output[output$generation == t & output$run == r, ]$p <- sum(population$trait == "A") / N # get p and put it into output slot for this generation t and run r
+    }
+    
+  }
+  output # export data from function
+}
+```
+
+PLOT (USUAL FUNCTION):
+
+```{r 5.6, echo=FALSE}
+plot_multiple_runs <- function(data_model) {
+  ggplot(data = data_model, aes(y = p, x = generation)) +
+    geom_line(aes(colour = run)) +
+    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    labs(y = "p (proportion of individuals with trait A)")
+}
+```
+
+```{r 5.7}
+data_model <- biased_transmission_model(N = 10000, p_0 = 0.2, t_max = 200, r_max = 5)
+plot_multiple_runs(data_model)
+```

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Biased transmission (direct bias) | Individual-based models of cultural evolution</title>
+  <meta name="description" content="A minimal working structure for the book" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Biased transmission (direct bias) | Individual-based models of cultural evolution" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A minimal working structure for the book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Biased transmission (direct bias) | Individual-based models of cultural evolution" />
+  
+  <meta name="twitter:description" content="A minimal working structure for the book" />
+  
+
+<meta name="author" content="Alberto Acerbi" />
+<meta name="author" content="Alex Mesoudi" />
+<meta name="author" content="Marco Smolla" />
+
+
+<meta name="date" content="2019-09-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="unbiased-and-biased-mutation.html">
+<link rel="next" href="biased-transmission-indirect-bias-frequency.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Individual-based models of cultural evolution</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>Basics</b></span></li>
+<li class="chapter" data-level="1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html"><i class="fa fa-check"></i><b>1</b> Unbiased transmission</a><ul>
+<li class="chapter" data-level="1.1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#initialising-the-simulation"><i class="fa fa-check"></i><b>1.1</b> Initialising the simulation</a></li>
+<li class="chapter" data-level="1.2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>1.2</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="1.3" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#plotting-the-model-results"><i class="fa fa-check"></i><b>1.3</b> Plotting the model results</a></li>
+<li class="chapter" data-level="1.4" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>1.4</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="1.5" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>1.5</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="1.6" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#varying-initial-conditions"><i class="fa fa-check"></i><b>1.6</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="1.7" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#summary-of-the-model"><i class="fa fa-check"></i><b>1.7</b> Summary of the model</a></li>
+<li class="chapter" data-level="1.8" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#analytical-appendix"><i class="fa fa-check"></i><b>1.8</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>2</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="2.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>2.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="2.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>2.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="2.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>2.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>2.4</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission (direct bias)</a><ul>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strenght-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strenght of selection</a></li>
+<li class="chapter" data-level="3.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>3.2</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>3.3</b> Analytical appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html"><i class="fa fa-check"></i><b>4</b> Biased transmission (indirect bias: frequency)</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>4.1</b> The logic of conformity</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>4.2</b> Testing conformist transmission</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.4" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#analytic-appendix"><i class="fa fa-check"></i><b>4.4</b> Analytic appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html"><i class="fa fa-check"></i><b>5</b> Biased transmission (indirect bias: model)</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Individual-based models of cultural evolution</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="biased-transmission-direct-bias" class="section level1">
+<h1><span class="header-section-number">3</span> Biased transmission (direct bias)</h1>
+<p>So far we have looked at unbiased transmission (<a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>) and mutation, both unbiased and biased (<a href="unbiased-and-biased-mutation.html#unbiased-and-biased-mutation">Chapter 2</a>). Let’s complete the set by looking at biased transmission. This occurs when one trait or one demonstrator is more likely to be copied than another trait or demonstrator. Trait-based copying is often called ‘direct’ or ‘content’ bias, while demonstrator-based copying is often called ‘indirect’ or ‘context’ bias. Both are sometimes also called ‘cultural selection’ because one thing (trait or demonstrator) is selected to be copied over another. In this chapter, we wil look at trait-based (direct, content) bias.</p>
+<p>(As an aside, there is a confusing array of terminology in the field of cultural evolution, as illustrated by the preceding paragraph. That’s why models are so useful. Words and verbal descriptions can be ambiguous. Often the writer doesn’t realise that there are hidden assumptions or unrecognised ambiguities in their descriptions. They may not realise that what they mean by ‘cultural selection’ is entirely different to how someone else uses it. Models are great because they force us to precisely specify exactly what we mean by a particular term or process. I can use the words in the paragraph above to describe biased transmission, but it’s only really clear when I model it, making all my assumptions explicit.)</p>
+<p>To simulate biased transmission, following the simulations in <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>,we assume there are two traits <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, and that each individual chooses another individual from the previous generation at random. This time, however, we associate to the traits two different probabilities of being copied: we can call them, <span class="math inline">\(s_a\)</span> and <span class="math inline">\(s_b\)</span> respectively. When an individual encounter an individual with trait <span class="math inline">\(A\)</span>, they will copy them with probability <span class="math inline">\(s_a\)</span>, and when they encounter an individual with trait <span class="math inline">\(B\)</span>, they will copy them with probability <span class="math inline">\(s_b\)</span>. With <span class="math inline">\(s_a=s_b\)</span>, copying is unbiased, and individuals switch to the encountered alternative with the same probabilty. This reproduces the results of the simulations when transmission is unbiased. If <span class="math inline">\(s_a=s_b=1\)</span>, the model is exactly the same of <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>. The relevant situation is when <span class="math inline">\(s_a&gt;s_b\)</span> (or vice versa), so that we have biased transmission. Perhaps <span class="math inline">\(A\)</span> (or <span class="math inline">\(B\)</span>) is a more effective tool, a more memorable story, or a more easily pronounced word.</p>
+<p>Let’s first write the function, and then explore what happens in this case. Below is a function <code>biased_ransmission_direct()</code> that implements all of these ideas</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">set.seed</span>(<span class="dv">111</span>)
+
+biased_ransmission_direct &lt;-<span class="st"> </span><span class="cf">function</span> (N, s_a, s_b, p_<span class="dv">0</span>, t_max, r_max) {
+  
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
+  
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+  
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>))) <span class="co"># create first generation</span>
+    
+    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
+
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+    
+      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
+      
+      demonstrator_trait &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)) 
+      <span class="co"># for each individual, pick a random individual from the previous generation to act as demonstrator and store their trait</span>
+      
+      <span class="co"># biased probabilities to copy:</span>
+      copy_a &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(s_a, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>s_a), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+      copy_b &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(s_b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>s_b), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+      
+      <span class="cf">if</span> (<span class="kw">nrow</span>(population[copy_a <span class="op">&amp;</span><span class="st"> </span>demonstrator_trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        population[copy_a <span class="op">&amp;</span><span class="st"> </span>demonstrator_trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span> 
+      }  
+      
+      <span class="cf">if</span> (<span class="kw">nrow</span>(population[copy_b <span class="op">&amp;</span><span class="st"> </span>demonstrator_trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        population[copy_b <span class="op">&amp;</span><span class="st"> </span>demonstrator_trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span> 
+      }  
+      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
+    }
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
+<p>Most of <code>biased_ransmission_direct()</code> is recycled from the previous models. As before, we initalise the data structure <strong>output</strong> from multiple runs, and in generation <span class="math inline">\(t = 1\)</span>, we create a <strong>population</strong> tibble to hold the trait of each individual.</p>
+<p>The major change is that we now include biased transmission. We first select at random the demonstrators from the previous generation (using the same code we used in <code>unbiased_transmission()</code>) and we store their trait in <strong>demonstrator_trait</strong>. Then we get the probabilities to copy <span class="math inline">\(A\)</span> and to copy <span class="math inline">\(B\)</span> for all the population, using the same code used in <code>biased_mutation()</code>, only that this time it produces a probability to copy. Again using the same code as in <code>biased mutation()</code>, we have the individuals copy the trait at hand with the desired probability.</p>
+<p>Let’s run our function <code>biased_ransmission_direct()</code>. As before, to plot the results, we can use the same function <code>plot_multiple_runs()</code> we wrote in <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>.</p>
+<p>As we discussed, the interesting case is when one trait is favored with respect to the other. We can assume, for example, <span class="math inline">\(s_a=0.1\)</span> and <span class="math inline">\(s_b=0\)</span>. This means that when individuals encounter another individual with trait <span class="math inline">\(A\)</span> they copy them 1 every 10 times, but, when individuals encounter another individual with trait <span class="math inline">\(B\)</span>, they never switch. We can also assume that the favoured trait, <span class="math inline">\(A\)</span>, is initially rare in the population (<span class="math inline">\(p_0=0.01\)</span>) to see how selection favours this initially-rare trait (<span class="math inline">\(p_0\)</span> needs to be higher than 0. Since we are re not including any mutation in the model, we need to include at least some <span class="math inline">\(A\)</span>s at the beginning of the simulation, otherwise it would never appear).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_ransmission_direct</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">s_a =</span> <span class="fl">0.1</span>, <span class="dt">s_b =</span> <span class="dv">0</span> , <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/3.3-1.png" width="672" /></p>
+<p>With a moderate selection strength we can see that <span class="math inline">\(A\)</span> gradually replaces <span class="math inline">\(B\)</span> and goes to fixation. It does this in a characteristic manner: the increase is slow at first, then picks up speed, then plateaus.</p>
+<p>Note the difference to biased mutation. Where biased mutation was r-shaped, with a steep initial increase, biased transmission is s-shaped, with an initial slow uptake. This is because the strength of biased transmission (like selection in general) is proportional to the variation in the population. When <span class="math inline">\(A\)</span> is rare initially, there is only a small chance of picking another individual with <span class="math inline">\(A\)</span>. As <span class="math inline">\(A\)</span> spreads, the chances of picking an <span class="math inline">\(A\)</span> individual increases. As <span class="math inline">\(A\)</span> becomes very common, there are few <span class="math inline">\(B\)</span> individuals left to switch. In the case of biased mutation, instead, the probability to switch is independent from the variation in the population.</p>
+<div id="strenght-of-selection" class="section level2">
+<h2><span class="header-section-number">3.1</span> Strenght of selection</h2>
+<p>From what does the strength of the selection depend? First, the strength is independent from the specific values of <span class="math inline">\(s_a\)</span> and <span class="math inline">\(s_b\)</span>. What counts is their relative difference, in this case <span class="math inline">\(s_a-s_b = 0.1\)</span>. We can try and run a simulation whith, say, <span class="math inline">\(s_a=0.6\)</span> and <span class="math inline">\(s_b=0.5\)</span>. We observe the same pattern, with slighlty more noise - the single runs are more different one another with respect to the previois simulation - due to the fact that switches from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> are also possible.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_ransmission_direct</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">s_a =</span> <span class="fl">0.6</span>, <span class="dt">s_b =</span> <span class="fl">0.5</span> , <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/3.4-1.png" width="672" /></p>
+<p>To change the selection strength, we need to modify the difference between <span class="math inline">\(s_a\)</span> and <span class="math inline">\(s_b\)</span>. We can double the strenght by setting <span class="math inline">\(s_a = 0.2\)</span>, and keeping <span class="math inline">\(s_b=0\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_ransmission_direct</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">s_a =</span> <span class="fl">0.2</span>, <span class="dt">s_b =</span> <span class="dv">0</span> , <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">t_max =</span> <span class="dv">150</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/3.5-1.png" width="672" /></p>
+<p>As we might expect, increasing the strength of selection increases the speed with which <span class="math inline">\(A\)</span> goes to fixation. Note, though, that it retains the s-shape.</p>
+<hr />
+</div>
+<div id="summary-of-the-model-2" class="section level2">
+<h2><span class="header-section-number">3.2</span> Summary of the model</h2>
+<p>We saw how biased transmission causes a trait favoured by cultural selection to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> at <span class="math inline">\(p = 0.5\)</span>), and weakest when there is little variation (when <span class="math inline">\(p\)</span> is close to 0 or 1).</p>
+<hr />
+</div>
+<div id="analytical-appendix-2" class="section level2">
+<h2><span class="header-section-number">3.3</span> Analytical appendix</h2>
+<p>As before, we have <span class="math inline">\(p\)</span> individuals with trait <span class="math inline">\(A\)</span>, and <span class="math inline">\(1 - p\)</span> individuals with trait <span class="math inline">\(B\)</span>. As we saw that what is important is the relative difference between the two probabilites of being copied associated to the two traits and not their absolute value, we consider always <span class="math inline">\(s_b=0\)</span>, and vary <span class="math inline">\(s_a\)</span>, which we can call simply <span class="math inline">\(s\)</span>. Thus, the <span class="math inline">\(p\)</span> individuals with trait <span class="math inline">\(A\)</span> always keep their <span class="math inline">\(A\)</span>s. The <span class="math inline">\(1 - p\)</span> individuals with trait <span class="math inline">\(B\)</span> pick another individual at random, hence with probability <span class="math inline">\(p\)</span>, and with probability <span class="math inline">\(s\)</span> they switch to trait <span class="math inline">\(A\)</span>. We can therefore write the recursion for <span class="math inline">\(p\)</span> under biased transmission as:</p>
+<p><span class="math display">\[p&#39; = p + p(1-p)s                \hspace{30 mm}(3.1)\]</span></p>
+<p>The first term on the right-hand side is the unchanged <span class="math inline">\(A\)</span> bearers, and the second term is the <span class="math inline">\(1-p\)</span> <span class="math inline">\(B\)</span>-bearers who find one of the <span class="math inline">\(p\)</span> <span class="math inline">\(A\)</span>-bearers and switch with probability <span class="math inline">\(s\)</span>.</p>
+<p>Here is some code to plot this biased transmission recursion:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_max &lt;-<span class="st"> </span><span class="dv">150</span>
+s &lt;-<span class="st"> </span><span class="fl">0.1</span>
+
+pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)
+pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="fl">0.01</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+  pop_analytical<span class="op">$</span>p[i] &lt;-<span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>s
+}
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/3.6-1.png" width="672" /></p>
+<p>The curve above should be identical to the simulation curve, given that the simulation had the same biased transmission strength <span class="math inline">\(s\)</span> and a large enough <span class="math inline">\(N\)</span> to minimise stochasticity.</p>
+<p>From the equation above, we can see how the strength of biased transmission depends on variation in the population, given that <span class="math inline">\(p(1 - p)\)</span> is the formula for variation. This determines the shape of the curve, while <span class="math inline">\(s\)</span> determines the speed with which the equilibrium <span class="math inline">\(p^*\)</span> is reached.</p>
+<p>But what is the equilibrium <span class="math inline">\(p^*\)</span> here? In fact there are two. As before, the equilibrium can be found by setting the change in <span class="math inline">\(p\)</span> to zero, or when:</p>
+<p><span class="math display">\[p(1-p)s = 0                 \hspace{30 mm}(3.2)\]</span></p>
+<p>There are three ways in which the left-hand side can equal zero: when <span class="math inline">\(p = 0\)</span>, when <span class="math inline">\(p = 1\)</span> and when <span class="math inline">\(s = 0\)</span>. The last case is uninteresting: it would mean that biased transmission is not occurring. The first two cases simply say that if either trait reaches fixation, then it will stay at fixation. This is to be expected, given that we have no mutation in our model. It contrasts with unbiased and biased mutation, where there is only one equlibrium value of <span class="math inline">\(p\)</span>.</p>
+<p>We can also say that <span class="math inline">\(p = 0\)</span> is an unstable equilibrium, meaning that any slight perturbation away from <span class="math inline">\(p = 0\)</span> moves <span class="math inline">\(p\)</span> away from that value. This is essentially what we simulated above: a slight perturbation up to <span class="math inline">\(p = 0.01\)</span> went all the way up to <span class="math inline">\(p = 1\)</span>. In contrast, <span class="math inline">\(p = 1\)</span> is a stable equilibrium: any slight perturbation from <span class="math inline">\(p = 1\)</span> immediately goes back to <span class="math inline">\(p = 1\)</span>.</p>
+<hr />
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="unbiased-and-biased-mutation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="biased-transmission-indirect-bias-frequency.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -12,8 +12,9 @@
   * ~~analytic section (AA)~~
 
 * 04-Biased_transmission_indirect_bias_frequency:
-  * everything - just copied from previous Alex's repository (AA)
+  * ~~everything - just copied from previous Alex's repository (AA)~~
   
 * 05-Biased_transmission_indirect_bias_model:
   * is there any *standard* model? (AA)
   * what about guided variation?
+  
