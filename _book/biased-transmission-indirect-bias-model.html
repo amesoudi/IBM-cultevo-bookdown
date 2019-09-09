@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-09-06" />
+<meta name="date" content="2019-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -134,7 +134,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#analytic-appendix"><i class="fa fa-check"></i><b>3.4</b> Analytic appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html"><i class="fa fa-check"></i><b>4</b> Biased transmission (indirect bias: model)</a><ul>
-<li class="chapter" data-level="4.1" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html#a-generic-model-bias"><i class="fa fa-check"></i><b>4.1</b> A generic model bias</a></li>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html#a-simple-model-bias"><i class="fa fa-check"></i><b>4.1</b> A simple model bias</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -160,44 +160,86 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">4</span> Biased transmission (indirect bias: model)</h1>
 <p>In the two previous chapters, we started to examine biased transmission, both based on the characteristics of the traits (or <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">direct bias</a>) and on the characteristics of the population. The latter can result from taking into account the frequency of a trait (as we did for <a href="biased-transmission-indirect-bias-frequency.html#biased-transmission-indirect-bias-frequency">conformity</a>) or from taking into account specific features of the demonstrators, or model bias, which we will look at in this chapter.</p>
 <p>Whereas the simulations we realised previously are fairly standard, indirect, model-based, biased transmission can be implemented in several different ways. Model biases can result when individuals copy preferentially from any features of the demonstrators, as long as it is not directly tied to the traits. The most studied model bias is prestige bias, where individuals are more likely to copy from demonstrators that are considered more ‘prestigious’, for example because other individuals show deference to them. Alternatively, individuals can copy the demonstrators that are more successful, independently from how others judge them, or they can copy individuals that are more similar to them, or older (or younger), and so on. The crux is that the decision is not directly linked to the cultural trait itself.</p>
-<div id="a-generic-model-bias" class="section level2">
-<h2><span class="header-section-number">4.1</span> A generic model bias</h2>
-<p>To implement a generic version of model-biased cultural transmission, we first need to assume that there are some intrinsic differences in the population. Up until now, our populations were described only by the traits they possessed. We now want that each individuals have some feature by which can be distinguished from others, and classified at a particular level with respect of all others. We can call thes feature ‘grade’. An individual’s grade could stand for their prestige, their age (assuming that the time frame of the simulations is sufficienlty short) or any other features that do not change, and that other individuals can use to decide whether to copy from them or not. How can we implement it? Again, there is not a standard way. We can assume that grade is distributed exponentially among individuals, meaning that few of them have an high grade, and the majority have a lower one (this may be similar to how prestige is distributed in human societies).</p>
+<div id="a-simple-model-bias" class="section level2">
+<h2><span class="header-section-number">4.1</span> A simple model bias</h2>
+<p>To implement a simple version of model-biased cultural transmission, we first need to assume that there are some intrinsic differences in the population. Up until now, our populations were described only by the traits they possessed. We now want that individuals have a feature by which some of them can be distinguished from others, and, as a consequence, being more liked to be copied. We can call this feature ‘status’. An individual’s status is a binary variable that could stand for whether they are prestigious or not, old (young) or not (assuming that the time frame of the simulations is sufficienlty short) or any other features that do not change, and that other individuals can use to decide whether to copy from them or not. We can have a parameter <span class="math inline">\(p_s\)</span>, that determines the probability an individual have an high or a low status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">set.seed</span>(<span class="dv">111</span>)
 
 N &lt;-<span class="st"> </span><span class="dv">100</span>
 p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span>
+p_s &lt;-<span class="st"> </span><span class="fl">0.05</span>
 
 population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)),
-                     <span class="dt">grade =</span> <span class="kw">rexp</span>(N)) </code></pre></div>
-<p>The only difference in the initialisation of the population is that we have now another variable, <span class="math inline">\(grade\)</span>, where the function <code>rexp()</code> draws <span class="math inline">\(N\)</span> random numbers from an exponential distribution. We can inspect the tibble by typing its name in the R console</p>
+                     <span class="dt">status =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_s, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_s))) </code></pre></div>
+<p>We can inspect the tibble by typing its name in the R console</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">population</code></pre></div>
 <pre><code>## # A tibble: 100 x 2
-##    trait grade
-##    &lt;chr&gt; &lt;dbl&gt;
-##  1 A     0.152
-##  2 A     1.48 
-##  3 B     0.122
-##  4 A     4.71 
-##  5 B     0.280
-##  6 B     0.761
-##  7 B     0.139
-##  8 A     0.138
-##  9 B     0.672
-## 10 B     0.456
+##    trait status
+##    &lt;chr&gt; &lt;chr&gt; 
+##  1 A     low   
+##  2 A     low   
+##  3 B     low   
+##  4 A     low   
+##  5 B     low   
+##  6 B     low   
+##  7 B     low   
+##  8 A     low   
+##  9 B     low   
+## 10 B     high  
 ## # … with 90 more rows</code></pre>
-<p>Individual 4 has a grade of <span class="math inline">\(4.71\)</span>, higher comparing to the others, so can be one of the individuals that will be likely to be copied from. We can plot an histogram of all grades to have a better grasp of the situation, using the new <code>geom_histogram()</code> ggplot geom (Notice the parameter <code>binwidth = 1</code> that specifies the width of the bins, and <code>scale_x_continuous(breaks = 0 : max(population$grade))</code> which tells ggplot to use breaks of size 1, starting from 0).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> population, <span class="kw">aes</span>(<span class="dt">x =</span> grade)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span> <span class="op">:</span><span class="st"> </span><span class="kw">max</span>(population<span class="op">$</span>grade)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Number of individuals&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/5.3-1.png" width="672" /></p>
-<p>We can see that the majority of individuals has a grade between 0 and 1, and almost all of them have a grade below 3 (incidentally our individual 4 is not the highest grade in the population). Of course, other distributions are possible, you can experiment for example with <code>rnorm(N)</code>, a normal distribution, that produces few high-grades and few low-grades individuals, and the majority of them close to the mean, or even <code>runif(N)</code>, a uniform distribution, that produces an ‘egualitarian’ grade assignment.</p>
-<p>How should ‘grade’ be used to decide whether to copy or not? Again, there are various possibilities.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">previous_population &lt;-<span class="st"> </span>population 
-demonstrator_population &lt;-<span class="st"> </span><span class="kw">sample</span>(previous_population, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>With <span class="math inline">\(p_s=0.05\)</span> around 5 individuals in a population of 100 will have high status. In this specific case, one of them is individual 10, so it will be one of the individuals that will be likely to be copied more from.</p>
+<p>How should the status used to decide whether to copy or not? Again, there are various possibilities. An intuitive way is to assume that the probabilities to pick high-status and low-status individuals as demonstrators are different. So far, when using the function <code>sample</code> to select demonstrators, we did not include any specific probability, so that each individual of the previous generation had the same likelihood to be selected. However, we can pass to the function a vector of probabilites to weight the choice. We can assume that the probability to select high status individuals as demonstrators is always equal to 1 (as in unbiased transmission), but the probability to select low-status individuals is encoded by a further parameter, <span class="math inline">\(p_\text{low}\)</span>: when <span class="math inline">\(p_\text{low}=1\)</span>, the simulations correspond to unbiased transmission, as everybody has the same probability to be chosen, while with <span class="math inline">\(p_\text{low}=0\)</span>, there is a strict model bias, where only high-status individuals are copied.</p>
+<p>To implement this, we first store in <code>p_demonstrator</code> the probabilities to be copied for each member of the population:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_low &lt;-<span class="st"> </span><span class="fl">0.01</span>
+
+p_demonstrator &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,N)
+p_demonstrator[population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;low&quot;</span>] &lt;-<span class="st"> </span>p_low</code></pre></div>
+<p>After that, we sample the traits in the population using these probabilities. Notice the instruction <code>if(sum(p_demonstrator) &gt; 0)</code>: this is necessary in the case in which there are not high-status individuals and the probability to select demonstrators from low-status one is equal to 0. In this case, the total probability would be also equal to 0, and it would generate an error when the function is run. With this instruction, instead, no copying happens, which is what we would expect in this situation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="kw">sum</span>(p_demonstrator) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
+  
+  demonstrator_index &lt;-<span class="st"> </span><span class="kw">sample</span> (N, <span class="dt">prob =</span> p_demonstrator, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  
+  population<span class="op">$</span>trait &lt;-<span class="st"> </span>population<span class="op">$</span>trait[demonstrator_index]
+  
+}</code></pre></div>
+<p>As usual, we can wrap everything in a function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">biased_transmission_model &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, p_s, p_low, t_max, r_max) {
+  
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
+  
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)),
+                     <span class="dt">status =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_s, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_s))) 
+    
+    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
+    
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+      
+      p_demonstrator &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,N)
+      p_demonstrator[population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;low&quot;</span>] &lt;-<span class="st"> </span>p_low
+      
+      <span class="cf">if</span>(<span class="kw">sum</span>(p_demonstrator) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
+        
+        demonstrator_index &lt;-<span class="st"> </span><span class="kw">sample</span> (N, <span class="dt">prob =</span> p_demonstrator, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+        
+        population<span class="op">$</span>trait &lt;-<span class="st"> </span>population<span class="op">$</span>trait[demonstrator_index]
+      
+      }
+      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
+    }
+    
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
+<p>We can now test our simulation, assuming a very low, but not null, probability to select low-status individuals as demonstrators (remember we are using the habitual <code>plot_multiple_runs()</code> function to plot the results of the simulations).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_model</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/5.7-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_model</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/5.8-1.png" width="672" /></p>
 
 </div>
 </div>
