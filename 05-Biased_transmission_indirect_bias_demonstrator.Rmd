@@ -219,12 +219,11 @@ IS THERE ANYHTIHG WE CAN DO HERE?
 
 ## Further readings
 
-Test @mesoudi_cultural_2009 
+Examples of simulation models implementing indirect, demonstrator-based, biased transmission include @mesoudi_cultural_2009, an individual-based model that explores how prestige bias can generate clusters of recurring behaviours, applied to the case of copycat suicides. @henrich_joseph_big_2015 presents a population-level model that links prestige to the emergence of whithin-group cooperation. @henrich_demography_2004 describes an analytical, population-level, model, where individuals copy the most succesfull demonstrator in the population.  
 
-Test @henrich_joseph_big_2015
+An earlier analytical treatment of demonstrator-based bias, with extensions on the evolution of symbolic traits that may be associated to demonstrators is in Chapter 8 of @boyd_culture_1985.
 
-Test @boyd_culture_1985
+Finally, @henrich_evolution_2001 is the classic treatment of prestige bias, and a recent review of the empirical evidence supporting it is @jimenez_prestige-biased_2019.
 
-Test @jimenez_prestige-biased_2019
 
 
