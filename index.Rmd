@@ -9,6 +9,9 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 description: "A minimal working structure for the book"
+bibliography: "biblio.bib"
+link-citations: true
+
 ---
 
 # Introduction {-#Introduction}
