@@ -16,6 +16,7 @@
   
 * 05-Biased_transmission_indirect_bias_model:
   * ~~is there any *standard* model? (AA)~~
+  * example of further readings section (AA)
 
 * 06-Horizontal, vertical, and oblique transmission:
   * EMPTY
