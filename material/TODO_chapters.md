@@ -17,8 +17,11 @@
 * 05-Biased_transmission_indirect_bias_model:
   * ~~is there any *standard* model? (AA)~~
 
-* 06-Multiple traits models:
-  * just moved from the previous repo (AA)
+* 06-Horizontal, vertical, and oblique transmission:
+  * EMPTY
+
+* 07-Multiple traits models:
+  * everything - just moved from the previous repo (AA)
   
 ***  
 
