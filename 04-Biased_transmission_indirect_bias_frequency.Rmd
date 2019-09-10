@@ -257,7 +257,7 @@ We also discussed the subtle, but fundamental, difference between unbiased copyi
 
 ***
 
-## Analytic appendix
+## Analytical appendix
 
 Let's revise Table 1 to add the probabilities of each combination of three demonstrators coming together, assuming they are picked at random. These probabilities can be expressed in terms of $p$, the frequency of $A$, and $(1 - p)$, the frequency of $B$. Table 2 adds this column.
 
@@ -325,3 +325,6 @@ ggplot(data = conformity_p_adopt, aes(y = p_next, x = p)) +
 This plot encapsulates the process of conformity. The dotted line shows unbiased transmission: the probability of adopting $A$ is exactly equal to the frequency of $A$ in the population. The s-shaped solid curve shows conformist transmission. When $A$ is common ($p > 0.5$), then the curve is higher than the dotted line: there is a disproportionately higher probability of adopting $A$. When $A$ is uncommon ($p < 0.5$), then the curve is lower than the dotted line: there is a disproportionately lower probability of adopting $A$.
 
 ***
+
+## Further readings
+

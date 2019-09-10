@@ -15,6 +15,12 @@
   * ~~everything - just copied from previous Alex's repository (AA)~~
   
 * 05-Biased_transmission_indirect_bias_model:
-  * is there any *standard* model? (AA)
-  * what about guided variation?
+  * ~~is there any *standard* model? (AA)~~
+
+* 06-Multiple traits models:
+  * just moved from the previous repo (AA)
+  
+***  
+
+* what about guided variation?
   
