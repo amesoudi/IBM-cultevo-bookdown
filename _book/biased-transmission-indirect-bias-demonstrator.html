@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Biased transmission (indirect bias: model) | Individual-based models of cultural evolution</title>
+  <title>4 Biased transmission (indirect bias: demonstrator) | Individual-based models of cultural evolution</title>
   <meta name="description" content="A minimal working structure for the book" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Biased transmission (indirect bias: model) | Individual-based models of cultural evolution" />
+  <meta property="og:title" content="4 Biased transmission (indirect bias: demonstrator) | Individual-based models of cultural evolution" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Biased transmission (indirect bias: model) | Individual-based models of cultural evolution" />
+  <meta name="twitter:title" content="4 Biased transmission (indirect bias: demonstrator) | Individual-based models of cultural evolution" />
   
   <meta name="twitter:description" content="A minimal working structure for the book" />
   
@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-09-09" />
+<meta name="date" content="2019-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,8 +133,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.3" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>3.3</b> Summary of the model</a></li>
 <li class="chapter" data-level="3.4" data-path="biased-transmission-indirect-bias-frequency.html"><a href="biased-transmission-indirect-bias-frequency.html#analytic-appendix"><i class="fa fa-check"></i><b>3.4</b> Analytic appendix</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html"><i class="fa fa-check"></i><b>4</b> Biased transmission (indirect bias: model)</a><ul>
-<li class="chapter" data-level="4.1" data-path="biased-transmission-indirect-bias-model.html"><a href="biased-transmission-indirect-bias-model.html#a-simple-model-bias"><i class="fa fa-check"></i><b>4.1</b> A simple model bias</a></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-indirect-bias-demonstrator.html"><a href="biased-transmission-indirect-bias-demonstrator.html"><i class="fa fa-check"></i><b>4</b> Biased transmission (indirect bias: demonstrator)</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-indirect-bias-demonstrator.html"><a href="biased-transmission-indirect-bias-demonstrator.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>4.1</b> A simple demonstrator bias</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-indirect-bias-demonstrator.html"><a href="biased-transmission-indirect-bias-demonstrator.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>4.2</b> Predicting the winning trait</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-indirect-bias-demonstrator.html"><a href="biased-transmission-indirect-bias-demonstrator.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -156,13 +158,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="biased-transmission-indirect-bias-model" class="section level1">
-<h1><span class="header-section-number">4</span> Biased transmission (indirect bias: model)</h1>
-<p>In the two previous chapters, we started to examine biased transmission, both based on the characteristics of the traits (or <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">direct bias</a>) and on the characteristics of the population. The latter can result from taking into account the frequency of a trait (as we did for <a href="biased-transmission-indirect-bias-frequency.html#biased-transmission-indirect-bias-frequency">conformity</a>) or from taking into account specific features of the demonstrators, or model bias, which we will look at in this chapter.</p>
-<p>Whereas the simulations we realised previously are fairly standard, indirect, model-based, biased transmission can be implemented in several different ways. Model biases can result when individuals copy preferentially from any features of the demonstrators, as long as it is not directly tied to the traits. The most studied model bias is prestige bias, where individuals are more likely to copy from demonstrators that are considered more ‘prestigious’, for example because other individuals show deference to them. Alternatively, individuals can copy the demonstrators that are more successful, independently from how others judge them, or they can copy individuals that are more similar to them, or older (or younger), and so on. The crux is that the decision is not directly linked to the cultural trait itself.</p>
-<div id="a-simple-model-bias" class="section level2">
-<h2><span class="header-section-number">4.1</span> A simple model bias</h2>
-<p>To implement a simple version of model-biased cultural transmission, we first need to assume that there are some intrinsic differences in the population. Up until now, our populations were described only by the traits they possessed. We now want that individuals have a feature by which some of them can be distinguished from others, and, as a consequence, being more liked to be copied. We can call this feature ‘status’. An individual’s status is a binary variable that could stand for whether they are prestigious or not, old (young) or not (assuming that the time frame of the simulations is sufficienlty short) or any other features that do not change, and that other individuals can use to decide whether to copy from them or not. We can have a parameter <span class="math inline">\(p_s\)</span>, that determines the probability an individual have an high or a low status.</p>
+<div id="biased-transmission-indirect-bias-demonstrator" class="section level1">
+<h1><span class="header-section-number">4</span> Biased transmission (indirect bias: demonstrator)</h1>
+<p>In the two previous chapters, we started to examine biased transmission, both based on the characteristics of the traits (or <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">direct bias</a>) and on the characteristics of the population. The latter can result from taking into account the frequency of a trait (as we did for <a href="biased-transmission-indirect-bias-frequency.html#biased-transmission-indirect-bias-frequency">conformity</a>) or from taking into account specific features of the demonstrators, which we will look at in this chapter (demonstrator bias is also called ‘model bias’ in cultural evolution).</p>
+<p>Whereas the simulations we realised previously are fairly standard, indirect demonstrator-based biased transmission can be implemented in several different ways. Demonstrator biases can result when individuals decide whether to copy or not by taking into account any features of the demonstrators, as long as it is not directly tied to the traits. The most studied demonstrator bias is prestige bias, where individuals are more likely to copy from demonstrators that are considered more ‘prestigious’, for example because other individuals show deference to them. Alternatively, individuals can copy the demonstrators that are more successful, independently from how others judge them, or they can copy individuals that are more similar to them, or older (or younger), and so on. The crux is that the decision is not directly linked to the cultural trait itself.</p>
+<div id="a-simple-demonstrator-bias" class="section level2">
+<h2><span class="header-section-number">4.1</span> A simple demonstrator bias</h2>
+<p>To implement a simple version of demonstrator-biased cultural transmission, we first need to assume that there are some intrinsic differences in the population. Up until now, our populations were described only by the traits they possessed. We now want that individuals have a feature by which some of them can be distinguished from others, and, as a consequence, being more liked to be copied. We can call this feature ‘status’. An individual’s status is a binary variable that could stand for whether they are prestigious or not, old (young) or not (assuming that the time frame of the simulations is sufficienlty short) or any other features that do not change, and that other individuals can use to decide whether to copy from them or not. We can have a parameter <span class="math inline">\(p_s\)</span> that determines the probability an individual have an high or a low status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">set.seed</span>(<span class="dv">111</span>)
 
@@ -195,7 +197,7 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 
 p_demonstrator &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,N)
 p_demonstrator[population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;low&quot;</span>] &lt;-<span class="st"> </span>p_low</code></pre></div>
-<p>After that, we sample the traits in the population using these probabilities. Notice the instruction <code>if(sum(p_demonstrator) &gt; 0)</code>: this is necessary in the case in which there are not high-status individuals and the probability to select demonstrators from low-status one is equal to 0. In this case, the total probability would be also equal to 0, and it would generate an error when the function is run. With this instruction, instead, no copying happens, which is what we would expect in this situation.</p>
+<p>After that, we sample the traits in the population using these probabilities. Notice the instruction <code>if(sum(p_demonstrator) &gt; 0)</code>: this is necessary in case there are not high-status individuals (for example with <span class="math inline">\(p_s\simeq0\)</span>) and the probability to select demonstrators from low-status one is equal to 0. In this case, the total probability would be also equal to 0, and it would generate an error when the function is run. With this instruction, instead, no copying happens, which is what we would expect in this situation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="kw">sum</span>(p_demonstrator) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
   
   demonstrator_index &lt;-<span class="st"> </span><span class="kw">sample</span> (N, <span class="dt">prob =</span> p_demonstrator, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
@@ -204,7 +206,7 @@ p_demonstrator[population<span class="op">$</span>status <span class="op">==</sp
   
 }</code></pre></div>
 <p>As usual, we can wrap everything in a function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">biased_transmission_model &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, p_s, p_low, t_max, r_max) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">biased_transmission_demonstrator &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, p_s, p_low, t_max, r_max) {
   
   output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
   
@@ -234,12 +236,76 @@ p_demonstrator[population<span class="op">$</span>status <span class="op">==</sp
   output <span class="co"># export data from function</span>
 }</code></pre></div>
 <p>We can now test our simulation, assuming a very low, but not null, probability to select low-status individuals as demonstrators (remember we are using the habitual <code>plot_multiple_runs()</code> function to plot the results of the simulations).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_model</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_demonstrator</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/5.7-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_model</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<p>The results are similar to what we saw in the <a href="biased-transmission-indirect-bias-frequency.html#biased-transmission-indirect-bias-frequency">previous chapter</a>) for conformity: one of the two traits quickly reaches fixation. In the case of conformity, however, the trait reaching fixation was the one that happened to have, because of the random initialisation, a slightly higher frequency at the beginning. With a demonstrator bias, this is not the case. The succesfull trait is the one that, irrispectively from its initial frequency, happens to be carried by high-status individuals.</p>
+<p>From this perspective, an indirect, demonstrator-based, bias is more similar to unbiased transmission. If you remember from the [first chapter][Unbiased transmission], simulations with unbiased transmission also ended up with one trait reaching fixation with small populations (<span class="math inline">\(N=100\)</span>), but with bigger ones (<span class="math inline">\(N=10000\)</span>) the frequencies of the two traits remained around <span class="math inline">\(p=0.5\)</span>. What does it happen with a demonstrator bias?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_demonstrator</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_s =</span> <span class="fl">0.005</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/5.8-1.png" width="672" /></p>
+<p>Even with <span class="math inline">\(N=10000\)</span>, if the number of high-status individuals is sufficiently low, as in this case (<span class="math inline">\(p_s=0.005\)</span> means that, on average, 50 individuals are high-statuts in each run), traits reach fixation. By reducing the pool of demonstrators, demonstrator-based bias makes drift more important for the overall dynamics. You can experiment with different values of <span class="math inline">\(p_s\)</span> and <span class="math inline">\(p_low\)</span>. How big can be the pool of high-stats demonstrators before the dynamics become undistinhishable from unbiased transmission.</p>
+</div>
+<div id="predicting-the-winning-trait" class="section level2">
+<h2><span class="header-section-number">4.2</span> Predicting the winning trait</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">biased_transmission_demonstrator_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, p_s, p_low, t_max, r_max) {
+  
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">status_A =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max)))
+  
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)),
+                     <span class="dt">status =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_s, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_s))) 
+    
+    output[output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>status_A &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;high&quot;</span> <span class="op">&amp;</span><span class="st"> </span>population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">sum</span>(population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;high&quot;</span>)
+    
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+      
+      p_demonstrator &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,N)
+      p_demonstrator[population<span class="op">$</span>status <span class="op">==</span><span class="st"> &quot;low&quot;</span>] &lt;-<span class="st"> </span>p_low
+      
+      <span class="cf">if</span>(<span class="kw">sum</span>(p_demonstrator) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
+        
+        demonstrator_index &lt;-<span class="st"> </span><span class="kw">sample</span> (N, <span class="dt">prob =</span> p_demonstrator, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+        
+        population<span class="op">$</span>trait &lt;-<span class="st"> </span>population<span class="op">$</span>trait[demonstrator_index]
+      
+      }
+    }
+  output[output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N     
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_demonstrator_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">p_s =</span> <span class="fl">0.05</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">50</span>)</code></pre></div>
+<p>In this case, we do not write a function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">filter</span>(data_model, p <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>p <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
+data_model[data_model<span class="op">$</span>p<span class="op">==</span><span class="dv">1</span>,]<span class="op">$</span>p &lt;-<span class="st"> &quot;A&quot;</span>
+data_model[data_model<span class="op">$</span>p<span class="op">==</span><span class="dv">0</span>,]<span class="op">$</span>p &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>( <span class="dt">x =</span> p, <span class="dt">y =</span> status_A)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.05</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;proportion of high-status individuals with trait A&quot;</span>, 
+       <span class="dt">x =</span> <span class="st">&quot;winning trait&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/5.11-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_transmission_demonstrator_2</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_s =</span> <span class="fl">0.005</span>, <span class="dt">p_low=</span><span class="fl">0.0001</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">filter</span>(data_model, p <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>p <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
+data_model[data_model<span class="op">$</span>p<span class="op">==</span><span class="dv">1</span>,]<span class="op">$</span>p &lt;-<span class="st"> &quot;A&quot;</span>
+data_model[data_model<span class="op">$</span>p<span class="op">==</span><span class="dv">0</span>,]<span class="op">$</span>p &lt;-<span class="st"> &quot;B&quot;</span>
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>( <span class="dt">x =</span> p, <span class="dt">y =</span> status_A)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width=</span><span class="fl">0.05</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;proportion of high-status individuals with trait A&quot;</span>, 
+       <span class="dt">x =</span> <span class="st">&quot;winning trait&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/5.13-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="summary-of-the-model-4" class="section level2">
+<h2><span class="header-section-number">4.3</span> Summary of the model</h2>
 
 </div>
 </div>
