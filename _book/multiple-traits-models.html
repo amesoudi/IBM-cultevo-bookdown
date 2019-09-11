@@ -180,8 +180,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">6</span> Multiple traits models</h1>
 <p>In all the scenarios we considered so far, individuals could posses one of two cultural traits, <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as being in favour or against a particular policy, choosing between Beatles and Rolling Stones (and no one else!), eating meat or not, and similar. In other cases, however, there are many options: there are many books to read, movies to watch, and, despite our Beatles and Rolling Stones example, many musical bands one can choose to listen to. What does it happen when we copy others’ choices? To simplfy, we are again assuming unbiased copying as in the [first chapter][Unbiased transmission]: all traits are equivalent and we do not copy preferentially from any individual, but just pick them at random.</p>
 <p>The first modification we need to do in the code concerns how traits are represented. Since we have an undetermined number of possible traits we can not use the two letters <span class="math inline">\(A\)</span> abd <span class="math inline">\(B\)</span>, but we will use instead numbers, so that traits will be now referred as trait “1”, trait “2”, trait “2”, etc. To start with, we can initliase each individual with a trait randomly chosen between “1” and “100”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">set.seed</span>(<span class="dv">111</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.1
+## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">111</span>)
 N &lt;-<span class="st"> </span><span class="dv">100</span>
 population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>N, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <p>As usual, you can inspect the <code>population</code> tibble by writing its name.</p>
@@ -310,7 +318,7 @@ population[innovators,]<span class="op">$</span>trait &lt;-<span class="st"> </s
 data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
 end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
 end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
-<pre><code>## Time difference of 36.91029 secs</code></pre>
+<pre><code>## Time difference of 49.01696 secs</code></pre>
 <p>On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with <span class="math inline">\(1100000\)</span> observations, as <em>max_traits</em> is equal to <span class="math inline">\(1100\)</span>, which needs to be updated, in the right position, at each generation. A possiblity to speed up the simulation is to record our output in a different data structure.</p>
 <p>So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as <code>population</code> or <code>output</code>. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our <code>output</code> tibble, the <span class="math inline">\(trait\)</span> column was spacified as a factor, whereas the others two columns, <span class="math inline">\(generation\)</span> and <span class="math inline">\(p\)</span>, were numeric.</p>
 <p>An alternative is to use vectors—and matrices, which can be thought as 2-dimensional vectors— that are basic structures in R. Differently from tibbles, in a matrix all data should be of the same type, in our case numeric (so we need to be careful to remember what numbers represent), but they may be convenient to use as the calculations performed on them are efficient, so that when we run models that are more complicated, or when we will need to produce bigger outputs, our simulations will still be relatively fast.</p>
@@ -359,28 +367,28 @@ end_time <span class="op">-</span><span class="st"> </span>start_time</code></pr
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
 data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_matrix</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
 end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
-end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
-<pre><code>## Time difference of 0.4117632 secs</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
+<span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
+<pre><code>## Warning: `as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.
+## This warning is displayed once per session.</code></pre>
 <p><img src="_main_files/figure-html/7.16-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
+<pre><code>## Time difference of 0.872508 secs</code></pre>
 <p>The results are equivalent, and the simulations is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run several times the same simulation, or testing many different parameter values, implementation choices can make drastic differences.</p>
 </div>
 <div id="the-distribution-of-popularity" class="section level2">
 <h2><span class="header-section-number">6.3</span> The distribution of popularity</h2>
 <p>An interesting aspect of these simulations is that, even if all traits are equal and individuals are not biased, few traits, for random reasons, are more successful than the majority of the others. A way to visualise this is to plot their cumulative popularity, that is the sums of their quantities over all generations. Given our matrix, it is easy to calculate them by summing each column and multiplying by <em>N</em> (remember they are frequencies, whereas we want now to visualise their actual quantities).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cumulative &lt;-<span class="st"> </span><span class="kw">colSums</span>(data_model) <span class="op">*</span><span class="st"> </span>N </code></pre></div>
-<p>Now we can plot them:</p>
+<p>Let’s sort them from the more to the least popular and plot the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">cumulative =</span> <span class="kw">sort</span>(cumulative, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>))
 
 <span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">seq_along</span>(cumulative), <span class="dt">y =</span> cumulative)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;trait label&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;cumulative popularity&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/7.18-1.png" width="672" /></p>
-<ul>
-<li><p>explain the plot</p></li>
-<li><p>loglog Bentley stile</p></li>
-</ul>
+<p>This is an example of a long-tailed distribution. The great majority of traits did not spread in the population, and their cumulative popularity is very close to one. Very few of them—the ones on the left side of the plot—were instead succesfull. Long-tailed distributions like the one we just produced are very common for cultural traits: very few movies, books, first names are very popular, while the great majority is not. In addition, in these domains, the popular traits are <em>much</em> more popular than the unpopular ones. The averge cumulative popularity is <code>mean(cumulative)</code>, but the most succesfull trait has a popularity of <code>max(cumulative)</code>.</p>
+<p>It is common to plot these distributions by binning the data in intervals of exponentially increasing size. In other words, we want to know how many traits have a cumulative popularity between 1 and 2, than between 2 and 4, than between 4 and 8, and so on, until we reach the maxmimum value of cumulative popularity. The code below does that, using a <code>for</code> cycle find how many traits fall in each bins and further normalising according to bin size. The size is increased 50 times, until an arbitrary maximum bin size of <span class="math inline">\(2^{50}\)</span>, to be sure to include all cumulative popularities. (We will get rid of the empty bins before plotting.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bin &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">50</span>)
 x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">50</span>)
 <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span> ){
@@ -388,6 +396,7 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA<
   bin[i] &lt;-<span class="st"> </span>( bin[i] <span class="op">/</span><span class="st"> </span><span class="kw">length</span>( cumulative ) ) <span class="op">/</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>(i<span class="op">-</span><span class="dv">1</span>);
   x[i] &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>i
 }</code></pre></div>
+<p>We can now visualise the data on a log-log plot (after filtering out the empty bins). A log-log plot is a graph that uses logarithmic scales on both axes. Using logarithmic axes is useful when, as in this case, the data are skewed towards large values. In the previous plot, we were not able to appreciate visually any difference in the great majority of data points, for example points that had cumulative popularity between 1 and 10, as they were all tangled close to the x-axis.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">bin =</span> bin, <span class="dt">x =</span> x) 
 data_to_plot &lt;-<span class="st"> </span><span class="kw">filter</span>(data_to_plot, bin <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
 
@@ -399,9 +408,11 @@ data_to_plot &lt;-<span class="st"> </span><span class="kw">filter</span>(data_t
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="_main_files/figure-html/7.20-1.png" width="672" /></p>
+<p>In addition, on a log-log scale, the distribution of cumulative popularity produced by unbiased copying lies approximatively on a straigh line (we plotted a linear fitting of the data with the command <code>stat_smooth(method = &quot;lm&quot;)</code>). The goodness of fit and the slope of the line can be used to compare different models of cultural transmission (what would happen with conformity? What with a model bias? And so on…) and to match them with empirical data to develop hypotheses on the processes that generated these distributions in the real world.</p>
 </div>
 <div id="summary-of-the-model-5" class="section level2">
 <h2><span class="header-section-number">6.4</span> Summary of the model</h2>
+<p>An interesting insight we have from our simulations is that these extreme distributions do not necessarly result from</p>
 <hr />
 </div>
 <div id="analytical-appendix-6" class="section level2">

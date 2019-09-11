@@ -1,9 +1,9 @@
 
 # Multiple traits models
 
-In all the scenarios we considered so far, individuals could posses one of two cultural traits, $A$ or $B$. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as being in favour or against a particular policy, choosing between Beatles and Rolling Stones (and no one else!), eating meat or not, and similar. In other cases, however, there are many options: there are many books to read, movies to watch, and, despite our Beatles and Rolling Stones example, many musical bands one can choose to listen to. What does it happen when we copy others' choices? To simplfy, we are again assuming unbiased copying as in the [first chapter][Unbiased transmission]: all traits are equivalent and we do not copy preferentially from any individual, but just pick them at random.
+In all the scenarios we considered so far, individuals could posses one of two cultural traits, $A$ or $B$. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as being in favour or against a particular policy, choosing between Beatles and Rolling Stones (and no one else!), eating meat or not, and similar. In other cases, however, there are many options: there are many books to read, movies to watch, and, despite our Beatles and Rolling Stones example, many musical bands one can choose to listen to. What does it happen when we copy others' choices? To simplify, we are again assuming unbiased copying as in the [first chapter][Unbiased transmission]: all traits are equivalent and we do not copy preferentially from any individual, but just pick them at random.
 
-The first modification we need to do in the code concerns how traits are represented. Since we have an undetermined number of possible traits we can not use the two letters $A$ abd $B$, but we will use instead numbers, so that traits will be now referred as trait "1", trait "2", trait "2", etc.  To start with, we can initliase each individual with a trait randomly chosen between "1" and "100".
+The first modification we need to do in the code concerns how traits are represented. Since we have an undetermined number of possible traits we can not use the two letters $A$ and $B$, but we will use instead numbers, so that traits will be now referred as trait "1", trait "2", trait "2", etc.  To start with, we can initliase each individual with a trait randomly chosen between "1" and "100".
 
 ```{r 7.1}
 library(tidyverse)
@@ -18,7 +18,7 @@ As usual, you can inspect the `population` tibble by writing its name.
 population
 ```
 
-The basic code of the simulation is similar to the code in the [first chapter][Unbiased transmission], but what the **output** should be? Until now, we just needed to save the freuquency of one of the two trait, but now we need the frequencies of all *N* traits to have an idea of what happens in the simulation. 
+The basic code of the simulation is similar to the code in the [first chapter][Unbiased transmission], but what the **output** should be? Until now, we just needed to save the frequency of one of the two trait, but now we need the frequencies of all *N* traits to have an idea of what happens in the simulation. 
 
 Another modification in the code above concerns how we measure the frequency of the traits in each generation. The function `hist()`, as the name suggests, is generally used to plot an histogram of the data. However, it can be used, adding the argument `plot = FALSE`, to only calculate what we would need for an histogram, without producing the graph. Among the outputs produced, `density` gives the relative frequencies of the binned data, which is what we are interested in.
 
@@ -66,7 +66,7 @@ plot_multiple_traits(data_model)
 Only one trait is still present at the end of the simulation. In general, only one or two traits are still present in the population after 200 generations, and, if we increase $t_\text{max}$ for example to 1000, virtually all runs end up with only a single trait reaching fixation:
 
 ```{r 7.6}
-data_model <- multiple_traits(N = 100, t_max = 200)
+data_model <- multiple_traits(N = 100, t_max = 1000)
 plot_multiple_traits(data_model)
 ```
 
@@ -165,7 +165,7 @@ Innovation, in sum, allows the maintenance of variation even in small population
 
 ## Optimising the code
 
-It is time for a short technical digression. You may have noticed that running the function `multiple_traits_2()` it is quite time consuming with a population of 1000 individuals. There is a quick way to check the exact time needed, using the function `Sys.time()`, which return your system current time. Let's run the function again and calcualte how long it takes.
+It is time for a short technical digression. You may have noticed that running the function `multiple_traits_2()` it is quite time consuming with a population of 1000 individuals. There is a quick way to check the exact time needed, using the function `Sys.time()`, which return your system current time. Let's run the function again and calculate how long it takes.
 
 ```{r 7.13}
 start_time <- Sys.time()
@@ -174,9 +174,9 @@ end_time <- Sys.time()
 end_time - start_time
 ```
 
-On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with $1100000$ observations, as *max_traits* is equal to $1100$, which needs to be updated, in the right position, at each generation. A possiblity to speed up the simulation is to record our output in a different data structure.
+On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with $1100000$ observations, as *max_traits* is equal to $1100$, which needs to be updated, in the right position, at each generation. A possibility to speed up the simulation is to record our output in a different data structure.
 
-So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as `population` or `output`. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our `output` tibble, the $trait$ column was spacified as a factor, whereas the others two columns, $generation$ and $p$, were numeric.
+So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as `population` or `output`. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our `output` tibble, the $trait$ column was specified as a factor, whereas the others two columns, $generation$ and $p$, were numeric.
 
 An alternative is to use vectors---and matrices, which can be thought as 2-dimensional vectors--- that are basic structures in R. Differently from tibbles, in a matrix all data should be of the same type, in our case numeric (so we need to be careful to remember what numbers represent), but they may be convenient to use as the calculations performed on them are efficient, so that when we run models that are more complicated, or when we will need to produce bigger outputs, our simulations will still be relatively fast. 
 
@@ -235,8 +235,8 @@ We can now run the function calculating the time needed, and then plot the resul
 start_time <- Sys.time()
 data_model <- multiple_traits_matrix(N = 100, t_max = 1000, mu = 0.01)
 end_time <- Sys.time()
-end_time - start_time
 plot_multiple_traits_matrix(data_model)
+end_time - start_time
 ```
 
 The results are equivalent, and the simulations is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run several times the same simulation, or testing many different parameter values, implementation choices can make drastic differences. 
@@ -249,20 +249,20 @@ An interesting aspect of these simulations is that, even if all traits are equal
 cumulative <- colSums(data_model) * N 
 ```
 
-Now we can plot them:
+Let's sort them from the more to the least popular and plot the results.
 
 ```{r 7.18}
 data_to_plot <- tibble(cumulative = sort(cumulative, decreasing = TRUE))
 
 ggplot(data = data_to_plot, aes(x = seq_along(cumulative), y = cumulative)) +
-  geom_point(alpha = 0.5) +
+  geom_point() +
   theme_bw() +
   labs(x = "trait label", y = "cumulative popularity")
 ```
 
-* explain the plot
+This is an example of a long-tailed distribution. The great majority of traits did not spread in the population, and their cumulative popularity is very close to one. Very few of them---the ones on the left side of the plot---were instead successful. Long-tailed distributions like the one we just produced are very common for cultural traits: very few movies, books, first names are very popular, while the great majority is not. In addition, in these domains, the popular traits are *much* more popular than the unpopular ones. The average cumulative popularity is `mean(cumulative)`, but the most successful trait has a popularity of `max(cumulative)`.
 
-* loglog Bentley stile
+It is common to plot these distributions by binning the data in intervals of exponentially increasing size. In other words, we want to know how many traits have a cumulative popularity between 1 and 2, than between 2 and 4, than between 4 and 8, and so on, until we reach the maximum value of cumulative popularity. The code below does that, using a `for` cycle find how many traits fall in each bins and further normalising according to bin size. The size is increased 50 times, until an arbitrary maximum bin size of $2^{50}$, to be sure to include all cumulative popularities. (We will get rid of the empty bins before plotting.)  
 
 ```{r 7.19}
 bin <- rep(NA, 50)
@@ -273,6 +273,8 @@ for( i in 1:50 ){
   x[i] <- 2^i
 }
 ```
+
+We can now visualise the data on a log-log plot (after filtering out the empty bins). A log-log plot is a graph that uses logarithmic scales on both axes. Using logarithmic axes is useful when, as in this case, the data are skewed towards large values. In the previous plot, we were not able to appreciate visually any difference in the great majority of data points, for example points that had cumulative popularity between 1 and 10, as they were all tangled close to the x-axis. 
 
 ```{r 7.20}
 data_to_plot <- tibble(bin = bin, x = x) 
@@ -287,13 +289,29 @@ ggplot(data = data_to_plot, aes(x = x, y = bin)) +
   theme_bw()
 ```
 
+In addition, on a log-log scale, the distribution of cumulative popularity produced by unbiased copying lies approximately on a straight line (we plotted a linear fitting of the data with the command `stat_smooth(method = "lm")`). The goodness of fit and the slope of the line can be used to compare different models of cultural transmission (what would happen with conformity? What with a model bias? And so on...) and to match them with empirical data to develop hypotheses on the processes that generated these distributions in the real world.    
 
 ## Summary of the model
+
+In this chapter we simulated situations where more than two traits can be taken into account, exploring the simplest case, i.e. unbiased copying. We also implemented the possibility of innovations, where individuals introduce, with some probability, new traits in the cultural pool of the population. Individual innovations counterbalance the homogenizing effect of drift, and replace the traits that are gradually lost. To simulate multiple traits and individual innovations we also needed to deal with a few technical details such as how to keep track of an initially unknown number of new traits. Mostly, from the technical point of view, we showed how important is to use appropriate data structures when simulations start to become slightly more complex. Replacing tibbles with matrices, we were able to make our simulation 100 times faster. 
+
+Our results showed that unbiased copying produces long-tailed distributions where very few traits are very popular and the great majority are not.
+An interesting insight from this model is that these `extreme` distributions do not necessarily result from extreme tendencies at individual level. Some traits become way more popular than others without individuals being biased, for example, towards popular traits. Cultural transmission generates these distributions without biases, but simply because popular traits have the intrinsic advantage of being more likely to be stumbled upon. We also introduced a new technique, the log-log plot of binned popularity distributions, to visualise this outcome.   
 
 ***
 
 ## Analytical appendix
 
+ANYHTING TO DO HERE?
+
 ***
 
 ## Further readings
+
+@neiman_stylistic_1995 first introduced a model of unbiased copying with multiple traits to explain popularity distributions in assemblages of Neolithic pottery. @bentley_random_2004 elaborates on this idea, presenting a 'random copying' model (equivalent to the one developed in this chapter) and comparing the popularity distributions produced with real datasets, including first names in US and citations of patents. @mesoudi_random_2009 added biases to a multiple traits model to compare the popularity distributions produced with the distribution produced by unbiased copying. 
+
+
+
+
+
+
