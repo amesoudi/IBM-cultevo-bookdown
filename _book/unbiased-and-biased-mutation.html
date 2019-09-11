@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-09-10" />
+<meta name="date" content="2019-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,7 +149,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.1" data-path="horizontal-vertical-and-oblique-transmission-.html"><a href="horizontal-vertical-and-oblique-transmission-.html#analytical-appendix-5"><i class="fa fa-check"></i><b>6.1</b> Analytical appendix</a></li>
 <li class="chapter" data-level="6.2" data-path="horizontal-vertical-and-oblique-transmission-.html"><a href="horizontal-vertical-and-oblique-transmission-.html#further-readings-5"><i class="fa fa-check"></i><b>6.2</b> Further readings</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>7</b> Multiple traits models</a></li>
+<li class="chapter" data-level="7" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>7</b> Multiple traits models</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovations"><i class="fa fa-check"></i><b>7.1</b> Introducing innovations</a></li>
+<li class="chapter" data-level="7.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>7.2</b> Optimising the code</a></li>
+<li class="chapter" data-level="7.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>7.3</b> The distribution of popularity</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>7.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="7.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>7.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="7.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-6"><i class="fa fa-check"></i><b>7.6</b> Further readings</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -177,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.1</span> Unbiased mutation</h2>
 <p>First we will simulate unbiased mutation in the same basic model as used in the previous chapter. We’ll remove unbiased transmission to see the effect of unbiased mutation alone.</p>
 <p>As in the previous model, we assume <span class="math inline">\(N\)</span> individuals each of whom possesses one of two non-overlapping cultural traits, denoted <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. In each generation, from <span class="math inline">\(t = 1\)</span> to <span class="math inline">\(t = t_{\text{max}}\)</span>, the <span class="math inline">\(N\)</span> individuals are replaced with <span class="math inline">\(N\)</span> new individuals. Instead of random copying, each individual now gives rise to a new individual with exactly the same cultural trait as them. (Another way of looking at this is in terms of timesteps, such as years: the same <span class="math inline">\(N\)</span> individual live for <span class="math inline">\(t_{\text{max}}\)</span> years, and keep their cultural trait from one year to the next.)</p>
-<p>At each generation, however, there is a probability <span class="math inline">\(\mu\)</span> that each individual mutates from their current trait to the other trait. Vegetarian individuals can decide to eat animal products, and vice versa. Remember, this is not copied from other individuals, as in the previous model, but can be thought as an individual decision. another way to say it, is that the probability of changing trait applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, that means that <span class="math inline">\(\mu N\)</span> individuals mutate each generation. Like in the previous model, we are interested in tracking the proportion <span class="math inline">\(p\)</span> of agents with trait <span class="math inline">\(A\)</span> over time.</p>
+<p>At each generation, however, there is a probability <span class="math inline">\(\mu\)</span> that each individual mutates from their current trait to the other trait (the Greek letter Mu is the standard notation for the mutation rate in genetic evolution, and it has an analogous function here). Vegetarian individuals can decide to eat animal products, and vice versa. Remember, this is not copied from other individuals, as in the previous model, but can be thought as an individual decision. another way to say it, is that the probability of changing trait applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, that means that <span class="math inline">\(\mu N\)</span> individuals mutate each generation. Like in the previous model, we are interested in tracking the proportion <span class="math inline">\(p\)</span> of agents with trait <span class="math inline">\(A\)</span> over time.</p>
 <p>We’ll wrap this in a function called <code>unbiased_mutation()</code>, using much of the same code as <code>unbiased_transmission_3()</code>. As before, we need to call the tidyverse library, and set a seed for the random number genrator, so the results will be exactly the same each time we rerun the code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">set.seed</span>(<span class="dv">111</span>)

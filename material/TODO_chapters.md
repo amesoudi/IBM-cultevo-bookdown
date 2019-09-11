@@ -22,7 +22,7 @@
   * EMPTY
 
 * 07-Multiple traits models:
-  * everything - just moved from the previous repo (AA)
+  * ~~everything - just moved from the previous repo (AA)~~
   
 ***  
 

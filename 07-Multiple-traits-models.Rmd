@@ -3,7 +3,7 @@
 
 In all the scenarios we considered so far, individuals could posses one of two cultural traits, $A$ or $B$. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as being in favour or against a particular policy, choosing between Beatles and Rolling Stones (and no one else!), eating meat or not, and similar. In other cases, however, there are many options: there are many books to read, movies to watch, and, despite our Beatles and Rolling Stones example, many musical bands one can choose to listen to. What does it happen when we copy others' choices? To simplify, we are again assuming unbiased copying as in the [first chapter][Unbiased transmission]: all traits are equivalent and we do not copy preferentially from any individual, but just pick them at random.
 
-The first modification we need to do in the code concerns how traits are represented. Since we have an undetermined number of possible traits we can not use the two letters $A$ and $B$, but we will use instead numbers, so that traits will be now referred as trait "1", trait "2", trait "2", etc.  To start with, we can initliase each individual with a trait randomly chosen between "1" and "100".
+The first modification we need to do in the code concerns how traits are represented. Since we have an undetermined number of possible traits we can not use the two letters $A$ and $B$, but we will use instead numbers, so that traits will be now referred as trait "1", trait "2", trait "3", etc.  To start with, we can initliase each individual with a trait randomly chosen between "1" and "100".
 
 ```{r 7.1}
 library(tidyverse)
@@ -18,9 +18,9 @@ As usual, you can inspect the `population` tibble by writing its name.
 population
 ```
 
-The basic code of the simulation is similar to the code in the [first chapter][Unbiased transmission], but what the **output** should be? Until now, we just needed to save the frequency of one of the two trait, but now we need the frequencies of all *N* traits to have an idea of what happens in the simulation. 
+The basic code of the simulation is similar to the code in the [first chapter][Unbiased transmission], but what the `output` should be? Until now, we just needed to save the frequency of one of the two trait, but now we need the frequencies of all $N$ traits to have an idea of what happens in the simulation. 
 
-Another modification in the code above concerns how we measure the frequency of the traits in each generation. The function `hist()`, as the name suggests, is generally used to plot an histogram of the data. However, it can be used, adding the argument `plot = FALSE`, to only calculate what we would need for an histogram, without producing the graph. Among the outputs produced, `density` gives the relative frequencies of the binned data, which is what we are interested in.
+Second, how do we measure the frequency of the traits in each generation? The function `tabulate()` dose this for us. `tabulate()` counts the number of times each element of a vector (`population$trait` in our case) occurs in the bins we also pass to the function, thus from $1$ to $N$. Since we want the frequencies, and not the absolute number, we divide the result by $N$.
 
 ```{r 7.3}
 multiple_traits <- function(N, t_max) {
@@ -30,7 +30,7 @@ multiple_traits <- function(N, t_max) {
   population <- tibble(trait = sample(1:N, N, replace = TRUE))
   # create first generation
   
-  output[output$generation == 1, ]$p <- hist(population$trait, 0:N, plot = FALSE)$density
+  output[output$generation == 1, ]$p <- tabulate(population$trait, nbins = N) / N
   # add first generation's p for all traits
 
   for (t in 2:t_max) {
@@ -38,13 +38,13 @@ multiple_traits <- function(N, t_max) {
 
     population <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))    # randomly copy from previous generation
 
-    output[output$generation == t, ]$p <- hist(population$trait, 0:N, plot = FALSE)$density # get p for all traits and put it into output slot for this generation t
+    output[output$generation == t, ]$p <- tabulate(population$trait, nbins = N) / N# get p for all traits and put it into output slot for this generation t
   }
   output # export data from function
 }
 ```
 
-Finally, the function to plot the output is similar to what we have already done when plotting multiple runs, with the difference that now the  colored lines do not represent different runs, but different traits, as indicated below by `aes(colour = trait)`. We also need to specify that traits should not be interpreted The new line `theme(legend.position = "none")` simply tells to not include the legends in the graph, as it is not informative, and it would show 100 colors, one for each trait.
+Finally, the function to plot the output is similar to what we have already done when plotting multiple runs, with the difference that now the  colored lines do not represent different runs, but different traits, as indicated below by `aes(colour = trait)`. The new line `theme(legend.position = "none")` simply tells to not include the legend in the graph, as it is not informative, and it would show 100 colors, one for each trait.
 
 ```{r 7.4}
 plot_multiple_traits <- function(data_model) {
@@ -91,13 +91,14 @@ population <- tibble(trait = sample(previous_population$trait, N, replace = TRUE
 
 innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) # select the innovators
 
-population[innovators,]$trait <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
-
+if( sum(innovators) > 0){ # if there are innovators
+  population[innovators,]$trait <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
+}
 ```
 
 There are two modifications here. First, we need to select who are the innovators. For that, we use again the function `sample()`, biased by $\mu$, picking $TRUE$ (corresponding to be an innovator) or $FALSE$ (keeping the copied cultural trait) for $N$ times.
 
-Second, we need to keep track of the new introduced traits. In order to do so, we record at the beginning of each generation what is the "name" of the last trait introduced (at the beginning, with $N=100$, it will be "100", as we initialise each individual of the population with a different trait). When new traits are introduced, we call them with consecutive numbers: the first new traits will be called "101", the second "102" and so on.  
+Second, we need to keep track of the new introduced traits. In order to do so, we record at the beginning of each generation what is the 'label' of the last trait introduced (at the beginning, with $N=100$, it will be likely to be "100", as we initialise each individual chosing randomly between 1 and 100). When new traits are introduced, we call them with consecutive numbers: the first new traits will be called "101", the second "102" and so on.  
 
 We can now, as usual, wrap everything in a function. 
 
@@ -110,7 +111,7 @@ multiple_traits_2 <- function(N, t_max, mu) {
   population <- tibble(trait = sample(1:N, N, replace = TRUE))
   # create first generation
   
-  output[output$generation == 1, ]$p <- hist(population$trait, 0:N, plot = FALSE)$density
+  output[output$generation == 1, ]$p <- tabulate(population$trait, nbins = N) / N
   # add first generation's p for all traits
 
   for (t in 2:t_max) {
@@ -127,7 +128,7 @@ multiple_traits_2 <- function(N, t_max, mu) {
         population[innovators,]$trait <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
       }
     }
-    output[output$generation == t, ]$p <- hist(population$trait, 0:max_traits, plot = FALSE)$density # get p for all traits and put it into output slot for this generation t
+    output[output$generation == t, ]$p <- tabulate(population$trait, nbins = max_traits) / N # get p for all traits and put it into output slot for this generation t
   }
   output # export data
 }
@@ -174,7 +175,7 @@ end_time <- Sys.time()
 end_time - start_time
 ```
 
-On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with $1100000$ observations, as *max_traits* is equal to $1100$, which needs to be updated, in the right position, at each generation. A possibility to speed up the simulation is to record our output in a different data structure.
+On a common laptop, it may take more than 30 or 40 seconds. To store the output, we are using a tibble with $1100000$ observations, as *max_traits* is equal to $1100$, which needs to be updated, in the right position, at each generation. A possibility to speed up the simulation is to record our output in a different data structure.
 
 So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as `population` or `output`. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our `output` tibble, the $trait$ column was specified as a factor, whereas the others two columns, $generation$ and $p$, were numeric.
 
@@ -191,7 +192,7 @@ multiple_traits_matrix <- function(N, t_max, mu) {
   
   # create first generation
   population <- sample(1:N, N, replace = TRUE)
-  output[1, ] <- hist(population, 0:max_traits, plot = FALSE)$density
+  output[1, ] <- tabulate(population, nbins = N) / N
   
   # add first generation's p for all traits
   for (t in 2:t_max) {
@@ -207,7 +208,7 @@ multiple_traits_matrix <- function(N, t_max, mu) {
       population[innovators] <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
     }
     
-    output[t, ] <- hist(population, 0:max_traits, plot = FALSE)$density # get p for all traits and put it into output slot for this generation t
+    output[t, ] <- tabulate(population, nbins = max_traits) / N # get p for all traits and put it into output slot for this generation t
   }
   output # export data
 }
@@ -231,7 +232,7 @@ plot_multiple_traits_matrix <- function(data_model) {
 
 We can now run the function calculating the time needed, and then plot the results, to see if they look the same.
 
-```{r 7.16}
+```{r 7.16, warning=FALSE}
 start_time <- Sys.time()
 data_model <- multiple_traits_matrix(N = 100, t_max = 1000, mu = 0.01)
 end_time <- Sys.time()
@@ -309,9 +310,3 @@ ANYHTING TO DO HERE?
 ## Further readings
 
 @neiman_stylistic_1995 first introduced a model of unbiased copying with multiple traits to explain popularity distributions in assemblages of Neolithic pottery. @bentley_random_2004 elaborates on this idea, presenting a 'random copying' model (equivalent to the one developed in this chapter) and comparing the popularity distributions produced with real datasets, including first names in US and citations of patents. @mesoudi_random_2009 added biases to a multiple traits model to compare the popularity distributions produced with the distribution produced by unbiased copying. 
-
-
-
-
-
-
