@@ -152,8 +152,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovations"><i class="fa fa-check"></i><b>6.1</b> Introducing innovations</a></li>
 <li class="chapter" data-level="6.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>6.2</b> Optimising the code</a></li>
 <li class="chapter" data-level="6.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>6.3</b> The distribution of popularity</a></li>
-<li class="chapter" data-level="6.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>6.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="6.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-6"><i class="fa fa-check"></i><b>6.5</b> Further readings</a></li>
+<li class="chapter" data-level="6.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>6.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="6.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>6.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-6"><i class="fa fa-check"></i><b>6.6</b> Further readings</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -232,13 +233,12 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">200</span>)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/7.5-1.png" width="672" /></p>
-<p>In the majority of cases, in 200 generations, only one or two traits are still present in the population and, if you increase <span class="math inline">\(t_\text{max}\)</span> for example to 1000, virtually all runs end up with only a single trait reaching fixation:</p>
+<p>Only one trait is still present at the end of the simulation. In general, only one or two traits are still present in the population after 200 generations, and, if we increase <span class="math inline">\(t_\text{max}\)</span> for example to 1000, virtually all runs end up with only a single trait reaching fixation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">200</span>)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/7.6-1.png" width="672" /></p>
 <p>This is similar to what we saw when considering the analogous situation with only two traits, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>: with unbiased copying and relative small populations, drift is a powerful force, that quickly erodes cultural diversity.</p>
-<p>This is similar to what we saw when considering the analogous situation with only two traits, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>: with unbiased copying and relative small populations, drift is a powerful force, that quickly erodes cultural diversity.</p>
-<p>As we already discussed, increasing <span class="math inline">\(N\)</span> limits the effect of drift. You can experiment with various values for <span class="math inline">\(N\)</span> and <span class="math inline">\(t_{max}\)</span>. However, the general point is that variation is gradually lost in all cases. How can we counterbalance the homogenizing effect that drift has in small and isolated population, such as the one we are simulating?</p>
+<p>As we already discussed, increasing <span class="math inline">\(N\)</span> limits the effect of drift. You can experiment with various values for <span class="math inline">\(N\)</span> and <span class="math inline">\(t_\text{max}\)</span>. However, the general point is that variation is gradually lost in all cases. How can we counterbalance the homogenizing effect that drift has in small and isolated population, such as the one we are simulating?</p>
 <div id="introducing-innovations" class="section level2">
 <h2><span class="header-section-number">6.1</span> Introducing innovations</h2>
 <p>An option is to introduce new traits with individual innovations. We can imagine that, at each time step, a proportion of individuals, <span class="math inline">\(\mu\)</span> (we use the same notation that we used for mutation in <a href="unbiased-and-biased-mutation.html#unbiased-and-biased-mutation">chapter 2</a>), introduces a new trait in the population. The remaining proportion of individuals, <span class="math inline">\(1-\mu\)</span> copy at random from others, as before. We can start with a small value, such as <span class="math inline">\(\mu=0.01\)</span>. Since <span class="math inline">\(N=100\)</span>, this means that at each generation, on average, one new trait will be introduced in the population.</p>
@@ -276,8 +276,8 @@ population[innovators,]<span class="op">$</span>trait &lt;-<span class="st"> </s
     population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly copy from previous generation&#39;s individuals</span>
     <span class="co"># randomly copy from previous generation</span>
 
-    <span class="cf">if</span> (last_trait <span class="op">&lt;</span><span class="st"> </span>max_traits) {
-      innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># select the innovators</span>
+    innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># select the innovators</span>
+    <span class="cf">if</span> ((last_trait <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(innovators)) <span class="op">&lt;</span><span class="st"> </span>max_traits) {  
       <span class="cf">if</span>( <span class="kw">sum</span>(innovators) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
         population[innovators,]<span class="op">$</span>trait &lt;-<span class="st"> </span>(last_trait <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(last_trait <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(innovators)) <span class="co"># replace innovators&#39; traits with new traits</span>
       }
@@ -286,7 +286,7 @@ population[innovators,]<span class="op">$</span>trait &lt;-<span class="st"> </s
   }
   output <span class="co"># export data</span>
 }</code></pre></div>
-<p>You should be familiar with more or less everything within this function, with one exception: the introduction of the new quantity <strong>max_traits</strong>. This is a trick we are using to avoid making the code too heavy to run. Our <code>output</code> tibble, as you remember, record all the frequencies of all traits. When programming, a good rule-of-thumb is to avoid to modify dynamically the size of your data structures, such as, for example, adding columns or rows to pre-existing matrices, as in our case. In our simulation, at every generation, there is some probability that a new trait will be introduced so that, as a consequence, we would need to add a columns in the <code>output</code> tibble to record its frequency. To avoid this, we are creating a bigger tibble from the beginning, with columns for many possible new traits. How many is ‘many’? We do not know, but an estimate is that we will need columns for the initial traits (<span class="math inline">\(N\)</span>), plus around <span class="math inline">\(N\mu\)</span> traits for each generation. To be sure to not exceed this number, we wrapped the innovation instruction in the <code>if( last_trait &lt; max_traits )</code> control. As a consequence, it is possible that in some runs, in the very last generations, innovations will not be permitted. For many purposes, this does not change the outcome of the simulation, and for the time being is better than modify dynamically our <strong>raw_output</strong>.</p>
+<p>You should now be familiar with more or less everything within this function, with one exception: the introduction of the new quantity <em>max_traits</em>. This is a trick we are using to avoid making the code too heavy to run. Our <code>output</code> tibble, as you remember, record all the frequencies of all traits. When programming, a good rule-of-thumb is to avoid to modify dynamically the size of your data structures, such as, for example, adding new rows to a pre-existing tibble, as in our case. In our simulation, at every generation, there is some probability that a new trait will be introduced so that, as a consequence, we would need to add new rows in the <code>output</code> tibble to record its frequency. To avoid this, we are creating a bigger tibble from the beginning, with rows for many possible new traits. How many is ‘many’? We do not know, but an estimate is that we will need space for the initial traits (<span class="math inline">\(N\)</span>), plus around <span class="math inline">\(N\mu\)</span> traits for each generation. To be sure to not exceed this number, we wrapped the innovation instruction in the <code>if ((last_trait + sum(innovators)) &lt; max_traits)</code> control. As a consequence, it is possible that in some runs, in the very last generations, innovations will not be permitted. For many purposes, this does not change the outcome of the simulation, and for the time being is better than modify dynamically our <code>output</code>.</p>
 <p>Let’s now run the function with an innovation rate <span class="math inline">\(\mu=0.01\)</span>, again with a population of 100 individuals, and for 200 generations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
@@ -305,37 +305,111 @@ population[innovators,]<span class="op">$</span>trait &lt;-<span class="st"> </s
 </div>
 <div id="optimising-the-code" class="section level2">
 <h2><span class="header-section-number">6.2</span> Optimising the code</h2>
-<p>BACK TO MATRICES</p>
+<p>It is time for a short technical digression. You may have noticed that running the function <code>multiple_traits_2()</code> it is quite time consuming with a population of 1000 individuals. There is a quick way to check the exact time needed, using the function <code>Sys.time()</code>, which return your system current time. Let’s run the function again and calcualte how long it takes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
+end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
+<pre><code>## Time difference of 36.91029 secs</code></pre>
+<p>On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with <span class="math inline">\(1100000\)</span> observations, as <em>max_traits</em> is equal to <span class="math inline">\(1100\)</span>, which needs to be updated, in the right position, at each generation. A possiblity to speed up the simulation is to record our output in a different data structure.</p>
+<p>So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as <code>population</code> or <code>output</code>. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our <code>output</code> tibble, the <span class="math inline">\(trait\)</span> column was spacified as a factor, whereas the others two columns, <span class="math inline">\(generation\)</span> and <span class="math inline">\(p\)</span>, were numeric.</p>
+<p>An alternative is to use vectors—and matrices, which can be thought as 2-dimensional vectors— that are basic structures in R. Differently from tibbles, in a matrix all data should be of the same type, in our case numeric (so we need to be careful to remember what numbers represent), but they may be convenient to use as the calculations performed on them are efficient, so that when we run models that are more complicated, or when we will need to produce bigger outputs, our simulations will still be relatively fast.</p>
+<p>We can rewrite a function that runs exactly the same simulation, but using matrices instead of tibbles. The output is now a matrix with <span class="math inline">\(t_\text{max}\)</span> rows and <em>max_traits</em> columns, intialised with NAs at the beginning, and the population is a vector of integers, representing the trait for each individual.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">multiple_traits_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, mu) {
+  
+  max_traits &lt;-<span class="st"> </span>N <span class="op">+</span><span class="st"> </span>N <span class="op">*</span><span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>t_max
+  
+  output &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> max_traits)
+  
+  <span class="co"># create first generation</span>
+  population &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>N, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  output[<span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw">hist</span>(population, <span class="dv">0</span><span class="op">:</span>max_traits, <span class="dt">plot =</span> <span class="ot">FALSE</span>)<span class="op">$</span>density
+  
+  <span class="co"># add first generation&#39;s p for all traits</span>
+  <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+    last_trait &lt;-<span class="st"> </span><span class="kw">max</span>(population) <span class="co"># record what is the last trait introduced in the population</span>
+  
+    previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
+    
+    population &lt;-<span class="st"> </span><span class="kw">sample</span>(previous_population, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    <span class="co"># randomly copy from previous generation</span>
+    
+    innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># select the innovators</span>
+    <span class="cf">if</span> ((last_trait <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(innovators)) <span class="op">&lt;</span><span class="st"> </span>max_traits) {
+      population[innovators] &lt;-<span class="st"> </span>(last_trait <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span>(last_trait <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(innovators)) <span class="co"># replace innovators&#39; traits with new traits</span>
+    }
+    
+    output[t, ] &lt;-<span class="st"> </span><span class="kw">hist</span>(population, <span class="dv">0</span><span class="op">:</span>max_traits, <span class="dt">plot =</span> <span class="ot">FALSE</span>)<span class="op">$</span>density <span class="co"># get p for all traits and put it into output slot for this generation t</span>
+  }
+  output <span class="co"># export data</span>
+}</code></pre></div>
+<p>To plot the output, we re-transform it in a tibble, so that can be handled by <code>ggplot()</code>. In order to do this, we first create a column that explicitly indicates the number of generations, and then we use the function <code>gather()</code> to reassemble the columns of the matrix in key-value pairs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_multiple_traits_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(data_model) {
+  generation &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(data_model)[<span class="dv">1</span>], <span class="kw">dim</span>(data_model)[<span class="dv">2</span>])
+  data_to_plot &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(data_model) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">gather</span>( <span class="dt">key =</span> <span class="st">&quot;trait&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">add_column</span>(generation)
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> trait)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)
+}</code></pre></div>
+<p>We can now run the function calculating the time needed, and then plot the results, to see if they look the same.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_matrix</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
+end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
+<pre><code>## Time difference of 0.4117632 secs</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/7.16-1.png" width="672" /></p>
+<p>The results are equivalent, and the simulations is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run several times the same simulation, or testing many different parameter values, implementation choices can make drastic differences.</p>
 </div>
 <div id="the-distribution-of-popularity" class="section level2">
 <h2><span class="header-section-number">6.3</span> The distribution of popularity</h2>
-<p>TO DO</p>
-<p>An interesting aspect of these simulations is that, even if all traits are equal and individuals are not biased, few traits, for random reasons, are more successful than the majority of the others. A way to visualise the relative popularity of all traits is to plot their cumulative frequencies, that is the sum of the frequencies over all generations. Given our matrix, it is easy to calculate them by summing each column:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cumulative &lt;- (sort(colSums(data_model), decreasing = TRUE)) / sum(data_model)</span></code></pre></div>
-<p>We also sort them from the highest to the lowest frequency, and we normalise all the values so that their sum is equal to 1. Now we can plot them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># output &lt;- tibble(cumulative)</span>
-<span class="co"># </span>
-<span class="co"># ggplot(data = output, aes(x = seq_along(cumulative), y = cumulative)) +</span>
-<span class="co">#   geom_point() +</span>
-<span class="co">#   theme_bw() +</span>
-<span class="co">#   labs(</span>
-<span class="co">#     title = &quot;Unbiased transmission&quot;,</span>
-<span class="co">#     x = &quot;trait&quot;,</span>
-<span class="co">#     y = &quot;cumulative frequency&quot;</span>
-<span class="co">#   )</span></code></pre></div>
+<p>An interesting aspect of these simulations is that, even if all traits are equal and individuals are not biased, few traits, for random reasons, are more successful than the majority of the others. A way to visualise this is to plot their cumulative popularity, that is the sums of their quantities over all generations. Given our matrix, it is easy to calculate them by summing each column and multiplying by <em>N</em> (remember they are frequencies, whereas we want now to visualise their actual quantities).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cumulative &lt;-<span class="st"> </span><span class="kw">colSums</span>(data_model) <span class="op">*</span><span class="st"> </span>N </code></pre></div>
+<p>Now we can plot them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">cumulative =</span> <span class="kw">sort</span>(cumulative, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">seq_along</span>(cumulative), <span class="dt">y =</span> cumulative)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;trait label&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;cumulative popularity&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/7.18-1.png" width="672" /></p>
 <ul>
 <li><p>explain the plot</p></li>
-<li><p>loglog Bentley stile?</p></li>
-<li><p>example of function that does multiple runs without storing the big matrix each time, but only the output we are interested in (e.g. number of traits, max frequency, etc. to compare the effect of parameters)</p></li>
+<li><p>loglog Bentley stile</p></li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bin &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">50</span>)
+x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">50</span>)
+<span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span> ){
+  bin[i] &lt;-<span class="st"> </span><span class="kw">sum</span>( cumulative <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>(i<span class="op">-</span><span class="dv">1</span>) <span class="op">&amp;</span><span class="st"> </span>cumulative <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>i)
+  bin[i] &lt;-<span class="st"> </span>( bin[i] <span class="op">/</span><span class="st"> </span><span class="kw">length</span>( cumulative ) ) <span class="op">/</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>(i<span class="op">-</span><span class="dv">1</span>);
+  x[i] &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>i
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">bin =</span> bin, <span class="dt">x =</span> x) 
+data_to_plot &lt;-<span class="st"> </span><span class="kw">filter</span>(data_to_plot, bin <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> bin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;cumulative popularity&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;proportion of traits&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/7.20-1.png" width="672" /></p>
+</div>
+<div id="summary-of-the-model-5" class="section level2">
+<h2><span class="header-section-number">6.4</span> Summary of the model</h2>
 <hr />
 </div>
 <div id="analytical-appendix-6" class="section level2">
-<h2><span class="header-section-number">6.4</span> Analytical appendix</h2>
+<h2><span class="header-section-number">6.5</span> Analytical appendix</h2>
 <hr />
 </div>
 <div id="further-readings-6" class="section level2">
-<h2><span class="header-section-number">6.5</span> Further readings</h2>
+<h2><span class="header-section-number">6.6</span> Further readings</h2>
 
 </div>
 </div>

@@ -121,8 +121,8 @@ multiple_traits_2 <- function(N, t_max, mu) {
     population <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))  # randomly copy from previous generation's individuals
     # randomly copy from previous generation
 
-    if (last_trait < max_traits) {
-      innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) # select the innovators
+    innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) # select the innovators
+    if ((last_trait + sum(innovators)) < max_traits) {  
       if( sum(innovators) > 0){
         population[innovators,]$trait <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
       }
@@ -133,7 +133,7 @@ multiple_traits_2 <- function(N, t_max, mu) {
 }
 ```
 
-You should be familiar with more or less everything within this function, with one exception: the introduction of the new quantity **max_traits**. This is a trick we are using to avoid making the code too heavy to run. Our `output` tibble, as you remember, record all the frequencies of all traits. When programming, a good rule-of-thumb is to avoid to modify dynamically the size of your data structures, such as, for example, adding columns or rows to pre-existing matrices, as in our case. In our simulation, at every generation, there is some probability that a new trait will be introduced so that, as a consequence, we would need to add a columns in the `output` tibble to record its frequency. To avoid this, we are creating a bigger tibble from the beginning, with columns for many possible new traits. How many is 'many'? We do not know, but an estimate is that we will need columns for the initial traits ($N$), plus around $N\mu$ traits for each generation. To be sure to not exceed this number, we wrapped the innovation instruction in the `if( last_trait < max_traits )` control. As a consequence, it is possible that in some runs, in the very last generations, innovations will not be permitted. For many purposes, this does not change the outcome of the simulation, and for the time being is better than modify dynamically our **raw_output**.        
+You should now be familiar with more or less everything within this function, with one exception: the introduction of the new quantity *max_traits*. This is a trick we are using to avoid making the code too heavy to run. Our `output` tibble, as you remember, record all the frequencies of all traits. When programming, a good rule-of-thumb is to avoid to modify dynamically the size of your data structures, such as, for example, adding new rows to a pre-existing tibble, as in our case. In our simulation, at every generation, there is some probability that a new trait will be introduced so that, as a consequence, we would need to add new rows in the `output` tibble to record its frequency. To avoid this, we are creating a bigger tibble from the beginning, with rows for many possible new traits. How many is 'many'? We do not know, but an estimate is that we will need space for the initial traits ($N$), plus around $N\mu$ traits for each generation. To be sure to not exceed this number, we wrapped the innovation instruction in the `if ((last_trait + sum(innovators)) < max_traits)` control. As a consequence, it is possible that in some runs, in the very last generations, innovations will not be permitted. For many purposes, this does not change the outcome of the simulation, and for the time being is better than modify dynamically our `output`.        
 
 Let's now run the function with an innovation rate $\mu=0.01$, again with a population of 100 individuals, and for 200 generations.
 
@@ -157,7 +157,7 @@ plot_multiple_traits(data_model)
 
 As you can see in the plot, there should still be various traits that have frequencies higher than 0, even after 1000 generations. Again, we can check it
 
-```{r}
+```{r 7.12}
 sum(filter(data_model, generation==1000)$p > 0)
 ```
 
@@ -165,38 +165,130 @@ Innovation, in sum, allows the maintenance of variation even in small population
 
 ## Optimising the code
 
-BACK TO MATRICES
+It is time for a short technical digression. You may have noticed that running the function `multiple_traits_2()` it is quite time consuming with a population of 1000 individuals. There is a quick way to check the exact time needed, using the function `Sys.time()`, which return your system current time. Let's run the function again and calcualte how long it takes.
+
+```{r 7.13}
+start_time <- Sys.time()
+data_model <- multiple_traits_2(N = 100, t_max = 1000, mu = 0.01)
+end_time <- Sys.time()
+end_time - start_time
+```
+
+On a common laptop, it may take more than 30 seconds. To store the output, we are using a tibble with $1100000$ observations, as *max_traits* is equal to $1100$, which needs to be updated, in the right position, at each generation. A possiblity to speed up the simulation is to record our output in a different data structure.
+
+So far, we have been using tibbles to store the output. R, as all programming languages, can store data in different structures. Depending on what the data are and on what one wants to do with them, different structures can be more or less suitable. So far, we used tibbles for the important data of our simulations, such as `population` or `output`. Tibbles can have heterogeneous data, depending on what we need to store: for example, in our `output` tibble, the $trait$ column was spacified as a factor, whereas the others two columns, $generation$ and $p$, were numeric.
+
+An alternative is to use vectors---and matrices, which can be thought as 2-dimensional vectors--- that are basic structures in R. Differently from tibbles, in a matrix all data should be of the same type, in our case numeric (so we need to be careful to remember what numbers represent), but they may be convenient to use as the calculations performed on them are efficient, so that when we run models that are more complicated, or when we will need to produce bigger outputs, our simulations will still be relatively fast. 
+
+We can rewrite a function that runs exactly the same simulation, but using matrices instead of tibbles. The output is now a matrix with $t_\text{max}$ rows and *max_traits* columns, intialised with NAs at the beginning, and the population is a vector of integers, representing the trait for each individual.  
+
+```{r 7.14}
+multiple_traits_matrix <- function(N, t_max, mu) {
+  
+  max_traits <- N + N * mu * t_max
+  
+  output <- matrix(data = NA, nrow = t_max, ncol = max_traits)
+  
+  # create first generation
+  population <- sample(1:N, N, replace = TRUE)
+  output[1, ] <- hist(population, 0:max_traits, plot = FALSE)$density
+  
+  # add first generation's p for all traits
+  for (t in 2:t_max) {
+    last_trait <- max(population) # record what is the last trait introduced in the population
+  
+    previous_population <- population # copy individuals to previous_population tibble
+    
+    population <- sample(previous_population, N, replace = TRUE)
+    # randomly copy from previous generation
+    
+    innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) # select the innovators
+    if ((last_trait + sum(innovators)) < max_traits) {
+      population[innovators] <- (last_trait + 1):(last_trait + sum(innovators)) # replace innovators' traits with new traits
+    }
+    
+    output[t, ] <- hist(population, 0:max_traits, plot = FALSE)$density # get p for all traits and put it into output slot for this generation t
+  }
+  output # export data
+}
+```
+
+To plot the output, we re-transform it in a tibble, so that can be handled by `ggplot()`. In order to do this, we first create a column that explicitly indicates the number of generations, and then we use the function `gather()` to reassemble the columns of the matrix in key-value pairs.  
+
+```{r 7.15}
+plot_multiple_traits_matrix <- function(data_model) {
+  generation <- rep(1:dim(data_model)[1], dim(data_model)[2])
+  data_to_plot <- as_tibble(data_model) %>%
+    gather( key = "trait", value = "p") %>%
+    add_column(generation)
+  ggplot(data = data_to_plot, aes(y = p, x = generation)) +
+    geom_line(aes(colour = trait)) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    theme(legend.position = "none")
+}
+```
+
+We can now run the function calculating the time needed, and then plot the results, to see if they look the same.
+
+```{r 7.16}
+start_time <- Sys.time()
+data_model <- multiple_traits_matrix(N = 100, t_max = 1000, mu = 0.01)
+end_time <- Sys.time()
+end_time - start_time
+plot_multiple_traits_matrix(data_model)
+```
+
+The results are equivalent, and the simulations is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run several times the same simulation, or testing many different parameter values, implementation choices can make drastic differences. 
 
 ## The distribution of popularity
 
-TO DO
+An interesting aspect of these simulations is that, even if all traits are equal and individuals are not biased, few traits, for random reasons, are more successful than the majority of the others. A way to visualise this is to plot their cumulative popularity, that is the sums of their  quantities over all generations. Given our matrix, it is easy to calculate them by summing each column and multiplying by *N* (remember they are frequencies, whereas we want now to visualise their actual quantities).   
 
-An interesting aspect of these simulations is that, even if all traits are equal and individuals are not biased, few traits, for random reasons, are more successful than the majority of the others. A way to visualise the relative popularity of all traits is to plot their cumulative frequencies, that is the sum of the frequencies over all generations. Given our matrix, it is easy to calculate them by summing each column:    
-
-```{r}
-# cumulative <- (sort(colSums(data_model), decreasing = TRUE)) / sum(data_model)
+```{r 7.17}
+cumulative <- colSums(data_model) * N 
 ```
 
-We also sort them from the highest to the lowest frequency, and we normalise all the values so that their sum is equal to 1. Now we can plot them:
+Now we can plot them:
 
-```{r}
-# output <- tibble(cumulative)
-# 
-# ggplot(data = output, aes(x = seq_along(cumulative), y = cumulative)) +
-#   geom_point() +
-#   theme_bw() +
-#   labs(
-#     title = "Unbiased transmission",
-#     x = "trait",
-#     y = "cumulative frequency"
-#   )
+```{r 7.18}
+data_to_plot <- tibble(cumulative = sort(cumulative, decreasing = TRUE))
+
+ggplot(data = data_to_plot, aes(x = seq_along(cumulative), y = cumulative)) +
+  geom_point(alpha = 0.5) +
+  theme_bw() +
+  labs(x = "trait label", y = "cumulative popularity")
 ```
 
 * explain the plot
 
-* loglog Bentley stile?
+* loglog Bentley stile
 
-* example of function that does multiple runs without storing the big matrix each time, but only the output we are interested in (e.g. number of traits, max frequency, etc. to compare the effect of parameters)
+```{r 7.19}
+bin <- rep(NA, 50)
+x <- rep(NA, 50)
+for( i in 1:50 ){
+  bin[i] <- sum( cumulative >= 2^(i-1) & cumulative < 2^i)
+  bin[i] <- ( bin[i] / length( cumulative ) ) / 2^(i-1);
+  x[i] <- 2^i
+}
+```
+
+```{r 7.20}
+data_to_plot <- tibble(bin = bin, x = x) 
+data_to_plot <- filter(data_to_plot, bin > 0)
+
+ggplot(data = data_to_plot, aes(x = x, y = bin)) +
+  geom_point() +
+  labs(x = "cumulative popularity", y = "proportion of traits") +
+  scale_x_log10() +
+  scale_y_log10() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
+
+
+## Summary of the model
 
 ***
 
