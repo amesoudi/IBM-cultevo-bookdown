@@ -162,7 +162,7 @@ At this point, we can visualise the results (code 1.12):
 plot_single_run(data_model)
 ```
 
-As anticipated, the plot is different from the simulation we ran before, even though the code is exactly the same. This is due to the stochastic nature of the simulation. This time, trait $A$ reaches the frequency of 1, meaning that all individuals have it, and trait $B$ has disappeared.
+As anticipated, the plot is different from the simulation we ran before, even though the code is exactly the same. This is due to the stochastic nature of the simulation. Assuming you haven't changed the set.seed value earlier, this time trait $A$ reaches a frequency of 1, meaning that all individuals have it, and trait $B$ has disappeared.
 
 Now let's try changing the parameters. We can call the simulation and the plotting functions together. Code 1.13 reruns and plots the simulation with a much larger $N$.
 
