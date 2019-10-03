@@ -1,19 +1,21 @@
 
 # Biased transmission (direct bias)
 
-So far we have looked at unbiased transmission ([Chapter 1][Unbiased transmission]) and mutation, both unbiased and biased ([Chapter 2][Unbiased and biased mutation]). Let's complete the set by looking at biased transmission. This occurs when one trait or is more likely to be copied than another trait. When the choice depends on features of the trait, it is often called 'direct' or 'content' bias, while when the choice depends on features of the demonstrators is often called 'indirect' or 'context' bias. Both are sometimes also called 'cultural selection' because the trait is selected to be copied over another. In this chapter, we will look at trait-based (direct, content) bias.
+So far we have looked at unbiased transmission ([Chapter 1][Unbiased transmission]) and mutation, both unbiased and biased ([Chapter 2][Unbiased and biased mutation]). Let's complete the set by looking at biased transmission. This occurs when one trait is more likely to be copied than another trait. When the choice depends on features of the trait, it is often called 'direct' or 'content' bias. When the choice depends on features of the demonstrators (the individuals from whom one is copying), it is often called 'indirect' or 'context' bias. Both are sometimes also called 'cultural selection' because one trait is selected to be copied over another trait. In this chapter, we will look at trait-based (direct, content) bias.
 
-(As an aside, there is a confusing array of terminology in the field of cultural evolution, as illustrated by the preceding paragraph. That's why models are so useful. Words and verbal descriptions can be ambiguous. Often the writer doesn't realise that there are hidden assumptions or unrecognised ambiguities in their descriptions. They may not realise that what they mean by 'cultural selection' is entirely different to how someone else uses it. Models are great because they force us to precisely specify exactly what we mean by a particular term or process. I can use the words in the paragraph above to describe biased transmission, but it's only really clear when I model it, making all my assumptions explicit.)
+(As an aside, there is a confusing array of terminology in the field of cultural evolution, as illustrated by the preceding paragraph. That's why models are so useful. Words and verbal descriptions can be ambiguous. Often the writer doesn't realise that there are hidden assumptions or unrecognised ambiguities in their descriptions. They may not realise that what they mean by 'cultural selection' is entirely different to how someone else uses it. Models are great because they force us to precisely specify exactly what we mean by a particular term or process. We can use the words in the paragraph above to describe biased transmission, but it's only really clear when we model it, making all our assumptions explicit.)
 
-To simulate biased transmission, following the simulations in [Chapter 1][Unbiased transmission],we assume there are two traits $A$ and $B$, and that each individual chooses another individual from the previous generation at random. This time, however, we associate to the traits two different probabilities of being copied: we can call them, $s_a$ and $s_b$ respectively. When an individual encounter an individual with trait $A$, they will copy them with probability $s_a$, and when they encounter an individual with trait $B$, they will copy them with probability $s_b$. With $s_a=s_b$, copying is unbiased, and individuals switch to the encountered alternative with the same probability. This reproduces the results of the simulations when transmission is unbiased. If $s_a=s_b=1$, the model is exactly the same of [Chapter 1][Unbiased transmission]. The relevant situation is when $s_a>s_b$ (or vice versa), so that we have biased transmission. Perhaps $A$ (or $B$) is a more effective tool, a more memorable story, or a more easily pronounced word.
+To simulate biased transmission, following the simulations in [Chapter 1][Unbiased transmission], we assume there are two traits $A$ and $B$, and that each individual chooses another individual from the previous generation at random. This time, however, we give the traits two different probabilities of being copied: we can call them, $s_a$ and $s_b$ respectively. When an individual encounters another individual with trait $A$, they will copy them with probability $s_a$. When they encounter an individual with trait $B$, they will copy them with probability $s_b$. 
 
-Let's first write the function, and then explore what happens in this case. Below is a function `biased_ransmission_direct()` that implements all of these ideas 
+With $s_a=s_b$, copying is unbiased, and individuals switch to the encountered alternative with the same probability. This reproduces the results of the simulations when transmission is unbiased. If $s_a=s_b=1$, the model is exactly the same as in [Chapter 1][Unbiased transmission]. The relevant situation in this chapter is when $s_a>s_b$ (or vice versa), so that we have biased transmission. Perhaps $A$ (or $B$) is a more effective tool, a more memorable story, or a more easily pronounced word.
+
+Let's first write the function, and then explore what happens in this case. Below is a function `biased_transmission_direct()` that implements all of these ideas.
 
 ```{r 3.1}
 library(tidyverse)
 set.seed(111)
 
-biased_ransmission_direct <- function (N, s_a, s_b, p_0, t_max, r_max) {
+biased_transmission_direct <- function (N, s_a, s_b, p_0, t_max, r_max) {
   
   output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
   
@@ -48,13 +50,13 @@ biased_ransmission_direct <- function (N, s_a, s_b, p_0, t_max, r_max) {
 }
 ```
 
-Most of `biased_ransmission_direct()` is recycled from the previous models. As before, we initalise the data structure **output** from multiple runs, and in generation $t = 1$, we create a **population** tibble to hold the trait of each individual. 
+Most of `biased_transmission_direct()` is recycled from the previous models. As before, we initalise the data structure **output** from multiple runs, and in generation $t = 1$, we create a **population** tibble to hold the trait of each individual. 
 
-The major change is that we now include biased transmission. We first select at random the demonstrators from the previous generation (using the same code we used in `unbiased_transmission()`) and we store their trait in **demonstrator_trait**. Then we get the probabilities to copy $A$ and to copy $B$ for all the population, using the same code used in `biased_mutation()`, only that this time it produces a probability to copy. Again using the same code as in `biased mutation()`, we have the individuals copy the trait at hand with the desired probability.
+The major change is that we now include biased transmission. We first select at random the demonstrators from the previous generation (using the same code we used in `unbiased_transmission()`) and we store their trait in **demonstrator_trait**. Then we get the probabilities to copy $A$ and to copy $B$ for the entire population, using the same code used in `biased_mutation()`, only that this time it produces a probability to copy. Again using the same code as in `biased mutation()`, we have the individuals copy the trait at hand with the desired probability.
 
-Let's run our function `biased_ransmission_direct()`. As before, to plot the results, we can use the same function `plot_multiple_runs()` we wrote in [Chapter 1][Unbiased transmission].
+Let's run our function `biased_transmission_direct()`. As before, to plot the results, we can use the same function `plot_multiple_runs()` we wrote in [Chapter 1][Unbiased transmission].
 
-As we discussed, the interesting case is when one trait is favored with respect to the other. We can assume, for example, $s_a=0.1$ and $s_b=0$. This means that when individuals encounter another individual with trait $A$ they copy them 1 every 10 times, but, when individuals encounter another individual with trait $B$, they never switch. We can also assume that the favoured trait, $A$, is initially rare in the population ($p_0=0.01$) to see how selection favours this initially-rare trait ($p_0$ needs to be higher than 0. Since we are re not including any mutation in the model, we need to include at least some $A$s at the beginning of the simulation, otherwise it would never appear). 
+As noted above, the interesting case is when one trait is favored over the other. We can assume, for example, $s_a=0.1$ and $s_b=0$. This means that when individuals encounter another individual with trait $A$ they copy them 1 in every 10 times, but, when individuals encounter another individual with trait $B$, they never switch. We can also assume that the favoured trait, $A$, is initially rare in the population ($p_0=0.01$) to see how selection favours this initially-rare trait (Note that $p_0$ needs to be higher than 0; since there is no mutation in this model, we need to include at least some $A$s at the beginning of the simulation, otherwise it would never appear). 
 
 ```{r 3.2, echo=FALSE}
 plot_multiple_runs <- function(data_model) {
@@ -68,7 +70,7 @@ plot_multiple_runs <- function(data_model) {
 ```
 
 ```{r 3.3}
-data_model <- biased_ransmission_direct(N = 10000, s_a = 0.1, s_b = 0 , p_0 = 0.01, t_max = 150, r_max = 5)
+data_model <- biased_transmission_direct(N = 10000, s_a = 0.1, s_b = 0 , p_0 = 0.01, t_max = 150, r_max = 5)
 plot_multiple_runs(data_model)
 ```
 
@@ -76,19 +78,19 @@ With a moderate selection strength we can see that $A$ gradually replaces $B$ an
 
 Note the difference to biased mutation. Where biased mutation was r-shaped, with a steep initial increase, biased transmission is s-shaped, with an initial slow uptake. This is because the strength of biased transmission (like selection in general) is proportional to the variation in the population. When $A$ is rare initially, there is only a small chance of picking another individual with $A$. As $A$ spreads, the chances of picking an $A$ individual increases. As $A$ becomes very common, there are few $B$ individuals left to switch. In the case of biased mutation, instead, the probability to switch is independent from the variation in the population. 
 
-## Strenght of selection
+## Strentgh of selection
 
-From what does the strength of the selection depend? First, the strength is independent from the specific values of $s_a$ and $s_b$. What counts is their relative difference, in this case $s_a-s_b = 0.1$. We can try and run a simulation with, say, $s_a=0.6$ and $s_b=0.5$. We observe the same pattern, with slightly more noise - the single runs are more different one another with respect to the previous simulation - due to the fact that switches from $A$ to $B$ are also possible.
+On what does the strength of selection depend? First, the strength is independent from the specific values of $s_a$ and $s_b$. What counts is their relative difference, in this case $s_a-s_b = 0.1$. If we run a simulation with, say, $s_a=0.6$ and $s_b=0.5$, we see the same pattern, albeit with slightly more noise. That is, the single runs are more different from one another compared to the previous simulation. This is due to the fact that switches from $A$ to $B$ are now also possible.
 
 ```{r 3.4}
-data_model <- biased_ransmission_direct(N = 10000, s_a = 0.6, s_b = 0.5 , p_0 = 0.01, t_max = 150, r_max = 5)
+data_model <- biased_transmission_direct(N = 10000, s_a = 0.6, s_b = 0.5 , p_0 = 0.01, t_max = 150, r_max = 5)
 plot_multiple_runs(data_model)
 ```
 
 To change the selection strength, we need to modify the difference between $s_a$ and $s_b$. We can double the strength by setting $s_a = 0.2$, and keeping $s_b=0$.
 
 ```{r 3.5}
-data_model <- biased_ransmission_direct(N = 10000, s_a = 0.2, s_b = 0 , p_0 = 0.01, t_max = 150, r_max = 5)
+data_model <- biased_transmission_direct(N = 10000, s_a = 0.2, s_b = 0 , p_0 = 0.01, t_max = 150, r_max = 5)
 plot_multiple_runs(data_model)
 ```
 
@@ -99,7 +101,7 @@ As we might expect, increasing the strength of selection increases the speed wit
 
 ## Summary of the model
 
-We saw how biased transmission causes a trait favoured by cultural selection to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of $A$ and $B$ at $p = 0.5$), and weakest when there is little variation (when $p$ is close to 0 or 1).
+We have seen how biased transmission causes a trait favoured by cultural selection to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of $A$ and $B$ at $p = 0.5$), and weakest when there is little variation (when $p$ is close to 0 or 1).
 
 ***
 
@@ -145,7 +147,11 @@ We can also say that $p = 0$ is an unstable equilibrium, meaning that any slight
 
 ***
 
-## Further readings
+## Further reading
 
+Boyd, R., and Richerson, P. J. (1985) Culture and the evolutionary process. Chicago, IL: Univ. Chicago Press. **NB Boyd & Richerson's 'direct bias' is equivalent to biased transmission**
 
+Henrich, J. (2001) Cultural transmission and the diffusion of innovations. American Anthropologist 103(4): 992–1013.  **Henrich adds biased transmission to his guided variation / biased mutation model, and shows that this generates s-shaped curves**
+
+Henrich, J., and McElreath, R. (2003) The evolution of cultural evolution. Evolutionary Anthropology 12(3): 123–135.  **Introduces and explains the distinction between content (direct) and context (indirect) biases in cultural evolution**
 
