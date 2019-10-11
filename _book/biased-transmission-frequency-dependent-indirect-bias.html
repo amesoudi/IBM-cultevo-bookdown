@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Biased transmission: frequency-dependent indirect bias | Individual-based models of cultural evolution</title>
+  <meta name="description" content="A minimal working structure for the book" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Biased transmission: frequency-dependent indirect bias | Individual-based models of cultural evolution" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A minimal working structure for the book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Biased transmission: frequency-dependent indirect bias | Individual-based models of cultural evolution" />
+  
+  <meta name="twitter:description" content="A minimal working structure for the book" />
+  
+
+<meta name="author" content="Alberto Acerbi" />
+<meta name="author" content="Alex Mesoudi" />
+<meta name="author" content="Marco Smolla" />
+
+
+<meta name="date" content="2019-10-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="biased-transmission-direct-bias.html"/>
+<link rel="next" href="biased-transmission-demonstrator-based-indirect-bias.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Individual-based models of cultural evolution</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>Basics</b></span></li>
+<li class="chapter" data-level="1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html"><i class="fa fa-check"></i><b>1</b> Unbiased transmission</a><ul>
+<li class="chapter" data-level="1.1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#initialising-the-simulation"><i class="fa fa-check"></i><b>1.1</b> Initialising the simulation</a></li>
+<li class="chapter" data-level="1.2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>1.2</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="1.3" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#plotting-the-model-results"><i class="fa fa-check"></i><b>1.3</b> Plotting the model results</a></li>
+<li class="chapter" data-level="1.4" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>1.4</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="1.5" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>1.5</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="1.6" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#varying-initial-conditions"><i class="fa fa-check"></i><b>1.6</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="1.7" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#summary-of-the-model"><i class="fa fa-check"></i><b>1.7</b> Summary of the model</a></li>
+<li class="chapter" data-level="1.8" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#analytical-appendix"><i class="fa fa-check"></i><b>1.8</b> Analytical appendix</a></li>
+<li class="chapter" data-level="1.9" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#further-reading"><i class="fa fa-check"></i><b>1.9</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>2</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="2.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>2.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="2.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>2.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="2.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>2.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>2.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="2.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: direct bias</a><ul>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strentgh-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strentgh of selection</a></li>
+<li class="chapter" data-level="3.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>3.2</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>3.3</b> Analytical appendix</a></li>
+<li class="chapter" data-level="3.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>3.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission: frequency-dependent indirect bias</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>4.1</b> The logic of conformity</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>4.2</b> Testing conformist transmission</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#analytical-appendix-3"><i class="fa fa-check"></i><b>4.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="4.5" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#further-readings"><i class="fa fa-check"></i><b>4.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html"><i class="fa fa-check"></i><b>5</b> Biased transmission: demonstrator-based indirect bias</a><ul>
+<li class="chapter" data-level="5.1" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>5.1</b> A simple demonstrator bias</a></li>
+<li class="chapter" data-level="5.2" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>5.2</b> Predicting the ‘winning’ trait</a></li>
+<li class="chapter" data-level="5.3" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>5.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="5.4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#analytical-appendix-4"><i class="fa fa-check"></i><b>5.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="5.5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#further-readings-1"><i class="fa fa-check"></i><b>5.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="horizontal-vertical-and-oblique-transmission-.html"><a href="horizontal-vertical-and-oblique-transmission-.html"><i class="fa fa-check"></i><b>6</b> Horizontal, vertical, and oblique transmission.</a><ul>
+<li class="chapter" data-level="6.1" data-path="horizontal-vertical-and-oblique-transmission-.html"><a href="horizontal-vertical-and-oblique-transmission-.html#analytical-appendix-5"><i class="fa fa-check"></i><b>6.1</b> Analytical appendix</a></li>
+<li class="chapter" data-level="6.2" data-path="horizontal-vertical-and-oblique-transmission-.html"><a href="horizontal-vertical-and-oblique-transmission-.html#further-readings-2"><i class="fa fa-check"></i><b>6.2</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>7</b> Multiple traits models</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovation"><i class="fa fa-check"></i><b>7.1</b> Introducing innovation</a></li>
+<li class="chapter" data-level="7.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>7.2</b> Optimising the code</a></li>
+<li class="chapter" data-level="7.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>7.3</b> The distribution of popularity</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>7.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="7.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>7.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="7.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-3"><i class="fa fa-check"></i><b>7.6</b> Further readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Individual-based models of cultural evolution</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="biased-transmission-frequency-dependent-indirect-bias" class="section level1">
+<h1><span class="header-section-number">4</span> Biased transmission: frequency-dependent indirect bias</h1>
+<div id="the-logic-of-conformity" class="section level2">
+<h2><span class="header-section-number">4.1</span> The logic of conformity</h2>
+<p>In [Chapter 3][Biased transmission (direct bias)] we looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will start looking at the other kind of biased transmission, when traits are equivalent, but individuals are more likely to adopt a trait according to the characteristics of the population, and in particular which other individuals already have it. (As we mentioned previously, these are often called ‘indirect’ or ‘context’ biases).</p>
+<p>A first possibility is that we may be influenced by the frequency of the trait in the population, i.e. how many other individuals already have the trait. Conformity (or ‘positive frequency dependent bias’) has been most studied. Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics. (The opposite case, anti-conformity or negative frequency dependent bias is also possible, where the least common trait is more likely to be copied. This is probably less common in real life.)</p>
+<p>For example, imagine trait <span class="math inline">\(A\)</span> has a frequency of 0.7 in the population, with the rest possessing trait <span class="math inline">\(B\)</span>. An unbiased learner would adopt trait <span class="math inline">\(A\)</span> with a probability exactly equal to 0.7. This is unbiased transmission, and is what happens the model described in (<a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>: by picking a member of the previous generation at random, the probability of adoption is equal to the frequency of that trait among the previous generation.</p>
+<p>A conformist learner, on the other hand, would adopt trait <span class="math inline">\(A\)</span> with a probability greater than 0.7. In other words, common traits get an ‘adoption boost’ relative to unbiased transmission. Uncommon traits get an equivalent ‘adoption penalty’. The magnitude of this boost or penalty can be controlled by a parameter, which we will call <span class="math inline">\(D\)</span>.</p>
+<p>Let’s keep things simple in our model. Rather than assuming that individuals sample across the entire population, which in any case might be implausible in large populations, let’s assume they pick only three demonstrators at random. Why three? This is the minimum number of demonstrators that can yield a majority (i.e. 2 vs 1), which we need in order to implement conformity. When two demonstrators have one trait and the other demonstrator has a different trait, we want to boost the probability of adoption for the majority trait, and reduce it for the minority trait.</p>
+<p>We can specify the probability of adoption as follows:</p>
+<p><strong>Table 1: Probability of adopting trait <span class="math inline">\(A\)</span> for each possible combination of traits amongst three demonstrators</strong></p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Demonstrator 1</th>
+<th>Demonstrator 2</th>
+<th>Demonstrator 3</th>
+<th>Probability of adopting trait <span class="math inline">\(A\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(2/3 + D/3\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(1/3 - D/3\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The first row says that when all demonstrators have trait <span class="math inline">\(A\)</span>, then trait <span class="math inline">\(A\)</span> is definitely adopted. Similarly, the bottom row says that when all demonstrators have trait <span class="math inline">\(B\)</span>, then trait <span class="math inline">\(A\)</span> is never adopted, and by implication trait <span class="math inline">\(B\)</span> is always adopted.</p>
+<p>For the three combinations where there are two <span class="math inline">\(A\)</span>s and one <span class="math inline">\(B\)</span>, the probability of adopting trait <span class="math inline">\(A\)</span> is <span class="math inline">\(2/3\)</span>, which it would be under unbiased transmission (because two out of three demonstrators have <span class="math inline">\(A\)</span>), plus the conformist adoption boost specified by <span class="math inline">\(D\)</span>. As we want <span class="math inline">\(D\)</span> to vary from 0 to 1, it is divided by three, so that the maximum probability of adoption is equal to 1 (when <span class="math inline">\(D=1\)</span>).</p>
+<p>Similarly, for the three combinations where there are two <span class="math inline">\(B\)</span>s and one <span class="math inline">\(A\)</span>, the probability of adopting <span class="math inline">\(A\)</span> is 1/3 minus the conformist adoption penalty specified by <span class="math inline">\(D\)</span>.</p>
+<p>Let’s implement these assumptions in the kind of individual based model we’ve been building so far. As before, assume <span class="math inline">\(N\)</span> individuals each of whom possess one of two traits <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. The frequency of <span class="math inline">\(A\)</span> is denoted by <span class="math inline">\(p\)</span>. The initial frequency of <span class="math inline">\(A\)</span> in generation <span class="math inline">\(t = 1\)</span> is <span class="math inline">\(p_0\)</span>. Rather than going straight to a function, let’s go step by step.</p>
+<p>First we’ll specify our parameters, <span class="math inline">\(N\)</span> and <span class="math inline">\(p_0\)</span> as before, plus the new conformity parameter <span class="math inline">\(D\)</span>. We also create the usual <strong>population</strong> tibble and fill it with <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s in the proportion specified by <span class="math inline">\(p_0\)</span>, again exactly as before.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">111</span>)</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">N &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">D &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>))) <span class="co"># create first generation</span></a></code></pre></div>
+<p>Now we create another tibble, called <strong>demonstrators</strong> that picks, for each new individual in the next generation, three demonstrators at random from the current population of individuals. It therefore needs three columns/variables, one for each of the demonstrators, and <span class="math inline">\(N\)</span> rows, one for each individual. We fill each column with randomly chosen traits from the <strong>population</strong> tibble. We can have a look at <strong>demonstrators</strong> by entering its name in the R console.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">demonstrators</a></code></pre></div>
+<pre><code>## # A tibble: 100 x 3
+##    dem1  dem2  dem3 
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 B     A     B    
+##  2 B     A     B    
+##  3 B     A     B    
+##  4 A     A     B    
+##  5 A     B     B    
+##  6 A     B     A    
+##  7 A     A     B    
+##  8 A     B     B    
+##  9 B     B     B    
+## 10 B     B     A    
+## # … with 90 more rows</code></pre>
+<p>Think of each row here as containing the traits of three randomly-chosen demonstrators chosen by each new next-generation individual. Now we want to calculate the probability of adoption of <span class="math inline">\(A\)</span> for each of these three-trait demonstrator combinations.</p>
+<p>First we need to get the number of <span class="math inline">\(A\)</span>s in each combination. Then we can replace the traits in <strong>population</strong> based on the probabilities in Table 1. When all demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span>. When no demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(B\)</span>. When two out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(2/3 + D/3\)</span> and <span class="math inline">\(B\)</span> otherwise. When one out of three demonstrators have <span class="math inline">\(A\)</span>, we set to <span class="math inline">\(A\)</span> with probability <span class="math inline">\(1/3 - D/3\)</span> and <span class="math inline">\(B\)</span> otherwise.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># get the number of As in each 3-dem combo</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">num_As &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span></a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span></a>
+<a class="sourceLine" id="cb46-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">prob_majority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">prob_minority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb46-10" data-line-number="10"><span class="co"># when A is a majority, 2/3</span></a>
+<a class="sourceLine" id="cb46-11" data-line-number="11"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">  population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb46-14" data-line-number="14"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">  population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">}  </a>
+<a class="sourceLine" id="cb46-17" data-line-number="17"><span class="co"># when A is a minority, 1/3</span></a>
+<a class="sourceLine" id="cb46-18" data-line-number="18"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb46-19" data-line-number="19">  population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb46-20" data-line-number="20">}</a>
+<a class="sourceLine" id="cb46-21" data-line-number="21"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb46-22" data-line-number="22">  population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb46-23" data-line-number="23">}  </a></code></pre></div>
+<p>To check it works, we can add the new <strong>population</strong> tibble as a column to <strong>demonstrators</strong> and have a look at it. This will let us see the three demonstrators and the resulting new trait side by side.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># for testing only, add the new traits to the demonstrator dataframe and show it</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">demonstrators &lt;-<span class="st"> </span><span class="kw">add_column</span>(demonstrators, <span class="dt">new_trait =</span> population<span class="op">$</span>trait)</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">demonstrators</a></code></pre></div>
+<pre><code>## # A tibble: 100 x 4
+##    dem1  dem2  dem3  new_trait
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+##  1 B     A     B     B        
+##  2 B     A     B     B        
+##  3 B     A     B     B        
+##  4 A     A     B     A        
+##  5 A     B     B     B        
+##  6 A     B     A     A        
+##  7 A     A     B     A        
+##  8 A     B     B     B        
+##  9 B     B     B     B        
+## 10 B     B     A     B        
+## # … with 90 more rows</code></pre>
+<p>Because we set <span class="math inline">\(D=1\)</span> above, the new trait is always the majority trait among the three demonstrators. This is perfect conformity. We can weaken conformity by reducing <span class="math inline">\(D\)</span>. Here an example with <span class="math inline">\(D=0.5\)</span>. All the code is the same of what we already discussed above.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">D &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb49-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>))) <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb49-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb49-7" data-line-number="7"><span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span></a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb49-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb49-10" data-line-number="10"><span class="co"># get the number of As in each 3-dem combo</span></a>
+<a class="sourceLine" id="cb49-11" data-line-number="11">num_As &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</a>
+<a class="sourceLine" id="cb49-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb49-13" data-line-number="13">population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span></a>
+<a class="sourceLine" id="cb49-14" data-line-number="14">population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span></a>
+<a class="sourceLine" id="cb49-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb49-16" data-line-number="16">prob_majority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb49-17" data-line-number="17">prob_minority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb49-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb49-19" data-line-number="19"><span class="co"># when A is a majority, 2/3</span></a>
+<a class="sourceLine" id="cb49-20" data-line-number="20"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb49-21" data-line-number="21">  population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb49-22" data-line-number="22">}</a>
+<a class="sourceLine" id="cb49-23" data-line-number="23"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb49-24" data-line-number="24">  population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb49-25" data-line-number="25">}  </a>
+<a class="sourceLine" id="cb49-26" data-line-number="26"><span class="co"># when A is a minority, 1/3</span></a>
+<a class="sourceLine" id="cb49-27" data-line-number="27"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb49-28" data-line-number="28">  population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb49-29" data-line-number="29">}</a>
+<a class="sourceLine" id="cb49-30" data-line-number="30"><span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb49-31" data-line-number="31">  population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb49-32" data-line-number="32">}  </a>
+<a class="sourceLine" id="cb49-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb49-34" data-line-number="34"><span class="co"># for testing only, add the new traits to the demonstrator dataframe and show it</span></a>
+<a class="sourceLine" id="cb49-35" data-line-number="35">demonstrators &lt;-<span class="st"> </span><span class="kw">add_column</span>(demonstrators, <span class="dt">new_trait =</span> population<span class="op">$</span>trait)</a>
+<a class="sourceLine" id="cb49-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb49-37" data-line-number="37">demonstrators</a></code></pre></div>
+<pre><code>## # A tibble: 100 x 4
+##    dem1  dem2  dem3  new_trait
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+##  1 B     A     A     A        
+##  2 B     B     A     A        
+##  3 A     A     B     A        
+##  4 B     A     A     B        
+##  5 A     A     A     A        
+##  6 A     B     B     B        
+##  7 A     A     B     A        
+##  8 B     B     A     B        
+##  9 B     A     B     B        
+## 10 A     B     A     A        
+## # … with 90 more rows</code></pre>
+<p>Now that conformity is weaker, sometimes the new trait is not the majority amongst the three demonstrators.</p>
+</div>
+<div id="testing-conformist-transmission" class="section level2">
+<h2><span class="header-section-number">4.2</span> Testing conformist transmission</h2>
+<p>As in the previous chapters, we can put all this code together into a function to see what happens over multiple generations and in multiple runs. There is nothing new in the code below, which is a combination of the code we already wrote in (<a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>) and the new bits of code for conformity introduced above.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">conformist_transmission &lt;-<span class="st"> </span><span class="cf">function</span> (N, p_<span class="dv">0</span>, D, t_max, r_max) {</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))</a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb51-5" data-line-number="5">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
+<a class="sourceLine" id="cb51-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">    <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb51-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb51-10" data-line-number="10">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
+<a class="sourceLine" id="cb51-11" data-line-number="11">    </a>
+<a class="sourceLine" id="cb51-12" data-line-number="12">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb51-13" data-line-number="13">      </a>
+<a class="sourceLine" id="cb51-14" data-line-number="14">      <span class="co"># create dataframe with a set of 3 randomly-picked demonstrators for each agent</span></a>
+<a class="sourceLine" id="cb51-15" data-line-number="15">      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dem1 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem2 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">dem3 =</span> <span class="kw">sample</span>(population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb51-16" data-line-number="16">      </a>
+<a class="sourceLine" id="cb51-17" data-line-number="17">      <span class="co"># get the number of As in each 3-dem combo</span></a>
+<a class="sourceLine" id="cb51-18" data-line-number="18">      num_As &lt;-<span class="st"> </span><span class="kw">rowSums</span>(demonstrators <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</a>
+<a class="sourceLine" id="cb51-19" data-line-number="19">      </a>
+<a class="sourceLine" id="cb51-20" data-line-number="20">      population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># for dem combos with all As, set to A</span></a>
+<a class="sourceLine" id="cb51-21" data-line-number="21">      population<span class="op">$</span>trait[num_As <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># for dem combos with no As, set to B</span></a>
+<a class="sourceLine" id="cb51-22" data-line-number="22">      </a>
+<a class="sourceLine" id="cb51-23" data-line-number="23">      prob_majority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb51-24" data-line-number="24">      prob_minority &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">prob =</span> <span class="kw">c</span>((<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span>D<span class="op">/</span><span class="dv">3</span>)), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb51-25" data-line-number="25">      </a>
+<a class="sourceLine" id="cb51-26" data-line-number="26">      <span class="co"># when A is a majority, 2/3</span></a>
+<a class="sourceLine" id="cb51-27" data-line-number="27">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-28" data-line-number="28">        population[prob_majority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb51-29" data-line-number="29">      }</a>
+<a class="sourceLine" id="cb51-30" data-line-number="30">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-31" data-line-number="31">        population[prob_majority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb51-32" data-line-number="32">      }  </a>
+<a class="sourceLine" id="cb51-33" data-line-number="33">      <span class="co"># when A is a minority, 1/3</span></a>
+<a class="sourceLine" id="cb51-34" data-line-number="34">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-35" data-line-number="35">        population[prob_minority <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;A&quot;</span></a>
+<a class="sourceLine" id="cb51-36" data-line-number="36">      }</a>
+<a class="sourceLine" id="cb51-37" data-line-number="37">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-38" data-line-number="38">        population[prob_minority <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>num_As <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ] &lt;-<span class="st"> &quot;B&quot;</span></a>
+<a class="sourceLine" id="cb51-39" data-line-number="39">      }  </a>
+<a class="sourceLine" id="cb51-40" data-line-number="40">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
+<a class="sourceLine" id="cb51-41" data-line-number="41">    }</a>
+<a class="sourceLine" id="cb51-42" data-line-number="42">  }</a>
+<a class="sourceLine" id="cb51-43" data-line-number="43">  output  <span class="co"># export data from function</span></a>
+<a class="sourceLine" id="cb51-44" data-line-number="44">}</a></code></pre></div>
+<p>We can test the function with perfect conformity (<span class="math inline">\(D=1\)</span>) and plot it (again we use the function <code>plot_multiple_runs()</code> we wrote in <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>).</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">conformist_transmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.8-1.png" width="672" /></p>
+<p>Here we should see some lines going to <span class="math inline">\(p = 1\)</span>, and some lines going to <span class="math inline">\(p = 0\)</span>. Conformity acts to favour the majority trait. This will depend on the initial frequency of <span class="math inline">\(A\)</span> in the population. In different runs with <span class="math inline">\(p_0 = 0.5\)</span>, sometimes there will be slightly more <span class="math inline">\(A\)</span>s, sometimes slightly more <span class="math inline">\(B\)</span>s (remember, in our model this is probabilistic, like flipping coins, so initial frequencies will rarely be precisely 0.5).</p>
+<p>What happens if we set <span class="math inline">\(D = 0\)</span>?</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">conformist_transmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">D =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.9-1.png" width="672" /></p>
+<p>This model is equivalent to unbiased transmission. As for the simulations described in <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>, with a sufficiently large <span class="math inline">\(N\)</span>, the frequencies fluctuate around <span class="math inline">\(p = 0.5\)</span>. This underlines the effect of conformity. With unbiased transmission, majority traits are favoured because they are copied in proportion to their frequency (incidentally, it is for this reason that ‘copying the majority’ is not a good description of conformity in the technical sense of cultural evolution: even with unbiased copying the majority trait is copied more than the minority one). However, they reach fixation only in small populations. With conformity, instead, the majority trait is copied with a probability higher than its frequency, so that conformity drives traits to fixation as they become more and more common.</p>
+<p>As an aside, note that the last two graphs have roughly the same thick black mean frequency line, which hovers around <span class="math inline">\(p = 0.5\)</span>. This highlights the dangers of looking at means alone. If we hadn’t plotted the individual runs and relied solely on mean frequencies, we might think that <span class="math inline">\(D = 0\)</span> and <span class="math inline">\(D = 1\)</span> gave identical results. But in fact, they are very different. Always look at the underlying distribution that generates means.</p>
+<p>Now let’s explore the effect of changing the initial frequencies by changing <span class="math inline">\(p_0\)</span>, and adding conformity back in.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">conformist_transmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.55</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.10-1.png" width="672" /></p>
+<p>When <span class="math inline">\(A\)</span> starts off in a slight majority (<span class="math inline">\(p_0 = 0.55\)</span>), all of the runs result in <span class="math inline">\(A\)</span> going to fixation (notice this partly depends on the random initialisation: you can change the number in <code>set.seed()</code> to see what happens. However, most if not all runs should result in <span class="math inline">\(A\)</span> going to fixation). Now let’s try the reverse.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">conformist_transmission</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">p_0 =</span> <span class="fl">0.45</span>, <span class="dt">D =</span> <span class="dv">1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.11-1.png" width="672" /></p>
+<p>When <span class="math inline">\(A\)</span> starts off in a minority (<span class="math inline">\(p_0 = 0.45\)</span>), all runs result in <span class="math inline">\(A\)</span> disappearing. These last two graphs show how initial conditions affect conformity. Whichever trait is more common is favoured by conformist transmission.</p>
+<hr />
+</div>
+<div id="summary-of-the-model-3" class="section level2">
+<h2><span class="header-section-number">4.3</span> Summary of the model</h2>
+<p>In this chapter, we explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this indirect bias with the direct (or content) biased transmission from [Chapter 3][Biased transmission (direct bias)], where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.</p>
+<p>We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This in turn makes stochasticity important, which in small populations can affect initial frequencies.</p>
+<p>We also discussed the subtle, but fundamental, difference between unbiased copying and conformity. In both, majority traits are favoured, but it is only with conformity that they are <em>disproportionally</em> favoured. In large populations, unbiased transmission rarely leads to trait fixation, whereas conformist transmission often does. Furthermore, as we will see later, conformity also makes majority traits resistant to external disturbances, such as the introduction of other traits via innovation or migration.</p>
+<hr />
+</div>
+<div id="analytical-appendix-3" class="section level2">
+<h2><span class="header-section-number">4.4</span> Analytical appendix</h2>
+<p>Let’s revise Table 1 to add the probabilities of each combination of three demonstrators coming together, assuming they are picked at random. These probabilities can be expressed in terms of <span class="math inline">\(p\)</span>, the frequency of <span class="math inline">\(A\)</span>, and <span class="math inline">\((1 - p)\)</span>, the frequency of <span class="math inline">\(B\)</span>. Table 2 adds this column.</p>
+<p><strong>Table 2: Full adoption probability table for trait <span class="math inline">\(A\)</span> under conformist transmission</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Dem 1</th>
+<th>Dem 2</th>
+<th>Dem 3</th>
+<th>Prob of adopting <span class="math inline">\(A\)</span></th>
+<th>Prob of combination forming</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td>1</td>
+<td><span class="math inline">\(p^3\)</span></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(2/3 + D/3\)</span></td>
+<td><span class="math inline">\(p^2(1-p)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(1/3 - D/3\)</span></td>
+<td><span class="math inline">\(p(1-p)^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(A\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(B\)</span></td>
+<td>0</td>
+<td><span class="math inline">\((1-p)^3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To get the frequency of <span class="math inline">\(A\)</span> in the next generation, <span class="math inline">\(p&#39;\)</span>, we multiply, for each of the eight rows in Table 2, the probability of adopting <span class="math inline">\(A\)</span> by the probability of that combination forming (i.e. the final two columns in Table 2), and add up all of these eight products. After rearranging, this gives the following recursion:</p>
+<p><span class="math display">\[p&#39; = p + Dp(1-p)(2p-1)            \hspace{30 mm}(4.1)\]</span></p>
+<p>We can plot the recursion, with weak conformity (<span class="math inline">\(D = 0.1\)</span>) and slightly more <span class="math inline">\(A\)</span> in the initial generation (<span class="math inline">\(p_0 = 0.55\)</span>) as we did previously in the simulation:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">t_max &lt;-<span class="st"> </span><span class="dv">150</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="fl">0.51</span> </a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">D &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb56-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6">pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span></a>
+<a class="sourceLine" id="cb56-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb56-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb56-9" data-line-number="9">  pop_analytical<span class="op">$</span>p[i] &lt;-pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>D <span class="op">*</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb56-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb56-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb56-12" data-line-number="12"><span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-14" data-line-number="14"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.12-1.png" width="672" /></p>
+<p>You can change the values of <span class="math inline">\(p_0\)</span> in the code above, (for example less than 0.5, and equal to 0.5) and reproduce the results of the other simulations above.</p>
+<p>Finally, we can use the recursion equation to generate a plot that has become a signature for conformity in the cultural evolution literature. The following code plots, for all possible values of <span class="math inline">\(p\)</span>, the probability of adopting <span class="math inline">\(p\)</span> in the next generation.</p>
+<p>Note first two new R commands. We use the function <code>seq()</code> to generate a sequence of 101, equally spaced, numbers from 0 to 1, and we use a new ggplot ‘geom’. <code>geom_abline()</code> draws a custom line for which we can pass slop and intercept, as well as other aesthetic properties (such as here <code>linetype = &quot;dashed&quot;</code>).</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">D &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">conformity_p_adopt &lt;-<span class="st"> </span><span class="kw">tibble</span>( <span class="dt">p =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">101</span>), <span class="dt">p_next =</span> p <span class="op">+</span><span class="st"> </span>D <span class="op">*</span><span class="st"> </span>p <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="kw">ggplot</span>(<span class="dt">data =</span> conformity_p_adopt, <span class="kw">aes</span>(<span class="dt">y =</span> p_next, <span class="dt">x =</span> p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-7" data-line-number="7"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-8" data-line-number="8"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb57-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;frequency of A (p)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;probability of adopting A (p&#39;)&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/4.13-1.png" width="672" /></p>
+<p>This plot encapsulates the process of conformity. The dotted line shows unbiased transmission: the probability of adopting <span class="math inline">\(A\)</span> is exactly equal to the frequency of <span class="math inline">\(A\)</span> in the population. The s-shaped solid curve shows conformist transmission. When <span class="math inline">\(A\)</span> is common (<span class="math inline">\(p &gt; 0.5\)</span>), then the curve is higher than the dotted line: there is a disproportionately higher probability of adopting <span class="math inline">\(A\)</span>. When <span class="math inline">\(A\)</span> is uncommon (<span class="math inline">\(p &lt; 0.5\)</span>), then the curve is lower than the dotted line: there is a disproportionately lower probability of adopting <span class="math inline">\(A\)</span>.</p>
+<hr />
+</div>
+<div id="further-readings" class="section level2">
+<h2><span class="header-section-number">4.5</span> Further readings</h2>
+<p><span class="citation">Boyd and Richerson (<a href="#ref-boyd_culture_1985">1985</a>)</span> introduced conformist or positive frequency-dependent cultural transmission as defined here, and modelled it analytically with similar methods. <span class="citation">Henrich and Boyd (<a href="#ref-henrich_evolution_1998">1998</a>)</span> modelled the evolution of conformist transmission, while <span class="citation">Efferson et al. (<a href="#ref-efferson_conformists_2008">2008</a>)</span> provided experimental evidence that at least some people conform in a simple learning task.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-boyd_culture_1985">
+<p>Boyd, Robert, and Peter J. Richerson. 1985. <em>Culture and the Evolutionary Process</em>. Culture and the Evolutionary Process. Chicago, IL, US: University of Chicago Press.</p>
+</div>
+<div id="ref-efferson_conformists_2008">
+<p>Efferson, C., Rafael Lalive, Peter J. Richerson, R. McElreath, and Mark Lubell. 2008. “Conformists and Mavericks: The Empirics of Frequency-Dependent Cultural Transmission.” <em>Evolution and Human Behavior</em> 29 (1): 56–64. <a href="https://doi.org/10.1016/j.evolhumbehav.2007.08.003">https://doi.org/10.1016/j.evolhumbehav.2007.08.003</a>.</p>
+</div>
+<div id="ref-henrich_evolution_1998">
+<p>Henrich, Joseph, and Robert Boyd. 1998. “The Evolution of Conformist Transmission and the Emergence of Between-Group Differences.” <em>Evolution and Human Behavior</em> 19 (4): 215–41. <a href="https://doi.org/10.1016/S1090-5138(98)00018-X">https://doi.org/10.1016/S1090-5138(98)00018-X</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="biased-transmission-direct-bias.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="biased-transmission-demonstrator-based-indirect-bias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
