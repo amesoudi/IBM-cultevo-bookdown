@@ -330,11 +330,4 @@ This plot encapsulates the process of conformity. The dotted line shows unbiased
 
 ## Further readings
 
-Boyd, R., and Richerson, P. J. (1985) Culture and the evolutionary process. Chicago, IL: Univ. Chicago Press. **Conformist cultural transmission as defined here was introduced in this book, and modelled analytically with similar methods**
-
-Henrich, J., and Boyd, R. (1998) The evolution of conformist transmission and the emergence of between-group differences. Evolution and Human Behavior 19(4): 215–241.  **Examines the evolution of conformist transmission**
-
-Efferson, C., Lalive, R., Richerson, P. J., McElreath, R., and Lubell, M. (2008) Conformists and mavericks: the empirics of frequency-dependent cultural transmission. Evolution and Human Behavior 29(1): 56–64.  **An experimental study testing whether people conform in a simple task**
-
-
-
+@boyd_culture_1985 introduced conformist or positive frequency-dependent cultural transmission as defined here, and modelled it analytically with similar methods. @henrich_evolution_1998 modelled the evolution of conformist transmission, while @efferson_conformists_2008 provided experimental evidence that at least some people conform in a simple learning task.

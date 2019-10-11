@@ -237,8 +237,4 @@ Second, it says that the rate of increase is proportional to $\mu_b$. This expla
 
 ## Further reading
 
-Boyd, R., and Richerson, P. J. (1985) Culture and the evolutionary process. Chicago, IL: Univ. Chicago Press. **NB Boyd & Richerson's 'guided variation' is equivalent to biased mutation**
-
-Henrich, J. (2001) Cultural transmission and the diffusion of innovations. American Anthropologist 103(4): 992–1013.  **Shows how biased mutation / guided variation generates r-shaped curves similar to those generated here**
-
-
+@boyd_culture_1985 model what they call 'guided variation', which is equivalent to biased mutation as modelled in this chapter. @henrich_cultural_2001 shows how biased mutation / guided variation generates r-shaped curves similar to thoese generated here.

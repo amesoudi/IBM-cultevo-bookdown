@@ -360,8 +360,4 @@ More generally, creating deterministic recursion-based models can be a good way 
 
 ## Further reading
 
-Cavalli-Sforza, L. L., & Feldman, M. W. (1981). Cultural transmission and evolution. Princeton: Princeton Univ. Press.
-
-Bentley, R. A., Hahn, M. W., & Shennan, S. J. (2004). Random drift and culture change. Proceedings of the Royal Society of London B, 271(1547), 1443-1450.
-
-Lansing, J. S., & Cox, M. P. (2011). The domain of the replicators: selection, neutrality, and cultural evolution. Current Anthropology, 52(1), 105-125. (plus associated commentaries)
+@cavalli-sforza_cultural_1981 explored how cultural drift affects cultural evolution, which was extended by @neiman_stylistic_1995 in an archaeological context. @bentley_random_2004 present models of unbiased transmission with respect to several cultural datasets. @lansing_domain_2011 and commentaries explore the underlying assumptions of applying random drift to cultural evolution.

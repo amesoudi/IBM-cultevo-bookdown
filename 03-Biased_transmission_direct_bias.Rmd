@@ -149,9 +149,5 @@ We can also say that $p = 0$ is an unstable equilibrium, meaning that any slight
 
 ## Further reading
 
-Boyd, R., and Richerson, P. J. (1985) Culture and the evolutionary process. Chicago, IL: Univ. Chicago Press. **NB Boyd & Richerson's 'direct bias' is equivalent to biased transmission**
-
-Henrich, J. (2001) Cultural transmission and the diffusion of innovations. American Anthropologist 103(4): 992–1013.  **Henrich adds biased transmission to his guided variation / biased mutation model, and shows that this generates s-shaped curves**
-
-Henrich, J., and McElreath, R. (2003) The evolution of cultural evolution. Evolutionary Anthropology 12(3): 123–135.  **Introduces and explains the distinction between content (direct) and context (indirect) biases in cultural evolution**
+@boyd_culture_1985 modelled direct bias, while @henrich_cultural_2001 added directly biased transmission to his guided variation / biased mutation model, showing that this generates s-shaped curves similar to those generated here. Note though that subsequent work has shown that s-shaped curves can be generated via other processes (e.g. @reader_distinguishing_2004), and should not be considered definite evidence for biased transmission.
 
