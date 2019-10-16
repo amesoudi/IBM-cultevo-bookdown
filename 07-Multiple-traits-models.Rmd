@@ -3,7 +3,7 @@
 
 In all previous models, individuals could possess one of only two cultural traits, $A$ or $B$. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as voting Republican or Democrat, driving on the left or the right, or being vegetarian or meat-eating. In other cases, however, there are many options: in many countries there are multiple political parties to vote for, there may be many dietary choices (vegan, pescatarian, vegetarian, etc), and so on. What happens when we copy others' choices given more than two alternatives? To simplify this question, we again assume unbiased copying as in the [first chapter][Unbiased transmission]: all traits are functionally equivalent and other individuals are copied at random.
 
-The first modification we need to make in the code concerns how traits are represented. Since we have an undetermined number of possible traits we cannot use the two letters $A$ and $B$. Instead we will use numbers, referring to trait "1", trait "2", trait "3", etc.  To start with, we can initialise each individual with a trait randomly chosen between "1" and "100".
+The first modification we need to make in the code concerns how traits are represented. Since we have an undetermined number of possible traits we cannot use the two letters $A$ and $B$. Instead we will use numbers, referring to trait "1", trait "2", trait "3", etc. How can we distribute the traits in the initial population? We can assume that there are $m$ possible traits at the beginning, with $m \leq N$ (as usual, $N$ is the population size). In all the following simulations, we will fix $m=N$, and effectively initialise each individual with a trait randomly chosen between "1" and "100".  
 
 ```{r 7.1}
 library(tidyverse)
@@ -12,7 +12,7 @@ N <- 100
 population <- tibble(trait = sample(1:N, N, replace = TRUE))
 ```
 
-As usual, you can inspect the `population` tibble by writing its name.
+You can inspect the `population` tibble by writing its name.
 
 ```{r 7.2}
 population
