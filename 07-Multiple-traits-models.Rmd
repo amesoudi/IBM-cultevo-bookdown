@@ -243,10 +243,11 @@ The results are equivalent, but the simulation is almost 100 times faster! This 
 
 ## The distribution of popularity
 
-An interesting aspect of these simulations is that, even if all traits are functionally equivalent and transmission is unbiased, a few traits, for random reasons, are more successful than the others. A way to visualise this is to plot their cumulative popularity, i.e. the sum of their quantities over all generations. Given our matrix, it is easy to calculate this by summing each column and multiplying by *N* (remember they are frequencies, whereas now we want to visualise their actual quantities).
+An interesting aspect of these simulations is that, even if all traits are functionally equivalent and transmission is unbiased, a few traits, for random reasons, are more successful than the others. A way to visualise this is to plot their cumulative popularity, i.e. the sum of their quantities over all generations. Given our matrix, it is easy to calculate this by summing each column and multiplying by *N* (remember they are frequencies, whereas now we want to visualise their actual quantities). We also need to keep only the values that are higher than zero: values equal to zero are in fact the empty slots created in the initial matrix that were never filled wiht actual traits.
 
 ```{r 7.17}
 cumulative <- colSums(data_model) * N 
+cumulative <- cumulative[cumulative > 0]
 ```
 
 Let's sort them from the most to the least popular and plot the results.
