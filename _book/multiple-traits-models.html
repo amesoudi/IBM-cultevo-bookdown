@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-10-16" />
+<meta name="date" content="2019-10-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,12 +181,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In all previous models, individuals could possess one of only two cultural traits, <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as voting Republican or Democrat, driving on the left or the right, or being vegetarian or meat-eating. In other cases, however, there are many options: in many countries there are multiple political parties to vote for, there may be many dietary choices (vegan, pescatarian, vegetarian, etc), and so on. What happens when we copy others’ choices given more than two alternatives? To simplify this question, we again assume unbiased copying as in the [first chapter][Unbiased transmission]: all traits are functionally equivalent and other individuals are copied at random.</p>
 <p>The first modification we need to make in the code concerns how traits are represented. Since we have an undetermined number of possible traits we cannot use the two letters <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. Instead we will use numbers, referring to trait “1”, trait “2”, trait “3”, etc. How can we distribute the traits in the initial population? We can assume that there are <span class="math inline">\(m\)</span> possible traits at the beginning, with <span class="math inline">\(m \leq N\)</span> (as usual, <span class="math inline">\(N\)</span> is the population size). In all the following simulations, we will fix <span class="math inline">\(m=N\)</span>, and effectively initialise each individual with a trait randomly chosen between “1” and “100”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.1
 ## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">111</span>)
@@ -247,7 +247,7 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <p>As we already discussed, increasing <span class="math inline">\(N\)</span> reduces the effect of drift. You can experiment with various values for <span class="math inline">\(N\)</span> and <span class="math inline">\(t_\text{max}\)</span>. However, the general point is that variation is gradually lost in all cases. How can we counterbalance the homogenizing effect that drift has in small and isolated population, such as the one we are simulating?</p>
 <div id="introducing-innovation" class="section level2">
 <h2><span class="header-section-number">6.1</span> Introducing innovation</h2>
-<p>One option is to introduce new traits via innovation. We can imagine that, at each time step, a proportion of individuals, <span class="math inline">\(\mu\)</span> (we use the same notation that we used for mutation in <a href="unbiased-and-biased-mutation.html#unbiased-and-biased-mutation">chapter 2</a>), introduces a new trait in the population. The remaining proportion of individuals, <span class="math inline">\(1-\mu\)</span>, copy at random from others, as before. We can start with a small value, such as <span class="math inline">\(\mu=0.01\)</span>. Since <span class="math inline">\(N=100\)</span>, this means that in each generation, on average, one new trait will be introduced into the population.</p>
+<p>One option is to introduce new traits via innovation. We can imagine that, at each time step, a proportion of individuals, <span class="math inline">\(\mu\)</span>, introduces a new trait in the population. We use the same notation that we used for mutation in <a href="unbiased-and-biased-mutation.html#unbiased-and-biased-mutation">chapter 2</a>: you can think that ‘mutation’ is when an individual change its trait for one that is already present, whereas an ‘innovation’ happens when an individual introduces a new trait never seen before. The remaining proportion of individuals, <span class="math inline">\(1-\mu\)</span>, copy at random from others, as before. We can start with a small value, such as <span class="math inline">\(\mu=0.01\)</span>. Since <span class="math inline">\(N=100\)</span>, this means that in each generation, on average, one new trait will be introduced into the population.</p>
 <p>The following code adds innovation to the multiple-trait code from above:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="fl">0.01</span>
 
@@ -316,7 +316,7 @@ innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span cl
 data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)
 end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
 end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
-<pre><code>## Time difference of 35.04396 secs</code></pre>
+<pre><code>## Time difference of 35.15504 secs</code></pre>
 <p>On a typical laptop, it may take more than 30 or 40 seconds. To store the output, we are using a tibble with <span class="math inline">\(1100000\)</span> data points, as <em>max_traits</em> is equal to <span class="math inline">\(1100\)</span>, which needs to be updated in each of the <span class="math inline">\(1000\)</span> generations. One way of speeding up the simulation is to record our output in a different data structure.</p>
 <p>So far, we have been using tibbles to store our simulation output. R, as with all programming languages, can store data in different structures. Depending on what the data are and what one wants to do with them, different structures are more or less suitable. The advantage of tibbles is that they can contain heterogeneous data, depending on what we need to store: for example, in our <code>output</code> tibble, the <span class="math inline">\(trait\)</span> column was specified as a factor, whereas the others two columns, <span class="math inline">\(generation\)</span> and <span class="math inline">\(p\)</span>, were numeric.</p>
 <p>An alternative is to use vectors and matrices. A vector is a list of data points that are all of the same type, e.g. logical (TRUE/FALSE), integer (whole numbers), numeric (any numbers), or character (text). Matrices are just two-dimensional vectors: they must also contain all the same type of data, but they have rows and columns similar to a tibble, dataframe or Excel spreadsheet. The advantage of vectors and matrices is efficiency: they make simulations much faster than identical code running with tibbles.</p>
@@ -370,7 +370,7 @@ end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
 <span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/7.16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">end_time <span class="op">-</span><span class="st"> </span>start_time</code></pre></div>
-<pre><code>## Time difference of 0.04852605 secs</code></pre>
+<pre><code>## Time difference of 0.06015801 secs</code></pre>
 <p>The results are equivalent, but the simulation is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run the same simulation many times, or test many different parameter values, implementation choices can make drastic differences.</p>
 </div>
 <div id="the-distribution-of-popularity" class="section level2">

@@ -74,7 +74,7 @@ As we already discussed, increasing $N$ reduces the effect of drift. You can exp
 
 ## Introducing innovation
 
-One option is to introduce new traits via innovation. We can imagine that, at each time step, a proportion of individuals, $\mu$ (we use the same notation that we used for mutation in [chapter 2][Unbiased and biased mutation]), introduces a new trait in the population. The remaining proportion of individuals, $1-\mu$, copy at random from others, as before. We can start with a small value, such as $\mu=0.01$. Since $N=100$, this means that in each generation, on average, one new trait will be introduced into the population.
+One option is to introduce new traits via innovation. We can imagine that, at each time step, a proportion of individuals, $\mu$, introduces a new trait in the population. We use the same notation that we used for mutation in [chapter 2][Unbiased and biased mutation]: you can think that 'mutation' is when an individual change its trait for one that is already present, whereas an 'innovation' happens when an individual introduces a new trait never seen before. The remaining proportion of individuals, $1-\mu$, copy at random from others, as before. We can start with a small value, such as $\mu=0.01$. Since $N=100$, this means that in each generation, on average, one new trait will be introduced into the population.
 
 The following code adds innovation to the multiple-trait code from above:
 
