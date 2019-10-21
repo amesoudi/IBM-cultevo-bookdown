@@ -15,9 +15,9 @@ For simplicity, we can assume that when both parents have the same trait, the ch
 
 Hence we assume a probability $b$ that, when parents differ in their traits such that there is some uncertainty, the child adopts $A$. With probability $1-b$ they adopt trait $B$. When $b=0.5$, transmission is unbiased. When $b>0.5$, $A$ should be favoured; when $b<0.5$, $B$ should be favoured. Let's simulate this and test these predictions.
 
-The following function `vertical_transmission` is very similar to previous simulation functions. The explanation follows.
+The following function `vertical_transmission()` is very similar to previous simulation functions. The explanation follows.
 
-```{r 6.1}
+```{r 6.1, message=FALSE}
 library(tidyverse)
 set.seed(111)
 
@@ -39,12 +39,12 @@ vertical_transmission <- function(N, p_0, b, t_max, r_max) {
       population <- tibble(trait = rep(NA, N))  # next generation
       
       both_A <- mother$trait == "A" & father$trait == "A"
-      if ( sum(both_A) > 0 ) {
+      if (sum(both_A) > 0) {
         population[both_A, ]$trait <- "A"  # parents both A, adopt A
       }
       
       both_B <- mother$trait == "B" & father$trait == "B"
-      if ( sum(both_B) > 0) {
+      if (sum(both_B) > 0) {
         population[both_B, ]$trait <- "B"  # parents both B, adopt B
       }
       
@@ -61,7 +61,7 @@ vertical_transmission <- function(N, p_0, b, t_max, r_max) {
 
 ```
 
-First we set up an output tibble to store the frequency of $A$ ($p$) over $t_max$ generations and across $r_max$ runs. As before we create a `population` tibble to store our $N$ traits, one per individual.
+First we set up an output tibble to store the frequency of $A$ ($p$) over $t_{\text{max}}$ generations and across $r_{\text{max}}$ runs. As before we create a `population` tibble to store our $N$ traits, one per individual.
 
 This time, however, in each generation we create two new tibbles, `mother` and `father`. These store the traits of two randomly chosen individuals from the `previous_population`, one pair for each new individual. Note that we are assuming random mating here: parents pair up entirely at random. Alternative mating rules are possible, such as assortative cultural mating, where parents preferentially assort based on their cultural trait. We will leave it to readers to create models of this.
 
@@ -69,9 +69,9 @@ Once the `mother` and `father` tibbles are created, we can fill in the new indiv
 
 The remaining cases (identified as still being NA in the `population` tibble) must have one $A$ and one $B$ parent. We are not concerned with which parent has which in this simple model, so in each of these cases we set the individual's trait to be $A$ with probability $b$ and $B$ with probability $1-b$. Again, we leave it to readers to modify the code to have separate probabilities for maternal and paternal transmission.
 
-Once all generations are finished, we export the `output` tibble as our data. We can use our existing function `plot_multiple_runs` from previous chapters to plot the results.
+Once all generations are finished, we export the `output` tibble as our data. We can use our existing function `plot_multiple_runs()` from previous chapters to plot the results.
 
-```{r 6.2}
+```{r 6.2, echo=FALSE}
 plot_multiple_runs <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
     geom_line(aes(colour = run)) +
@@ -89,7 +89,7 @@ data_model <- vertical_transmission(N = 10000, p_0 = 0.01, b = 0.6, t_max = 50, 
 plot_multiple_runs(data_model)
 ```
 
-Here we can see a gradual spread of the favoured trait $A$ from $p=0.01$ to $p=1$. As in our directly biased transmission model (Chapter 3), the diffusion curve is s-shaped. To obtain the same result with two different models is encouraging! We can also test our prediction that when $b=0.5$, we recreate our unbiased transmission model from Chapter 1:
+Here we can see a gradual spread of the favoured trait $A$ from $p=0.01$ to $p=1$. As in our [directly biased transmission model][Biased transmission: direct bias], the diffusion curve is s-shaped. To obtain the same result with two different models is encouraging! We can also test our prediction that when $b=0.5$, we recreate our unbiased transmission model from [Chapter 1][Unbiased transmission]:
 
 ```{r 6.4}
 data_model <- vertical_transmission(N = 10000, p_0 = 0.1, b = 0.5, t_max = 50, r_max = 5)
@@ -104,7 +104,7 @@ Now let's add horizontal cultural transmission to our model. We will add it to v
 
 First there is vertical transmission as above, with random mating and the parental bias $b$, to create a new generation. Then, the new generation learns from each other. The key difference between vertical and horizontal transmission is that horizontal cultural transmission can occur from more than two individuals. Let's assume individuals pick $n$ other individuals from their generation. We also assume a bias in favour of $A$ during horizontal transmission. If the learner is $B$, then for each of the $n$ demonstrators who have $A$, there is an independent probability $g$ that the learner switches to $A$. If the learner is already $A$, or if the demonstrator is $B$, then nothing happens.
 
-The following code implements this horizontal transmission in a new function `vertical_horizontal_transmission`.
+The following code implements this horizontal transmission in a new function `vertical_horizontal_transmission()`.
 
 ```{r 6.5}
 vertical_horizontal_transmission <- function(N, p_0, b, n, g, t_max, r_max) {
@@ -193,7 +193,7 @@ The first two plots should be very similar. Horizontal cultural transmission fro
 
 This model has combined directly biased transmission with vertical and horizontal transmission pathways. The vertical transmission model recreates the patterns from our previous unbiased and directly biased transmission, but explicitly modelling parents and their offspring. Although there were no differences, our vertical transmission model could be modified easily to study different kinds of parental bias (e.g. making maternal influence stronger than paternal influence), or different types of non-random mating.
 
-Our horizontal transmission model is similar to the conformist bias simulated in Chapter 4, but slightly different - there is no disproportionate majority copying, and instead one trait is favoured when learning from $n$ demonstrators. Comparing the two pathways, we can see that horizontal cultural transmission is faster than vertical cultural transmission largely because it allows individuals to learn from more than two demonstrators.
+Our horizontal transmission model is similar to the conformist bias simulated in [Chapter 4][Biased transmission: frequency-dependent indirect bias], but slightly different - there is no disproportionate majority copying, and instead one trait is favoured when learning from $n$ demonstrators. Comparing the two pathways, we can see that horizontal cultural transmission is faster than vertical cultural transmission largely because it allows individuals to learn from more than two demonstrators.
 
 ***
 

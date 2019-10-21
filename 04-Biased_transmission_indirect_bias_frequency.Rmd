@@ -3,7 +3,7 @@
 
 ## The logic of conformity 
 
-In [Chapter 3][Biased transmission (direct bias)] we looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will start looking at the other kind of biased transmission, when traits are equivalent, but individuals are more likely to adopt a trait according to the characteristics of the population, and in particular which other individuals already have it. (As we mentioned previously, these are often called 'indirect' or 'context' biases).
+In [Chapter 3][Biased transmission: direct bias] we looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will start looking at the other kind of biased transmission, when traits are equivalent, but individuals are more likely to adopt a trait according to the characteristics of the population, and in particular which other individuals already have it. (As we mentioned previously, these are often called 'indirect' or 'context' biases).
 
 A first possibility is that we may be influenced by the frequency of the trait in the population, i.e. how many other individuals already have the trait. Conformity (or 'positive frequency dependent bias') has been most studied. Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics. (The opposite case, anti-conformity or negative frequency dependent bias is also possible, where the least common trait is more likely to be copied. This is probably less common in real life.)
 

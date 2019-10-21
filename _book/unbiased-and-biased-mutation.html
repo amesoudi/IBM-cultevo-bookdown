@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Unbiased and biased mutation | Individual-based models of cultural evolution</title>
   <meta name="description" content="A minimal working structure for the book" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Unbiased and biased mutation | Individual-based models of cultural evolution" />
   <meta property="og:type" content="book" />
@@ -26,15 +26,15 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-10-20" />
+<meta name="date" content="2019-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="unbiased-transmission.html"/>
-<link rel="next" href="biased-transmission-direct-bias.html"/>
+<link rel="prev" href="unbiased-transmission.html">
+<link rel="next" href="biased-transmission-direct-bias.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -42,9 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
 
 
 
@@ -55,66 +52,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -217,48 +189,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As in the previous model, we assume <span class="math inline">\(N\)</span> individuals each of whom possesses one of two non-overlapping cultural traits, denoted <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. In each generation, from <span class="math inline">\(t = 1\)</span> to <span class="math inline">\(t = t_{\text{max}}\)</span>, the <span class="math inline">\(N\)</span> individuals are replaced with <span class="math inline">\(N\)</span> new individuals. Instead of random copying, each individual now gives rise to a new individual with exactly the same cultural trait as them. (Another way of looking at this is in terms of timesteps, such as years: the same <span class="math inline">\(N\)</span> individual live for <span class="math inline">\(t_{\text{max}}\)</span> years, and keep their cultural trait from one year to the next.)</p>
 <p>At each generation, however, there is a probability <span class="math inline">\(\mu\)</span> that each individual mutates from their current trait to the other trait (the Greek letter Mu is the standard notation for the mutation rate in genetic evolution, and it has an analogous function here). For example, vegetarian individuals can decide to eat animal products, and vice versa. Remember, this is not copied from other individuals, as in the previous model, but can be thought as an individual decision. Another way to see this is that the probability of changing trait applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, this means that <span class="math inline">\(\mu N\)</span> individuals mutate each generation. Like in the previous model, we are interested in tracking the proportion <span class="math inline">\(p\)</span> of agents with trait <span class="math inline">\(A\)</span> over time.</p>
 <p>We’ll wrap this in a function called <code>unbiased_mutation()</code>, using much of the same code as <code>unbiased_transmission_3()</code>. As before, we need to call the tidyverse library, and set a seed for the random number genrator, so the results will be exactly the same each time we rerun the code. Of course, if you want to see the stochasticity inherent in the simulation, you can remove the set.seed command, or set it to a different number.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">111</span>)</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">unbiased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>(N, mu, p_<span class="dv">0</span>, t_max, r_max) {</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max))) <span class="co"># create the output tibble</span></a>
-<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb29-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb29-10" data-line-number="10">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
-<a class="sourceLine" id="cb29-11" data-line-number="11">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
-<a class="sourceLine" id="cb29-12" data-line-number="12">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
-<a class="sourceLine" id="cb29-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb29-14" data-line-number="14">      mutate &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># determine &#39;mutant&#39; individuals</span></a>
-<a class="sourceLine" id="cb29-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb29-16" data-line-number="16">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) { <span class="co"># if there are &#39;mutants&#39; from A to B</span></a>
-<a class="sourceLine" id="cb29-17" data-line-number="17">        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span> <span class="co"># then flip them to B</span></a>
-<a class="sourceLine" id="cb29-18" data-line-number="18">      }</a>
-<a class="sourceLine" id="cb29-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb29-20" data-line-number="20">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) { <span class="co"># if there are &#39;mutants&#39; from B to A</span></a>
-<a class="sourceLine" id="cb29-21" data-line-number="21">        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span> <span class="co"># then flip them to A</span></a>
-<a class="sourceLine" id="cb29-22" data-line-number="22">      }</a>
-<a class="sourceLine" id="cb29-23" data-line-number="23">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
-<a class="sourceLine" id="cb29-24" data-line-number="24">    }</a>
-<a class="sourceLine" id="cb29-25" data-line-number="25">  }</a>
-<a class="sourceLine" id="cb29-26" data-line-number="26">  output <span class="co"># export data from function</span></a>
-<a class="sourceLine" id="cb29-27" data-line-number="27">}</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">set.seed</span>(<span class="dv">111</span>)
+
+unbiased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>(N, mu, p_<span class="dv">0</span>, t_max, r_max) {
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max))) <span class="co"># create the output tibble</span>
+
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))
+
+    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
+
+      mutate &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># determine &#39;mutant&#39; individuals</span>
+
+      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) { <span class="co"># if there are &#39;mutants&#39; from A to B</span>
+        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span> <span class="co"># then flip them to B</span>
+      }
+
+      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) { <span class="co"># if there are &#39;mutants&#39; from B to A</span>
+        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span> <span class="co"># then flip them to A</span>
+      }
+      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
+    }
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
 <p>The only changes from the previous model are the addition of <span class="math inline">\(\mu\)</span>, the parameter that specifies the probability of mutation, in the function definition and new lines of code within the <code>for</code> loop on <span class="math inline">\(t\)</span> which replace the random copying command with unbiased mutation. Let’s examine these lines to see how they work.</p>
 <p>The most obvious way of implementing unbiased mutation - which is not done above - would have been to set up another <code>for</code> loop. We would cycle through each individual one by one, each time calculating whether it should mutate or not based on <span class="math inline">\(mu\)</span>. This would certainly work, but R is notoriously slow at loops. It’s always preferable in R, where possible, to use ‘vectorised’ code. That’s what is done above in our three added lines, starting from <code>mutate &lt;- sample()</code>.</p>
 <p>First, we pre-specify the probability of mutating for each individual. For this, we again use the function <code>sample()</code>, picking <span class="math inline">\(TRUE\)</span> (corresponding to being a mutant) or <span class="math inline">\(FALSE\)</span> (not mutating, i.e. keeping the same cultural trait) for <span class="math inline">\(N\)</span> times. The draw, however, is not random: the probability of drawing <span class="math inline">\(TRUE\)</span> is equal to <span class="math inline">\(\mu\)</span>, and the probability of drawing <span class="math inline">\(FALSE\)</span> is <span class="math inline">\(1-\mu\)</span>. You can think about the procedure in this way: each individual in the population flips a biased coin that has <span class="math inline">\(\mu\)</span> probability to land on, say, heads, and <span class="math inline">\(1-\mu\)</span> to land on tails. If it lands on heads they change their cultural trait.</p>
 <p>After that, in the following lines, we actually change the traits for the ‘mutant’ individuals. We need to check whether there are individuals that change their trait, both from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> and vice versa, using the two <code>if</code> conditionals. If there are no such individuals, then assigning a new value to an empty tibble returns an error. To check, we make sure that the number of rows is greater than 0 (using <code>nrow()&gt;0</code> within the <code>if</code>).</p>
 <p>To plot the results, we can use the same function <code>plot_multiple_runs()</code> we wrote in the <a href="unbiased-transmission.html#unbiased-transmission">previous chapter</a>, reproduced here for convenience.</p>
 <p>Let’s now run and plot the model:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/2.3-1.png" width="672" /></p>
 <p>Unbiased mutation produces random fluctuations over time, and does not alter the overall frequency of <span class="math inline">\(A\)</span>, which stays around <span class="math inline">\(p = 0.5\)</span>. Because mutations from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> are as equally likely as <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span>, there is no overall directional trend.</p>
 <p>If you remember from the previous chapter, with unbiased transmission, instead, when populations were small (e.g. <span class="math inline">\(N=100\)</span>) generally one of the traits disappeared after a few generations. Here, though, with <span class="math inline">\(N=100\)</span>, both traits remain until the end of the simulation. Why this difference? You can think of it in this way: when one trait becomes popular, say the frequency of <span class="math inline">\(A\)</span> is equal to <span class="math inline">\(0.8\)</span>, with unbiased transmission it is more likely that individuals of the new generation will pick up <span class="math inline">\(A\)</span> randomly when copying. The few individuals with trait <span class="math inline">\(B\)</span> will have 80% of probability of copying <span class="math inline">\(A\)</span>. With unbiased mutation, on the other hand, since <span class="math inline">\(\mu\)</span> is applied independently to each individual, when <span class="math inline">\(A\)</span> is common then there will be more individuals that will flip to <span class="math inline">\(B\)</span> (specifically, <span class="math inline">\(\mu p N\)</span> individuals, which in our case is 4) than individuals that will flip to <span class="math inline">\(A\)</span> (equal to <span class="math inline">\(\mu (1-p) N\)</span> individuals, in our case 1) keeping the traits at similar freuqencies.</p>
 <p>But what if we were to start at different initial frequencies of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>? Say, <span class="math inline">\(p=0.1\)</span> and <span class="math inline">\(p=0.9\)</span>? Would <span class="math inline">\(A\)</span> disappear? Would unbiased mutation keep <span class="math inline">\(p\)</span> at these initial values, like we saw unbiased transmission does in Model 1?</p>
 <p>To find out, let’s change <span class="math inline">\(p_0\)</span>, which specifies the initial probability of drawing an <span class="math inline">\(A\)</span> rather than a <span class="math inline">\(B\)</span> in the first generation.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">unbiased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/2.4-1.png" width="672" /></p>
 <p>You should see <span class="math inline">\(p\)</span> go from 0.1 up to 0.5. In fact, whatever the initial starting frequencies of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, unbiased mutation always leads to <span class="math inline">\(p = 0.5\)</span>, for the reason explained above: unbiased mutation always tends to balance the proportion of <span class="math inline">\(A\)</span>s and <span class="math inline">\(B\)</span>s.</p>
 </div>
@@ -266,38 +238,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.2</span> Biased mutation</h2>
 <p>A more interesting case is biased mutation. Let’s assume now that there is a probability <span class="math inline">\(\mu_b\)</span> that an individual with trait <span class="math inline">\(B\)</span> mutates into <span class="math inline">\(A\)</span>, but there is no possibility of trait <span class="math inline">\(A\)</span> mutating into trait <span class="math inline">\(B\)</span>. Perhaps trait <span class="math inline">\(A\)</span> is a particularly catchy or memorable version of a story, or an intuitive explanation of a phenomenon, and <span class="math inline">\(B\)</span> is difficult to remember or unintuitive to understand.</p>
 <p>The function <code>biased_mutation()</code> captures this unidirectional mutation.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">biased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>(N, mu_b, p_<span class="dv">0</span>, t_max, r_max) {</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max))) <span class="co"># create the output tibble</span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
-<a class="sourceLine" id="cb32-8" data-line-number="8">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
-<a class="sourceLine" id="cb32-9" data-line-number="9">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
-<a class="sourceLine" id="cb32-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb32-11" data-line-number="11">      mutate &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu_b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu_b), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># find &#39;mutant&#39; individuals</span></a>
-<a class="sourceLine" id="cb32-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb32-13" data-line-number="13">      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb32-14" data-line-number="14">        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span> <span class="co"># if individual was B and mutates, flip to A</span></a>
-<a class="sourceLine" id="cb32-15" data-line-number="15">      }</a>
-<a class="sourceLine" id="cb32-16" data-line-number="16">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
-<a class="sourceLine" id="cb32-17" data-line-number="17">    }</a>
-<a class="sourceLine" id="cb32-18" data-line-number="18">  }</a>
-<a class="sourceLine" id="cb32-19" data-line-number="19">  output <span class="co"># export data from function</span></a>
-<a class="sourceLine" id="cb32-20" data-line-number="20">}</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">biased_mutation &lt;-<span class="st"> </span><span class="cf">function</span>(N, mu_b, p_<span class="dv">0</span>, t_max, r_max) {
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max))) <span class="co"># create the output tibble</span>
+
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))
+
+    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
+
+      mutate &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu_b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu_b), <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># find &#39;mutant&#39; individuals</span>
+
+      <span class="cf">if</span> (<span class="kw">nrow</span>(population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        population[mutate <span class="op">&amp;</span><span class="st"> </span>previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span> <span class="co"># if individual was B and mutates, flip to A</span>
+      }
+      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
+    }
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
 <p>There are just two changes in this code compared to <code>unbiased_mutation()</code>. First, we’ve replaced <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\mu_b\)</span> to keep the two parameters distinct and avoid confusion. Second, the line in <code>unbiased_mutation()</code> which caused individuals with <span class="math inline">\(A\)</span> to mutate to <span class="math inline">\(B\)</span> has been deleted.</p>
 <p>Let’s see what effect this has by running <code>biased_mutation()</code>. We’ll start with the population entirely composed of individuals with <span class="math inline">\(B\)</span>, i.e. <span class="math inline">\(p_0 = 0\)</span>, to see how quickly and in what manner <span class="math inline">\(A\)</span> spreads via biased mutation.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/2.6-1.png" width="672" /></p>
 <p>The plot shows a steep increase that slows and plateaus at <span class="math inline">\(p = 1\)</span> by around generation <span class="math inline">\(t = 100\)</span>. There should be a bit of fluctuation in the different runs, but not much. Now let’s try a larger sample size.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.05</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/2.7-1.png" width="672" /></p>
 <p>With <span class="math inline">\(N = 10000\)</span> the line should be smooth with little (if any) fluctuation across the runs. But notice that it plateaus at about the same generation, around <span class="math inline">\(t = 100\)</span>. Population size has little effect on the rate at which a novel trait spreads via biased mutation. <span class="math inline">\(\mu_b\)</span>, on the other hand, does affect this speed. Let’s double the biased mutation rate to 0.1.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.1</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw">plot_multiple_runs</span>(data_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">biased_mutation</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">mu_b =</span> <span class="fl">0.1</span>, <span class="dt">p_0 =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">200</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/2.8-1.png" width="672" /></p>
 <p>Now trait <span class="math inline">\(A\)</span> reaches fixation around generation <span class="math inline">\(t = 50\)</span>. Play around with <span class="math inline">\(N\)</span> and <span class="math inline">\(\mu_b\)</span> to confirm that the latter determines the rate of diffusion of trait <span class="math inline">\(A\)</span>, and that it takes the same form each time - roughly an ‘r’ shape with an initial steep increase followed by a plateauing at <span class="math inline">\(p = 1\)</span>.</p>
 <hr />
@@ -320,44 +292,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\mu(1 - 2p) = 0 \hspace{30 mm}(2.3)\]</span></p>
 <p>The left-hand side of Equation 2.3 equals zero when either <span class="math inline">\(\mu = 0\)</span>, which given our assumption that <span class="math inline">\(\mu &gt; 0\)</span> cannot be the case, or when <span class="math inline">\(1 - 2p = 0\)</span>, which after rearranging gives the single equilibrium <span class="math inline">\(p^* = 0.5\)</span>. This matches our simulation results above. As we found in the simulations, this does not depend on <span class="math inline">\(\mu\)</span> or the starting frequency of <span class="math inline">\(p\)</span>.</p>
 <p>We can also plot the recursion in Equation 2.1 like so:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">t_max &lt;-<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">mu &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb36-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb36-5" data-line-number="5">pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)</a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span></a>
-<a class="sourceLine" id="cb36-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
-<a class="sourceLine" id="cb36-9" data-line-number="9">  pop_analytical<span class="op">$</span>p[i] &lt;-<span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>mu</a>
-<a class="sourceLine" id="cb36-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb36-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb36-12" data-line-number="12"><span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-14" data-line-number="14"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb36-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="dv">0</span>
+t_max &lt;-<span class="st"> </span><span class="dv">200</span>
+mu &lt;-<span class="st"> </span><span class="fl">0.1</span>
+
+pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)
+pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+  pop_analytical<span class="op">$</span>p[i] &lt;-<span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>mu
+}
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/2.9-1.png" width="672" /></p>
 <p>Again, this should resemble the figure generated by the simulations above, and confirm that <span class="math inline">\(p^* = 0.5\)</span>.</p>
 <p>For biased mutation, assume that only <span class="math inline">\(B\)</span>s are switching to <span class="math inline">\(A\)</span>, and with probability <span class="math inline">\(\mu_b\)</span> instead of <span class="math inline">\(\mu\)</span>. The first term on the right hand side becomes simply <span class="math inline">\(p\)</span>, because <span class="math inline">\(A\)</span>s do not switch. The second term remains the same, but with <span class="math inline">\(\mu_b\)</span>. Thus,</p>
 <p><span class="math display">\[p&#39; = p + (1-p)\mu_b \hspace{30 mm}(2.4)\]</span></p>
 <p>The equilibrium value <span class="math inline">\(p^*\)</span> can be found by again setting <span class="math inline">\(p&#39; = p\)</span> and solving for <span class="math inline">\(p\)</span>. Assuming <span class="math inline">\(\mu_b &gt; 0\)</span>, this gives the single equilibrium <span class="math inline">\(p^* = 1\)</span>, which again matches the simulation results.</p>
 <p>We can plot the above recursion like so:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">t_max &lt;-<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">mu_b &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)</a>
-<a class="sourceLine" id="cb37-6" data-line-number="6">pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span></a>
-<a class="sourceLine" id="cb37-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
-<a class="sourceLine" id="cb37-9" data-line-number="9">  pop_analytical<span class="op">$</span>p[i] &lt;-<span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>mu_b</a>
-<a class="sourceLine" id="cb37-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb37-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb37-12" data-line-number="12"><span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-14" data-line-number="14"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-15" data-line-number="15"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="dv">0</span>
+t_max &lt;-<span class="st"> </span><span class="dv">200</span>
+mu_b &lt;-<span class="st"> </span><span class="fl">0.1</span>
+
+pop_analytical &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max), <span class="dt">generation =</span> <span class="dv">1</span><span class="op">:</span>t_max)
+pop_analytical<span class="op">$</span>p[<span class="dv">1</span>] &lt;-<span class="st"> </span>p_<span class="dv">0</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+  pop_analytical<span class="op">$</span>p[i] &lt;-<span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pop_analytical<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>mu_b
+}
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> pop_analytical, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (proportion of individuals with trait A)&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/2.10-1.png" width="672" /></p>
 <p>Hopefully, this looks identical to the final simulation plot with the same value of <span class="math inline">\(\mu_b\)</span>.</p>
 <p>Furthermore, we can specify an equation for the change in <span class="math inline">\(p\)</span> from one generation to the next, or <span class="math inline">\(\Delta p\)</span>. We do this by subtracting <span class="math inline">\(p\)</span> from both sides of Equation 2.4, giving:</p>
@@ -392,13 +364,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -439,11 +409,10 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
