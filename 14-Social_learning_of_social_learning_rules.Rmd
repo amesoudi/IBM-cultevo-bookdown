@@ -1,0 +1,26 @@
+
+# Social learning of social learning rules
+
+TO DO
+
+```{r 14.1}
+library(tidyverse)
+set.seed(111)
+
+```
+
+## Summary of the model
+
+TO DO
+
+***
+
+## Analytical appendix
+
+TO DO
+
+***
+
+## Further readings
+
+TO DO

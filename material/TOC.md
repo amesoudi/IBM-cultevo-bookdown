@@ -4,34 +4,33 @@
 
 ### Basics
 
-* Unbiased transmission
-* Biased/unbiased mutation
-* Biased transmission (direct/content bias)
-* Biased transmission (indirect bias)
-* Biased transmission (conformity and anti-conformity)
-* Biased transmission (model bias)
-* Vertical/horizontal/oblique transmission
-* Model of the above with multiple traits (here we will need a bit for performance/matrices, etc.)
+1. Unbiased transmission
+2. Biased/unbiased mutation
+3. Biased transmission (direct/content bias)
+4. Biased transmission (indirect: frequency)
+5. Biased transmission (indirect: demonstrator)
+6. Vertical/horizontal/oblique transmission
+7. Model of the above with multiple traits (here we will need a bit for performance/matrices, etc.)
 
 
 ### Advanced topics
 
 #### The evolution of cultural evolution
 
-* Rogers' model
-* 'Solutions' to Rogers' model
+8. Rogers' model
+9. 'Solutions' to Rogers' model
 
 #### Culture and populations
 
-* Group-structured populations and migration
-* Social network structure
-* Demography and cultural evolution 
+10. Group-structured populations and migration
+11. Social network structure
+12. Demography and cultural evolution 
 
 #### Cultural inheritance
 
-* Selection and transformation
-*	Social learning of social learning
-*	Trait inter-dependence
+13. Selection and transformation
+14.	Social learning of social learning rules
+15.	Trait inter-dependence
 
 ***
 
