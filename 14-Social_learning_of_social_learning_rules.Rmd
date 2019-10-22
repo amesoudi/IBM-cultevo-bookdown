@@ -1,13 +1,76 @@
 
 # Social learning of social learning rules
 
-TO DO
+In the models we explored so far, individuals decide whether to copy or not according to various rules, often called "transmission biases" in cultural evolution jargon. They may have a tendency to copy common traits, or to copy a subset of the population, or to prefer certain cultural traits with respect to others by virtue of their intrinsic characteristics, and so on. 
 
-```{r 14.1}
+A characteristic of all these models is that these rules were considered stable, or changing (perhaps because of genetic evolution) very solwly in comparision to the timescale considered in the model, so that we considered them as foxed. However, cultural evolution can also influence its own rules, that is, we can learn from others when, what, or from whom to learn from. This is far from being a rare instance: parents, at least in modern western societies, invest much effort in transmitting to children that learning from schoolteachers is important, or teenagers group discourage learning from other groups, or from adults in general. Educational system in countries such as Korea or Jopan are thought to encourage pupils to learn and trust teachers almost unconditionally, whereas in countries like UK and USA, the emphasis is on individual creativity and critical thinking.
+
+## Openness and conservatism 
+
+How can we approach the social learning of social learning rules with simple models? To start with, we can imagine that individuals learn from others whether to copy others or not. We can imagine the simplest possible dynamic, where a single trait, *P*, both regualte the probability to copy from others and is the trait that is actually copied. When an individual has *P=1* always copies others (we will call it a completely "open" individual), and when it has $P=0$ he never copies others (we will call it a completely "conservative" individual). All intermediate values of *P* are possible. [NOTE: *P* IS A CONTINUOS TRAITS. WE WILL PROBABLY HAVE INTRODUCED THEM BEFORE, OTHERWISE WE NEED TO SAY SOMETHING]     
+
+```{r 14.1, message=FALSE}
 library(tidyverse)
 set.seed(111)
-
+N <- 1000
+population <- tibble(P = runif(N))
 ```
+
+After initalising the population with a random uniform sample of values of *P*, we can write the function to run the simulations.
+
+```{r 14.2}
+openness_conservatism <- function(N, t_max, r_max) {
+  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+
+  for (r in 1:r_max) {
+    population <- tibble(P = runif(N))
+    # create first generation
+
+    output[output$generation == 1 & output$run == r, ]$p <- sum(population$P) / N # add first generation's p for run r
+
+    for (t in 2:t_max) {
+      previous_population <- population # copy individuals to previous_population tibble
+
+      demonstrators <- tibble(P = sample(previous_population$P, N, replace = TRUE)) # choose demonstrators at random
+      
+      copy <- previous_population$P > runif(N) # choose individuals that copy, according to their P
+      
+      population[copy, ]$P <- demonstrators[copy, ]$P # copy
+
+      output[output$generation == t & output$run == r, ]$p <- sum(population$P) / N # get p and put it into output slot for this generation t and run r
+    }
+  }
+  output # export data from function
+}
+```
+
+We can now run the simulation, and plot it with a slightly modified function `plot_multiple_runs()` (we just need to change the label for y-axis).
+
+```{r 14.3}
+plot_multiple_runs <- function(data_model) {
+  ggplot(data = data_model, aes(y = p, x = generation)) +
+    geom_line(aes(colour = run)) +
+    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    labs(y = "p (average value of P)")
+}
+```
+
+```{r 14.4}
+data_model <- openness_conservatism(N = 1000, t_max = 50, r_max = 10)
+plot_multiple_runs(data_model)
+```
+
+The average value of *P* in the population quickly converges towards 0 (in fact, towards the lower inital value, as there are neither mutations or innovations) in all runs. At this point of the book, you should be able to introduce mutation and innovation, as well as intialising the population with different values of *P*. What would happen, for example, if individuals start with values of *P* clustering around 1, that is, they are all initally very open? Another possible modification is that, when two individuals are paired, the individual with the higher *P*, that is the most open of the two, copy the other one. 
+
+At the risk of ruining the surprise, the main result of populations converging towards maximum conservatism is robust to many modifications (but you should try your own, this is what models are about). The result seems at first sight counterintuitive: the outcome of social tranmission is to eliminate social transmission! A way to understand this result is that, conservative individuals, exactly because they are conservative, change less than open individuals and, in general, transitions from open to conservative happen more frequently than transitions from conservative to open. Imagine a room where people are all copying the t-shirt colors of each other, but one stubborn individual, with a red t-shirt, never changes. At some point, slowly but surely, all individuals will wear red t-shirts.    
+
+## Maintaining open populations
+
+The result above highlights a possibly intersting aspect of what could happen when social learning rules are themselves subject to social learning, but it does not represent, of course, what happens in reality. Some models, such as the Rogers' model we explored in [chapter 8][Rogers' model], are useful exactly because they force us to think how reality differs from the modeled situation. Individuals, in real life, remain open because learning from others is, on average, effective, and increase their fitness. 
+
+However, 
 
 ## Summary of the model
 

@@ -33,6 +33,12 @@
 15.	Trait inter-dependence
 
 ***
+POSSIBLE OTHER MODELS TO ADD:
+
+* Axelrod's dissmeination of culture?
+
+***
+
 
 
 (early AM plan)
