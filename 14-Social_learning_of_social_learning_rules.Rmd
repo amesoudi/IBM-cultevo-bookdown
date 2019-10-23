@@ -65,9 +65,9 @@ At the risk of ruining the surprise, the main result of populations converging t
 
 ## Maintaining open populations
 
-The result above highlights a possibly interesting aspect of what could happen when social learning rules are themselves subject to social learning, but it does not represent, of course, what happens in reality. Some models, such as the Rogers' model we explored in [chapter 8][Rogers' model], are useful exactly because they force us to think how reality differs from the modeled situation. Individuals, in real life, remain open because learning from others is, on average, effective, and increase their fitness. 
+The result above highlights a possibly interesting aspect of what could happen when social learning rules are themselves subject to social learning, but it does not represent, of course, what happens in reality. Some models, such as the Rogers' model we explored in [chapter 8][Rogers' model], are useful exactly because they force us to think how reality differs from the modeled situation. Individuals, in real life, remain open because learning from others is, on average, effective, and increases their fitness. 
 
-However, 
+In addition, even without considering the possible fitness advantages of copying from others, there may be other reasons why individuals remain open to cultural influences. We can add a bit of complexity to the previous model and see what happens. For example, instead of having a single *P* value, individuals can be "open" or "conservative" depending on the specific cultural trait they observe. One can be open to try exotic recipes, while another may like only its local cuisine; one want to know everything about combat sports, while another prefers watching them in TV. We can say that, instead of a single *P*, we have many preferences associated to cultural traits and, as before, they can be transmitted from one individual to another. Second, we decide to copy other individuals depending on our preferences for the traits they show us. Finally, individuals are born [AS BEFORE, IF BIRTH/DEATH PROCESSES ARE NOT INTRODUCED BEFORE, WE NEED TO SAY SOMETHING HERE] without cultural traits, and they acquire them during the course of their life, by copying them from others, or by introducing them through innovation. The new function `openness_conservatims_2()` does all the above.   
 
 ```{r 14.5}
 openness_conservatism_2 <- function(N, M, mu, p_death, t_max, r_max){
@@ -108,7 +108,34 @@ openness_conservatism_2 <- function(N, M, mu, p_death, t_max, r_max){
 }
 ```
 
+The population is now described by two matrices, `population_preferences` and `population_traits`, that are initliased with random number between 0 and 1 and with all 0s, rispectively, meaning that at the beginning there are no traits in the population. The same happens for newborns. A parameter of the simulation, *M*, gives the maximum possible number of traits. At each time step, a proportion $\mu$ of innovators introduce a trait at random. 
+
+The main novelties of the code are in the copying procedure. After selecting random demonstrators and, for each of them, a random trait-slot, we record in the variable `copy` the individuals that will copy the demonstrator. For this to happen, the demonstrator needs to actually posses the trait randomly selected `previous_population_traits[cbind(demonstrators,demonstrators_traits)]==1` and the preference of the observer for that trait should be sufficienlty high `previous_population_preferences[cbind(1:N, demonstrators_traits)] > runif(N)`. If this two conditions are satisifed, the observer copies both the trait and the preference of the demonstrator. 
+
+We can start with a situation similar to the previous model, with ony a single trait ($M=1$). We set a relatively high innovation rate ($\mu=0.1$) so that the initial population is quickly populate by cultural traits, and $p_\text{death}=0.01$, meaning that, with a population of 100 individuals, every time step there will be on average one newborn. (As usual, you are invited to explore the effect of these parameters.) 
+
 ```{r 14.6}
+data_model <- openness_conservatism_2(N = 1000, M = 1, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
+plot_multiple_runs_p(data_model)
+```
+
+The plot is fairly similar to what we saw before. The average openness of the population converges towards lower values in few generations, in all runs. The descent is less steep since at the beginning of the simulations individuals need to acquire cultural traits to kickstart social transmission. We can now with an higher number of possible traits, for example $M=10$.  
+
+```{r 14.7}
+data_model <- openness_conservatism_2(N = 1000, M = 10, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
+plot_multiple_runs_p(data_model)
+```
+
+Now the covergence seems slower. We can try with longer simulations, fixing $t_\text{max}=1000$.
+
+```{r 14.8}
+data_model <- openness_conservatism_2(N = 1000, M = 10, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
+plot_multiple_runs_p(data_model)
+```
+
+Even after $1000$ generations, population openness did not go to 0, but it stabilises on a value of around $0.12$. To understand what happens it is interesting to plot the other value we are recording in the output of the simulation, that is the average number of traits that individuals possess. The function below is equivalent to the usual `plot_multiple_runs()`, but with a different y-axis label, and it takes $M$ (the maximum number of traits) as a parameter, so that we can set the y-axis to span from 0 to $M$, to have a better visual estimate of the proportion of traits present with respect to the maximum possible.  
+
+```{r 14.9}
 plot_multiple_runs_m <- function(data_model, M) {
   ggplot(data = data_model, aes(y = m, x = generation)) +
     geom_line(aes(colour = run)) +
@@ -119,47 +146,37 @@ plot_multiple_runs_m <- function(data_model, M) {
 }
 ```
 
-```{r 14.7}
-data_model <- openness_conservatism_2(N = 100, M = 1, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
-plot_multiple_runs_p(data_model)
-plot_multiple_runs_m(data_model, M = 1)
-```
-
-```{r 14.8}
-data_model <- openness_conservatism_2(N = 100, M = 10, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
-plot_multiple_runs_p(data_model)
-plot_multiple_runs_m(data_model, M = 10)
-```
-
-```{r 14.9}
-data_model <- openness_conservatism_2(N = 100, M = 10, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
-plot_multiple_runs_p(data_model)
-plot_multiple_runs_m(data_model, M = 10)
-```
-
 ```{r 14.10}
-data_model <- openness_conservatism_2(N = 100, M = 50, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
+plot_multiple_runs_m(data_model, M = 10)
+```
+
+On average, individuals do not have all 10 possible traits. Remember that individuals are replaced with a birth/death process, and they are born with no cultural traits so that they need time to acquire them. Let's try now with a bigger possible cultural repertoire, say $M=50$, and plot the aveage openness as well as the average number of traits.
+
+```{r 14.11}
+data_model <- openness_conservatism_2(N = 1000, M = 50, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
 plot_multiple_runs_p(data_model)
 plot_multiple_runs_m(data_model, M = 50)
 ```
 
-Visualise the full relationship:
+This time the average openness stabilises to an even higher value (around $0.4$), and the number of cultural traits is below 20, lower than half of all possible traits. 
+
+We can explcitly visualise the relationship between $M$ and population openness after $1000$ generations for few representative values of $M$. We consider only a single run for each condition as, from the previous results, we know that different runs give very similar results.
   
-```{r 14.11}
+```{r 14.12}
 test_openness <- tibble(M = c(1,5,10,20,50,100), p = rep(NA, 6))
 for(condition in test_openness$M){
   data_model <- openness_conservatism_2(N = 100, M = condition, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 1)
   test_openness[test_openness$M == condition, ]$p <- data_model[data_model$generation == 1000, ]$p
 }
 ggplot(data = test_openness, aes(x = M, y = p)) +
-  geom_line() +
+  geom_line(linetype = "dashed") +
   geom_point() +
   theme_bw() +
   labs(x = "Maximum possible number of traits", y = "p (final average value of p)")
 ```
 
 
-You can do the same for $p_\text{death}$
+you can find if it is true the explanation. - You can do the same for $p_\text{death}$, 
   
 ## Summary of the model
   
