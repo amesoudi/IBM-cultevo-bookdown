@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-10-22" />
+<meta name="date" content="2019-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,10 +189,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="social-learning-of-social-learning-rules" class="section level1">
 <h1><span class="header-section-number">7</span> Social learning of social learning rules</h1>
 <p>In the models we explored so far, individuals decide whether to copy or not according to various rules, often called “transmission biases” in cultural evolution jargon. They may have a tendency to copy common traits, or to copy a subset of the population, or to prefer certain cultural traits with respect to others by virtue of their intrinsic characteristics, and so on.</p>
-<p>A characteristic of all these models is that these rules were considered stable, or changing (perhaps because of genetic evolution) very slowly in comparison to the timescale considered in the model, so that we considered them as foxed. However, cultural evolution can also influence its own rules, that is, we can learn from others when, what, or from whom to learn from. This is far from being a rare instance: parents, at least in modern western societies, invest much effort in transmitting to children that learning from schoolteachers is important, or teenagers group discourage learning from other groups, or from adults in general. Educational system in countries such as Korea or Japan are thought to encourage pupils to learn and trust teachers almost unconditionally, whereas in countries like UK and USA, the emphasis is on individual creativity and critical thinking.</p>
+<p>A characteristic of all these models is that these rules were considered stable, or changing very slowly (perhaps because of genetic evolution) in comparison to the timescale considered in the model, so that we considered them as fixed. However, cultural evolution can also influence its own rules, that is, we can learn from others when, what, or from whom to learn. This is far from being a rare instance: parents, at least in modern western societies, invest much effort to transmit to children that learning from schoolteachers is important, or teenagers groups may discourage learning from other groups, or from adults in general. Educational systems in countries such as Korea or Japan are thought to encourage pupils to learn and trust teachers almost unconditionally, whereas, in countries like UK and USA, the emphasis is on individual creativity and critical thinking.</p>
 <div id="openness-and-conservatism" class="section level2">
 <h2><span class="header-section-number">7.1</span> Openness and conservatism</h2>
-<p>How can we approach the social learning of social learning rules with simple models? To start with, we can imagine that individuals learn from others whether to copy others or not. We can imagine the simplest possible dynamic, where a single trait, <em>P</em>, both regulate the probability to copy from others and is the trait that is actually copied. When an individual has <em>P=1</em> always copies others (we will call it a completely “open” individual), and when it has <span class="math inline">\(P=0\)</span> he never copies others (we will call it a completely “conservative” individual). All intermediate values of <em>P</em> are possible. [NOTE: <em>P</em> IS A CONTINUOS TRAITS. WE WILL PROBABLY HAVE INTRODUCED THEM BEFORE, OTHERWISE WE NEED TO SAY SOMETHING]</p>
+<p>How can we approach the social learning of social learning rules with simple models? To start with, we can imagine that individuals learn from others whether to copy others or not. We can imagine the simplest possible dynamic, where a single trait, <em>P</em>, both regulate the probability to copy from others and is the trait that is actually copied. When an individual has <span class="math inline">\(P=1\)</span> always copies others (we will call it a completely “open” individual), and when it has <span class="math inline">\(P=0\)</span> never copies others (we will call it a completely “conservative” individual). All intermediate values of <em>P</em> are possible. [NOTE: <em>P</em> IS A CONTINUOS TRAITS. WE WILL PROBABLY HAVE INTRODUCED THEM BEFORE - E.G. IN HENRICH DEMOGRAPHY MODEL? -, OTHERWISE WE NEED TO SAY SOMETHING]</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">set.seed</span>(<span class="dv">111</span>)
 N &lt;-<span class="st"> </span><span class="dv">1000</span>
@@ -200,29 +200,24 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <p>After initialising the population with a random uniform sample of values of <em>P</em>, we can write the function to run the simulations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">openness_conservatism &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {
   output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
-
   <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
     population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
     <span class="co"># create first generation</span>
-
     output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-
     <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
       previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-
       demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)) <span class="co"># choose demonstrators at random</span>
       
       copy &lt;-<span class="st"> </span>previous_population<span class="op">$</span>P <span class="op">&gt;</span><span class="st"> </span><span class="kw">runif</span>(N) <span class="co"># choose individuals that copy, according to their P</span>
       
       population[copy, ]<span class="op">$</span>P &lt;-<span class="st"> </span>demonstrators[copy, ]<span class="op">$</span>P <span class="co"># copy</span>
-
       output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
     }
   }
   output <span class="co"># export data from function</span>
 }</code></pre></div>
-<p>EXPLAIN THE CODE HERE</p>
-<p>We can now run the simulation, and plot it with a slightly modified function <code>plot_multiple_runs()</code> (we just need to change the label for y-axis).</p>
+<p>Everything should be familiar in this function. The only new instruction is in the line <code>copy &lt;- previous_population$P &gt; runif(N)</code>. This simply compares each individual’s <em>P</em> value with a random number extracted between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. If the <em>P</em> value is higher, the individual will copy, otherwise it will not.</p>
+<p>We can now run the simulation, and plot it with a slightly modified function <code>plot_multiple_runs_p()</code> (we just need to change the label for y-axis).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_multiple_runs_p &lt;-<span class="st"> </span><span class="cf">function</span>(data_model) {
   <span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> run)) <span class="op">+</span>
@@ -234,8 +229,8 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">openness_conservatism</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
 <span class="kw">plot_multiple_runs_p</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/14.4-1.png" width="672" /></p>
-<p>The average value of <em>P</em> in the population quickly converges towards 0 (in fact, towards the lower initial value, as there are neither mutations or innovations) in all runs. At this point of the book, you should be able to introduce mutation and innovation, as well as initialising the population with different values of <em>P</em>. What would happen, for example, if individuals start with values of <em>P</em> clustering around 1, that is, they are all initially very open? Another possible modification is that, when two individuals are paired, the individual with the higher <em>P</em>, that is the most open of the two, copy the other one.</p>
-<p>At the risk of ruining the surprise, the main result of populations converging towards maximum conservatism is robust to many modifications (but you should try your own, this is what models are about). The result seems at first sight counterintuitive: the outcome of social transmission is to eliminate social transmission! A way to understand this result is that, conservative individuals, exactly because they are conservative, change less than open individuals and, in general, transitions from open to conservative happen more frequently than transitions from conservative to open. Imagine a room where people are all copying the t-shirt colors of each other, but one stubborn individual, with a red t-shirt, never changes. At some point, slowly but surely, all individuals will wear red t-shirts.</p>
+<p>The average value of <em>P</em> in the population quickly converges towards 0 (in fact, towards the lower initial value, as there are neither mutations nor innovations) in all runs. At this point of the book, you should be able to introduce mutation and innovation, as well as initialising the population with different values of <em>P</em>. What would happen, for example, if individuals start with values of <em>P</em> clustering around 1, that is, they are all initially very open? Another possible modification is that, instead of comparing the copier’s <em>P</em> value with a random number, when two individuals are paired, the individual with the higher <em>P</em> (that is, the most open of the two) copies the other one.</p>
+<p>At the risk of ruining the surprise, the main result of populations converging towards maximum conservatism is robust to many modifications (but you should try your own, this is what models are about). The result seems at first sight counterintuitive: the outcome of social transmission is to eliminate social transmission! A way to understand this result is that conservative individuals, exactly because they are conservative, change less than open individuals and, in general, transitions from open to conservative happen more frequently than transitions from conservative to open. Imagine a room where people are all copying the t-shirt colors of each other, but one stubborn individual, with a red t-shirt, never changes. At some point, slowly but surely, all individuals will wear red t-shirts.</p>
 </div>
 <div id="maintaining-open-populations" class="section level2">
 <h2><span class="header-section-number">7.2</span> Maintaining open populations</h2>
@@ -253,24 +248,24 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
       innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
       innovations &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>M, <span class="kw">sum</span>(innovators), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
       population_traits[<span class="kw">cbind</span>(<span class="kw">which</span>(innovators <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>), innovations)] &lt;-<span class="st"> </span><span class="dv">1</span>
-    
+      
       <span class="co"># copying</span>
       previous_population_preferences &lt;-<span class="st"> </span>population_preferences
       previous_population_traits &lt;-<span class="st"> </span>population_traits
-    
+      
       demonstrators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
       demonstrators_traits &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>M, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-    
+      
       copy &lt;-<span class="st"> </span>previous_population_traits[<span class="kw">cbind</span>(demonstrators,demonstrators_traits)]<span class="op">==</span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>previous_population_preferences[<span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span>N, demonstrators_traits)] <span class="op">&gt;</span><span class="st"> </span><span class="kw">runif</span>(N)
-    
+      
       population_traits[<span class="kw">cbind</span>(<span class="kw">which</span>(copy), demonstrators_traits[copy])] &lt;-<span class="st"> </span><span class="dv">1</span>
       population_preferences[<span class="kw">cbind</span>(<span class="kw">which</span>(copy), demonstrators_traits[copy])] &lt;-<span class="st"> </span>previous_population_preferences[<span class="kw">cbind</span>(demonstrators[copy], demonstrators_traits[copy])] 
-    
+      
       <span class="co"># birth/death</span>
       replace &lt;-<span class="st"> </span>innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(p_death, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_death), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
       population_traits[replace, ] &lt;-<span class="st"> </span><span class="dv">0</span>
       population_preferences[replace, ] &lt;-<span class="st"> </span><span class="kw">runif</span>(M <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(replace))
-    
+      
       output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">mean</span>(population_preferences)
       output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>m &lt;-<span class="st"> </span><span class="kw">sum</span>(population_traits) <span class="op">/</span><span class="st"> </span>N    
     }
@@ -311,7 +306,6 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
   data_model &lt;-<span class="st"> </span><span class="kw">openness_conservatism_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> condition, <span class="dt">mu =</span> <span class="fl">0.1</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">r_max =</span> <span class="dv">1</span>)
   test_openness[test_openness<span class="op">$</span>M <span class="op">==</span><span class="st"> </span>condition, ]<span class="op">$</span>p &lt;-<span class="st"> </span>data_model[data_model<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1000</span>, ]<span class="op">$</span>p
 }
-
 <span class="kw">ggplot</span>(<span class="dt">data =</span> test_openness, <span class="kw">aes</span>(<span class="dt">x =</span> M, <span class="dt">y =</span> p)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
