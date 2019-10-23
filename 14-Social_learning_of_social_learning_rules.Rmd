@@ -165,7 +165,7 @@ We can explcitly visualise the relationship between $M$ and population openness 
 ```{r 14.12}
 test_openness <- tibble(M = c(1,5,10,20,50,100), p = rep(NA, 6))
 for(condition in test_openness$M){
-  data_model <- openness_conservatism_2(N = 100, M = condition, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 1)
+  data_model <- openness_conservatism_2(N = 1000, M = condition, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 1)
   test_openness[test_openness$M == condition, ]$p <- data_model[data_model$generation == 1000, ]$p
 }
 ggplot(data = test_openness, aes(x = M, y = p)) +
@@ -175,12 +175,13 @@ ggplot(data = test_openness, aes(x = M, y = p)) +
   labs(x = "Maximum possible number of traits", y = "p (final average value of p)")
 ```
 
+The more cultural traits that are possible to acquire, the more individuals remain open. Why is that the case? As we saw before, a conservative individual will be able to spread its traits because they are more stable (remember the red t-shirt example). On the other hand, to be copied, an individual needs to showcase its traits. As the traits are chosen at random, it is better for an individual - from the point of view of its cultural success - to have many traits. These two requirments are in conflict: to acquire many traits an individual needs to remain relatively open. 
 
-you can find if it is true the explanation. - You can do the same for $p_\text{death}$, 
+For this reason, when the cultural repertorie is big, individuals will remain open longer. You can easily check by yourself that decreasing $p_\text{death}$ has a similar effect of decreasing $M$. Individual living longer will generate more conservative populations. With a bit of work to the code, the same effect can be produced if individual can learn faster. You can add a parameter to the model that tells how many traits an observer copies from the demonstrator at each interaction (in our case, this parameter was fixed to 1). The more effective is cultural transmission, the more conservative the populations. All depends on whether individuals have time to to optimise *both* openness and conservatism: big repertories, short lifespans, and uneffective cultural transmission maintains relatively open populations. 
   
 ## Summary of the model
   
-TO DO
+Regardless of the particular results
 
 ***
 
