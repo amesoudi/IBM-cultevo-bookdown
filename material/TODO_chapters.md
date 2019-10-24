@@ -19,7 +19,7 @@
   * ~~example of further readings section (AA)~~
 
 * 06-Horizontal, vertical, and oblique transmission:
-  * EMPTY
+  * adding reference to oblique transmission (AM?)
 
 * 07-Multiple traits models:
   * ~~everything - just moved from the previous repo (AA)~~
