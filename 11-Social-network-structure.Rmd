@@ -1,0 +1,35 @@
+
+# Social network structure
+
+<!-- Explaining fundamentals of networks -->
+In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter \@ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals. 
+
+A common way to visualise structure on the individual level are networks, where individuals are represented by nodes and their interactions or relationhsips are depicted by edges (or links). Depending on the number of edges (connections) an individaul might be able to interact with more or fewer or specific individuals. In fact, the use of networks has greatly improved our understanding of the spread of dieseases and has rekindled the interest in game theory (e.g. netwokred Prisoners Dilemma).
+
+In our case, edges will allow or prohibit the information transmission from one individual to another. We would expect that different networks (e.g. many edges versus few edges) will affect information transmission differently. 
+
+In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations. 
+
+<!-- Generate simple networks from text -->
+
+```{r 11.1}
+library(igraph)
+net <- graph_from_literal(A--B, C--D--E, F--G--H, G--I, F--H)
+plot(net)
+```
+
+<!-- Plot networks, with different styling explained -->
+
+<!-- Generate simple networks from matrix -->
+
+<!-- Generate random networks, scale-free, small world networks -->
+
+<!-- How to characterise networks - Degree, path length, transitivity, centrality measures -->
+
+<!-- How to simulate transmission of information along the edges of a network -->
+
+<!-- Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
+
+<!-- Finally, let network change dynamically change over time -->
+
+<!-- Further Reading -->

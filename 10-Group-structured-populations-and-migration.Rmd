@@ -1,0 +1,13 @@
+
+# Group structured populations and migration {#group-structure}
+
+<!-- Explaining fundamentals of networks -->
+In the previous chapters, we have assumed that all individuals in our simulations are equally likely to interact with each other. In many situations, this is a justified assumption, for example, when looking at a small population or a limited geographic area. Sometimes, however, populations are subdivided into groups were individuals are more likely to interact with others within and less with those outside their group. 
+
+In this chapter, we will simulate subdivided populations and test how this affects the spread of a new trait across groups and the population. We will also simulate the diffusion of traits in a population based on migration events between groups. 
+
+
+
+```{r 10.1}
+
+```
