@@ -1,0 +1,21 @@
+
+# Traits inter-dependence
+
+```{r 15.1, message=FALSE}
+library(tidyverse)
+set.seed(111)
+```
+
+## Summary of the model
+  
+
+***
+
+## Analytical appendix
+
+***
+  
+## Further readings
+  
+
+# References

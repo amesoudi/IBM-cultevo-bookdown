@@ -193,6 +193,3 @@ Todo, or omit. Equations, for the first model (single trait $P$) are in @ghirlan
 ## Further readings
   
 The models above are based on the models described in @ghirlanda_cultural_2006 and @acerbi_cultural_2009. @acerbi_cultural_2009 investigates possible variants of the main model of this chapter, such as continuous traits, innovations possible for preferences too, and various degrees of effectiveness of cultural transmission. It also explores how the basic dynamics affects individual characteristics (young individuals are more open than older individuals, older individuals are more effective cultural models than younger individuals, and so on). @acerbi_regulatory_2014 summarises these models, and provides a more general perspective on the "social learning of social learning rules" topics, including other simulated scenarios. @mesoudi_evolution_2016 is a review of the individual and cultural variation in social learning, pointing to various references, including empirical evidences of cultural variation in social learning in humans.   
-
-
-# References
