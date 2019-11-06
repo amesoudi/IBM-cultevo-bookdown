@@ -95,7 +95,7 @@ openness_conservatism_2 <- function(N, M, mu, p_death, t_max, r_max){
       population_preferences[cbind(which(copy), demonstrators_traits[copy])] <- previous_population_preferences[cbind(demonstrators[copy], demonstrators_traits[copy])] 
       
       # birth/death
-      replace <- innovators <- sample(c(TRUE, FALSE), N, prob = c(p_death, 1 - p_death), replace = TRUE)
+      replace <- sample(c(TRUE, FALSE), N, prob = c(p_death, 1 - p_death), replace = TRUE)
       population_traits[replace, ] <- 0
       population_preferences[replace, ] <- runif(M * sum(replace))
       
@@ -109,7 +109,7 @@ openness_conservatism_2 <- function(N, M, mu, p_death, t_max, r_max){
 
 The population is now described by two matrices, `population_preferences` and `population_traits`, that are initialiased, respectively, with random number between 0 and 1 and with all 0s, respectively, meaning that at the beginning there are no traits in the population. The same happens for newborns. A parameter of the simulation, *M*, gives the maximum possible number of traits. At each time step, a proportion $\mu$ of innovators introduce a trait at random. 
 
-The main novelties of the code are in the copying procedure. After selecting random demonstrators and, for each of them, a random trait-slot, we record in the variable `copy` whether or not the individuals that will copy the demonstrator. For this to happen, the demonstrator needs to actually posses the trait randomly selected (`previous_population_traits[cbind(demonstrators,demonstrators_traits)]==1`) and the preference of the observer for that trait should be sufficiently high (`previous_population_preferences[cbind(1:N, demonstrators_traits)] > runif(N)`). If these two conditions are satisfied, the observer copies both the trait and the preference of the demonstrator. 
+The main novelties of the code are in the copying procedure. After selecting random demonstrators and, for each of them, a random trait-slot, we record in the variable `copy` whether or not the individuals that will copy the demonstrator. For this to happen, the demonstrator needs to actually possess the trait randomly selected (`previous_population_traits[cbind(demonstrators,demonstrators_traits)]==1`) and the preference of the observer for that trait should be sufficiently high (`previous_population_preferences[cbind(1:N, demonstrators_traits)] > runif(N)`). If these two conditions are satisfied, the observer copies both the trait and the preference of the demonstrator. 
 
 We can start with a situation similar to the previous model, with only a single trait ($M=1$). We set a relatively high innovation rate ($\mu=0.1$) so that the initial population is quickly populated by cultural traits, and $p_\text{death}=0.01$, meaning that, with a population of 100 individuals, every time step there will be on average one newborn. (As usual, you are invited to explore the effect of these parameters.) 
 

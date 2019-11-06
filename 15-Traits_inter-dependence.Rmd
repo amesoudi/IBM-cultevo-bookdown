@@ -3,22 +3,103 @@
 
 Relationships between traits are important. Examples.
 
-Imagine a simple scenario when there are only two possible relationships between traits (compatible or incompatible), they are simmetric (if A is compatible with B, also B will be compatible with A):
+Imagine a simple scenario when there are only two possible relationships between traits (compatible or incompatible), they are simmetric (if A is compatible with B, also B will be compatible with A). Each trait is compatible with itself.
 
 Traits    |  A |  B |  C |  D 
 ----------|---:|---:|---:|---:
- **A**    |    | +1 | -1 | -1 
- **B**    | +1 |    | -1 | -1 
- **C**    | -1 | -1 |    | +1 
- **D**    | -1 | -1 | +1 |    
+ **A**    | +1 | +1 | -1 | -1 
+ **B**    | +1 | +1 | -1 | -1 
+ **C**    | -1 | -1 | +1 | +1 
+ **D**    | -1 | -1 | +1 | +1    
 
 
+Have a look at the world
 
 ```{r 15.1, message=FALSE}
 library(tidyverse)
 set.seed(111)
-
+my_world <- matrix(c(1,1,-1,-1,1,1,-1,-1,-1,-1,1,1,-1,-1,1,1), nrow = 4, ncol = 4)
+my_world
 ```
+
+Function for the simulation
+
+```{r 15.2}
+traits_inter_dependence <- function(N, t_max, k, mu, p_death, world){
+  output <- tibble(trait = as.factor(rep(1:4, each = t_max)), generation = rep(1:t_max, 4), p = rep(NA, t_max * 4))      
+  population <- matrix(0, ncol = 4, nrow = N)
+  output[output$generation == 1 ,]$p <- colSums(population) / N
+  for(t in 2:t_max){
+    # innovations
+    innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) 
+    innovations <- sample(1:4, sum(innovators), replace = TRUE)
+    population[cbind(which(innovators == TRUE), innovations)] <- 1
+    
+    # copying
+    demonstrators <- sample(1:N, replace = TRUE)
+    demonstrators_traits <- sample(1:4, N, replace = TRUE)
+
+    for(i in 1:N){
+      if(population[demonstrators[i], demonstrators_traits[i]]){
+        compatibility_score <- sum(world[demonstrators_traits[i], which(population[i,]>0)])
+        copy <- (1 / (1 + exp(-k*compatibility_score))) > runif(1)
+        if(copy){
+          population[i,demonstrators_traits[i]] <- 1
+        }
+      }
+    }
+    
+    # birth/death
+    replace <- sample(c(TRUE, FALSE), N, prob = c(p_death, 1 - p_death), replace = TRUE)
+    population[replace, ] <- 0
+    
+    output[output$generation == t ,]$p <- colSums(population) / N
+  }
+  output
+}
+```
+
+```{r 15.3, echo=FALSE }
+plot_multiple_traits <- function(data_model) {
+  ggplot(data = data_model, aes(y = p, x = generation)) +
+    geom_line(aes(colour = trait)) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    theme(legend.position = "none")
+}
+```
+
+```{r 15.4}
+data_model <- traits_inter_dependence(N = 100, t_max = 1000, k = 10, mu = 0.0005, p_death = 0.01, world = my_world)
+plot_multiple_traits(data_model)
+```
+
+check that are the compatible traits
+
+```{r 15.5}
+data_model[data_model$generation==1000,]
+```
+
+It varies at each simulation. What happens by changing the *world*? (remember you can visualise the matrix)
+
+```{r 15.6}
+my_world <- matrix(c(1,1,1,-1, 1,1,1,-1,1,1,1,-1,-1,-1,-1,1), nrow = 4, ncol = 4)
+data_model <- traits_inter_dependence(N = 100, t_max = 1000, k = 10, mu = 0.0005, p_death = 0.01, world = my_world)
+plot_multiple_traits(data_model)
+```
+
+All compatible:
+
+```{r 15.7}
+my_world <- matrix(c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), nrow = 4, ncol = 4)
+data_model <- traits_inter_dependence(N = 100, t_max = 1000, k = 10, mu = 0.0005, p_death = 0.01, world = my_world)
+plot_multiple_traits(data_model)
+```
+
+No compatiblity equates to a random copy (remember the logistic)
+
+## Many-traits model
+
 
 ## Summary of the model
   
