@@ -283,6 +283,7 @@ my_world</code></pre></div>
   }
   output
 }</code></pre></div>
+<p>Mention k, the logistic, etc.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.4-1.png" width="672" /></p>
@@ -308,6 +309,82 @@ data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependenc
 <p>No compatiblity equates to a random copy (remember the logistic)</p>
 <div id="many-traits-model" class="section level2">
 <h2><span class="header-section-number">10.1</span> Many-traits model</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="dv">7</span>
+gamma &lt;-<span class="st"> </span><span class="fl">0.5</span>
+my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>( <span class="kw">rep</span>(<span class="dv">1</span>, M <span class="op">*</span><span class="st"> </span>M), <span class="dt">nrow =</span> M)
+compatibilities &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), <span class="kw">choose</span>(M,<span class="dv">2</span>), <span class="dt">prob =</span> <span class="kw">c</span>(gamma, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>gamma), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities
+my_world &lt;-<span class="st"> </span><span class="kw">t</span>(my_world)
+my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities
+my_world</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    1   -1   -1   -1   -1    1   -1
+## [2,]   -1    1    1    1    1    1   -1
+## [3,]   -1    1    1   -1    1   -1   -1
+## [4,]   -1    1   -1    1    1   -1    1
+## [5,]   -1    1    1    1    1   -1    1
+## [6,]    1    1   -1   -1   -1    1    1
+## [7,]   -1   -1   -1    1    1    1    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traits_inter_dependence_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(N, M, t_max, k, mu, p_death, gamma){
+  output &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> M)
+  <span class="co"># initalise the traits&#39; world:</span>
+  world &lt;-<span class="st"> </span><span class="kw">matrix</span>( <span class="kw">rep</span>(<span class="dv">1</span>, M <span class="op">*</span><span class="st"> </span>M), <span class="dt">nrow =</span> M)
+  compatibilities &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), <span class="kw">choose</span>(M,<span class="dv">2</span>), <span class="dt">prob =</span> <span class="kw">c</span>(gamma, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>gamma), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+  world[<span class="kw">upper.tri</span>(world)] &lt;-<span class="st"> </span>compatibilities
+  world &lt;-<span class="st"> </span><span class="kw">t</span>(world)
+  world[<span class="kw">upper.tri</span>(world)] &lt;-<span class="st"> </span>compatibilities
+  <span class="co"># initialise the population:</span>
+  population &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> M, <span class="dt">nrow =</span> N)
+  output[<span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="kw">colSums</span>(population) <span class="op">/</span><span class="st"> </span>N 
+  <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max){
+    <span class="co"># innovations</span>
+    innovators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(mu, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mu), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+    innovations &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>M, <span class="kw">sum</span>(innovators), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    population[<span class="kw">cbind</span>(<span class="kw">which</span>(innovators <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>), innovations)] &lt;-<span class="st"> </span><span class="dv">1</span>
+    
+    <span class="co"># copying</span>
+    demonstrators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    demonstrators_traits &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>M, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+
+    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){
+      <span class="cf">if</span>(population[demonstrators[i], demonstrators_traits[i]]){
+        compatibility_score &lt;-<span class="st"> </span><span class="kw">sum</span>(world[demonstrators_traits[i], <span class="kw">which</span>(population[i,]<span class="op">&gt;</span><span class="dv">0</span>)])
+        copy &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>k<span class="op">*</span>compatibility_score))) <span class="op">&gt;</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
+        <span class="cf">if</span>(copy){
+          population[i,demonstrators_traits[i]] &lt;-<span class="st"> </span><span class="dv">1</span>
+        }
+      }
+    }
+    
+    <span class="co"># birth/death</span>
+    replace &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), N, <span class="dt">prob =</span> <span class="kw">c</span>(p_death, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_death), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    population[replace, ] &lt;-<span class="st"> </span><span class="dv">0</span>
+    
+    output[t, ] &lt;-<span class="st"> </span><span class="kw">colSums</span>(population) <span class="op">/</span><span class="st"> </span>N
+  }
+  output
+}  </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> .<span class="dv">5</span>)
+<span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/15.11-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="dv">1</span>)
+<span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/15.12-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r_max =<span class="st"> </span><span class="dv">10</span>
+test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">gamma =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>), r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> <span class="dv">11</span>)), <span class="dt">C =</span> <span class="ot">NA</span>)
+<span class="cf">for</span>(condition <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>)){
+  <span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> condition)
+    test_inter_dependence[test_inter_dependence<span class="op">$</span>gamma <span class="op">==</span><span class="st"> </span>condition <span class="op">&amp;</span><span class="st"> </span>test_inter_dependence<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>C &lt;-<span class="st"> </span><span class="kw">sum</span>(data_model[<span class="dv">2000</span>,]<span class="op">&gt;</span>.<span class="dv">5</span>)
+  }
+}
+<span class="kw">ggplot</span>(<span class="dt">data =</span> test_inter_dependence, <span class="kw">aes</span>(<span class="dt">x =</span> gamma, <span class="dt">y =</span> C)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="dv">0</span>, <span class="dt">height =</span> <span class="fl">0.5</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Average compatibility&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;C (number of common traits)&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/15.13-1.png" width="672" /></p>
 </div>
 <div id="summary-of-the-model-8" class="section level2">
 <h2><span class="header-section-number">10.2</span> Summary of the model</h2>

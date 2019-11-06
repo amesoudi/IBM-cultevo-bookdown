@@ -3,6 +3,8 @@
 
 Relationships between traits are important. Examples.
 
+## Compatible and uncompatible traits
+
 Imagine a simple scenario when there are only two possible relationships between traits (compatible or incompatible), they are simmetric (if A is compatible with B, also B will be compatible with A). Each trait is compatible with itself.
 
 Traits    |  A |  B |  C |  D 
@@ -59,6 +61,8 @@ traits_inter_dependence <- function(N, t_max, k, mu, p_death, world){
 }
 ```
 
+Mention k, the logistic, etc.
+
 ```{r 15.3, echo=FALSE }
 plot_multiple_traits <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
@@ -100,6 +104,101 @@ No compatiblity equates to a random copy (remember the logistic)
 
 ## Many-traits model
 
+```{r 15.8}
+M <- 7
+gamma <- 0.5
+my_world <- matrix( rep(1, M * M), nrow = M)
+compatibilities <- sample(c(1, -1), choose(M,2), prob = c(gamma, 1 - gamma), replace = TRUE) 
+my_world[upper.tri(my_world)] <- compatibilities
+my_world <- t(my_world)
+my_world[upper.tri(my_world)] <- compatibilities
+my_world
+```
+
+```{r 15.9}
+traits_inter_dependence_2 <- function(N, M, t_max, k, mu, p_death, gamma){
+  output <- matrix(data = NA, nrow = t_max, ncol = M)
+  # initalise the traits' world:
+  world <- matrix( rep(1, M * M), nrow = M)
+  compatibilities <- sample(c(1, -1), choose(M,2), prob = c(gamma, 1 - gamma), replace = TRUE) 
+  world[upper.tri(world)] <- compatibilities
+  world <- t(world)
+  world[upper.tri(world)] <- compatibilities
+  # initialise the population:
+  population <- matrix(0, ncol = M, nrow = N)
+  output[1, ] <- colSums(population) / N 
+  for(t in 2:t_max){
+    # innovations
+    innovators <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE) 
+    innovations <- sample(1:M, sum(innovators), replace = TRUE)
+    population[cbind(which(innovators == TRUE), innovations)] <- 1
+    
+    # copying
+    demonstrators <- sample(1:N, replace = TRUE)
+    demonstrators_traits <- sample(1:M, N, replace = TRUE)
+
+    for(i in 1:N){
+      if(population[demonstrators[i], demonstrators_traits[i]]){
+        compatibility_score <- sum(world[demonstrators_traits[i], which(population[i,]>0)])
+        copy <- (1 / (1 + exp(-k*compatibility_score))) > runif(1)
+        if(copy){
+          population[i,demonstrators_traits[i]] <- 1
+        }
+      }
+    }
+    
+    # birth/death
+    replace <- sample(c(TRUE, FALSE), N, prob = c(p_death, 1 - p_death), replace = TRUE)
+    population[replace, ] <- 0
+    
+    output[t, ] <- colSums(population) / N
+  }
+  output
+}  
+```
+
+```{r 15.10, echo=FALSE}
+plot_multiple_traits_matrix <- function(data_model) {
+  generation <- rep(1:dim(data_model)[1], dim(data_model)[2])
+  
+  data_to_plot <- as_tibble(data_model) %>%
+    gather( key = "trait", value = "p") %>%
+    add_column(generation)
+  
+  ggplot(data = data_to_plot, aes(y = p, x = generation)) +
+    geom_line(aes(colour = trait)) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    theme(legend.position = "none")
+}
+```
+
+```{r 15.11}
+data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, mu = 0.001, p_death = 0.01, gamma = .5)
+plot_multiple_traits_matrix(data_model)
+```
+
+```{r 15.12}
+data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, mu = 0.001, p_death = 0.01, gamma = 1)
+plot_multiple_traits_matrix(data_model)
+```
+
+```{r 15.13}
+r_max = 10
+test_inter_dependence <- tibble(gamma = rep(seq(0, 1, by = .1), r_max), run = as.factor(rep(1:r_max, each = 11)), C = NA)
+for(condition in seq(0, 1, by = .1)){
+  for(r in 1:r_max) {
+    data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, mu = 0.001, p_death = 0.01, gamma = condition)
+    test_inter_dependence[test_inter_dependence$gamma == condition & test_inter_dependence$run == r, ]$C <- sum(data_model[2000,]>.5)
+  }
+}
+ggplot(data = test_inter_dependence, aes(x = gamma, y = C)) +
+  geom_jitter(width = 0, height = 0.5, alpha = 0.5) +
+  stat_summary(fun.y = mean, geom = "point", colour = "red") +
+  stat_summary(fun.y = mean, geom = "line", colour = "red") +
+  theme_bw() +
+  labs(x = "Average compatibility", y = "C (number of common traits)")
+```
 
 ## Summary of the model
   
