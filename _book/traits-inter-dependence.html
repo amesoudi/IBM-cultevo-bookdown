@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-11-06" />
+<meta name="date" content="2019-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,10 +169,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-3"><i class="fa fa-check"></i><b>9.5</b> Further readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>10</b> Traits inter-dependence</a><ul>
-<li class="chapter" data-level="10.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>10.1</b> Many-traits model</a></li>
-<li class="chapter" data-level="10.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>10.2</b> Summary of the model</a></li>
-<li class="chapter" data-level="10.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-8"><i class="fa fa-check"></i><b>10.3</b> Analytical appendix</a></li>
-<li class="chapter" data-level="10.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-4"><i class="fa fa-check"></i><b>10.4</b> Further readings</a></li>
+<li class="chapter" data-level="10.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>10.1</b> Compatible and incompatible traits</a></li>
+<li class="chapter" data-level="10.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>10.2</b> Many-traits model</a></li>
+<li class="chapter" data-level="10.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>10.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="10.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-8"><i class="fa fa-check"></i><b>10.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="10.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-4"><i class="fa fa-check"></i><b>10.5</b> Further readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
 <li class="divider"></li>
@@ -197,8 +198,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="traits-inter-dependence" class="section level1">
 <h1><span class="header-section-number">10</span> Traits inter-dependence</h1>
-<p>Relationships between traits are important. Examples.</p>
-<p>Imagine a simple scenario when there are only two possible relationships between traits (compatible or incompatible), they are simmetric (if A is compatible with B, also B will be compatible with A). Each trait is compatible with itself.</p>
+<p>In real life, the relationship a cultural trait has with other, coexisting, cultural traits, is important to determine its success. Nails will enjoy much cultural success in a world where hammers are present, and less in a world where they are not. Being against abortion in contemporary US is strongly correlated to being religious, which, in turn, is (less strongly) correlated with not supporting same-sex marriage. Of course, not all these relationships are stable in time, and they can also be themselves subject to cultural change. In this chapter, we will explore how simple relationships between traits can be modeled, and how they can influence cultural evolution.</p>
+<div id="compatible-and-incompatible-traits" class="section level2">
+<h2><span class="header-section-number">10.1</span> Compatible and incompatible traits</h2>
+<p>We can start by assuming that, when an observer meets a demonstrator, the observer evaluates the relationships of the traits of the demonstrator with its own traits, and use this information to decide whether to copy or not. For example, if the observer has the trait “being religious” and the demonstrator the trait “being pro abortion”, copying will be less likely to happen than if the demonstrator has the trait “being against abortion”.</p>
+<p>We can imagine a simple scenario when there are only two possible relationships between two traits: they are compatible, meaning that the presence of one trait will reinforce the presence of the other, or incompatible, meaning the opposite. In addition, the relationship is symmetric: if trait A favours B, also trait B favours A, and the same holds for incompatibility. Finally, we assume that each trait is compatible with itself, simply meaning that, if the observer has trait A and the demonstrator has trait A too, this will increase the probability that copy will happens.</p>
+<p>We can represent the relationships between traits, in a simple “world” with only four traits, with a symmetric matrix, as the one below, where <span class="math inline">\(+1\)</span> denotes compatibility, and <span class="math inline">\(-1\)</span> denotes incompatibility.</p>
 <table>
 <thead>
 <tr class="header">
@@ -240,7 +245,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Have a look at the world</p>
+<p>In this case, the traits A and B are compatible with themselves, but incompatible with C and D, and the same happens for C and D, that are compatible with themselves, but incompatible with A and B.</p>
+<p>We can build manually the same matrix in R, by indicating one-by-one the values we want to fill in, and the number of rows and columns the matrix needs to have. As usual, we can check that we did right asking to print the matrix, by writing its name.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">set.seed</span>(<span class="dv">111</span>)
 my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)
@@ -250,9 +256,9 @@ my_world</code></pre></div>
 ## [2,]    1    1   -1   -1
 ## [3,]   -1   -1    1    1
 ## [4,]   -1   -1    1    1</code></pre>
-<p>Function for the simulation</p>
+<p>Given this simple way of representing a “world” of compatibilities among traits, we can write our model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traits_inter_dependence &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, k, mu, p_death, world){
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> t_max)), <span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, <span class="dv">4</span>), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))      
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>), <span class="dt">each =</span> t_max), <span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, <span class="dv">4</span>), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))      
   population &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">nrow =</span> N)
   output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ,]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">colSums</span>(population) <span class="op">/</span><span class="st"> </span>N
   <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max){
@@ -264,7 +270,11 @@ my_world</code></pre></div>
     <span class="co"># copying</span>
     demonstrators &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
     demonstrators_traits &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-
+    
+    <span class="co"># not sure how to vectorise the code below. The first &quot;if&quot; can be done with:</span>
+    <span class="co"># population[cbind(demonstrators,demonstrators_traits)]==1 as in previous chapter</span>
+    <span class="co"># but I could not figure out a way to calcualte the compatibility score at popualtion level</span>
+    
     <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){
       <span class="cf">if</span>(population[demonstrators[i], demonstrators_traits[i]]){
         compatibility_score &lt;-<span class="st"> </span><span class="kw">sum</span>(world[demonstrators_traits[i], <span class="kw">which</span>(population[i,]<span class="op">&gt;</span><span class="dv">0</span>)])
@@ -283,40 +293,50 @@ my_world</code></pre></div>
   }
   output
 }</code></pre></div>
-<p>Mention k, the logistic, etc.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)
+<p>As in the <a href="social-learning-of-social-learning-rules.html#social-learning-of-social-learning-rules">previous chapter</a>, the simulation starts with no traits, and individuals introduce them with random innovations, the rate of which is regulated by the parameter <span class="math inline">\(\mu\)</span>. Individuals are replaced by culturally-naive newborns with a probability <span class="math inline">\(p_\text{death}\)</span>. There are, mainly, two differences. One is that the function accepts a parameter, <code>world</code>, a four-by-four matrix of compatibilities between traits (thus the compatibilities can change, but not the actual number of traits). The second is in the copying procedure.</p>
+<p>As in the previous chapter, one trait is randomly selected in the demonstrator and, if the demonstrator <em>i</em> has it (<code>population[demonstrators[i], demonstrators_traits[i]]</code>), the observer calculates a “compatibility score”. The compatibility score is the sum of the compatibilities of all the traits of the observer towards the traits of the demonstrator, calculated using the “world” matrix. If, for example, both observer and demonstrator have A and B (and only A and B), the compatibility with be <span class="math inline">\(2\)</span>, if the observer has A and B and the demonstrator C and D, the compatibility with be <span class="math inline">\(-2\)</span> and so on. In the following line, the compatibility score is transformed in the actual probability to copy with a logistic function, useful to transform possibly unbounded positive and negative values in values between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>:</p>
+<p><span class="math display">\[P_\text{copy} = \frac{1}{1 + e^{-kC}}         \hspace{30 mm}(15.1)\]</span> where <em>C</em> represents the compatibility score between observer and demonstrator, and <em>k</em> is a parameter of the simulation, that regulates how steep is the logistic, that is, how fast positive values of the compatibility score produce a probability to copy equal to <span class="math inline">\(1\)</span>, and negative values a probability equal to <span class="math inline">\(0\)</span>.</p>
+<p>We can now run the function, using the <code>plot_multiple_traits()</code> function to plot the result. We use a value of <span class="math inline">\(k=10\)</span>, and a small probability of innovation <span class="math inline">\(\mu=0.0005\)</span>, so that the dynamics are mainly generated by cultural transmission.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)
+data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.4-1.png" width="672" /></p>
-<p>check that are the compatible traits</p>
+<p>Two of the four traits diffuse in the population. We can check whether these are in fact one of the couple of compatible traits, having a look at the last line of the output produced by the simulation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model[data_model<span class="op">$</span>generation<span class="op">==</span><span class="dv">1000</span>,]</code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   trait generation     p
-##   &lt;fct&gt;      &lt;int&gt; &lt;dbl&gt;
-## 1 1           1000  0.04
-## 2 2           1000  0.03
-## 3 3           1000  0.91
-## 4 4           1000  0.92</code></pre>
-<p>It varies at each simulation. What happens by changing the <em>world</em>? (remember you can visualise the matrix)</p>
+##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
+## 1 A           1000  0.04
+## 2 B           1000  0.03
+## 3 C           1000  0.91
+## 4 D           1000  0.92</code></pre>
+<p>They are indeed trait C and D. If you run the simulation other times the results are likely to change, with sometime A and B being the successful traits, but it will be practically impossible that one or three traits will be successful, with this “world” of compatibilities.</p>
+<p>What does it happen, however, if we change the world? We can run a new simulation where the traits A, B, and C are all compatible, but not D (remember, you can visualise the matrix of compatibilities by typing its name to be sure to have entered the compatibilities correctly).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)
 data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.6-1.png" width="672" /></p>
-<p>All compatible:</p>
+<p>As expected, now three traits have high frequencies in the population, while one is unsuccessful. As before, you can check that the unsuccessful trait is actually D by inspecting manually the last line of the output.</p>
+<p>Not surprisingly, if all traits are compatible, they all spread equally in the population.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)
 data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)
 <span class="kw">plot_multiple_traits</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.7-1.png" width="672" /></p>
-<p>No compatiblity equates to a random copy (remember the logistic)</p>
+<p>Notice that the opposite—when none of the traits is compatible with each other—is an extreme case that produces a situation similar to the <a href="multiple-traits-models.html#multiple-traits-models">unbiased transmission model with multiple traits</a> we explored earlier in the book. Individuals only copy once in their life, when they do not have any trait, and they copy whatever trait they observe with 50% probability, since a compatibility score of <span class="math inline">\(0\)</span> while always produce <span class="math inline">\(0.5\)</span> when transformed by the logistic function. After that, any encounter will produce a very low probability of copying (when they meet demonstrators with any other trait), or a high, but useless, probability (when they meet a demonstrator with the same trait they already have).</p>
+</div>
 <div id="many-traits-model" class="section level2">
-<h2><span class="header-section-number">10.1</span> Many-traits model</h2>
+<h2><span class="header-section-number">10.2</span> Many-traits model</h2>
+<p>Building the compatibility world by hand is unpractical, especially if we want to test our model with more traits. We will now extend the basic model above in order to be able to customise the maximum number of traits and to generate automatically the compatibility worlds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="dv">7</span>
 gamma &lt;-<span class="st"> </span><span class="fl">0.5</span>
 my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>( <span class="kw">rep</span>(<span class="dv">1</span>, M <span class="op">*</span><span class="st"> </span>M), <span class="dt">nrow =</span> M)
-compatibilities &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), <span class="kw">choose</span>(M,<span class="dv">2</span>), <span class="dt">prob =</span> <span class="kw">c</span>(gamma, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>gamma), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
+compatibilities &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), <span class="kw">choose</span>(M, <span class="dv">2</span>), <span class="dt">prob =</span> <span class="kw">c</span>(gamma, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>gamma), <span class="dt">replace =</span> <span class="ot">TRUE</span>) 
 my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities
 my_world &lt;-<span class="st"> </span><span class="kw">t</span>(my_world)
-my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities
-my_world</code></pre></div>
+my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities</code></pre></div>
+<p>We have now two parameters we use to build the matrix: one (<span class="math inline">\(M\)</span>) gives the maximum number of traits, and the other (<span class="math inline">\(\gamma\)</span>, or <code>gamma</code> in the code) gives the probability that two traits are compatible with each other. To build the matrix, we first create a <span class="math inline">\(M\)</span> by <span class="math inline">\(M\)</span> matrix of all ones, then a vector of compatibilities randomly generated with probability <span class="math inline">\(\gamma\)</span> (the length of the vector is the number of entries above the main diagonal of the matrix, given by <code>choose(M, 2)</code>), and finally we copy these values in the upper and lower triangle of the matrix (to make it symmetric, in practice, we copy it twice in the upper triangle, transposing the matrix after the first copy).</p>
+<p>Here the matrix we generated.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 ## [1,]    1   -1   -1   -1   -1    1   -1
 ## [2,]   -1    1    1    1    1    1   -1
@@ -325,6 +345,7 @@ my_world</code></pre></div>
 ## [5,]   -1    1    1    1    1   -1    1
 ## [6,]    1    1   -1   -1   -1    1    1
 ## [7,]   -1   -1   -1    1    1    1    1</code></pre>
+<p>The function to run the simulation is very similar to the previous one, once we account for the difference in how the compatibility world is created, and the two new parameters (<span class="math inline">\(M\)</span> and <span class="math inline">\(\gamma\)</span>) needed in the function call. Another difference is that the output data structure is a matrix and not a tibble. Since we want to be able to run the simulations with an arbitrary high number of traits, we need to speed up the computation, exactly in the same way we did for the multiple traits model in <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traits_inter_dependence_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(N, M, t_max, k, mu, p_death, gamma){
   output &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> M)
   <span class="co"># initalise the traits&#39; world:</span>
@@ -364,12 +385,13 @@ my_world</code></pre></div>
   }
   output
 }  </code></pre></div>
+<p>We can now use the <code>plot_multiple_traits_matrix()</code> function we wrote in <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a> to visualise the results of the model. We can have a look at what happens with 20 traits, and an intermediate probability of compatibility.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> .<span class="dv">5</span>)
 <span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/15.11-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/15.12-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="dv">1</span>)
 <span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
-<p><img src="_main_files/figure-html/15.12-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/15.13-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r_max =<span class="st"> </span><span class="dv">10</span>
 test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">gamma =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>), r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> <span class="dv">11</span>)), <span class="dt">C =</span> <span class="ot">NA</span>)
 <span class="cf">for</span>(condition <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>)){
@@ -384,18 +406,19 @@ test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</spa
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Average compatibility&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;C (number of common traits)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/15.13-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/15.14-1.png" width="672" /></p>
 </div>
 <div id="summary-of-the-model-8" class="section level2">
-<h2><span class="header-section-number">10.2</span> Summary of the model</h2>
+<h2><span class="header-section-number">10.3</span> Summary of the model</h2>
+<p>Mention the logistic, and the last visualisation</p>
 <hr />
 </div>
 <div id="analytical-appendix-8" class="section level2">
-<h2><span class="header-section-number">10.3</span> Analytical appendix</h2>
+<h2><span class="header-section-number">10.4</span> Analytical appendix</h2>
 <hr />
 </div>
 <div id="further-readings-4" class="section level2">
-<h2><span class="header-section-number">10.4</span> Further readings</h2>
+<h2><span class="header-section-number">10.5</span> Further readings</h2>
 </div>
 </div>
             </section>
@@ -449,6 +472,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
