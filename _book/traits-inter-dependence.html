@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-11-07" />
+<meta name="date" content="2019-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,7 +334,7 @@ compatibilities &lt;-<span class="st"> </span><span class="kw">sample</span>(<sp
 my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities
 my_world &lt;-<span class="st"> </span><span class="kw">t</span>(my_world)
 my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </span>compatibilities</code></pre></div>
-<p>We have now two parameters we use to build the matrix: one (<span class="math inline">\(M\)</span>) gives the maximum number of traits, and the other (<span class="math inline">\(\gamma\)</span>, or <code>gamma</code> in the code) gives the probability that two traits are compatible with each other. To build the matrix, we first create a <span class="math inline">\(M\)</span> by <span class="math inline">\(M\)</span> matrix of all ones, then a vector of compatibilities randomly generated with probability <span class="math inline">\(\gamma\)</span> (the length of the vector is the number of entries above the main diagonal of the matrix, given by <code>choose(M, 2)</code>), and finally we copy these values in the upper and lower triangle of the matrix (to make it symmetric, in practice, we copy it twice in the upper triangle, transposing the matrix after the first copy).</p>
+<p>We have now two parameters we use to build the matrix: one (<span class="math inline">\(M\)</span>) gives the maximum number of traits, and the other (<span class="math inline">\(\gamma\)</span>, or <code>gamma</code> in the code) gives the probability that two traits are compatible with each other. To build the matrix, we first create a <span class="math inline">\(M\)</span> by <span class="math inline">\(M\)</span> matrix of all ones, then a vector of compatibilities randomly generated with probability <span class="math inline">\(\gamma\)</span> (the length of the vector is the number of entries above the main diagonal of the matrix, given by <code>choose(M, 2)</code>), and finally we copy these values in the upper and lower triangle of the matrix (in practice, to make it symmetric, we copy it twice in the upper triangle, transposing the matrix after the first copy).</p>
 <p>Here the matrix we generated.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_world</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
@@ -345,7 +345,7 @@ my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </s
 ## [5,]   -1    1    1    1    1   -1    1
 ## [6,]    1    1   -1   -1   -1    1    1
 ## [7,]   -1   -1   -1    1    1    1    1</code></pre>
-<p>The function to run the simulation is very similar to the previous one, once we account for the difference in how the compatibility world is created, and the two new parameters (<span class="math inline">\(M\)</span> and <span class="math inline">\(\gamma\)</span>) needed in the function call. Another difference is that the output data structure is a matrix and not a tibble. Since we want to be able to run the simulations with an arbitrary high number of traits, we need to speed up the computation, exactly in the same way we did for the multiple traits model in <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a>.</p>
+<p>The function to run the simulation is very similar to the previous one, once we account for the difference in how the compatibility world is created and for the two new parameters (<span class="math inline">\(M\)</span> and <span class="math inline">\(\gamma\)</span>) needed in the function call. Another difference is that the output data structure is a matrix and not a tibble. Since we want to be able to run the simulations with an arbitrary high number of traits, we need to speed up the computation, exactly in the same way we did for the multiple traits model in <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traits_inter_dependence_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(N, M, t_max, k, mu, p_death, gamma){
   output &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> M)
   <span class="co"># initalise the traits&#39; world:</span>
@@ -389,9 +389,14 @@ my_world[<span class="kw">upper.tri</span>(my_world)] &lt;-<span class="st"> </s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> .<span class="dv">5</span>)
 <span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.12-1.png" width="672" /></p>
+<p>The simulation generates a complex dynamic in which some of the traits spread in the population, while others do not. The success of a trait depends on its general compatbility with other traits, but also on which traits are present, in a certain moment, in the population. Some traits (see, for example, the trait starting to grow in popularity after around 1,500 time steps in the plot above) succeed to spread only after the traits they are compatible with are diffused enough.</p>
+<p>Let’s try now with <span class="math inline">\(\gamma=1\)</span>, i.e. when all traits are compatible with each other.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="dv">1</span>)
 <span class="kw">plot_multiple_traits_matrix</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/15.13-1.png" width="672" /></p>
+<p>As expected, all traits spread in the popultion.</p>
+<p>We leave to the reader to explore further what drives the dynamic, especially in the interesting cases with intermediate values of <span class="math inline">\(gamma\)</span>. In order to do this, we suggest to add further outputs to the function <code>traits_inter_dependence_2()</code>, such as the compatiblity world generated by the simulation, or the actual composition of the population, perhaps only at the end, or every 100, or 500, time steps.</p>
+<p>As an example, we can try to confirm the intuition that the final number of traits depends on the value of <span class="math inline">\(\gamma\)</span>: if it is more likely that traits are compatible with each other, we expect more traits to spread in the population. We can choose values of <span class="math inline">\(\gamma\)</span> between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> (with steps of <span class="math inline">\(0.1\)</span>), and use a <code>for</code> cycle to run our function for each value. In fact, we are running another <code>for</code> cycle whitin the main one, so to have more runs for each value of <span class="math inline">\(\gamma\)</span> (an alternative would have been to rewrite the function <code>traits_inter_dependence_2()</code> to accept also the number of runs, as we did in many other chapters). Finally, we save as output the number of succesfull traits at the end of the simulation, that is, the traits that spread in at least half of the population (<code>data_model[2000,]&gt;.5</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r_max =<span class="st"> </span><span class="dv">10</span>
 test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">gamma =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>), r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> <span class="dv">11</span>)), <span class="dt">C =</span> <span class="ot">NA</span>)
 <span class="cf">for</span>(condition <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> .<span class="dv">1</span>)){
@@ -399,14 +404,16 @@ test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</spa
     data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> condition)
     test_inter_dependence[test_inter_dependence<span class="op">$</span>gamma <span class="op">==</span><span class="st"> </span>condition <span class="op">&amp;</span><span class="st"> </span>test_inter_dependence<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>C &lt;-<span class="st"> </span><span class="kw">sum</span>(data_model[<span class="dv">2000</span>,]<span class="op">&gt;</span>.<span class="dv">5</span>)
   }
-}
-<span class="kw">ggplot</span>(<span class="dt">data =</span> test_inter_dependence, <span class="kw">aes</span>(<span class="dt">x =</span> gamma, <span class="dt">y =</span> C)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="dv">0</span>, <span class="dt">height =</span> <span class="fl">0.5</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+}</code></pre></div>
+<p>Here the results. To plot them, we use <code>geom_jitter()</code>, another ggplot ‘geom’. <code>geom_jitter()</code> adds a small amount of random variation to the location of each point, regualted by the parameters <code>width</code> and <code>height</code>: in our case we want a small variation only on the width dimension. This is useful to show data points that would have otherwise being overlapped (techincally defined “overplotting”). We also use the usual <code>stat_summary()</code> to plot the mean of the data in red.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> test_inter_dependence, <span class="kw">aes</span>(<span class="dt">x =</span> gamma, <span class="dt">y =</span> C)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.01</span>, <span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Average compatibility&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;C (number of common traits)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/15.14-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/15.15-1.png" width="672" /></p>
+<p>The results broadly confirm our intuitions. Interestingly, we do not need all traits being compatible with each other to produce the outcome of all traits being successfull. Already with <span class="math inline">\(\gamma=0.8\)</span>, all the 20 traits spread in more than half of the population in almost all runs of the simulation. Even with few incompatiblities, the “compatibility score” between observers and demonstrators is, given a sufficient number of compatible traits, a positive number, resulting in high probabilities to copy.</p>
 </div>
 <div id="summary-of-the-model-8" class="section level2">
 <h2><span class="header-section-number">10.3</span> Summary of the model</h2>
@@ -415,6 +422,7 @@ test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</spa
 </div>
 <div id="analytical-appendix-8" class="section level2">
 <h2><span class="header-section-number">10.4</span> Analytical appendix</h2>
+<p>I do not know of analytical treatment of this.</p>
 <hr />
 </div>
 <div id="further-readings-4" class="section level2">
