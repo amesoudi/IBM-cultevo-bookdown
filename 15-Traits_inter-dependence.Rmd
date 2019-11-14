@@ -50,14 +50,18 @@ traits_inter_dependence <- function(N, t_max, k, mu, p_death, world){
     # not sure how to vectorise the code below. The first "if" can be done with:
     # population[cbind(demonstrators,demonstrators_traits)]==1 as in previous chapter
     # but I could not figure out a way to calcualte the compatibility score at popualtion level
+    # MS: I can't come up with a faster version either. I think that's a good solution, I made some small adjustments
     
     for(i in 1:N){
       if(population[demonstrators[i], demonstrators_traits[i]]){
-        compatibility_score <- sum(world[demonstrators_traits[i], which(population[i,]!=0)])
+        # compatibility_score <- sum(world[demonstrators_traits[i], which(population[i,]!=0)])
+        compatibility_score <- sum(world[demonstrators_traits[i], population[i,]!=0]) # I think the which is not necessary here
         copy <- (1 / (1 + exp(-k*compatibility_score))) > runif(1)
-        if(copy){
-          population[i,demonstrators_traits[i]] <- 1
-        }
+        # if(copy){
+        #   population[i,demonstrators_traits[i]] <- 1
+        # }
+        # population[i,demonstrators_traits[i]] <- 1*copy # which is the same as the next line
+        population[i,demonstrators_traits[i]] <- copy
       }
     }
     
