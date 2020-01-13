@@ -11,16 +11,70 @@ In our case, edges will allow or prohibit the information transmission from one 
 In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations. 
 
 <!-- Generate simple networks from text -->
+To generate and plot networks, we wil use the `igraph` package that provides many useful functions. The simplest function to generate a network is called `graph_from_literal()`, which takes, for example, names and generates a network based on wheter these names are connected with each othe (using `--`). (Note: instead of names we could have also used letters or even numbers.) In the example below, we generate a friendship network, where each node represents an individual and each edge a strong reciprocal friendship. We store the generated network in **net**, and then apply the `plot` function to have a look at the network.
 
 ```{r 11.1}
 library(igraph)
-net <- graph_from_literal(A--B, C--D--E, F--G--H, G--I, F--H)
+net <- graph_from_literal(Iris--Eva--Anna, 
+                          Jacob--Pete--Felix, 
+                          Julia--Anna--Mia, 
+                          Anna--Iris, 
+                          Anna--Pete,
+                          Julia--Mia)
 plot(net)
 ```
 
 <!-- Plot networks, with different styling explained -->
+Let us edit the look of the network a bit. 
+
+```{r 11.2}
+plot(net, 
+     vertex.color="white", 
+     vertex.size=42,
+     edge.color="black",
+     edge.width=3)
+```
+
+Plotting the network makes it much easier to see the overall structure and important nodes. Here, for example, we can quickly see that Anna is the most connected individual in the group with four connections.
+
+Let us take a closer look at the network object. We can use the `V()` function to look at the vertices and the `E()` function to look at the edges that are stored in **net**. 
+
+```{r 11.3}
+V(net)
+E(net)
+```
+
+The output tells us that there are eight named vertices and nine edges stored. The functions also tell us the names of the vertices and which nodes each edge connects. The functions can be used to return stored information in the **net** object (try, for example, `V(net)$name`) but also to store additional information. For example, let us add the information whether a node represents a girl or a boy. 
+
+```{r 11.4}
+V(net)$sex <- "girl"
+V(net)$sex[ V(net)$name %in% c("Felix","Jacob","Pete") ] <- "boy"
+V(net)$sex
+```
+
+In the first line, we create a new node variable as part of the **net** object, called 'sex.' We set this variable to be 'girl' for all entries. In the next line we replace all 'girl' entries with 'boy' where the name of the vertex is one of the three boy names. We can now use this information to change the colour of the nodes depending on their sex.
+
+```{r 11.4}
+V(net)$col <- 'dodgerblue'
+V(net)$col[ V(net)$sex=="boy" ] <- 'firebrick3'
+
+plot(net, 
+     vertex.color=V(net)$col, 
+     vertex.size=42,
+     vertex.label.color="white",
+     edge.color="black",
+     edge.width=3)
+```
+
+With the added colour, we can now see that there is a divide between boys and girls and we can see that Anna and Pete connect the two subsets. There are of course many other ways to change the appearence of the network, which we will try out as we go a long this chapter. First, however, let us try to generate larger networks. 
 
 <!-- Generate simple networks from matrix -->
+A second function that allows to generate simple networks is 
+```{r}
+m <- matrix(sample(x=0:1, size=25, replace=T), ncol=5)
+plot(graph_from_adjacency_matrix(adjmatrix=m) )
+```
+
 
 <!-- Generate random networks, scale-free, small world networks -->
 
@@ -30,6 +84,6 @@ plot(net)
 
 <!-- Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
 
-<!-- Finally, let network change dynamically change over time -->
+<!-- Finally, let networks dynamically change over time -->
 
 <!-- Further Reading -->
