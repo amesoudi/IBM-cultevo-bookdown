@@ -72,11 +72,43 @@ With the added colour, we can now see that there is a divide between boys and gi
 A second function that allows to generate simple networks is 
 ```{r}
 m <- matrix(sample(x=0:1, size=25, replace=T), ncol=5)
-plot(graph_from_adjacency_matrix(adjmatrix=m) )
+net <- graph_from_adjacency_matrix(adjmatrix=m)
+plot(net, 
+     vertex.color="gold")
+#randomly generated, matrix based
+#see, arrows
+#can make them undirected
+plot(as.undirected(net))
+#see, self-arrows
+#can get rid of self-loops
+plot(simplified(net))
+#which is the same as setting the diagonal of m to be 0
+diag(m) <- 0
+net <- graph_from_adjacency_matrix(adjmatrix=m)
+plot(net, 
+     vertex.color="gold")
 ```
 
 
 <!-- Generate random networks, scale-free, small world networks -->
+```{r}
+#make ring
+net_ring <- make_ring(n=25)
+plot(net_ring, vertex.color="gold")
+#make lattice
+net_lat <- make_lattice(dimvector=c(3,5))
+plot(net_lat, vertex.color="gold")
+#make random
+net_rand <- erdos.renyi.game(n=25, p.or.m=.15, type="gnp")
+plot(net_rand, vertex.color="gold")
+#make scale-free
+net_scale <- barabasi.game(n=25, power=3, m=2, directed=FALSE)
+plot(net_scale, vertex.color="gold")
+#make small-world
+net_small <- watts.strogatz.game(dim=1, size=25, nei=2, p=.05)
+plot(net_small, vertex.color="gold")
+```
+
 
 <!-- How to characterise networks - Degree, path length, transitivity, centrality measures -->
 
