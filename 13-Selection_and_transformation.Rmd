@@ -1,0 +1,25 @@
+
+# Selection and transformation
+
+   
+
+```{r 13.1, message=FALSE}
+library(tidyverse)
+set.seed(111)
+N <- 1000
+population <- tibble(P = runif(N))
+```
+
+  
+## Summary of the model
+
+***
+
+## Analytical appendix
+  
+
+***
+  
+## Further readings
+  
+  
