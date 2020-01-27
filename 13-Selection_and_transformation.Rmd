@@ -1,6 +1,14 @@
 
 # Selection and transformation
 
+To be considered "cultural", ideas, behaviours, and artefacts need to be sufficiently stable in time. The version of *Little Red Riding Hood* we heard now is considered part of a long cultural transmission chain that includes all the other versions of the tale becasue they all share *enough* features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider one cultural trait as *lasagne*. Boundaries are muddled for many traits: while some artifcats can be the exact replica of each other, no two identical lasagne exist. In any case,the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a realtive stability. This is a useful assumption and, in many case, a good approximation of what happens in reality. 
+
+However, cultural traits can also be stable not because they are copied with high-fidelity, but also because when passing from an individual to another they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so they we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling tecniques for which it is required. As we will discuss later, copying and reconstruting are not two alternative processes, but they both concur to cultural evolution.)
+
+To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.
+
+Let's imagine a population with a single trait, a continuos trait $P$, that can have values between $0$ and $1$. At the beginning of the simulations $P$ is uniformely distributed in the population. Let's say the optimal value of $P$ is $1$ (this is convenient for the code, but the exact value is not important). You can think to $P$ as, for example, how sharp is a knife: the more the better.
+
 ```{r 13.1, message=FALSE}
 library(tidyverse)
 set.seed(111)
@@ -8,7 +16,48 @@ N <- 1000
 population <- tibble(P = runif(N))
 ```
 
-  
+Now, we can write a familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In ([Chapter 3][Biased transmission: direct bias]), for example, we showed how a direct bias for one of two discrete cultural trait could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a prefernce for traits close to the optimal value. (Notice we could obtain the same effect of convergence to optimal value using other mehtods of cultural selection, e.g. and indirect bias towards succesful demonstrators, that are sucesfull as they have a $P$ close to the optimal).
+
+```{r 13.2}
+selection <- function(N, t_max, r_max) {
+  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  for (r in 1:r_max) {
+    population <- tibble(P = runif(N))
+    # create first generation
+    output[output$generation == 1 & output$run == r, ]$p <- sum(population$P) / N # add first generation's p for run r
+    for (t in 2:t_max) {
+      previous_population <- population # copy individuals to previous_population tibble
+      demonstrators <- tibble(P1 = sample(previous_population$P, N, replace = TRUE), P2 = sample(previous_population$P, N, replace = TRUE))
+      copy <- pmax(demonstrators$P1, demonstrators$P2)
+
+      population$P <- copy 
+      output[output$generation == t & output$run == r, ]$p <- sum(population$P) / N # get p and put it into output slot for this generation t and run r
+    }
+  }
+  output # export data from function
+}
+```
+
+EXPLANATION HERE
+
+We can now run the simulation, and plot it with a slightly modified function `plot_multiple_runs_p()` (we just need to change the label for y-axis).
+
+```{r 13.3}
+plot_multiple_runs_p <- function(data_model) {
+  ggplot(data = data_model, aes(y = p, x = generation)) +
+    geom_line(aes(colour = run)) +
+    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    ylim(c(0, 1)) +
+    theme_bw() +
+    labs(y = "p (average value of P)")
+}
+```
+
+```{r 13.4}
+data_model <- selection(N = 1000, t_max = 20, r_max = 5)
+plot_multiple_runs_p(data_model)
+```
+
 ## Summary of the model
 
 ***

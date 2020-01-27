@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Selection and transformation | Individual-based models of cultural evolution</title>
+  <meta name="description" content="A minimal working structure for the book" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Selection and transformation | Individual-based models of cultural evolution" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A minimal working structure for the book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Selection and transformation | Individual-based models of cultural evolution" />
+  
+  <meta name="twitter:description" content="A minimal working structure for the book" />
+  
+
+<meta name="author" content="Alberto Acerbi" />
+<meta name="author" content="Alex Mesoudi" />
+<meta name="author" content="Marco Smolla" />
+
+
+<meta name="date" content="2020-01-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="social-network-structure.html">
+<link rel="next" href="social-learning-of-social-learning-rules.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Individual-based models of cultural evolution</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>Basics</b></span><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#initialising-the-simulation"><i class="fa fa-check"></i><b>0.1</b> Initialising the simulation</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>0.2</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#plotting-the-model-results"><i class="fa fa-check"></i><b>0.3</b> Plotting the model results</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>0.4</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>0.5</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#varying-initial-conditions"><i class="fa fa-check"></i><b>0.6</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#summary-of-the-model"><i class="fa fa-check"></i><b>0.7</b> Summary of the model</a></li>
+<li class="chapter" data-level="0.8" data-path="index.html"><a href="index.html#analytical-appendix"><i class="fa fa-check"></i><b>0.8</b> Analytical appendix</a></li>
+<li class="chapter" data-level="0.9" data-path="index.html"><a href="index.html#further-reading"><i class="fa fa-check"></i><b>0.9</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>1</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="1.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>1.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="1.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>1.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="1.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>1.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="1.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>1.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="1.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>1.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>2</b> Biased transmission: direct bias</a><ul>
+<li class="chapter" data-level="2.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strentgh-of-selection"><i class="fa fa-check"></i><b>2.1</b> Strentgh of selection</a></li>
+<li class="chapter" data-level="2.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>2.2</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>2.3</b> Analytical appendix</a></li>
+<li class="chapter" data-level="2.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>2.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: frequency-dependent indirect bias</a><ul>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>3.1</b> The logic of conformity</a></li>
+<li class="chapter" data-level="3.2" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>3.2</b> Testing conformist transmission</a></li>
+<li class="chapter" data-level="3.3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>3.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#analytical-appendix-3"><i class="fa fa-check"></i><b>3.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="3.5" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#further-readings"><i class="fa fa-check"></i><b>3.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission: demonstrator-based indirect bias</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>4.1</b> A simple demonstrator bias</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>4.2</b> Predicting the ‘winning’ trait</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#analytical-appendix-4"><i class="fa fa-check"></i><b>4.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="4.5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#further-readings-1"><i class="fa fa-check"></i><b>4.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html"><i class="fa fa-check"></i><b>5</b> Vertical and horizontal transmission</a><ul>
+<li class="chapter" data-level="5.1" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#vertical-cultural-transmission"><i class="fa fa-check"></i><b>5.1</b> Vertical cultural transmission</a></li>
+<li class="chapter" data-level="5.2" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#horizontal-cultural-transmission"><i class="fa fa-check"></i><b>5.2</b> Horizontal cultural transmission</a></li>
+<li class="chapter" data-level="5.3" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>5.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="5.4" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#analytical-appendix-5"><i class="fa fa-check"></i><b>5.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="5.5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#further-reading-3"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>6</b> Multiple traits models</a><ul>
+<li class="chapter" data-level="6.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovation"><i class="fa fa-check"></i><b>6.1</b> Introducing innovation</a></li>
+<li class="chapter" data-level="6.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>6.2</b> Optimising the code</a></li>
+<li class="chapter" data-level="6.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>6.3</b> The distribution of popularity</a></li>
+<li class="chapter" data-level="6.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-6"><i class="fa fa-check"></i><b>6.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="6.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>6.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-2"><i class="fa fa-check"></i><b>6.6</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="group-structure.html"><a href="group-structure.html"><i class="fa fa-check"></i><b>7</b> Group structured populations and migration</a></li>
+<li class="chapter" data-level="8" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>8</b> Social network structure</a></li>
+<li class="chapter" data-level="9" data-path="selection-and-transformation.html"><a href="selection-and-transformation.html"><i class="fa fa-check"></i><b>9</b> Selection and transformation</a><ul>
+<li class="chapter" data-level="9.1" data-path="selection-and-transformation.html"><a href="selection-and-transformation.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>9.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="9.2" data-path="selection-and-transformation.html"><a href="selection-and-transformation.html#analytical-appendix-7"><i class="fa fa-check"></i><b>9.2</b> Analytical appendix</a></li>
+<li class="chapter" data-level="9.3" data-path="selection-and-transformation.html"><a href="selection-and-transformation.html#further-readings-3"><i class="fa fa-check"></i><b>9.3</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>10</b> Social learning of social learning rules</a><ul>
+<li class="chapter" data-level="10.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>10.1</b> Openness and conservatism</a></li>
+<li class="chapter" data-level="10.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>10.2</b> Maintaining open populations</a></li>
+<li class="chapter" data-level="10.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>10.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="10.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-8"><i class="fa fa-check"></i><b>10.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="10.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-4"><i class="fa fa-check"></i><b>10.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>11</b> Traits inter-dependence</a><ul>
+<li class="chapter" data-level="11.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>11.1</b> Compatible and incompatible traits</a></li>
+<li class="chapter" data-level="11.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>11.2</b> Many-traits model</a></li>
+<li class="chapter" data-level="11.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-9"><i class="fa fa-check"></i><b>11.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="11.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-9"><i class="fa fa-check"></i><b>11.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="11.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-5"><i class="fa fa-check"></i><b>11.5</b> Further readings</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Individual-based models of cultural evolution</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="selection-and-transformation" class="section level1">
+<h1><span class="header-section-number">9</span> Selection and transformation</h1>
+<p>To be considered “cultural”, ideas, behaviours, and artefacts need to be sufficiently stable in time. The version of <em>Little Red Riding Hood</em> we heard now is considered part of a long cultural transmission chain that includes all the other versions of the tale becasue they all share <em>enough</em> features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider one cultural trait as <em>lasagne</em>. Boundaries are muddled for many traits: while some artifcats can be the exact replica of each other, no two identical lasagne exist. In any case,the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a realtive stability. This is a useful assumption and, in many case, a good approximation of what happens in reality.</p>
+<p>However, cultural traits can also be stable not because they are copied with high-fidelity, but also because when passing from an individual to another they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so they we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling tecniques for which it is required. As we will discuss later, copying and reconstruting are not two alternative processes, but they both concur to cultural evolution.)</p>
+<p>To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.</p>
+<p>Let’s imagine a population with a single trait, a continuos trait <span class="math inline">\(P\)</span>, that can have values between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. At the beginning of the simulations <span class="math inline">\(P\)</span> is uniformely distributed in the population. Let’s say the optimal value of <span class="math inline">\(P\)</span> is <span class="math inline">\(1\)</span> (this is convenient for the code, but the exact value is not important). You can think to <span class="math inline">\(P\)</span> as, for example, how sharp is a knife: the more the better.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">set.seed</span>(<span class="dv">111</span>)
+N &lt;-<span class="st"> </span><span class="dv">1000</span>
+population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</code></pre></div>
+<p>Now, we can write a familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In (<a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">Chapter 3</a>), for example, we showed how a direct bias for one of two discrete cultural trait could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a prefernce for traits close to the optimal value. (Notice we could obtain the same effect of convergence to optimal value using other mehtods of cultural selection, e.g. and indirect bias towards succesful demonstrators, that are sucesfull as they have a <span class="math inline">\(P\)</span> close to the optimal).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">selection &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {
+  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
+  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
+    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
+    <span class="co"># create first generation</span>
+    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
+    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
+      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
+      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P1 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">P2 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
+      copy &lt;-<span class="st"> </span><span class="kw">pmax</span>(demonstrators<span class="op">$</span>P1, demonstrators<span class="op">$</span>P2)
+
+      population<span class="op">$</span>P &lt;-<span class="st"> </span>copy 
+      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
+    }
+  }
+  output <span class="co"># export data from function</span>
+}</code></pre></div>
+<p>EXPLANATION HERE</p>
+<p>We can now run the simulation, and plot it with a slightly modified function <code>plot_multiple_runs_p()</code> (we just need to change the label for y-axis).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_multiple_runs_p &lt;-<span class="st"> </span><span class="cf">function</span>(data_model) {
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> run)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (average value of P)&quot;</span>)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">selection</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
+<span class="kw">plot_multiple_runs_p</span>(data_model)</code></pre></div>
+<p><img src="_main_files/figure-html/13.4-1.png" width="672" /></p>
+<div id="summary-of-the-model-7" class="section level2">
+<h2><span class="header-section-number">9.1</span> Summary of the model</h2>
+<hr />
+</div>
+<div id="analytical-appendix-7" class="section level2">
+<h2><span class="header-section-number">9.2</span> Analytical appendix</h2>
+<hr />
+</div>
+<div id="further-readings-3" class="section level2">
+<h2><span class="header-section-number">9.3</span> Further readings</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="social-network-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="social-learning-of-social-learning-rules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
