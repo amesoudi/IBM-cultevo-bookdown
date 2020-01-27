@@ -28,14 +28,9 @@
 
 #### Cultural inheritance
 
-13. Selection and transformation
+13. Reproduction and transformation
 14.	Social learning of social learning rules
 15.	Trait inter-dependence
-
-***
-POSSIBLE OTHER MODELS TO ADD:
-
-* Axelrod's dissmeination of culture?
 
 ***
 
