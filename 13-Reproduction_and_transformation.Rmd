@@ -19,7 +19,7 @@ population <- tibble(P = runif(N))
 Now, we can write the familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In [Chapter 3][Biased transmission: direct bias], for example, we showed how a direct bias for one of two discrete cultural traits could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a preference for traits close to the optimal value. (Notice the code would be equivalent - and we would obtain the same effect of convergence to optimal value - thinking in terms of other methods of cultural selection, e.g. and indirect bias towards successful demonstrators, that are successful as they have a $P$ close to the optimal).
 
 ```{r 13.2}
-selection <- function(N, t_max, r_max, mu) {
+reproduction <- function(N, t_max, r_max, mu) {
   output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
@@ -56,7 +56,7 @@ plot_multiple_runs_p <- function(data_model) {
 ```
 
 ```{r 13.4}
-data_model <- selection(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
+data_model <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
 plot_multiple_runs_p(data_model)
 ```
 
@@ -96,12 +96,14 @@ As the transformations tend to all converge in the same direction, the results a
 
 When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. How can we distinguish the relative importance of the two processes?    
 
-## TITLE
+## Emergent similarity 
 
-New function for selection, calculating the error:
+QUESTION 
+
+We can rewrite the `reproduction()` and `transformation()` functions adding a further output, that is, how similar are the traits that the new generation show to the traits that they had copied from the previous. We thus add a variable *d* (as in "distance") in our `output` tibble, and we calculate this value at the end of each generation as `sum(abs(population$P - copy)) / N`.
 
 ```{r 13.7}
-selection <- function(N, t_max, r_max, mu) {
+reproduction <- function(N, t_max, r_max, mu) {
   output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), d = rep(NA, t_max * r_max))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
@@ -123,15 +125,9 @@ selection <- function(N, t_max, r_max, mu) {
 }
 ```
 
-Run:
+We do the same for the `transformation()` function, and we can run again both simulations.
 
-```{r 13.9}
-data_model_selection <- selection(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
-```
-
-Same for transformation: 
-
-```{r 13.10}
+```{r 13.8}
 transformation <- function(N, t_max, r_max) {
   output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), d = rep(NA, t_max * r_max))
   for (r in 1:r_max) {
@@ -152,15 +148,16 @@ transformation <- function(N, t_max, r_max) {
 }
 ```
 
-```{r 13.11}
+```{r 13.9}
+data_model_reproduction <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
 data_model_transformation <- transformation(N = 1000, t_max = 20, r_max = 5)
 ```
 
-Custom plot:
+We already know the results with repsect to the value of $P$, but now we are interested in comparing if and how the values for *d* change in time in the two conditions. For this, we write an *ad hoc* plotting function, that takes the data from the two outputs and plot them in the same graph. Notice the `na.omit()` function in the first line: the data on *d* is NA for the first generation, because there is no previous generation from which to take the measure, so we want to exclude it from our plot, and start from generation number 2. For this reason, all the other values are riscaled and, in particular, the variable *generation* starts from 2. 
 
-```{r 13.12}
-data_to_plot <- tibble(distance = c(na.omit(data_model_selection$d), na.omit(data_model_transformation$d)), 
-                       condition = rep(c("selection", "transformation"), each = 95),
+```{r 13.10}
+data_to_plot <- tibble(distance = c(na.omit(data_model_reproduction$d), na.omit(data_model_transformation$d)), 
+                       condition = rep(c("reproduction", "transformation"), each = 95),
                        generation = rep(2:20,10),
                        run = as.factor(rep(1:10, each = 19)))
 ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color = condition)) +
@@ -169,6 +166,8 @@ ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color
   labs(y = "d (average distance observer/demonstrator)")
 
 ```
+
+DESCRIPTION OF THE RESULTS
 
 ## The cultural Price equation
 

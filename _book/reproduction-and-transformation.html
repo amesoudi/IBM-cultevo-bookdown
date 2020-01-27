@@ -213,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 N &lt;-<span class="st"> </span><span class="dv">1000</span>
 population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</code></pre></div>
 <p>Now, we can write the familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">Chapter 3</a>, for example, we showed how a direct bias for one of two discrete cultural traits could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a preference for traits close to the optimal value. (Notice the code would be equivalent - and we would obtain the same effect of convergence to optimal value - thinking in terms of other methods of cultural selection, e.g. and indirect bias towards successful demonstrators, that are successful as they have a <span class="math inline">\(P\)</span> close to the optimal).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">selection &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
   output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
   <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
     population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
@@ -242,7 +242,7 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (average value of P)&quot;</span>)
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">selection</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)
 <span class="kw">plot_multiple_runs_p</span>(data_model)</code></pre></div>
 <p><img src="_main_files/figure-html/13.4-1.png" width="672" /></p>
 <p>Even with a weak form of selection (sampling two traits and choosing the better one) the population converges on the optimal value quickly, in only around ten cultural generations.</p>
@@ -272,8 +272,9 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
 <p>When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. How can we distinguish the relative importance of the two processes?</p>
 <div id="emergent-similarity" class="section level2">
 <h2><span class="header-section-number">9.1</span> Emergent similarity</h2>
-<p>New function for selection, calculating the error:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">selection &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
+<p>QUESTION</p>
+<p>We can rewrite the <code>reproduction()</code> and <code>transformation()</code> functions adding a further output, that is, how similar are the traits that the new generation show to the traits that they had copied from the previous. We thus add a variable <em>d</em> (as in “distance”) in our <code>output</code> tibble, and we calculate this value at the end of each generation as <code>sum(abs(population$P - copy)) / N</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
   output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))
   <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
     population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
@@ -293,9 +294,7 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
   }
   output <span class="co"># export data from function</span>
 }</code></pre></div>
-<p>Run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model_selection &lt;-<span class="st"> </span><span class="kw">selection</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)</code></pre></div>
-<p>Same for transformation:</p>
+<p>We do the same for the <code>transformation()</code> function, and we can run again both simulations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transformation &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {
   output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))
   <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
@@ -314,17 +313,19 @@ population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cl
   }
   output <span class="co"># export data from function</span>
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model_transformation &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</code></pre></div>
-<p>Custom plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">distance =</span> <span class="kw">c</span>(<span class="kw">na.omit</span>(data_model_selection<span class="op">$</span>d), <span class="kw">na.omit</span>(data_model_transformation<span class="op">$</span>d)), 
-                       <span class="dt">condition =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;selection&quot;</span>, <span class="st">&quot;transformation&quot;</span>), <span class="dt">each =</span> <span class="dv">95</span>),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model_reproduction &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)
+data_model_transformation &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</code></pre></div>
+<p>We already know the results with repsect to the value of <span class="math inline">\(P\)</span>, but now we are interested in comparing if and how the values for <em>d</em> change in time in the two conditions. For this, we write an <em>ad hoc</em> plotting function, that takes the data from the two outputs and plot them in the same graph. Notice the <code>na.omit()</code> function in the first line: the data on <em>d</em> is NA for the first generation, because there is no previous generation from which to take the measure, so we want to exclude it from our plot, and start from generation number 2. For this reason, all the other values are riscaled and, in particular, the variable <em>generation</em> starts from 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">distance =</span> <span class="kw">c</span>(<span class="kw">na.omit</span>(data_model_reproduction<span class="op">$</span>d), <span class="kw">na.omit</span>(data_model_transformation<span class="op">$</span>d)), 
+                       <span class="dt">condition =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;reproduction&quot;</span>, <span class="st">&quot;transformation&quot;</span>), <span class="dt">each =</span> <span class="dv">95</span>),
                        <span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">10</span>),
                        <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">19</span>)))
 <span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">y =</span> distance, <span class="dt">x =</span> generation, <span class="dt">group =</span> run, <span class="dt">color =</span> condition)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st">    </span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;d (average distance observer/demonstrator)&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/13.12-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/13.10-1.png" width="672" /></p>
+<p>DESCRIPTION OF THE RESULTS</p>
 </div>
 <div id="the-cultural-price-equation" class="section level2">
 <h2><span class="header-section-number">9.2</span> The cultural Price equation</h2>
