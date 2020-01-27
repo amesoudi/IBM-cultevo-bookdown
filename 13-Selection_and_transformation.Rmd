@@ -1,9 +1,6 @@
 
 # Selection and transformation
 
-Links with biased mutation in chapter 2?
-Do we say something about guided variation
-
 ```{r 13.1, message=FALSE}
 library(tidyverse)
 set.seed(111)
@@ -22,5 +19,4 @@ population <- tibble(P = runif(N))
 ***
   
 ## Further readings
-  
   

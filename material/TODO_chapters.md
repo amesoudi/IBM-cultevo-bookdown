@@ -24,6 +24,10 @@
 * 07-Multiple traits models:
   * ~~everything - just moved from the previous repo (AA)~~
   
+* 13-Selection and transformation
+ * links with biased mutation in chapter 2? (AA)
+ * do we say something about guided variation elsewhere? (AA)
+  
 ***  
 
 * what about guided variation?
