@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Reproduction and transformation | Individual-based models of cultural evolution</title>
   <meta name="description" content="A minimal working structure for the book" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Reproduction and transformation | Individual-based models of cultural evolution" />
   <meta property="og:type" content="book" />
@@ -26,15 +26,15 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2020-01-27" />
+<meta name="date" content="2020-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="social-network-structure.html">
-<link rel="next" href="social-learning-of-social-learning-rules.html">
+<link rel="prev" href="social-network-structure.html"/>
+<link rel="next" href="social-learning-of-social-learning-rules.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -42,6 +42,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -52,41 +55,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -208,124 +236,124 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>However, cultural traits can also be stable not because they are copied with high-fidelity, but also because when passing from an individual to another they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so they we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling techniques for which it is required. As we will discuss later, copying and reconstructing are not two alternative processes, but they both concur to cultural evolution.)</p>
 <p>To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.</p>
 <p>Let’s imagine a population with a single trait, a continuous trait <span class="math inline">\(P\)</span>, that can have values between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. At the beginning of the simulations, <span class="math inline">\(P\)</span> is uniformly distributed in the population. Let’s say the optimal value of <span class="math inline">\(P\)</span> is <span class="math inline">\(1\)</span> (this is convenient for the code, but the exact value is not important). You can think to <span class="math inline">\(P\)</span> as, for example, how sharp is a knife: the more the better.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">set.seed</span>(<span class="dv">111</span>)
-N &lt;-<span class="st"> </span><span class="dv">1000</span>
-population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">111</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</a></code></pre></div>
 <p>Now, we can write the familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">Chapter 3</a>, for example, we showed how a direct bias for one of two discrete cultural traits could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a preference for traits close to the optimal value. (Notice the code would be equivalent - and we would obtain the same effect of convergence to optimal value - thinking in terms of other methods of cultural selection, e.g. and indirect bias towards successful demonstrators, that are successful as they have a <span class="math inline">\(P\)</span> close to the optimal).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
-    <span class="co"># create first generation</span>
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P1 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">P2 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-      copy &lt;-<span class="st"> </span><span class="kw">pmax</span>(demonstrators<span class="op">$</span>P1, demonstrators<span class="op">$</span>P2)
-
-      population<span class="op">$</span>P &lt;-<span class="st"> </span>copy <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="op">-</span>mu, <span class="op">+</span>mu)
-      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
-      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P1 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">P2 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">      copy &lt;-<span class="st"> </span><span class="kw">pmax</span>(demonstrators<span class="op">$</span>P1, demonstrators<span class="op">$</span>P2)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      population<span class="op">$</span>P &lt;-<span class="st"> </span>copy <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="op">-</span>mu, <span class="op">+</span>mu)</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">    }</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  }</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  output <span class="co"># export data from function</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">}</a></code></pre></div>
 <p>The function is similar to what we have already done several times. Let’s have a look at the few differences. First, we find again the parameter <span class="math inline">\(\mu\)</span>, as done for <a href="unbiased-and-biased-mutation.html#unbiased-and-biased-mutation">biased mutation</a> and <a href="multiple-traits-models.html#multiple-traits-models">innovation</a> in previous chapters. Similarly, it implements here the error in copying: with respect to the <span class="math inline">\(P\)</span> of the demonstrator chosen, the new trait will vary of maximum of <span class="math inline">\(\mu\)</span>, through the instruction <code>runif(N, -mu, +mu)</code>. The two following lines just keep the traits in the boundaries between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. The second difference is in the selection of the trait to copy. Here each individual sample two traits (or demonstrators) from the previous generation, and simply copies the one with the trait closer to the optimal value of <span class="math inline">\(1\)</span>.</p>
 <p>We can now run the simulation, and plot it with a slightly modified function <code>plot_multiple_runs_p()</code> (we just need to change the label for y-axis). We use a low value for the copying error such as <span class="math inline">\(\mu=0.05\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_multiple_runs_p &lt;-<span class="st"> </span><span class="cf">function</span>(data_model) {
-  <span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> run)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (average value of P)&quot;</span>)
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)
-<span class="kw">plot_multiple_runs_p</span>(data_model)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">plot_multiple_runs_p &lt;-<span class="st"> </span><span class="cf">function</span>(data_model) {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">ggplot</span>(<span class="dt">data =</span> data_model, <span class="kw">aes</span>(<span class="dt">y =</span> p, <span class="dt">x =</span> generation)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> run)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">    </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;p (average value of P)&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">plot_multiple_runs_p</span>(data_model)</a></code></pre></div>
 <p><img src="_main_files/figure-html/13.4-1.png" width="672" /></p>
 <p>Even with a weak form of selection (sampling two traits and choosing the better one) the population converges on the optimal value quickly, in only around ten cultural generations.</p>
 <p>Now we can write another function where convergent transformation produces the same effect.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transformation &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
-    <span class="co"># create first generation</span>
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-      
-      population<span class="op">$</span>P &lt;-<span class="st"> </span>demonstrators<span class="op">$</span>P <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="dt">max =</span> <span class="dv">1</span><span class="op">-</span>demonstrators<span class="op">$</span>P)
-      
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">transformation &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">      </a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">      population<span class="op">$</span>P &lt;-<span class="st"> </span>demonstrators<span class="op">$</span>P <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="dt">max =</span> <span class="dv">1</span><span class="op">-</span>demonstrators<span class="op">$</span>P)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">      </a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">  output <span class="co"># export data from function</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">}</a></code></pre></div>
 <p>There is only a line we need to pay attention to: the values of <span class="math inline">\(P\)</span> of the new generation are calculated as <code>demonstrators$P + runif(N, max = 1-demonstrators$P)</code>. This means that the individuals of the new population copy the old generation, but they are not particularly good. They take a value of <span class="math inline">\(P\)</span> randomly drawn between the value of the demonstrator and the optimal <span class="math inline">\(P=1\)</span>. Thus, if they attempt to copy a demonstrator with <span class="math inline">\(P=0.1\)</span>, their “error” can be as large as 0.9. Let’s run the simulations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-<span class="kw">plot_multiple_runs_p</span>(data_model)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">data_model &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot_multiple_runs_p</span>(data_model)</a></code></pre></div>
 <p><img src="_main_files/figure-html/13.6-1.png" width="672" /></p>
 <p>As the transformations tend to all converge in the same direction, the results are equivalent to the previous model. It does not matter when exactly the population reaches stability at <span class="math inline">\(P=1\)</span>, as this depends on the specific implementation choices, for example the strength of cultural selection in the first model, or how big can be the “jump” of the transformation in the second model.</p>
-<p>When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. How can we distinguish the relative importance of the two processes?</p>
+<p>When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. As we have just shown, however, the spread of the traits in the population looks similar in both cases. Are there ways to distinguish the relative importance of the two processes?</p>
 <div id="emergent-similarity" class="section level2">
 <h2><span class="header-section-number">9.1</span> Emergent similarity</h2>
-<p>QUESTION</p>
-<p>We can rewrite the <code>reproduction()</code> and <code>transformation()</code> functions adding a further output, that is, how similar are the traits that the new generation show to the traits that they had copied from the previous. We thus add a variable <em>d</em> (as in “distance”) in our <code>output</code> tibble, and we calculate this value at the end of each generation as <code>sum(abs(population$P - copy)) / N</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
-    <span class="co"># create first generation</span>
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P1 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">P2 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-      copy &lt;-<span class="st"> </span><span class="kw">pmax</span>(demonstrators<span class="op">$</span>P1, demonstrators<span class="op">$</span>P2)
-
-      population<span class="op">$</span>P &lt;-<span class="st"> </span>copy <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="op">-</span>mu, <span class="op">+</span>mu)
-      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
-      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(population<span class="op">$</span>P <span class="op">-</span><span class="st"> </span>copy)) <span class="op">/</span><span class="st"> </span>N
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
+<p>One possibility is to track how similar are the traits that the observers reproduce, with respect to the traits they use as a starting point. If reproduction is the driving force, they should be fairly similar and the measure should be always the same, as the distance between the trait produced and the trait copied is fixed, and given by the parameter <span class="math inline">\(\mu\)</span>. If transformation is the driving force, instead, we should expect similarity being lower when traits are far from the optimal value (i.e. at the beginning of the simulations) - remember their <span class="math inline">\(P\)</span> is randomly drawn between the value of the demonstrator and the optimal <span class="math inline">\(P=1\)</span> - and higher when traits are close to the optimal value.</p>
+<p>We can rewrite the <code>reproduction()</code> and <code>transformation()</code> functions adding as a further output this measure of similarity, that is, how distant are the traits that the new generation show to the traits that they had copied from the previous. We thus add a variable <em>d</em> (as in “distance”) in our <code>output</code> tibble, and we calculate this value at the end of each generation as <code>sum(abs(population$P - copy)) / N</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">reproduction &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max, mu) {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P1 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">P2 =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">      copy &lt;-<span class="st"> </span><span class="kw">pmax</span>(demonstrators<span class="op">$</span>P1, demonstrators<span class="op">$</span>P2)</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">      population<span class="op">$</span>P &lt;-<span class="st"> </span>copy <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="op">-</span>mu, <span class="op">+</span>mu)</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">      population<span class="op">$</span>P[population<span class="op">$</span>P <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(population<span class="op">$</span>P <span class="op">-</span><span class="st"> </span>copy)) <span class="op">/</span><span class="st"> </span>N</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">  output <span class="co"># export data from function</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">}</a></code></pre></div>
 <p>We do the same for the <code>transformation()</code> function, and we can run again both simulations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transformation &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))
-    <span class="co"># create first generation</span>
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-      
-      population<span class="op">$</span>P &lt;-<span class="st"> </span>demonstrators<span class="op">$</span>P <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="dt">max =</span> <span class="dv">1</span><span class="op">-</span>demonstrators<span class="op">$</span>P)
-      
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(population<span class="op">$</span>P <span class="op">-</span><span class="st"> </span>demonstrators<span class="op">$</span>P)) <span class="op">/</span><span class="st"> </span>N
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model_reproduction &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)
-data_model_transformation &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</code></pre></div>
-<p>We already know the results with repsect to the value of <span class="math inline">\(P\)</span>, but now we are interested in comparing if and how the values for <em>d</em> change in time in the two conditions. For this, we write an <em>ad hoc</em> plotting function, that takes the data from the two outputs and plot them in the same graph. Notice the <code>na.omit()</code> function in the first line: the data on <em>d</em> is NA for the first generation, because there is no previous generation from which to take the measure, so we want to exclude it from our plot, and start from generation number 2. For this reason, all the other values are riscaled and, in particular, the variable <em>generation</em> starts from 2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">distance =</span> <span class="kw">c</span>(<span class="kw">na.omit</span>(data_model_reproduction<span class="op">$</span>d), <span class="kw">na.omit</span>(data_model_transformation<span class="op">$</span>d)), 
-                       <span class="dt">condition =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;reproduction&quot;</span>, <span class="st">&quot;transformation&quot;</span>), <span class="dt">each =</span> <span class="dv">95</span>),
-                       <span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">10</span>),
-                       <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">19</span>)))
-<span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">y =</span> distance, <span class="dt">x =</span> generation, <span class="dt">group =</span> run, <span class="dt">color =</span> condition)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st">    </span>
-<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;d (average distance observer/demonstrator)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">transformation &lt;-<span class="st"> </span><span class="cf">function</span>(N, t_max, r_max) {</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)), <span class="dt">d =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max))</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">runif</span>(N))</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="co"># create first generation</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">      demonstrators &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">P =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>P, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">      </a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">      population<span class="op">$</span>P &lt;-<span class="st"> </span>demonstrators<span class="op">$</span>P <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(N, <span class="dt">max =</span> <span class="dv">1</span><span class="op">-</span>demonstrators<span class="op">$</span>P)</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">      </a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>P) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(population<span class="op">$</span>P <span class="op">-</span><span class="st"> </span>demonstrators<span class="op">$</span>P)) <span class="op">/</span><span class="st"> </span>N</a>
+<a class="sourceLine" id="cb8-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">  }</a>
+<a class="sourceLine" id="cb8-17" data-line-number="17">  output <span class="co"># export data from function</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18">}</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">data_model_reproduction &lt;-<span class="st"> </span><span class="kw">reproduction</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>, <span class="dt">mu =</span> <span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">data_model_transformation &lt;-<span class="st"> </span><span class="kw">transformation</span>(<span class="dt">N =</span> <span class="dv">1000</span>, <span class="dt">t_max =</span> <span class="dv">20</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</a></code></pre></div>
+<p>We already know the results with respect to the value of <span class="math inline">\(P\)</span>, but now we are interested in comparing if and how the values for <em>d</em> change in time in the two conditions. For this, we write an <em>ad hoc</em> plotting function, that takes the data from the two outputs and plot them in the same graph. Notice the <code>na.omit()</code> function in the first line: the data on <em>d</em> is NA for the first generation, because there is no previous generation from which to take the measure, so we want to exclude it from our plot, and start from generation number 2. For this reason, all the other values are rescaled and, in particular, the variable <em>generation</em> starts from 2.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">data_to_plot &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">distance =</span> <span class="kw">c</span>(<span class="kw">na.omit</span>(data_model_reproduction<span class="op">$</span>d), <span class="kw">na.omit</span>(data_model_transformation<span class="op">$</span>d)), </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">                       <span class="dt">condition =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;reproduction&quot;</span>, <span class="st">&quot;transformation&quot;</span>), <span class="dt">each =</span> <span class="dv">95</span>),</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">                       <span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">                       <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">19</span>)))</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw">ggplot</span>(<span class="dt">data =</span> data_to_plot, <span class="kw">aes</span>(<span class="dt">y =</span> distance, <span class="dt">x =</span> generation, <span class="dt">group =</span> run, <span class="dt">color =</span> condition)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st">    </span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;d (average distance observer/demonstrator)&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/13.10-1.png" width="672" /></p>
-<p>DESCRIPTION OF THE RESULTS</p>
+<p>As predicted, in the “transformation” condition distance is higher at the beginning of the simulation, and reaches zero when all individuals have the optimal value. In the “reproduction” condition, instead, the distance is approximately constant. In fact, it slightly decreases after the first few generations. This is due to the fact that at the beginning, with <span class="math inline">\(P\)</span> randomly distributed in the population, the mutation is effectively drawn between <span class="math inline">\(P-\mu\)</span> and <span class="math inline">\(P+\mu\)</span>, but after a while, when demonstrators have a value close to the optimal <span class="math inline">\(P=1\)</span>, the mutation is only drawn in <span class="math inline">\(P-\mu\)</span>, as values of <span class="math inline">\(P\)</span> higher than <span class="math inline">\(1\)</span> are not allowed.</p>
 </div>
 <div id="the-cultural-price-equation" class="section level2">
 <h2><span class="header-section-number">9.2</span> The cultural Price equation</h2>
@@ -355,11 +383,13 @@ data_model_transformation &lt;-<span class="st"> </span><span class="kw">transfo
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -367,12 +397,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -384,6 +413,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -400,10 +433,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
