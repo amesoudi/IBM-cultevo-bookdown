@@ -1,13 +1,13 @@
 
 # Reproduction and transformation
 
-To be considered "cultural", ideas, behaviours, and artifacts need to be sufficiently stable in time. The version of *Little Red Riding Hood* we heard now is part of a long cultural transmission chain that includes all the other versions of the tale because they all share *enough* features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider one cultural trait as *lasagne*. Boundaries are muddled for many traits: while some artifacts can be the exact replica of each other, no two identical lasagne exist. In any case, the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a relative stability. This is a useful assumption and, in many case, a good approximation of what happens in reality. 
+To be considered "cultural", ideas, behaviours, and artifacts need to be sufficiently stable in time. The version of *Little Red Riding Hood* we heard now is part of a long cultural transmission chain that includes all the other versions of the tale because they all share *enough* features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider all of them as one cultural trait: *lasagne*. Boundaries are muddled for many traits: while some artifacts can be the exact replica of each other, no two identical lasagne exist. In any case, the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a relative stability. This is a useful assumption and, in many case, a good approximation of what happens in reality. 
 
-However, cultural traits can also be stable not because they are copied with high-fidelity, but also because when passing from an individual to another they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so they we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling techniques for which it is required. As we will discuss later, copying and reconstructing are not two alternative processes, but they both concur to cultural evolution.)
+However, cultural traits can be stable not because they are copied with high-fidelity, but because, when passing from an individual to another, they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so that we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling techniques for which it is required. As we will mention again later, copying and reconstructing are not two alternative processes, but they both concur to cultural evolution.)
 
 To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.
 
-Let's imagine a population with a single trait, a continuous trait $P$, that can have values between $0$ and $1$. At the beginning of the simulations, $P$ is uniformly distributed in the population. Let's say the optimal value of $P$ is $1$ (this is convenient for the code, but the exact value is not important). You can think to $P$ as, for example, how sharp is a knife: the more the better.
+Let's imagine a population with a single trait, a continuous trait $P$, that can have values between 0 and 1. At the beginning of the simulations, $P$ is uniformly distributed in the population. Let's say the optimal value of $P$ is $1$ (this is convenient for the code, but the exact value is not important). You can think to $P$ as, for example, how sharp is a knife: the more the better.
 
 ```{r 13.1, message=FALSE}
 library(tidyverse)
@@ -16,7 +16,7 @@ N <- 1000
 population <- tibble(P = runif(N))
 ```
 
-Now, we can write the familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In [Chapter 3][Biased transmission: direct bias], for example, we showed how a direct bias for one of two discrete cultural traits could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a preference for traits close to the optimal value. (Notice the code would be equivalent - and we would obtain the same effect of convergence to optimal value - thinking in terms of other methods of cultural selection, e.g. and indirect bias towards successful demonstrators, that are successful as they have a $P$ close to the optimal).
+Now, we can write the familiar function where individuals copy the trait from the previous generation with one of the biases we explored earlier in the book. In [Chapter 3][Biased transmission: direct bias], for example, we showed how a direct bias for one of two discrete cultural traits could make it spread and go to fixation. We can do something similar here, with the difference that the trait is continuous and the bias needs to be a preference for traits close to the optimal value. (Notice the code would be equivalent - and we would obtain the same effect of convergence to optimal value - thinking in terms of other methods of cultural selection, e.g. an indirect bias towards successful demonstrators, that are successful as they have a $P$ close to the optimal).
 
 ```{r 13.2}
 reproduction <- function(N, t_max, r_max, mu) {
@@ -42,7 +42,7 @@ reproduction <- function(N, t_max, r_max, mu) {
 
 The function is similar to what we have already done several times. Let's have a look at the few differences. First, we find again the parameter $\mu$, as done for [biased mutation][Unbiased and biased mutation] and [innovation][Multiple traits models] in previous chapters. Similarly, it implements here the error in copying: with respect to the $P$ of the demonstrator chosen, the new trait will vary of maximum of $\mu$, through the instruction `runif(N, -mu, +mu)`. The two following lines just keep the traits in the boundaries between $0$ and $1$. The second difference is in the selection of the trait to copy. Here each individual sample two traits (or demonstrators) from the previous generation, and simply copies the one with the trait closer to the optimal value of $1$.   
 
-We can now run the simulation, and plot it with a slightly modified function `plot_multiple_runs_p()` (we just need to change the label for y-axis). We use a low value for the copying error such as $\mu=0.05$.
+We can now run the simulation, and plot it with a slightly modified function `plot_multiple_runs_p()` (we just need to change the label for y-axis). We use a low value for the copying error, such as $\mu=0.05$.
 
 ```{r 13.3}
 plot_multiple_runs_p <- function(data_model) {
@@ -84,7 +84,7 @@ transformation <- function(N, t_max, r_max) {
 }
 ```
 
-There is only a line we need to pay attention to: the values of $P$ of the new generation are calculated as `demonstrators$P + runif(N, max = 1-demonstrators$P)`. This means that the individuals of the new population copy the old generation, but they are not particularly good. They take a value of $P$ randomly drawn between the value of the demonstrator and the optimal $P=1$. Thus, if they attempt to copy a demonstrator with $P=0.1$, their "error" can be as large as 0.9. Let's run the simulations.
+There is only a line we need to pay attention to: the values of $P$ of the new generation are calculated as `demonstrators$P + runif(N, max = 1-demonstrators$P)`. This means that the individuals of the new population copy the old generation, but they are not particularly good. They take a value of $P$ randomly drawn between the value of the demonstrator and the optimal $P=1$. Thus, if they attempt to copy a demonstrator with $P=0.1$, their "error" can be as large as 0.9. While errors can be big, they are all in the same direction, contributing to increase $P$. Let's run the simulations.
 
 ```{r 13.6}
 data_model <- transformation(N = 1000, t_max = 20, r_max = 5)
@@ -97,9 +97,9 @@ When we see cultural traits in real life, we are observing systems in a state an
 
 ## Emergent similarity 
 
-One possibility is to track how similar are the traits that the observers reproduce, with respect to the traits they use as a starting point. If reproduction is the driving force, they should be fairly similar and the measure should be always the same, as the distance between the trait produced and the trait copied is fixed, and given by the parameter $\mu$. If transformation is the driving force, instead, we should expect similarity being lower when traits are far from the optimal value (i.e. at the beginning of the simulations) - remember their $P$ is randomly drawn between the value of the demonstrator and the optimal $P=1$ - and higher when traits are close to the optimal value.
+One possibility is to track how similar are the traits that the observers reproduce, with respect to the traits they use as a starting point. If reproduction is the driving force, they should be fairly similar and the measure should be always the same, as the distance between the trait produced and the trait copied is fixed, and given by the parameter $\mu$. If transformation is the driving force, instead, we should expect similarity being lower when traits are far from the optimal value (i.e. at the beginning of the simulations, remember their $P$ is randomly drawn between the value of the demonstrator and the optimal $P=1$ - and higher when traits are close to the optimal value.
 
-We can rewrite the `reproduction()` and `transformation()` functions adding as a further output this measure of similarity, that is, how distant are the traits that the new generation show to the traits that they had copied from the previous. We thus add a variable *d* (as in "distance") in our `output` tibble, and we calculate this value at the end of each generation as `sum(abs(population$P - copy)) / N`.
+We can rewrite the `reproduction()` and `transformation()` functions adding as a further output this measure of similarity, that is, how distant are the traits that the new generation show versus the traits that they had copied from the previous. We thus add a variable *d* (as in "distance") in our `output` tibble, and we calculate this value at the end of each generation as `sum(abs(population$P - copy)) / N`.
 
 ```{r 13.7}
 reproduction <- function(N, t_max, r_max, mu) {
@@ -171,7 +171,7 @@ As predicted, in the "transformation" condition distance is higher at the beginn
 
 Another way to look at the difference between the two conditions is to look at the "cultural fitness" of the individuals in the population. More in detail, one can look at how this metric covaries with how good they actually are, that is given by their value of $P$. We can define $W$, a measure of cultural fitness, as the number of "cultural offspring" that the individual $i$ has in the next generation. If individual $i$ has been copied by, say, four individuals, its fitness will be $W_i=4$.  
 
-If individuals, or their traits, are selected, as happens in the "reproduction" condition, we expect that individuals with higher values of $P$ have more cultural offspring, thus, that to higher $P$s correspond higher $W$s. We expect, in other word, the covariance between $W$ and $P$ being positive i.e. $cov(W,P)>0$. On the other hand, in the condition "transformation" there is no selection, so there are no reasons why an individual with higher $P$ produces more cultural offspring. In this case, the covariance should be around zero, i.e. $cov(W,P)>0$. 
+If individuals, or their traits, are selected, as happens in the "reproduction" condition, we expect that individuals with higher values of $P$ have more cultural offspring, thus, that to higher $P$s correspond higher $W$s. We expect, in other words, the covariance between $W$ and $P$ being positive i.e. $cov(W,P)>0$. On the other hand, in the condition "transformation" there is no selection, so there are no reasons why an individual with higher $P$ produces more cultural offspring. In this case, the covariance should be zero, i.e. $cov(W,P)=0$. 
 
 To calculate cultural fitness, and how it covaries with $P$, we need to modify again our functions. Let's start, as before, with `reproduction()`:
 
@@ -200,7 +200,7 @@ reproduction <- function(N, t_max, r_max, mu) {
 }
 ```
 
-The function produces the usual output, but in a different way. To measure $W$, we need to know the actual individuals that are copied, not only their $P$ values, as we were doing previously. For this reason, the sampling of the demonstrators is done on their indexes (`sample(N, N, replace = TRUE)`). Then, the indexes are used to retrieve their $P$, in the two following lines. Finally, we count how many times each index, that is, each individual, is used as demonstrator, using the function `tabulate()`, introduced in [Chapter 7][Multiple traits models].   
+The function produces the usual output, but in a different way. To measure $W$, we need to know the actual individuals that are copied, not only their $P$ values, as we were doing previously. For this reason, the sampling of the demonstrators is done on their indexes with the instruction `sample(N, N, replace = TRUE)`. Then, the indexes are used to retrieve their $P$, in the two following lines. Finally, we count how many times each index, that is, each individual, is used as demonstrator, using the function `tabulate()`, introduced in [Chapter 7][Multiple traits models].   
 
 Now we need to do the same for `transformation()`:
 
@@ -243,9 +243,11 @@ ggplot(data = data_to_plot, aes(y = covariance, x = generation, group = run, col
   labs(y = "covariance between cultural fitness and P")
 ```
 
-In the "reproduction" condition, the covariance is indeed positive, and decreases gradually close to zero, when all the individuals converge to $P=1$, as there is no more variation on which selection can act. For the same logic explained for the previous result, it does not reach zero, as mutation keep some variation, and individuals that muted to lower $P$s are less likely to be selected. As expected, the covariance is equal to zero in the "transformation" condition. This is hardly a surprising result as demonstrators are selected fully at random in the model, but it is important to compare this with what happens with empirical data of real cultural dynamics, where we can be able to distinguish different underlying stabilising forces.
+In the "reproduction" condition, the covariance is indeed positive, and decreases gradually close to zero, when all the individuals converge to $P=1$, as there is no more variation on which selection can act. Notice it does not reach zero, as mutation keep some variation, and individuals that muted to lower $P$s are less likely to be selected. As expected, the covariance is equal to zero in the "transformation" condition. This is hardly a surprising result as demonstrators are selected fully at random in the model, but it is important to compare this with what happens with empirical data of real cultural dynamics, where we can be able to distinguish different underlying stabilising forces.
 
 ## Summary of the model
+
+TO DO
 
 ***
 
@@ -257,5 +259,7 @@ I do not think it is possible.
   
 ## Further readings
 
-The analysis described in the sections Emergent similarity and the cultural fitness are based on the cultural application of the Price Equation 
-  
+TO DO
+
+The analysis described in the sections emergent similarity and the cultural fitness are based on the cultural application of the Price Equation see @nettle_selection_nodate. Model similar to @acerbi_cultural_2019. Transformation and reproduction in cultural evolution @acerbi_if_2015. Cultural attraction in 
+@sperber_selection_1997.
