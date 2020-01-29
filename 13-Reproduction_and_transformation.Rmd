@@ -163,14 +163,17 @@ ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color
   geom_line() +    
   theme_bw() +
   labs(y = "d (average distance observer/demonstrator)")
-
 ```
 
 As predicted, in the "transformation" condition distance is higher at the beginning of the simulation, and reaches zero when all individuals have the optimal value. In the "reproduction" condition, instead, the distance is approximately constant. In fact, it slightly decreases after the first few generations. This is due to the fact that at the beginning, with $P$ randomly distributed in the population, the mutation is effectively drawn between $P-\mu$ and $P+\mu$, but after a while, when demonstrators have a value close to the optimal $P=1$, the mutation is only drawn in $P-\mu$, as values of $P$ higher than $1$ are not allowed.  
 
 ## Cultural fitness
 
-Another way to look at it: 
+Another way to look at the difference between the two conditions is to look at the "cultural fitness" of the individuals in the population. More in detail, one can look at how this metric covaries with how good they actually are, that is given by their value of $P$. We can define $W$, a measure of cultural fitness, as the number of "cultural offspring" that the individual $i$ has in the next generation. If individual $i$ has been copied by, say, four individuals, its fitness will be $W_i=4$.  
+
+If individuals, or their traits, are selected, as happens in the "reproduction" condition, we expect that individuals with higher values of $P$ have more cultural offspring, thus, that to higher $P$s correspond higher $W$s. We expect, in other word, the covariance between $W$ and $P$ being positive i.e. $cov(W,P)>0$. On the other hand, in the condition "transformation" there is no selection, so there are no reasons why an individual with higher $P$ produces more cultural offspring. In this case, the covariance should be around zero, i.e. $cov(W,P)>0$. 
+
+To calculate cultural fitness, and how it covaries with $P$, we need to modify again our functions. Let's start, as before, with `reproduction()`:
 
 ```{r 13.11}
 reproduction <- function(N, t_max, r_max, mu) {
@@ -197,7 +200,9 @@ reproduction <- function(N, t_max, r_max, mu) {
 }
 ```
 
-Now for transformation:
+The function produces the usual output, but in a different way. To measure $W$, we need to know the actual individuals that are copied, not only their $P$ values, as we were doing previously. For this reason, the sampling of the demonstrators is done on their indexes (`sample(N, N, replace = TRUE)`). Then, the indexes are used to retrieve their $P$, in the two following lines. Finally, we count how many times each index, that is, each individual, is used as demonstrator, using the function `tabulate()`, introduced in [Chapter 7][Multiple traits models].   
+
+Now we need to do the same for `transformation()`:
 
 ```{r 13.12}
 transformation <- function(N, t_max, r_max) {
@@ -222,26 +227,23 @@ transformation <- function(N, t_max, r_max) {
 }
 ```
 
-Run sims:
+The logic is exactly the same, only we do not need to use the indexes to retrieve the $P$ values, as they are not needed to choose demonstrators. At this point, as before, we can run the simulations in the two conditions, and plot the results (the code for the plot is also the same, only the label for the y-axes changes).
 
 ```{r 13.13}
 data_model_reproduction <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
 data_model_transformation <- transformation(N = 1000, t_max = 20, r_max = 5)
-```
 
-Plot: 
-
-```{r 13.14}
-data_to_plot <- tibble(distance = c(na.omit(data_model_reproduction$cov_W_P), na.omit(data_model_transformation$cov_W_P)), 
+data_to_plot <- tibble(covariance = c(na.omit(data_model_reproduction$cov_W_P), na.omit(data_model_transformation$cov_W_P)), 
                        condition = rep(c("reproduction", "transformation"), each = 95),
                        generation = rep(2:20,10),
                        run = as.factor(rep(1:10, each = 19)))
-ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color = condition)) +
+ggplot(data = data_to_plot, aes(y = covariance, x = generation, group = run, color = condition)) +
   geom_line() +    
   theme_bw() +
-  labs(y = "covariance between fitness and P")
-
+  labs(y = "covariance between cultural fitness and P")
 ```
+
+In the "reproduction" condition, the covariance is indeed positive, and decreases gradually close to zero, when all the individuals converge to $P=1$, as there is no more variation on which selection can act. For the same logic explained for the previous result, it does not reach zero, as mutation keep some variation, and individuals that muted to lower $P$s are less likely to be selected. As expected, the covariance is equal to zero in the "transformation" condition. This is hardly a surprising result as demonstrators are selected fully at random in the model, but it is important to compare this with what happens with empirical data of real cultural dynamics, where we can be able to distinguish different underlying stabilising forces.
 
 ## Summary of the model
 
@@ -249,6 +251,7 @@ ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color
 
 ## Analytical appendix
   
+I do not think it is possible.
 
 ***
   
