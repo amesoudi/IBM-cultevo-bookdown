@@ -93,7 +93,7 @@ plot_multiple_runs_p(data_model)
 
 As the transformations tend to all converge in the same direction, the results are equivalent to the previous model. It does not matter when exactly the population reaches stability at $P=1$, as this depends on the specific implementation choices, for example the strength of cultural selection in the first model, or how big can be the "jump" of the transformation in the second model.
 
-When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. As we have just shown, however, the spread of the traits in the population looks similar in both cases. Are there ways to distinguish the relative importance of the two processes?    
+When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying coupled with selection and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. As we have just shown, however, the spread of the traits in the population looks similar in both cases. Are there ways to distinguish the relative importance of the two processes?    
 
 ## Emergent similarity 
 
@@ -169,7 +169,7 @@ As predicted, in the "transformation" condition distance is higher at the beginn
 
 ## Cultural fitness
 
-Another way to look at the difference between the two conditions is to look at the "cultural fitness" of the individuals in the population. More in detail, one can look at how this metric covaries with how good they actually are, that is given by their value of $P$. We can define $W$, a measure of cultural fitness, as the number of "cultural offspring" that the individual $i$ has in the next generation. If individual $i$ has been copied by, say, four individuals, its fitness will be $W_i=4$.  
+Another way to look at the difference between the two conditions, focusing on the process of selection, is to look at the "cultural fitness" of the individuals in the population. More in detail, one can look at how this metric covaries with how good they actually are, as given by their value of $P$. We can define $W$, a measure of cultural fitness, as the number of "cultural offspring" that the individual $i$ has in the next generation. If individual $i$ has been copied by, say, four individuals, its fitness will be $W_i=4$.  
 
 If individuals, or their traits, are selected, as happens in the "reproduction" condition, we expect that individuals with higher values of $P$ have more cultural offspring, thus, that to higher $P$s correspond higher $W$s. We expect, in other words, the covariance between $W$ and $P$ being positive i.e. $cov(W,P)>0$. On the other hand, in the condition "transformation" there is no selection, so there are no reasons why an individual with higher $P$ produces more cultural offspring. In this case, the covariance should be zero, i.e. $cov(W,P)=0$. 
 
