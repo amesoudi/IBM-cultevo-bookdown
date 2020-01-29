@@ -27,4 +27,5 @@
 * 13-Reproduction and transformation
   * links with biased mutation in chapter 2? (AA)
   * do we say something about guided variation elsewhere? (AA)
+  * the two sections "emergent distance" and "cultural fitness" can be explicitly reformulated as coming from the Price equation
   

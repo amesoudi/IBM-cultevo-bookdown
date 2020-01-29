@@ -168,9 +168,80 @@ ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color
 
 As predicted, in the "transformation" condition distance is higher at the beginning of the simulation, and reaches zero when all individuals have the optimal value. In the "reproduction" condition, instead, the distance is approximately constant. In fact, it slightly decreases after the first few generations. This is due to the fact that at the beginning, with $P$ randomly distributed in the population, the mutation is effectively drawn between $P-\mu$ and $P+\mu$, but after a while, when demonstrators have a value close to the optimal $P=1$, the mutation is only drawn in $P-\mu$, as values of $P$ higher than $1$ are not allowed.  
 
-## The cultural Price equation
+## Cultural fitness
 
-TO DO
+Another way to look at it: 
+
+```{r 13.11}
+reproduction <- function(N, t_max, r_max, mu) {
+  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = rep(NA, t_max * r_max))
+  for (r in 1:r_max) {
+    population <- tibble(P = runif(N))
+    # create first generation
+    output[output$generation == 1 & output$run == r, ]$p <- sum(population$P) / N # add first generation's p for run r
+    for (t in 2:t_max) {
+      previous_population <- population # copy individuals to previous_population tibble
+      demonstrators <- cbind(sample(N, N, replace = TRUE), sample(N, N, replace = TRUE))
+      copy <- max.col(cbind(previous_population[demonstrators[,1],], previous_population[demonstrators[,2],]))
+      demonstrators <- demonstrators[cbind(1 : N, copy)]
+      fitness <- tabulate(demonstrators, N) 
+
+      population$P <- previous_population[demonstrators,]$P + runif(N, -mu, +mu)
+      population$P[population$P > 1] <- 1
+      population$P[population$P < 0] <- 0
+      output[output$generation == t & output$run == r, ]$p <- sum(population$P) / N # get p and put it into output slot for this generation t and run r
+      output[output$generation == t & output$run == r, ]$cov_W_P <- cov(fitness, previous_population$P) 
+    }
+  }
+  output # export data from function
+}
+```
+
+Now for transformation:
+
+```{r 13.12}
+transformation <- function(N, t_max, r_max) {
+  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = rep(NA, t_max * r_max))
+  for (r in 1:r_max) {
+    population <- tibble(P = runif(N))
+    # create first generation
+    output[output$generation == 1 & output$run == r, ]$p <- sum(population$P) / N # add first generation's p for run r
+    for (t in 2:t_max) {
+      previous_population <- population # copy individuals to previous_population tibble
+      demonstrators <- sample(N, N, replace = TRUE)
+      fitness <- tabulate(demonstrators, N) 
+
+      
+      population$P <- previous_population[demonstrators,]$P + runif(N, max = 1 - previous_population[demonstrators,]$P)
+      
+      output[output$generation == t & output$run == r, ]$p <- sum(population$P) / N # get p and put it into output slot for this generation t and run r
+      output[output$generation == t & output$run == r, ]$cov_W_P <- cov(fitness,previous_population$P)
+    }
+  }
+  output # export data from function
+}
+```
+
+Run sims:
+
+```{r 13.13}
+data_model_reproduction <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
+data_model_transformation <- transformation(N = 1000, t_max = 20, r_max = 5)
+```
+
+Plot: 
+
+```{r 13.14}
+data_to_plot <- tibble(distance = c(na.omit(data_model_reproduction$cov_W_P), na.omit(data_model_transformation$cov_W_P)), 
+                       condition = rep(c("reproduction", "transformation"), each = 95),
+                       generation = rep(2:20,10),
+                       run = as.factor(rep(1:10, each = 19)))
+ggplot(data = data_to_plot, aes(y = distance, x = generation, group = run, color = condition)) +
+  geom_line() +    
+  theme_bw() +
+  labs(y = "covariance between fitness and P")
+
+```
 
 ## Summary of the model
 
@@ -182,4 +253,6 @@ TO DO
 ***
   
 ## Further readings
+
+The analysis described in the sections Emergent similarity and the cultural fitness are based on the cultural application of the Price Equation 
   
