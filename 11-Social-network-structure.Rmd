@@ -54,7 +54,7 @@ V(net)$sex
 
 In the first line, we create a new node variable as part of the **net** object, called 'sex.' We set this variable to be 'girl' for all entries. In the next line we replace all 'girl' entries with 'boy' where the name of the vertex is one of the three boy names. We can now use this information to change the colour of the nodes depending on their sex.
 
-```{r 11.4}
+```{r 11.5}
 V(net)$col <- 'dodgerblue'
 V(net)$col[ V(net)$sex=="boy" ] <- 'firebrick3'
 
