@@ -5,6 +5,8 @@ To be considered "cultural", ideas, behaviours, and artifacts need to be suffici
 
 However, cultural traits can be stable not because they are copied with high-fidelity, but because, when passing from an individual to another, they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so that we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling techniques for which it is required. As we will mention again later, copying and reconstructing are not two alternative processes, but they both concur to cultural evolution.)
 
+Evolutionary psychologists and some anthropologists emphasise how certain cultural traditions are similar in many societies, such as supernatural beliefs, types of musics, or what people find or not disgusting. These similarities do not need to be produced by genetically encoded preferences, but it suffices that some general tendencies make more likely that people everywhere will converge on these quasi-universal forms. A psychological tendency to interpret the behaviour of an entity as intentional (even if this entity is an inanimate object) could give rise to similarity in supernatural beliefs, as much as the physical property of the mouth give rise to similarity in how people whistle everywhere.    
+
 To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.
 
 Let's imagine a population with a single trait, a continuous trait $P$, that can have values between 0 and 1. At the beginning of the simulations, $P$ is uniformly distributed in the population. Let's say the optimal value of $P$ is $1$ (this is convenient for the code, but the exact value is not important). You can think to $P$ as, for example, how sharp is a knife: the more the better.
@@ -93,7 +95,7 @@ plot_multiple_runs_p(data_model)
 
 As the transformations tend to all converge in the same direction, the results are equivalent to the previous model. It does not matter when exactly the population reaches stability at $P=1$, as this depends on the specific implementation choices, for example the strength of cultural selection in the first model, or how big can be the "jump" of the transformation in the second model.
 
-When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we mentioned earlier in the chapter, both faithful copying coupled with selection and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. As we have just shown, however, the spread of the traits in the population looks similar in both cases. Are there ways to distinguish the relative importance of the two processes?    
+When we see cultural traits in real life, we are observing systems in a state analogous to what happens on the right side of the two plots, where individuals reproduce traits one similar to the other. As we touched earlier in the chapter, both faithful copying coupled with selection and transformation can be important for culture, and their importance can depend from the specific features we are interested to track, or from the cultural domain. As we have just shown, however, the spread of the traits in the population looks similar in both cases. Are there ways to distinguish the relative importance of the two processes?    
 
 ## Emergent similarity 
 
@@ -247,7 +249,7 @@ In the "reproduction" condition, the covariance is indeed positive, and decrease
 
 ## Summary of the model
 
-TO DO
+Cultural traditions can survive intact through long and wide transmission chains because cultural traits are copied faithfully, because some of them are copied more than others (cultural selection), and because everybody involved in the episodes of transmission tend to reproduce them in a similar way. All these forces are likely to be important, to a various degree, in different domains and for different features of cultural traits. While in the rest of the book we have focused on copying and selection, in this chapter we have considered transformation. We have shown that both copying plus selection and convergent transformation create stable cultural systems, where all individuals in the population converge on similar cultural traits. We also explored how these forces can be distinguished. One possible way is to chart the similarity between the cultural traits observed and the cultural traits reproduces: in the case of transformation depends on the specific feature of the traits (the closer to the end-point of the convergence, the higher the similarity), whereas for reproduction we should expect similarity to be constant, depending on how, generally, copying is precise. Another way is to detect whether demonstrators with certain traits (or certain features of a trait) are copied more: this is the sign of selection, that characterised our "reproduction"" model, but not the "transformation" one.   
 
 ***
 
@@ -259,7 +261,6 @@ Nothing to do here?
   
 ## Further readings
 
-TO DO
+The model comparing reproduction and transformation is a simplified version of the model described in @acerbi_cultural_2019. The analysis to detect signs (similarity and cultural fitness) of the two forces are inspired also by the application of the Price Equation to cultural evolution in @nettle_selection_nodate. An early account of the importance of convergent transformation ("cultural attraction") in cultural evolution is @sperber_selection_1997. A discussion of the relative importance of transformation and reproduction in cultural evolution, and of the necessity to consider both is @acerbi_if_2015. 
 
-The analysis described in the sections emergent similarity and the cultural fitness are based on the cultural application of the Price Equation see @nettle_selection_nodate. Model similar to @acerbi_cultural_2019. Transformation and reproduction in cultural evolution @acerbi_if_2015. Cultural attraction in 
-@sperber_selection_1997.
+
