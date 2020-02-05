@@ -81,7 +81,7 @@ plot(net,
 plot(as.undirected(net))
 #see, self-arrows
 #can get rid of self-loops
-plot(simplified(net))
+plot(simplify(net))
 #which is the same as setting the diagonal of m to be 0
 diag(m) <- 0
 net <- graph_from_adjacency_matrix(adjmatrix=m)
@@ -111,8 +111,55 @@ plot(net_small, vertex.color="gold")
 
 
 <!-- How to characterise networks - Degree, path length, transitivity, centrality measures -->
+Different measures, descriptive (size, connectivity, path length)
+Different measures of centrality (transitivity, betweeness, closeness)
+
+```{r}
+net <- net_small
+vcount(net)
+degree(graph=net)
+degree(graph=net, mode="out")
+mean(degree(graph=net, mode="out"))
+
+average.path.length(graph=net)
+
+transitivity(graph=net)
+
+betweenness(graph=net)
+
+closeness(graph=net)
+```
+
+
+Next, how are we going to use this?
+Another way to represent a network is in the shape of a matrix
+```{r}
+get.adjacency(net)
+net_m <- as.matrix(get.adjacency(net))
+```
+
+Undirected network (which we will look at here to keep things simple)
+
+If we want to know who is connected to individual 3
+
+```{r}
+net_m[3,]
+which(net_m[3,]==1)
+```
+
+Contagion on this network
+
+Select individaul to have information/innovation
+Set repertoire to 1 for this individual
+Loop
+Select individual with repertoire == 1, then select random neighbour, transmit information
+Record how many individuals have repertoire == 1
+
 
 <!-- How to simulate transmission of information along the edges of a network -->
+E.g. using a simple contagion method
+
+how long does it take for information to spread in networks with different shape and characteristics (more or less clustered)?
 
 <!-- Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
 
