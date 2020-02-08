@@ -1,0 +1,205 @@
+# Rogers' Paradox: A Solution
+
+In the previous chapter we saw how social learning does not increase the mean fitness of a population relative to a population entirely made up of individual learners, at least in a changing environment. This is colloquially known as Rogers' paradox, after Alan Rogers' model which originally showed this. It is a 'paradox' because it holds even though social learning is less costly than individual learning, and social learning is often argued to underpin our species' ecological success. The paradox occurs because social learning is frequency dependent: when environments change, the success of social learning depends on there being individual learners around to copy. Otherwise social learners are left copying each others' outdated behaviour.
+
+Several subsequent models have explored 'solutions' to Rogers' paradox. These involve relaxing the obviously unrealistic assumptions. One of these is that individuals in the model come in one of two fixed types: social learners always socially learn, and individual learners always individually learn. This is obviously unrealistic. Most organisms that can learn individually can also learn socially, and the two capacities likely rely on the same underlying mechanisms (e.g. associative learning).
+
+To explore this assumption, @enquist_critical_2007 added another type of individual to Rogers' model: a critical social learner. These individuals first try social learning, and if the result is unsatisfactory, they then try individual learning. The following function modifies the rogers_model function from the last chapter to include critical learners. We need to change the code in a few places, as explained below the chunk. 
+
+```{r 9.1, message = FALSE}
+
+library(tidyverse)
+set.seed(111)
+
+rogers_model2 <- function(N, t_max, r_max, w = 1, b = 0.5, c, s = 0, mu, p, u) {
+  
+  # check parameters, to avoid negative fitnesses
+  if (b*(1+c) > 1 || b*(1+s) > 1) {
+    stop("Invalid parameter values: ensure b*(1+c) < 1 and b*(1+s) < 1")
+  }
+  
+  # create output tibble
+  # p.SL is the proportion of social learners in the population and W is the population mean fitness
+  output <- tibble(generation = rep(1:t_max, r_max), run = as.factor(rep(1:r_max, each = t_max)), p.SL = rep(NA, t_max * r_max), p.IL = rep(NA, t_max * r_max), p.CL = rep(NA, t_max * r_max), W = rep(NA, t_max * r_max))
+  
+  for (r in 1:r_max) {
+    
+    # create a population of individuals
+    # learning type is 'individual', 'social' or 'critical' (initially all 'individual')
+    # behaviour is indexed by an integer, which may or may not match the environment
+    # fitness is the individual's fitness, given their learning type, behaviour and the environment
+    population <- tibble(learning = rep("individual", N), behaviour = rep(NA, N), fitness = rep(NA, N))
+    
+    # initialise the environment
+    E <- 0
+    
+    for (t in 1:t_max) {
+      
+      # NB now we integrate fitnesses into the learning stage
+      population$fitness <- w  # start with baseline fitness
+      
+      # 1. social learners copy the behaviour of a randomly chosen member of the previous generation
+      if (sum(population$learning == "social") > 0) {
+        population$behaviour[population$learning == "social"] <- sample(previous_population$behaviour, sum(population$learning == "social"), replace = TRUE)
+        # subtract b*s from fitness of SLers
+        population$fitness[population$learning == "social"] <- population$fitness[population$learning == "social"] - b*s
+      }
+      
+      # 2. individual learners learn the correct behaviour (E) with probability p
+      # otherwise they learn the incorrect behaviour (E - 1)
+      learn_correct <- sample(c(TRUE, FALSE), N, prob = c(p, 1 - p), replace = TRUE)
+      population$behaviour[learn_correct & population$learning == "individual"] <- E
+      population$behaviour[!learn_correct & population$learning == "individual"] <- E - 1
+      # impose cost b*c on individual learners
+      population$fitness[population$learning == "individual"] <- population$fitness[population$learning == "individual"] - b*c
+      
+      # 3. critical learners try social learning, and if the copied behaviour does not match the environment, they do individual learning
+      if (sum(population$learning == "critical") > 0) {
+        
+        # first critical learners socially learn
+        population$behaviour[population$learning == "critical"] <- sample(previous_population$behaviour, sum(population$learning == "critical"), replace = TRUE)
+        
+        # subtract b*s from fitness of socially learning critical learners
+        population$fitness[population$learning == "critical"] <- population$fitness[population$learning == "critical"] - b*s
+        
+        # do individual learning for those critical learners who did not copy correct behaviour
+        # (NB we re-use learn_correct from above)
+        population$behaviour[learn_correct & population$learning == "critical" & population$behaviour != E] <- E
+      
+        # subtract b*c from fitness of individually learning critical learners
+        population$fitness[learn_correct & population$learning == "critical" & population$behaviour != E] <- population$fitness[learn_correct & population$learning == "critical" & population$behaviour != E] - b*c
+        
+      }
+      
+      # 4. get fitnesses
+      # now only need to do the b bonus or penalty
+      # for individuals with behaviour matched to the environment, add b
+      population$fitness[population$behaviour == E] <- population$fitness[population$behaviour == E] + b  
+      # for individuals with behaviour not matched to the environment, subtract b
+      population$fitness[population$behaviour != E] <- population$fitness[population$behaviour != E] - b
+      
+      # 5. store population characteristics in output
+      output[output$generation == t & output$run == r, ]$p.SL <- mean(population$learning == "social")
+      output[output$generation == t & output$run == r, ]$p.IL <- mean(population$learning == "individual")
+      output[output$generation == t & output$run == r, ]$p.CL <- mean(population$learning == "critical")
+      output[output$generation == t & output$run == r, ]$W <- mean(population$fitness)
+      
+      # 6. reproduction
+      previous_population <- population
+      population$behaviour <- NA
+      population$fitness <- NA
+      
+      # probability of individual learning in new generation (population) is proportional to the relative fitness of individual learners in the previous_population
+      
+      # relative fitness of individual learners (if there are any)
+      if (sum(previous_population$learning == "individual") > 0) {
+        fitness_IL <- sum(previous_population$fitness[previous_population$learning == "individual"]) / sum(previous_population$fitness)
+      } else {
+        fitness_IL <- 0
+      }
+      produce_IL <- sample(c(TRUE, FALSE), N, prob = c(fitness_IL, 1 - fitness_IL), replace = TRUE)
+      
+      # relative fitness of social learners (if there are any)
+      if (sum(previous_population$learning == "social") > 0) {
+        fitness_SL <- sum(previous_population$fitness[previous_population$learning == "social"]) / sum(previous_population$fitness)
+      } else {
+        fitness_SL <- 0
+      }
+      produce_SL <- sample(c(TRUE, FALSE), N, prob = c(fitness_SL, 1 - fitness_SL), replace = TRUE)
+      
+      # if parent is an individual learner, then they're an ind learner
+      population$learning[produce_IL] <- "individual"  
+      # if parent is a social learner, then they're a social learner
+      population$learning[produce_SL] <- "social"  
+      # if parent is neither IL or SL, then they're a critical learner
+      population$learning[!produce_IL & !produce_SL] <- "critical"
+      
+      # 7. mutation, chance of switching learning types
+      mutation <- sample(c(TRUE, FALSE), N, prob = c(mu, 1 - mu), replace = TRUE)
+      
+      # new previous_population2 to avoid anyone mutating twice
+      previous_population2 <- population
+      
+      population$learning[mutation & previous_population2$learning == "individual"] <- sample(c("critical", "social"), sum(mutation & previous_population2$learning == "individual"), prob = c(0.5, 0.5), replace = TRUE)
+      population$learning[mutation & previous_population2$learning == "social"] <- sample(c("critical", "individual"), sum(mutation & previous_population2$learning == "social"), prob = c(0.5, 0.5), replace = TRUE)
+      population$learning[mutation & previous_population2$learning == "critical"] <- sample(c("individual", "social"), sum(mutation & previous_population2$learning == "critical"), prob = c(0.5, 0.5), replace = TRUE)
+    
+      # 8. potential environmental change
+      # increment the environmental state with probability u
+      if (runif(1) < u) E <- E + 1
+      
+    }
+  }
+  output
+}
+
+```
+
+First, the output tibble needs to store the proportion of all three types of learner, so we add $p.CL$, the proportion of critical learners. Next, we need to add a learning routine for critical learners. This involves repeating the social learning code originally written for the social learners. We then apply the individual learning code to those critical learners who copied the incorrect behaviour (this makes them 'unsatisfied'). To make it easier to follow, we now insert the fitness updates into the learning section. This is because only those critical learners who are unsatified will suffer the costs of individual learning. If we left it to afterwards, it's easy to lose track of who is paying what fitness costs.
+
+Reproduction and mutation are changed to account for the three learning strategies. We now need to get the relative fitness of social and individual learners, and reproduce based on those fitnesses. Individuals left over become critical learners. We could calculate the relative fitness of critical learners, but it's not really necessary given that the proportion of critical learners will always be 1 minus the proportion of social and individual learners. Similarly, mutation now needs to specify that individuals can mutate into either of the two other learning strategies. We assume this mutation is unbiased, and mutation is equally likely to result in the two other strategies.
+
+Now we can run rogers_model2, with the same parameter values as we initially ran rogers_model in the last chapter.
+
+```{r 9.2}
+
+data_model <- rogers_model2(N = 1000, t_max = 500, r_max = 10, c = 0.9, mu = 0.01, p = 1, u = 0.2)
+
+```
+
+As before, it's difficult to see what's happening unless we plot the data. The following function plot_prop now plots the proportion of all three learning strategies. To do this we need to convert our wide data_model tibble (where each strategy is in a different column) to long format (where all proportions are in a single column, and a new column indexes the strategy). To do this we use pivot_longer from the tidyverse package, which we have already loaded above. For cosmetic purposes, we also rename the p.XL variables with full words.
+
+```{r 9.3}
+
+plot_prop <- function(data_model) {
+  
+  names(data_model)[3:5] <- c("social", "individual", "critical")
+  data_model_long <- pivot_longer(data_model, -c(W,generation,run), names_to = "learning", values_to = "proportion")
+
+ggplot(data = data_model_long, aes(y = proportion, x = generation, colour = learning)) +
+  stat_summary(fun.y = mean, geom = "line", size = 1) +
+  ylim(c(0, 1)) +
+  theme_bw() +
+  labs(y = "Proportion of learners")
+}
+
+plot_prop(data_model)
+
+```
+
+Here we can see that critical learners have a clear advantage over the other two learning strategies. Critical learners go virtually to fixation, barring mutation which prevents it from going to 100%. It pays off being a flexible, discerning learner who only learns individually when social learning does not work.
+
+What about Rogers' paradox? Do critical learners exceed the mean fitness of a population entirely composed of individual learners? We can use the plot_W function from the last chapter to find out:
+
+```{r}
+
+plot_W <- function(data_model, w=1, b=0.5, c, p) {
+  ggplot(data = data_model, aes(y = W, x = generation)) +
+    geom_line(col = "grey") +
+    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    geom_hline(yintercept = w + b*(2*p - c - 1), linetype = 2) +
+    ylim(c(0, NA)) +
+    theme_bw() +
+    labs(y = "W (mean population fitness)")
+}
+
+plot_W(data_model, c = 0.9, p = 1)
+
+```
+
+Yes: critical learners clearly outperform the dotted line indicating a hypothetical 100% individual learning population. Rogers' paradox is solved.
+
+***
+
+## Summary of the model
+
+Several 'solutions' have been demonstrated to Rogers' paradox. Here we have explored one of them. Critical learners can flexibly employ both social and individual learning, and do this in an adaptive manner (i.e. only individually learn if social learning is unsuccessful). Critical learners outperform the pure individual learning and pure social learning strategies. They therefore solve Rogers' paradox by exceeding the mean fitness of a population entirely composed of individual learning.
+
+One might complain that all this is obvious. Of course real organisms can learn both socially and individually, and adaptively employ both during their lifetimes. But hindsight is a wonderful thing. Before Rogers' model, scholars did not fully recognise this, and simply argued that social learning is adaptive because it has lower costs than individual learning. We now know this argument is faulty. But it took a simple model to realise it, and to realise the reasons why.
+
+***
+
+## Further reading
+
+There are several other solutions to Rogers' paradox in the literature. @boyd_why_1995 suggested individuals who initially learn individually and then if unsatisfied learn socially - the reverse of @enquist_critical_2007's critical learners. @boyd_why_1995 also suggested that if culture is cumulative, i.e. each generation builds on the beneficial modifications of the previous generations, then Rogers' paradox is resolved.
+
