@@ -1,0 +1,70 @@
+
+# Demography
+
+Important aspect of cumulative cultural evolution: demography
+Who is learning from whom but also from how many individuals to learn? 
+Henrich 2004 (@henrich_demography_2004) presents an analytical model 
+
+
+```{r}
+beta <- 1
+alpha <- beta*7
+alpha/beta
+
+Rounds <- 100
+N <- 5000
+f <- rep(NA, N)
+z <- runif(n=N, min=0, max=1)
+zbar <- rep(NA, Rounds)
+
+for(r in 1:Rounds){
+  # update f
+    # f <- z/max(z)
+    # or for perfect identification of most skilful individual
+    f <- as.numeric(z == max(z))
+  
+  # choose whom to observe
+    obs <- sample(x=1:N, prob=f, replace=T)
+    
+  # calculate new z
+  znew <- rlogis(n=N, location=z[obs]-alpha, scale=beta)
+  
+  # record average z
+    zbar[r] <- mean(znew-z)
+      
+  # update z
+    z <- znew
+}
+plot(zbar, type="l", xlab="time", ylab="change in z")
+mean(zbar)
+```
+
+```{r}
+# automate process
+demography_model <- function(R, N, f, z, alpha, beta, repeats){
+  res <- lapply(1:repeats, function(r){
+    z <- runif(n=N, min=0, max=1)
+    zbar <- rep(NA, R)
+    for(r in 1:R){
+      # we simplify and ommit f and obs by assuming all individuals observe the best individual 
+      znew <- rlogis(n=N, location=z[ which.max(z) ]-alpha, scale=beta)
+      zbar[r] <- mean(znew-z)
+      z <- znew
+    }
+    return(mean(zbar))
+  })
+  mean(unlist(res))
+}
+
+demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
+
+sizes <- c(2, seq(100,5000,by=100))
+beta <- 1
+res <- lapply(sizes, demography_model, R=200, alpha=beta*7, beta=beta, repeats=20)
+res2 <- lapply(sizes, demography_model, R=200, alpha=beta*9, beta=beta, repeats=20)
+df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), skill=rep(c("simple","complex"), each=length(sizes)))
+
+library(ggplot2)
+ggplot(df) + geom_line(aes(x=N, y=zbar, color=skill)) + xlab("N") + ylab("z bar") + geom_hline(yintercept=0)
+```
+
