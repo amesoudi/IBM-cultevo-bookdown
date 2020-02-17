@@ -1,6 +1,9 @@
 
 # Social network structure
 
+![](material/F1.medium.gif)
+<!-- "Coauthorship networks and patterns of scientific collaboration" by M. E. J. Newman; PNAS April 6, 2004 101 (suppl 1) 5200-5205; https://doi.org/10.1073/pnas.0307545100 -->
+
 <!-- Explaining fundamentals of networks -->
 In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter \@ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals. 
 
