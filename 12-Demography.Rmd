@@ -48,6 +48,10 @@ demography_model <- function(R, N, f, z, alpha, beta, repeats){
     for(r in 1:R){
       # we simplify and ommit f and obs by assuming all individuals observe the best individual 
       znew <- rlogis(n=N, location=z[ which.max(z) ]-alpha, scale=beta)
+      # alternatively, use rgumbel function from the extraDistr package
+      # library(extraDistr)
+      # znew <- rgumbel(n=N, mu=z[ which.max(z) ]-alpha, sigma=beta)
+      
       zbar[r] <- mean(znew-z)
       z <- znew
     }
@@ -59,12 +63,27 @@ demography_model <- function(R, N, f, z, alpha, beta, repeats){
 demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
 
 sizes <- c(2, seq(100,5000,by=100))
-beta <- 1
-res <- lapply(sizes, demography_model, R=200, alpha=beta*7, beta=beta, repeats=20)
-res2 <- lapply(sizes, demography_model, R=200, alpha=beta*9, beta=beta, repeats=20)
+res <- lapply(sizes, demography_model, R=200, alpha=7, beta=1, repeats=20)
+res2 <- lapply(sizes, demography_model, R=200, alpha=9, beta=1, repeats=20)
 df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), skill=rep(c("simple","complex"), each=length(sizes)))
 
 library(ggplot2)
 ggplot(df) + geom_line(aes(x=N, y=zbar, color=skill)) + xlab("N") + ylab("z bar") + geom_hline(yintercept=0)
+# results don't match exactly, but we are using logistic distribution here and not gumble
+
+```
+
+```{r}
+data <- data.frame(skill = rep(c("simple","complex"), each=6000),
+                   z = c(rlogis(n=6000, location=-7, scale=1),
+                         rlogis(n=6000, location=-9, scale=1)))
+# data <- data.frame(skill = rep(c("simple","complex"), each=6000),
+#                    z = c(rgumbel(n=6000, mu=-7, sigma=1),
+#                          rgumbel(n=6000, mu=-9, sigma=1)))
+ggplot(data, aes(x=z, col=skill)) +
+  geom_density() + 
+  geom_vline(xintercept=0) #+ scale_x_continuous(limits=c(-20, 5))
+
+# with these values of alpha/beta I cannot find the same results as shown in Henrich's paper, however, with beta=2 the results look more like it but then a/b would be 3.5 and 4.5
 ```
 
