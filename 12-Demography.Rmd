@@ -2,8 +2,16 @@
 # Demography
 
 Important aspect of cumulative cultural evolution: demography
-Who is learning from whom but also from how many individuals to learn? 
-Henrich 2004 (@henrich_demography_2004) presents an analytical model 
+
+How can we explain the growth in culture in many human societies and the decline in some others?
+
+Henrich 2004 (@henrich_demography_2004) suggests that demography affects cumulative cultural evolution
+
+Presents an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time
+
+The idea is this: fundamental in cultural evolution is the transmission of information from one generation to another. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their model. These individuals will now become the new cultural models. How does this play out over time? 
+
+Assumption (needs graph with density)
 
 
 ```{r}
@@ -86,4 +94,26 @@ ggplot(data, aes(x=z, col=skill)) +
 
 # with these values of alpha/beta I cannot find the same results as shown in Henrich's paper, however, with beta=2 the results look more like it but then a/b would be 3.5 and 4.5
 ```
+
+
+
+
+
+## Summary of the model
+
+
+***
+
+## Analytical appendix
+
+Henrich's actual paper is analytical
+
+***
+
+## Further readings
+
+
+***
+
+## References
 
