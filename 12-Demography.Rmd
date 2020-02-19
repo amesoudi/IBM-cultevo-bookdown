@@ -11,7 +11,22 @@ Presents an analytical model to explain how societies below a critical size (of 
 
 The idea is this: fundamental in cultural evolution is the transmission of information from one generation to another. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their model. These individuals will now become the new cultural models. How does this play out over time? 
 
+
 Assumption (needs graph with density)
+```{r}
+# data <- data.frame(skill = rep(c("simple","complex"), each=6000),
+#                    z = c(rlogis(n=6000, location=-7, scale=1),
+#                          rlogis(n=6000, location=-9, scale=1)))
+library(extraDistr)
+data <- data.frame(skill = rep(c("simple","complex"), each=6000),
+                   z = c(rgumbel(n=6000, mu=-7, sigma=1),
+                         rgumbel(n=6000, mu=-9, sigma=1)))
+ggplot(data, aes(x=z, col=skill)) +
+  geom_density() + 
+  geom_vline(xintercept=0) + theme(axis.text=element_blank(), axis.ticks=element_blank()) + xlab("imitator value z") + ylab("probability imitatior acquires z") #+ scale_x_continuous(limits=c(-20, 5))
+
+# with these values of alpha/beta I cannot find the same results as shown in Henrich's paper, however, with beta=2 the results look more like it but then a/b would be 3.5 and 4.5
+```
 
 
 ```{r}
@@ -19,8 +34,8 @@ beta <- 1
 alpha <- beta*7
 alpha/beta
 
-Rounds <- 100
-N <- 5000
+Rounds <- 5000
+N <- 1000
 f <- rep(NA, N)
 z <- runif(n=N, min=0, max=1)
 zbar <- rep(NA, Rounds)
@@ -35,7 +50,8 @@ for(r in 1:Rounds){
     obs <- sample(x=1:N, prob=f, replace=T)
     
   # calculate new z
-  znew <- rlogis(n=N, location=z[obs]-alpha, scale=beta)
+  # znew <- rlogis(n=N, location=z[obs]-alpha, scale=beta)
+  znew <- rgumbel(n=N, mu=z[obs]-alpha, sigma=beta)
   
   # record average z
     zbar[r] <- mean(znew-z)
@@ -47,9 +63,11 @@ plot(zbar, type="l", xlab="time", ylab="change in z")
 mean(zbar)
 ```
 
+We can not use this process to figure out what 
+
 ```{r}
 # automate process
-demography_model <- function(R, N, f, z, alpha, beta, repeats){
+demography_model <- function(R, N, alpha, beta, repeats){
   res <- lapply(1:repeats, function(r){
     z <- runif(n=N, min=0, max=1)
     zbar <- rep(NA, R)
@@ -81,20 +99,12 @@ ggplot(df) + geom_line(aes(x=N, y=zbar, color=skill)) + xlab("N") + ylab("z bar"
 
 ```
 
-```{r}
-data <- data.frame(skill = rep(c("simple","complex"), each=6000),
-                   z = c(rlogis(n=6000, location=-7, scale=1),
-                         rlogis(n=6000, location=-9, scale=1)))
-# data <- data.frame(skill = rep(c("simple","complex"), each=6000),
-#                    z = c(rgumbel(n=6000, mu=-7, sigma=1),
-#                          rgumbel(n=6000, mu=-9, sigma=1)))
-ggplot(data, aes(x=z, col=skill)) +
-  geom_density() + 
-  geom_vline(xintercept=0) #+ scale_x_continuous(limits=c(-20, 5))
 
-# with these values of alpha/beta I cannot find the same results as shown in Henrich's paper, however, with beta=2 the results look more like it but then a/b would be 3.5 and 4.5
-```
+This model can easily be adapted, e.g. 
 
+we assumed that individauls know who is the best, how about they copy from anyone who is better than them? 
+
+In the following chapters we will discuss the importance of social networks, i.e. can interact with whom. We will see that his will also have an affect (additional to the population size).
 
 
 
