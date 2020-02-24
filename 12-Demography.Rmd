@@ -1,7 +1,7 @@
 
 # Demography
 
-In previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual-level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have seen the importance of the characteristics of individuals (e.g. for success bias, prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
+In previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual-level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have also seen the importance of the characteristics of individuals (e.g. for success and prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how: population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
 
 One if not the central question in cultural evolution is how cultural complexity emerges from simpler forms.
 This requires to not only look on the side of social transmission of cultural traits but especially on the side of innovation of new traits.
@@ -89,10 +89,11 @@ demography_model <- function(R, N, alpha, beta, repeats){
     zbar <- rep(NA, R)
     for(r in 1:R){
       # we simplify and ommit f and obs by assuming all individuals observe the best individual 
-      znew <- rlogis(n=N, location=z[ which.max(z) ]-alpha, scale=beta)
+      # znew <- rlogis(n=N, location=z[ which.max(z) ]-alpha, scale=beta)
       # alternatively, use rgumbel function from the extraDistr package
-      # library(extraDistr)
+      library(extraDistr)
       # znew <- rgumbel(n=N, mu=z[ which.max(z) ]-alpha, sigma=beta)
+      znew <- rgumbel(n=N, mu=max(z)-alpha, sigma=beta)
       
       zbar[r] <- mean(znew-z)
       z <- znew
@@ -102,17 +103,73 @@ demography_model <- function(R, N, alpha, beta, repeats){
   mean(unlist(res))
 }
 
-demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
+```
 
-sizes <- c(2, seq(100,5000,by=100))
+```{r}
+demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
+```
+
+We will run the simulation for different population sizes 
+```{r}
+sizes <- c(2, seq(100,6100,by=250))
 res <- lapply(sizes, demography_model, R=200, alpha=7, beta=1, repeats=20)
 res2 <- lapply(sizes, demography_model, R=200, alpha=9, beta=1, repeats=20)
-df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), skill=rep(c("simple","complex"), each=length(sizes)))
+df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), trait=rep(c("simple","complex"), each=length(sizes)))
+```
 
+Let's plot the results
+
+```{r}
 library(ggplot2)
-ggplot(df) + geom_line(aes(x=N, y=zbar, color=skill)) + xlab("N") + ylab("z bar") + geom_hline(yintercept=0)
-# results don't match exactly, but we are using logistic distribution here and not gumble
+ggplot(df) + 
+  geom_line(aes(x=N, y=zbar, color=trait)) +
+  xlab("Effective population size") + 
+  ylab("Change in average skill level, z bar") + 
+  geom_hline(yintercept=0) + 
+  theme_bw()
+```
 
+How can we find the critical population size, N\*?
+When we use the log function on N we find the results to be almost linear. 
+
+```{r}
+ggplot(df) + 
+  geom_line(aes(x=log(N), y=zbar, color=trait)) +
+  xlab("log(Effective population size)") +
+  ylab("Change in average skill level, z bar") + 
+  geom_hline(yintercept=0) + 
+  theme_bw()
+```
+
+And so, we could use a linear fit and then solve for y=0
+
+```{r}
+fit <- lm(zbar ~ log(N), df[df$trait=="simple",])
+print(fit)
+N_star <- exp(solve(coef(fit)[-1], -coef(fit)[1]))
+N_star
+```
+
+Of course in the last step we also have to take the exponent of the value to revert the effect of the log function. We see that a simple trait with a low alpha/beta ratio requires a minimum population size of about `r round(N_bar)`. We can now valculate the N bar values for different trait complexities.
+
+```{r}
+sizes <- seq(100,6100,by=500)
+
+res <- do.call("rbind", lapply(seq(4,9,.5), function(alpha){
+  tmp_z <- unlist(lapply(X=sizes, FUN=demography_model, R=200, alpha=alpha, beta=1, repeats=5))
+  fit <- lm(tmp_z ~ log(sizes))
+  n_star <- exp(solve(coef(fit)[-1], -coef(fit)[1]))
+  data.frame(n_star=n_star, alpha=alpha)
+}))
+res
+```
+
+```{r}
+ggplot(res, aes(x=alpha, y=n_star)) + 
+  geom_line() + 
+  xlab(expression(alpha/beta)) +
+  ylab("N*") + 
+  theme_bw()
 ```
 
 
@@ -139,7 +196,4 @@ Henrich's actual paper is analytical
 ## Further readings
 
 
-***
-
-## References
 
