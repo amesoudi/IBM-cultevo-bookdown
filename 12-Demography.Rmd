@@ -1,15 +1,31 @@
 
 # Demography
 
+In previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual-level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have seen the importance of the characteristics of individuals (e.g. for success bias, prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
+
+One if not the central question in cultural evolution is how cultural complexity emerges from simpler forms.
+This requires to not only look on the side of social transmission of cultural traits but especially on the side of innovation of new traits.
+Most models, especially those from population genetics, generally assume large/infinite population sizes. This allows to work with changing proportions instead of individual counts. However, we know from ecology that interesting dynamics can emerge where populations are finite/small. Effects that are usually too weak to drive evolutionary dynamics, such as genetic drift, can have a much stronger impact on small populations (see island populations). In analogy, there might be similar effects observable when we look at cultural dynamics in finite or small populations.
+
+This topic has received much attention in the field
+Overview article by Shennan (2015)
+
+examples
+Ghirlanda, Enquist, and Perc (2010) (look at interplay between creativity and cultural innovations (which affect carrying capacity) and cultural loss; also consider corruption rate, i.e. a trait that was adaptive before can become maladaptive as it can lead e.g. to overexploitation of resources)
+
+one of them: Henrich 2004 (@henrich_demography_2004) suggests that demography affects cumulative cultural evolution
+
+Presents an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time
+
+The idea is this: fundamental in cultural evolution is the transmission of information from one generation to another. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their model. These individuals will now become the new cultural models. How does this play out over time?
+
+
+
+
 Important aspect of cumulative cultural evolution: demography
 
 How can we explain the growth in culture in many human societies and the decline in some others?
 
-Henrich 2004 (@henrich_demography_2004) suggests that demography affects cumulative cultural evolution
-
-Presents an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time
-
-The idea is this: fundamental in cultural evolution is the transmission of information from one generation to another. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their model. These individuals will now become the new cultural models. How does this play out over time? 
 
 
 Assumption (needs graph with density)
