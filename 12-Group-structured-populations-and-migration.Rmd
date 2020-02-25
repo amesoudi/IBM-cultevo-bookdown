@@ -8,6 +8,6 @@ In this chapter, we will simulate subdivided populations and test how this affec
 
 
 
-```{r 10.1}
+```{r 12.1}
 
 ```
