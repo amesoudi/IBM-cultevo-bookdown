@@ -1,15 +1,15 @@
 
 # Demography
 
-In the previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual-level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have also seen the importance of the characteristics of individuals (e.g. for success and prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how: population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
+In the previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have also seen the importance of the characteristics of individuals (e.g. for success and prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how: population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
 
-To start, why would demography matter to cultural evolution? As long as information is transmitted among individuals and between generations, the size of the population should not play a role. In theory, this statement is true but it relies on a crucial assumption: information transfer is not only complete (all information from the previous generation is transmitted to the next generation) but also error-free. However, from many lab experiments, we know that copying information is an error-prone process. In this chapter, we will look at how those errors affect infromation accumulation and how population size is argumenting this process. 
+To start, why would demography matter to cultural evolution? As long as information is transmitted among individuals and between generations, the size of the population should not play a role. In theory, this statement is true but it relies on a crucial assumption: information transfer is not only complete (all information from the previous generation is transmitted to the next generation) but also error-free. However, from many lab experiments, we know that copying information is an error-prone process. In this chapter, we will look at how those errors affect information accumulation and how population size is augmenting this process. 
 
-A number of studies have looked at population effects. @shennan_demography_2015 provide a good overivew over a variety of approaches and questions. For example, in their model, @ghirlanda_sustainability_2010, investigate the interplay between cultural innovations and cultural loss. While it would be trivial to say that culture accumulates where the rate of cultural innovation is higher than the rate of cultural loss, this model allows for two additional complicating mechanisms: (1) it lets innovations affect carrying capacity (and so the number of innovators), and (2) it allows trait corruption (i.e. a trait that was adaptive before can become maladaptive later, e.g. because it allows the over-exploitation of a resource). 
+Several studies have looked at population effects. @shennan_demography_2015 provide a good overview of a variety of approaches and questions. For example, in their model, @ghirlanda_sustainability_2010, investigate the interplay between cultural innovations and cultural loss. While it would be trivial to say that culture accumulates where the rate of cultural innovation is higher than the rate of cultural loss, this model allows for two additional complicating mechanisms: (1) it lets innovations affect carrying capacity (and so the number of innovators), and (2) it allows trait corruption (i.e. a trait that was adaptive before can become maladaptive later, e.g. because it allows the over-exploitation of a resource). 
 
-Another well-known study is that by Joseph @henrich_demography_2004. His model takes inspiration from the archaeological record of Tasmania, which shows a detirioration of some and the persistence of other cultural traits after Tasmania was cut-off from Australia at the end of the last ice age. Henrich developes a compelling analytical model to show that the same adaptive processes in cultural evolution can result in the improvement and retention of simple skills but also in the deterioration and even loss of complex skills. 
+Another well-known study is that by Joseph @henrich_demography_2004. His model takes inspiration from the archaeological record of Tasmania, which shows a deterioration of some and the persistence of other cultural traits after Tasmania was cut-off from Australia at the end of the last ice age. Henrich develops a compelling analytical model to show that the same adaptive processes in cultural evolution can result in the improvement and retention of simple skills but also the deterioration and even loss of complex skills. 
 
-The principle idea is the following: information transmission from one generation to another (or from one individual to another, here it does not make a difference) has a random component (error rate) that will lead to most individauls failing to achieving the same skill level as their cultural model, whereas a few will match and - even fewer - exceed that skill level. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their cultural model. These 'new masters' will become the cultural models of the next generation. Fig. \@ref(fig:henrichGumbel) is shwoing this principle. 
+The principle idea is the following: information transmission from one generation to another (or from one individual to another, here it does not make a difference) has a random component (error rate) that will lead to most individuals failing to achieve the same skill level as their cultural model, whereas a few will match and - even fewer - exceed that skill level. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their cultural model. These 'new masters' will become the cultural models of the next generation. Fig. \@ref(fig:henrichGumbel) is showing this principle. 
 
 ```{r henrichGumbel, fig.cap="Shown are the probability distributions to acquire a specific skill level for two different skills (one that is easy to learn and one that is more complex and therefore harder to learn). Given that learning is error-prone more individuals will acquire a skill level that is lower than that of a cultural model (its level is indicated by the vertical dashed line) through imitation (left of the dashed line). A few individauls will achieve higher skill levels (right of the dashed line). For the complex skill the probability to be above the skill level of the cultural model is lower (smaller area under the curve) than for simple skills."}
 # data <- data.frame(skill = rep(c("simple","complex"), each=6000),
@@ -29,9 +29,9 @@ ggplot(data, aes(x=z, col=skill)) +
   ylab("probability imitatior acquires z") 
 ```
 
-Given that the new skill level is essentially drawn from a probability distribution around the value of the individual that is imitated, the new average skill value of the population will not only depend on how frequent and severe copying errors are (that is, how skewed the distribution is to the right) but also on how many individuals try to imitate. The smaller the pool of imitators, the fewer individuals will achieve a higher skill level and so, over time the skill will deteriorate. Henrich provides an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time. We will attempt to re-create his results using an individaul-based model. 
+Given that the new skill level is essentially drawn from a probability distribution around the value of the individual that is imitated, the new average skill value of the population will not only depend on how frequent and severe copying errors are (that is, how skewed the distribution is to the right) but also on how many individuals try to imitate. The smaller the pool of imitators, the fewer individuals will achieve a higher skill level and so, over time the skill will deteriorate. Henrich provides an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time. We will attempt to re-create his results using an individual-based model. 
 
-We begin with a very simple learning loop. We have a population of $N=1000$ individuals, each with a skill level $z$ for a particular skill (which we initiate with random values drawn fron a uniform distribution, $U(0,1)$). The average skill level is $\bar{z}$. We want to calculate what the new average skill level is after all individuals attempt to imitate the most successful individual (the one where $z$ is largest). Each individual then receives a new $z$-value that is drawn from a Gumbel distribution (which we can get from the `extraDistr` package). This distribution is controlled by two values, $\mu$ (location) and $\beta$ (scale). To model imperfect imitation, we can vary $\beta$ and we can subtract an amount $\alpha$ from $\mu$. If learning was perfect $\alpha$ and $\beta$ would be zero. If something is easy to learn, $\alpha$ is small (and large if it is hard to learn). If people make very similar mistakes, $\beta$ is small (and large if people make widely different mistakes). Once we have drawn new values for $z$, we calcualte the average change in $z$, $\Delta \bar{z}$, and then replace the original $z$-values to restart the loop. 
+We begin with a very simple learning loop. We have a population of $N=1000$ individuals, each with a skill level $z$ for a particular skill (which we initiate with random values drawn from a uniform distribution, $U(0,1)$). The average skill level is $\bar{z}$. We want to calculate what the new average skill level is after all individuals attempt to imitate the most successful individual (the one where $z$ is the largest). Each individual then receives a new $z$-value that is drawn from a Gumbel distribution (which we can get from the `extraDistr` package). This distribution is controlled by two values, $\mu$ (location) and $\beta$ (scale). To model imperfect imitation, we can vary $\beta$ and we can subtract an amount $\alpha$ from $\mu$. If learning was perfect $\alpha$ and $\beta$ would be zero. If something is easy to learn, $\alpha$ is small (and large if it is hard to learn). If people make very similar mistakes, $\beta$ is small (and large if people make widely different mistakes). Once we have drawn new values for $z$, we calculate the average change in $z$, $\Delta \bar{z}$, and then replace the original $z$-values to restart the loop. 
 
 ```{r, cache = TRUE}
 Rounds <- 5000
@@ -93,13 +93,13 @@ demography_model <- function(R, N, alpha, beta, repeats){
 }
 ```
 
-With this function we can now run the simulation repeatedly for a single set of parameters. 
+With this function, we can now run the simulation repeatedly for a single set of parameters. 
 
 ```{r, cache=TRUE}
 demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
 ```
 
-Now, we have everythint we need to run the simulation for different population sizes. We will also run it for two different skill complexities: simple ($\alpha/\beta=7$) and complex ($\alpha/\beta=9$). 
+Now, we have everything we need to run simulations for different population sizes. We will also run it for two different skill complexities: simple ($\alpha/\beta=7$) and complex ($\alpha/\beta=9$). 
 
 ```{r, cache = TRUE}
 sizes <- c(2, seq(100,6100,by=250))
@@ -108,7 +108,7 @@ res2 <- lapply(sizes, demography_model, R=200, alpha=9, beta=1, repeats=20)
 df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), trait=rep(c("simple","complex"), each=length(sizes)))
 ```
 
-In the last line of this chunck we have created a data.frame with the results for both skills and for the different population sizes. Now, we can plot the results. 
+In the last line of this chunk, we have created a data.frame with the results for both skills and the different population sizes. Now, we can plot the results. 
 
 ```{r effectivePopSize, fig.cap="The effect of population size on the average change in skill level in the population."}
 library(ggplot2)
@@ -122,7 +122,7 @@ ggplot(df) +
 
 In Fig. \@ref(fig:effectivePopSize) we can see that the simple skill (blue) intercepts the x-axis at much smaller population sizes than the complex trait. That means, a simple trait can be maintained by much smaller populations, whereas larger populations of imitators are required for complex traits. 
 
-Henrich calls the the minimum population size required to maintain a skill the critical population size, $N^\star$. How can we calculate $N^\star$ for different skill complexities? Note that when you use the logarithmic population size to plot Fig. \@ref(fig:effectivePopSize), the resulting graphs are almost linear (see \@ref(fig:logEffectivePopSize)). 
+Henrich calls the minimum population size required to maintain a skill the critical population size, $N^\star$. How can we calculate $N^\star$ for different skill complexities? Note that when you use the logarithmic population size to plot Fig. \@ref(fig:effectivePopSize), the resulting graphs are almost linear (see \@ref(fig:logEffectivePopSize)). 
 
 ```{r logEffectivePopSize, fig.cap="The same as in Fig. \\@ref(fig:effectivePopSize) but using log on population sizes."}
 ggplot(df) + 
@@ -142,7 +142,7 @@ N_star <- exp(solve(coef(fit)[-1], -coef(fit)[1]))
 N_star
 ```
 
-Of course in the last step we also have to take the exponent of the resulting value to revert the log function. We see that a simple trait with a low alpha/beta ratio requires a minimum population size of about `r round(N_star)`. Let us now calculate the $N^\star$ values for different trait complexities.
+Of course in the last step, we also have to take the exponent of the resulting value to revert the log function. We see that a simple trait with a low alpha/beta ratio requires a minimum population size of about `r round(N_star)`. Let us now calculate the $N^\star$ values for different trait complexities.
 
 ```{r, cache = TRUE}
 sizes <- seq(100,6100,by=500)
@@ -166,18 +166,18 @@ ggplot(res, aes(x=alpha, y=n_star)) +
   theme_bw()
 ```
 
-It is intersting to observe that the criticla population sizes increases exponentially with skill complexity. This also suggests that, all being equal, very high skill levels will never be reached by finite population sizes. However, different ways of learning (e.g. teaching) could considerably decrease $\alpha$ and $\beta$ over time and so allow high skill levels. 
+It is interesting to observe that the critical population size increases exponentially with skill complexity. This also suggests that all being equal, very high skill levels will never be reached by finite population sizes. However, different ways of learning (e.g. teaching) could considerably decrease $\alpha$ and $\beta$ over time and so allow high skill levels. 
 
 
 
 ## Summary of the model
-Similar to the model in the chapter on Rogers' paradox, the present model is very simple and is making many simplifications. Neverthless, it provides an intuitive understanding of how changes (up and down) in population size can affect the cultural repertoire of a population, and how it can be that simple traits thrive, while complex ones disappear. In the next chapter, we will discuss the importance of social networks, i.e. who can interact with whom. We will see that this will also have an affect (additional to the population size).
+Similar to the model in the chapter on Rogers' paradox, the present model is very simple and is making many simplifications. Nevertheless, it provides an intuitive understanding of how changes (up and down) in population size can affect the cultural repertoire of a population, and how it can be that simple traits thrive, while complex ones disappear. In the next chapter, we will discuss the importance of social networks, i.e. who can interact with whom. We will see that this will also have an effect (additional to the population size).
 
 ***
 
 ## Analytical appendix and further readings
 
-It is important to note that Henrich's paper provides an analytical model, which can give precise results without the need of modelling learning. The paper is well worth a read as it explains this analytical approach in clear terms. 
+It is important to note that Henrich's paper provides an analytical model, which can give precise results without the need for modelling learning. The paper is well worth a read as it explains this analytical approach in clear terms. 
 
 
 
