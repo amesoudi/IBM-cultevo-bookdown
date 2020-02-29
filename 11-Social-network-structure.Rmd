@@ -1,19 +1,187 @@
 
 # Social network structure
 
-![](material/F1.medium.gif)
-<!-- "Coauthorship networks and patterns of scientific collaboration" by M. E. J. Newman; PNAS April 6, 2004 101 (suppl 1) 5200-5205; https://doi.org/10.1073/pnas.0307545100 -->
+As we have seen in the previous chapter, sometimes more detailed modelling can lead to different results (compared to the abstract case) ....... 
+Henrich's model, for example, has shown that a populations ability to maintain and accumulate cultural traits depends on its size, whereby larger populations are more likely to retain and improve cultural traits than smaller ones. We used this model as an example that population-level characteristics (here, demography) play a role in cultural dynamics. Given that  individuals acquire information from other individuals through social learning, we might also suspect that individual-level phenomena are important, too. Commonly, individual interactions are represented as networks, whereby nodes (also referred to as vertex, _pl._ vertices) represent individuals, and ties (also referred to as edges) between any two nodes indicate a relationship (e.g. friendship or kinship, or willingness to cooperate, etc.). Note, as with the term individaul-based models, the individual can be a person but it can also represent a country, an institution, or any other kind of actor. 
 
-<!-- Explaining fundamentals of networks -->
-In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter \@ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals. 
+In this chapter, we will cover the basics of social networks, how to create, analyse, and use them. Finally, we will use all of that to find an answer to the question: how do individual-level interaction patterns affect population-level cultural dynamics?
 
-A common way to visualise structure on the individual level are networks, where individuals are represented by nodes and their interactions or relationhsips are depicted by edges (or links). Depending on the number of edges (connections) an individaul might be able to interact with more or fewer or specific individuals. In fact, the use of networks has greatly improved our understanding of the spread of dieseases and has rekindled the interest in game theory (e.g. netwokred Prisoners Dilemma).
+## The Basics
+Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as the socially transmitted information. Say, we want to better undersand how gossip is spreading through this group. At simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spead in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix. It is a square matrix where all individuals of a population are represent as columns and rows. 
 
-In our case, edges will allow or prohibit the information transmission from one individual to another. We would expect that different networks (e.g. many edges versus few edges) will affect information transmission differently. 
+```{r}
+m <- matrix(c(0,1,1, 0,0,1, 1,1,0), nrow=3, byrow=T)
+row.names(m) <- c("A","B","C")
+colnames(m) <- c("A","B","C")
+m
+```
 
-In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations. 
+The matrix above is an example for such an adjacency matrix. Shown are the relationships between three individuals (A, B, and C). When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row we see that B is only interacting with C, and the last row tell us that C interacting both with A and with B. This is an example for an asymmetrix adjacency matrix, because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper trianle of the matrix with the lower triangle of the matrix:
 
-<!-- Generate simple networks from text -->
+```{r}
+all(m[upper.tri(m)] == m[lower.tri(m)])
+```
+
+We can make this matrix symmetric by replacing the lower matrix triangle with the upper one (this requires us to first transpose the triangle using the `t()` function):
+
+```{r}
+# Either
+m[lower.tri(m)] <- t(m)[lower.tri(m)]
+# or use m[2,1] <- 1
+m
+# Check whether the matrix is symmetric now:
+all(m[upper.tri(m)] == m[lower.tri(m)])
+```
+
+Now let us turn back to out group of co-workers, and let us create a random friendship network. We start with an empty adjacency matrix, add friendships to the upper triangle and then copy the mirror image to the lower triangle (this is assuming that friendships are reciprocal):
+
+```{r}
+n <- 10
+adjm <- matrix(NA, ncol=n, nrow=n)
+adjm
+```
+
+Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with equal probability (we could change this value to be higher or lower to simulate groups with more or less friendships):
+
+```{r}
+friendshipRatio <- 0.5
+
+adjm[upper.tri(adjm)] <- sample(x = 0:1, 
+                                size = n*(n-1)/2, 
+                                replace = T, 
+                                prob = c(1-friendshipRatio, friendshipRatio))
+adjm
+
+# add the mirror image to the lower triangle
+adjm[lower.tri(adjm)] <- t(adjm)[lower.tri(adjm)]
+adjm
+
+
+
+# replace diagonal (these indicate self-references) with zeros
+diag(adjm) <- 0
+adjm
+```
+
+This is all we need to describe the interactions and the flow of information within this group. And while we could already use other tools in R to analyse it, we should first try to visualise this network to get a better intuition of what this group actualy looks like. The `igraph` package provides many incredibly useful functions and tools to create, work with, and analyse networks. We will rely on many of its functions in this chapter. 
+
+## Plotting networks 
+Given that we already have an adjacency matrix, we can create a network using the `graph_from_adjacency_matrix()` function. 
+
+```{r}
+net <- graph_from_adjacency_matrix(adjm)
+net
+```
+
+When we return the `net` object, we receive a lot of information about our network, for example, that it is there are `r vcount(net)` vertices and `r ecount(net)` edges (for more information be sure to have a look at this short [igraph introduction](https://igraph.org/r/doc/aaa-igraph-package.html)). However, we did not receive an actual network figure. For this, we can use the R's generic plot function:
+
+```{r}
+#set.seed(1)
+plot(net)
+```
+
+This is the most basic network plot where each node (with the numbers 1 to `r n`) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that receive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the `set.seed()` function in the code chunck above.
+
+There are many ways to change the looks of network plots. The igraph manual is an ideal starting point to learn more about it. For example, we could plot nodes based on specific layout functions:
+
+```{r}
+par(mfrow=c(1,2))
+plot(net, layout=layout.grid(net), main="Grid layout")
+plot(net, layout=layout.circle(net), main="Ring layout")
+```
+
+Or we can directly change the size, and colour of nodes:
+
+```{r}
+par(mfrow=c(1,1))
+plot(net, 
+     vertex.color="dodgerblue", 
+     vertex.label.color="white",
+     vertex.size=20,
+     edge.color="black",
+     edge.width=1,
+     edge.arrow.size=0.5,
+     main="Default layout with styling")
+```
+
+In the previous example, we have changed the colour of the nodes' background and text, and their overall size (attributes starting with `vertex.`). We have also changed the colour of the edges, their width, and the size of the tips (attributes starting with `edge.`).
+
+Let's say, we know the age of each individual and we would like to visualise age as different colours of the nodes. For that, we should first store the colour information for each vertex (using the `V()` function) and then change the vertex colour in the plot function:
+
+```{r}
+# There is no age attribute set
+V(net)$age
+
+# Add an age attribute and randomly assign an age class
+V(net)$age <- sample(x=1:10, size=n, replace=T)
+
+# The network now has an age attribute
+V(net)$age
+
+V(net)$colour <- heat.colors(n=10)[V(net)$age]
+
+net
+```
+
+The `net` object now has two attributes (one is called age, with numeric values, and one is called colour, with character values). We can now plot this graph:
+
+```{r}
+plot(net, 
+     vertex.color=V(net)$colour, 
+     vertex.label.color="black",
+     vertex.size=20,
+     edge.color="black",
+     edge.width=1,
+     edge.arrow.size=0.5)
+```
+
+It can be useful to remove the text in each node and make the nodes smaller, especially when the networks become large. Also, given that we have a symmetric network (all relationships are reciprocal), we can get rid of the arrow tips. We do this by telling igraph that the network is undirected.
+
+```{r}
+net <- as.undirected(net)
+plot(net, 
+     vertex.color=V(net)$colour, 
+     vertex.label="",
+     vertex.size=9,
+     edge.width=1,
+     edge.arrow.size=0.5)
+```
+
+One final styling example. So far, we have the edges indicate the existence of a friendship relationship, which is a binary quality. However, we can also imagine friendshi as a continous variable. Using the edge function `E()`, we can alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to contionous) and then plot the new network.
+
+```{r}
+adjm2 <- adjm
+
+adjm2[upper.tri(adjm2)] <- runif(n=sum(upper.tri(adjm2))) * adjm2[upper.tri(adjm2)]
+
+adjm2[lower.tri(adjm2)] <- t(adjm2)[lower.tri(adjm2)]
+
+net2 <- graph_from_adjacency_matrix(adjm2, weighted=TRUE, mode="undirected")
+
+net2
+```
+
+Note, igraph automatically added an attribute called `weight`. Now, let's plot this network with the edge width representing their weight:
+
+```{r}
+V(net2)$age <- V(net)$age
+V(net2)$colour <- V(net)$colour
+
+plot(net2, 
+     vertex.color=V(net2)$colour,
+     vertex.label="",
+     vertex.size=9,
+     edge.width=E(net2)$weight*5,
+     edge.arrow.size=0.5)
+```
+
+Now that 
+
+## Analyse networks
+
+
+
+<!-- Generate simple networks from text
 To generate and plot networks, we wil use the `igraph` package that provides many useful functions. The simplest function to generate a network is called `graph_from_literal()`, which takes, for example, names and generates a network based on wheter these names are connected with each othe (using `--`). (Note: instead of names we could have also used letters or even numbers.) In the example below, we generate a friendship network, where each node represents an individual and each edge a strong reciprocal friendship. We store the generated network in **net**, and then apply the `plot` function to have a look at the network.
 
 ```{r 11.1}
@@ -27,16 +195,10 @@ net <- graph_from_literal(Iris--Eva--Anna,
 plot(net)
 ```
 
-<!-- Plot networks, with different styling explained -->
+Plot networks, with different styling explained 
 Let us edit the look of the network a bit. 
 
-```{r 11.2}
-plot(net, 
-     vertex.color="white", 
-     vertex.size=42,
-     edge.color="black",
-     edge.width=3)
-```
+
 
 Plotting the network makes it much easier to see the overall structure and important nodes. Here, for example, we can quickly see that Anna is the most connected individual in the group with four connections.
 
@@ -71,7 +233,7 @@ plot(net,
 
 With the added colour, we can now see that there is a divide between boys and girls and we can see that Anna and Pete connect the two subsets. There are of course many other ways to change the appearence of the network, which we will try out as we go a long this chapter. First, however, let us try to generate larger networks. 
 
-<!-- Generate simple networks from matrix -->
+Generate simple networks from matrix
 A second function that allows to generate simple networks is 
 ```{r}
 m <- matrix(sample(x=0:1, size=25, replace=T), ncol=5)
@@ -93,7 +255,7 @@ plot(net,
 ```
 
 
-<!-- Generate random networks, scale-free, small world networks -->
+Generate random networks, scale-free, small world networks
 ```{r}
 #make ring
 net_ring <- make_ring(n=25)
@@ -113,7 +275,7 @@ plot(net_small, vertex.color="gold")
 ```
 
 
-<!-- How to characterise networks - Degree, path length, transitivity, centrality measures -->
+How to characterise networks - Degree, path length, transitivity, centrality measures
 Different measures, descriptive (size, connectivity, path length)
 Different measures of centrality (transitivity, betweeness, closeness)
 
@@ -159,13 +321,26 @@ Select individual with repertoire == 1, then select random neighbour, transmit i
 Record how many individuals have repertoire == 1
 
 
-<!-- How to simulate transmission of information along the edges of a network -->
+How to simulate transmission of information along the edges of a network
 E.g. using a simple contagion method
 
 how long does it take for information to spread in networks with different shape and characteristics (more or less clustered)?
 
-<!-- Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
+Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
 
 <!-- Finally, let networks dynamically change over time -->
 
 <!-- Further Reading -->
+
+
+
+
+<!--Most models, especially those from population genetics, generally assume large/infinite population sizes. This allows to work with changing proportions instead of individual counts. However, we know from ecology that interesting dynamics can emerge where populations are finite/small. Effects that are usually too weak to drive evolutionary dynamics, such as genetic drift, can have a much stronger impact on small populations (see island populations). In analogy, there might be similar effects observable when we look at cultural dynamics in finite or small populations.
+
+In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter \@ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals. 
+
+A common way to visualise structure on the individual level are networks, where individuals are represented by nodes and their interactions or relationhsips are depicted by edges (or links). Depending on the number of edges (connections) an individaul might be able to interact with more or fewer or specific individuals. In fact, the use of networks has greatly improved our understanding of the spread of dieseases and has rekindled the interest in game theory (e.g. netwokred Prisoners Dilemma).
+
+In our case, edges will allow or prohibit the information transmission from one individual to another. We would expect that different networks (e.g. many edges versus few edges) will affect information transmission differently. 
+
+In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations. -->
