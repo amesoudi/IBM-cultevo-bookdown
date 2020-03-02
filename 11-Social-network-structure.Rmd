@@ -69,6 +69,7 @@ This is all we need to describe the interactions and the flow of information wit
 Given that we already have an adjacency matrix, we can create a network using the `graph_from_adjacency_matrix()` function. 
 
 ```{r}
+library(igraph)
 net <- graph_from_adjacency_matrix(adjm)
 net
 ```
@@ -147,17 +148,20 @@ plot(net,
      edge.arrow.size=0.5)
 ```
 
-One final styling example. So far, we have the edges indicate the existence of a friendship relationship, which is a binary quality. However, we can also imagine friendshi as a continous variable. Using the edge function `E()`, we can alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to contionous) and then plot the new network.
+One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continous variable (from strong$=$1 to none$=$0). Using the edge function `E()`, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to contionous values) and then plot the new network.
 
 ```{r}
+# create a copy of the adjacency matrix
 adjm2 <- adjm
 
+# draw random values from a uniform distribution and replace the matrix entries that have a value of 1
 adjm2[upper.tri(adjm2)] <- runif(n=sum(upper.tri(adjm2))) * adjm2[upper.tri(adjm2)]
 
+# copy the mirror image to the lower triangle
 adjm2[lower.tri(adjm2)] <- t(adjm2)[lower.tri(adjm2)]
 
+# create the network
 net2 <- graph_from_adjacency_matrix(adjm2, weighted=TRUE, mode="undirected")
-
 net2
 ```
 
@@ -175,13 +179,113 @@ plot(net2,
      edge.arrow.size=0.5)
 ```
 
-Now that 
+You can now observe strong and week relationships between individuals, their location in relation to each other, and how they cluster. In the next section, we will try to quantify what we observe here. 
 
 ## Analyse networks
+There is a variety of measures to describe the structure of our graph (another term for network). We can generally differentiate between properties of the network and properties of the vertices:
+
+### Network properties 
+We can retrieve the most basic information about our network using:
+```{r}
+# vertex information
+V(net)
+
+# edge information
+E(net)
+```
+
+If our networks have attributes stored (for the vertices or edges), we can retrieve them with the following two functions: 
+```{r}
+# vertex attributes
+get.vertex.attribute(graph=net)
+
+# edge attributes
+get.edge.attribute(net)
+```
+
+With `vcount()` and `ecount()`, we can return the number of vertices (`r vcount(net)`) and edges (`r ecount(net)`) in our graph. 
+```{r}
+# vertex count
+vcount(net)
+
+# edge count
+ecount(net)
+```
+
+Let us now look at a variety of measures that we can calculate to characterise our network.
+
+**Diameter** is a measure for the longest (geodesic) path, i.e. the largest number of steps that are necessary to reach two vertices in a network (using `farthest_vertices()` we can return the ID of the two vertices).
+```{r}
+diameter(graph=net)
+```
+
+**Average path length** is the average number of steps that need to be traveresed between any two vertices (aka as dyad). We can also use the `distance()` function to return a distance matrix similar to the adjacency matrix.
+```{r}
+# average distance between any dyad
+mean_distance(graph=net)
+```
+
+**Edge density** is the proportion of edges present in the graph relative to the number of possible edges (i.e. in a fully connected network with the same number of nodes).
+```{r}
+edge_density(graph=net)
+```
+
+**Reciprocity** (relevant for directed graphs only) calculates the proportion of mutual edges. As we have a directed graph, this value is one. 
+```{r}
+reciprocity(graph=net)
+```
+
+**Clustering coefficient** (aka transitivity, or cliquishness) is the probability that the two neighbours of a vertex are neighbours of each other. This is also called a triangle, and often the image of 'my friends are friends with each other' is used.
+```{r}
+transitivity(graph=net)
+```
+
+
+### Vertex properties
+Additional to these high-level measures, we can use a series of node-level measures to describe connectivity in more detail:
+
+**Degree centrality** refers to the number of (incoming/outgoing/both) edges of a vertex. We can use the `degree()` function to determine the degree centrality of each node:
+```{r}
+# number of edges that connected with each node
+degree(graph=net)
+
+# as we have an undirected network, the count of incoming and outgoing edges is identical
+identical(degree(graph=net, mode="in"), 
+          degree(graph=net, mode="out"))
+
+# we can use the mean of all degree centralities as a general measure for the entire network
+mean(degree(graph=net))
+```
+
+**Strength** is similar to degree centrality but relevant for weighted networks. It is the sum of all adjacent edge weights (a node might have many edges but with very low weights and so with high degree centrality but low strength). In our case (unweighted network), `degree()` and `strength()` produce the same result:
+```{r}
+sort(strength(graph=net))
+```
+
+**Closeness centrality** represents the number ofsteps it takes from a given vertex to any other vertex in the network. It is a measure for hoe long information on average takes to arrive at this node. 
+```{r}
+closeness(graph=net)
+```
+Note that the values are $<$1. This is because `igraph` defines closeness centrality as 'the inverse of the average length of the shortest paths to/from all the other vertices in the graph.'
+
+**Betweenness centrality** is the number of shortest paths between nodes that pass through a particular node. It is often seen as a measure for a node's gatekeeping or brokerage potential:
+```{r}
+betweenness(graph=net)
+```
+
+**Eigentvector centrality** is the eigenvector of the adjacency matrix. Vertices with a high eigenvector centrality are connected to many individuals who are connected to many individuals, and so on (see also page rank, `page_rank()`, and authority, `authority_score()`, score functions).
+```{r}
+eigen_centrality(graph=net)$vector
+```
+
+## Using social networks to model information transmission
 
 
 
-<!-- Generate simple networks from text
+
+
+<!-- 
+Generate simple networks from text
 To generate and plot networks, we wil use the `igraph` package that provides many useful functions. The simplest function to generate a network is called `graph_from_literal()`, which takes, for example, names and generates a network based on wheter these names are connected with each othe (using `--`). (Note: instead of names we could have also used letters or even numbers.) In the example below, we generate a friendship network, where each node represents an individual and each edge a strong reciprocal friendship. We store the generated network in **net**, and then apply the `plot` function to have a look at the network.
 
 ```{r 11.1}
@@ -195,19 +299,6 @@ net <- graph_from_literal(Iris--Eva--Anna,
 plot(net)
 ```
 
-Plot networks, with different styling explained 
-Let us edit the look of the network a bit. 
-
-
-
-Plotting the network makes it much easier to see the overall structure and important nodes. Here, for example, we can quickly see that Anna is the most connected individual in the group with four connections.
-
-Let us take a closer look at the network object. We can use the `V()` function to look at the vertices and the `E()` function to look at the edges that are stored in **net**. 
-
-```{r 11.3}
-V(net)
-E(net)
-```
 
 The output tells us that there are eight named vertices and nine edges stored. The functions also tell us the names of the vertices and which nodes each edge connects. The functions can be used to return stored information in the **net** object (try, for example, `V(net)$name`) but also to store additional information. For example, let us add the information whether a node represents a girl or a boy. 
 
