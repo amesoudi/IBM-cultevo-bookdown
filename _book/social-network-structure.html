@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Social network structure | Individual-based models of cultural evolution</title>
+  <title>10 Social network structure | Individual-based models of cultural evolution</title>
   <meta name="description" content="A minimal working structure for the book" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Social network structure | Individual-based models of cultural evolution" />
+  <meta property="og:title" content="10 Social network structure | Individual-based models of cultural evolution" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Social network structure | Individual-based models of cultural evolution" />
+  <meta name="twitter:title" content="10 Social network structure | Individual-based models of cultural evolution" />
   
   <meta name="twitter:description" content="A minimal working structure for the book" />
   
@@ -26,15 +26,15 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-11-08" />
+<meta name="date" content="2020-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="group-structure.html">
-<link rel="next" href="social-learning-of-social-learning-rules.html">
+<link rel="prev" href="demography.html"/>
+<link rel="next" href="group-structure.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -42,6 +42,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -52,41 +55,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -106,77 +134,102 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="part"><span><b>Basics</b></span></li>
-<li class="chapter" data-level="1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html"><i class="fa fa-check"></i><b>1</b> Unbiased transmission</a><ul>
-<li class="chapter" data-level="1.1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#initialising-the-simulation"><i class="fa fa-check"></i><b>1.1</b> Initialising the simulation</a></li>
-<li class="chapter" data-level="1.2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>1.2</b> Execute generation turn-over many times</a></li>
-<li class="chapter" data-level="1.3" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#plotting-the-model-results"><i class="fa fa-check"></i><b>1.3</b> Plotting the model results</a></li>
-<li class="chapter" data-level="1.4" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>1.4</b> Write a function to wrap the model code</a></li>
-<li class="chapter" data-level="1.5" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>1.5</b> Run several independent simulations and plot their results</a></li>
-<li class="chapter" data-level="1.6" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#varying-initial-conditions"><i class="fa fa-check"></i><b>1.6</b> Varying initial conditions</a></li>
-<li class="chapter" data-level="1.7" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#summary-of-the-model"><i class="fa fa-check"></i><b>1.7</b> Summary of the model</a></li>
-<li class="chapter" data-level="1.8" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#analytical-appendix"><i class="fa fa-check"></i><b>1.8</b> Analytical appendix</a></li>
-<li class="chapter" data-level="1.9" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#further-reading"><i class="fa fa-check"></i><b>1.9</b> Further reading</a></li>
+<li class="part"><span><b>Basics</b></span><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#initialising-the-simulation"><i class="fa fa-check"></i><b>0.1</b> Initialising the simulation</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>0.2</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#plotting-the-model-results"><i class="fa fa-check"></i><b>0.3</b> Plotting the model results</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>0.4</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>0.5</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#varying-initial-conditions"><i class="fa fa-check"></i><b>0.6</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#summary-of-the-model"><i class="fa fa-check"></i><b>0.7</b> Summary of the model</a></li>
+<li class="chapter" data-level="0.8" data-path="index.html"><a href="index.html#analytical-appendix"><i class="fa fa-check"></i><b>0.8</b> Analytical appendix</a></li>
+<li class="chapter" data-level="0.9" data-path="index.html"><a href="index.html#further-reading"><i class="fa fa-check"></i><b>0.9</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>2</b> Unbiased and biased mutation</a><ul>
-<li class="chapter" data-level="2.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>2.1</b> Unbiased mutation</a></li>
-<li class="chapter" data-level="2.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>2.2</b> Biased mutation</a></li>
-<li class="chapter" data-level="2.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>2.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="2.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>2.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="2.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
+<li class="chapter" data-level="1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>1</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="1.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>1.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="1.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>1.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="1.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>1.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="1.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>1.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="1.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>1.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: direct bias</a><ul>
-<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strentgh-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strentgh of selection</a></li>
-<li class="chapter" data-level="3.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>3.2</b> Summary of the model</a></li>
-<li class="chapter" data-level="3.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>3.3</b> Analytical appendix</a></li>
-<li class="chapter" data-level="3.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>3.4</b> Further reading</a></li>
+<li class="chapter" data-level="2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>2</b> Biased transmission: direct bias</a><ul>
+<li class="chapter" data-level="2.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strentgh-of-selection"><i class="fa fa-check"></i><b>2.1</b> Strentgh of selection</a></li>
+<li class="chapter" data-level="2.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>2.2</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>2.3</b> Analytical appendix</a></li>
+<li class="chapter" data-level="2.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>2.4</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission: frequency-dependent indirect bias</a><ul>
-<li class="chapter" data-level="4.1" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>4.1</b> The logic of conformity</a></li>
-<li class="chapter" data-level="4.2" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>4.2</b> Testing conformist transmission</a></li>
-<li class="chapter" data-level="4.3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="4.4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#analytical-appendix-3"><i class="fa fa-check"></i><b>4.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="4.5" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#further-readings"><i class="fa fa-check"></i><b>4.5</b> Further readings</a></li>
+<li class="chapter" data-level="3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: frequency-dependent indirect bias</a><ul>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>3.1</b> The logic of conformity</a></li>
+<li class="chapter" data-level="3.2" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>3.2</b> Testing conformist transmission</a></li>
+<li class="chapter" data-level="3.3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>3.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#analytical-appendix-3"><i class="fa fa-check"></i><b>3.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="3.5" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#further-readings"><i class="fa fa-check"></i><b>3.5</b> Further readings</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html"><i class="fa fa-check"></i><b>5</b> Biased transmission: demonstrator-based indirect bias</a><ul>
-<li class="chapter" data-level="5.1" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>5.1</b> A simple demonstrator bias</a></li>
-<li class="chapter" data-level="5.2" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>5.2</b> Predicting the ‘winning’ trait</a></li>
-<li class="chapter" data-level="5.3" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>5.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="5.4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#analytical-appendix-4"><i class="fa fa-check"></i><b>5.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="5.5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#further-readings-1"><i class="fa fa-check"></i><b>5.5</b> Further readings</a></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission: demonstrator-based indirect bias</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>4.1</b> A simple demonstrator bias</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>4.2</b> Predicting the ‘winning’ trait</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#analytical-appendix-4"><i class="fa fa-check"></i><b>4.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="4.5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#further-readings-1"><i class="fa fa-check"></i><b>4.5</b> Further readings</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html"><i class="fa fa-check"></i><b>6</b> Vertical and horizontal transmission</a><ul>
-<li class="chapter" data-level="6.1" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#vertical-cultural-transmission"><i class="fa fa-check"></i><b>6.1</b> Vertical cultural transmission</a></li>
-<li class="chapter" data-level="6.2" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#horizontal-cultural-transmission"><i class="fa fa-check"></i><b>6.2</b> Horizontal cultural transmission</a></li>
-<li class="chapter" data-level="6.3" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>6.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="6.4" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#analytical-appendix-5"><i class="fa fa-check"></i><b>6.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="6.5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#further-reading-3"><i class="fa fa-check"></i><b>6.5</b> Further reading</a></li>
+<li class="chapter" data-level="5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html"><i class="fa fa-check"></i><b>5</b> Vertical and horizontal transmission</a><ul>
+<li class="chapter" data-level="5.1" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#vertical-cultural-transmission"><i class="fa fa-check"></i><b>5.1</b> Vertical cultural transmission</a></li>
+<li class="chapter" data-level="5.2" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#horizontal-cultural-transmission"><i class="fa fa-check"></i><b>5.2</b> Horizontal cultural transmission</a></li>
+<li class="chapter" data-level="5.3" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>5.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="5.4" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#analytical-appendix-5"><i class="fa fa-check"></i><b>5.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="5.5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#further-reading-3"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>7</b> Multiple traits models</a><ul>
-<li class="chapter" data-level="7.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovation"><i class="fa fa-check"></i><b>7.1</b> Introducing innovation</a></li>
-<li class="chapter" data-level="7.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>7.2</b> Optimising the code</a></li>
-<li class="chapter" data-level="7.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>7.3</b> The distribution of popularity</a></li>
-<li class="chapter" data-level="7.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-6"><i class="fa fa-check"></i><b>7.4</b> Summary of the model</a></li>
-<li class="chapter" data-level="7.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>7.5</b> Analytical appendix</a></li>
-<li class="chapter" data-level="7.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-2"><i class="fa fa-check"></i><b>7.6</b> Further readings</a></li>
+<li class="chapter" data-level="6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>6</b> Multiple traits models</a><ul>
+<li class="chapter" data-level="6.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovation"><i class="fa fa-check"></i><b>6.1</b> Introducing innovation</a></li>
+<li class="chapter" data-level="6.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>6.2</b> Optimising the code</a></li>
+<li class="chapter" data-level="6.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>6.3</b> The distribution of popularity</a></li>
+<li class="chapter" data-level="6.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-6"><i class="fa fa-check"></i><b>6.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="6.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>6.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-2"><i class="fa fa-check"></i><b>6.6</b> Further readings</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="group-structure.html"><a href="group-structure.html"><i class="fa fa-check"></i><b>8</b> Group structured populations and migration</a></li>
-<li class="chapter" data-level="9" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>9</b> Social network structure</a></li>
-<li class="chapter" data-level="10" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>10</b> Social learning of social learning rules</a><ul>
-<li class="chapter" data-level="10.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>10.1</b> Openness and conservatism</a></li>
-<li class="chapter" data-level="10.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>10.2</b> Maintaining open populations</a></li>
-<li class="chapter" data-level="10.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>10.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="10.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-7"><i class="fa fa-check"></i><b>10.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="10.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-3"><i class="fa fa-check"></i><b>10.5</b> Further readings</a></li>
+<li class="chapter" data-level="7" data-path="rogers-paradox.html"><a href="rogers-paradox.html"><i class="fa fa-check"></i><b>7</b> Rogers’ Paradox</a><ul>
+<li class="chapter" data-level="7.1" data-path="rogers-paradox.html"><a href="rogers-paradox.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>7.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="7.2" data-path="rogers-paradox.html"><a href="rogers-paradox.html#further-reading-4"><i class="fa fa-check"></i><b>7.2</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>11</b> Traits inter-dependence</a><ul>
-<li class="chapter" data-level="11.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>11.1</b> Compatible and incompatible traits</a></li>
-<li class="chapter" data-level="11.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>11.2</b> Many-traits model</a></li>
-<li class="chapter" data-level="11.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>11.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="11.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-8"><i class="fa fa-check"></i><b>11.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="11.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-4"><i class="fa fa-check"></i><b>11.5</b> Further readings</a></li>
+<li class="chapter" data-level="8" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html"><i class="fa fa-check"></i><b>8</b> Rogers’ Paradox: A Solution</a><ul>
+<li class="chapter" data-level="8.1" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>8.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="8.2" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#further-reading-5"><i class="fa fa-check"></i><b>8.2</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12</b> References</a></li>
+<li class="chapter" data-level="9" data-path="demography.html"><a href="demography.html"><i class="fa fa-check"></i><b>9</b> Demography</a><ul>
+<li class="chapter" data-level="9.1" data-path="demography.html"><a href="demography.html#summary-of-the-model-9"><i class="fa fa-check"></i><b>9.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="9.2" data-path="demography.html"><a href="demography.html#analytical-appendix-and-further-readings"><i class="fa fa-check"></i><b>9.2</b> Analytical appendix and further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>10</b> Social network structure</a><ul>
+<li class="chapter" data-level="10.1" data-path="social-network-structure.html"><a href="social-network-structure.html#the-basics"><i class="fa fa-check"></i><b>10.1</b> The Basics</a></li>
+<li class="chapter" data-level="10.2" data-path="social-network-structure.html"><a href="social-network-structure.html#plotting-networks"><i class="fa fa-check"></i><b>10.2</b> Plotting networks</a></li>
+<li class="chapter" data-level="10.3" data-path="social-network-structure.html"><a href="social-network-structure.html#analyse-networks"><i class="fa fa-check"></i><b>10.3</b> Analyse networks</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="social-network-structure.html"><a href="social-network-structure.html#network-properties"><i class="fa fa-check"></i><b>10.3.1</b> Network properties</a></li>
+<li class="chapter" data-level="10.3.2" data-path="social-network-structure.html"><a href="social-network-structure.html#vertex-properties"><i class="fa fa-check"></i><b>10.3.2</b> Vertex properties</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="social-network-structure.html"><a href="social-network-structure.html#using-social-networks-to-model-information-transmission"><i class="fa fa-check"></i><b>10.4</b> Using social networks to model information transmission</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="group-structure.html"><a href="group-structure.html"><i class="fa fa-check"></i><b>11</b> Group structured populations and migration</a></li>
+<li class="chapter" data-level="12" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html"><i class="fa fa-check"></i><b>12</b> Reproduction and transformation</a><ul>
+<li class="chapter" data-level="12.1" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#emergent-similarity"><i class="fa fa-check"></i><b>12.1</b> Emergent similarity</a></li>
+<li class="chapter" data-level="12.2" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#cultural-fitness"><i class="fa fa-check"></i><b>12.2</b> Cultural fitness</a></li>
+<li class="chapter" data-level="12.3" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#summary-of-the-model-10"><i class="fa fa-check"></i><b>12.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="12.4" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#analytical-appendix-7"><i class="fa fa-check"></i><b>12.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="12.5" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#further-readings-3"><i class="fa fa-check"></i><b>12.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>13</b> Social learning of social learning rules</a><ul>
+<li class="chapter" data-level="13.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>13.1</b> Openness and conservatism</a></li>
+<li class="chapter" data-level="13.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>13.2</b> Maintaining open populations</a></li>
+<li class="chapter" data-level="13.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-11"><i class="fa fa-check"></i><b>13.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="13.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-8"><i class="fa fa-check"></i><b>13.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="13.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-4"><i class="fa fa-check"></i><b>13.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>14</b> Traits inter-dependence</a><ul>
+<li class="chapter" data-level="14.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>14.1</b> Compatible and incompatible traits</a></li>
+<li class="chapter" data-level="14.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>14.2</b> Many-traits model</a></li>
+<li class="chapter" data-level="14.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-12"><i class="fa fa-check"></i><b>14.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="14.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-9"><i class="fa fa-check"></i><b>14.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="14.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-5"><i class="fa fa-check"></i><b>14.5</b> Further readings</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -198,63 +251,325 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="social-network-structure" class="section level1">
-<h1><span class="header-section-number">9</span> Social network structure</h1>
-<!-- Explaining fundamentals of networks -->
-<p>In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter @ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals.</p>
-<p>A common way to visualise structure on the individual level are networks, where individuals are represented by nodes and their interactions or relationhsips are depicted by edges (or links). Depending on the number of edges (connections) an individaul might be able to interact with more or fewer or specific individuals. In fact, the use of networks has greatly improved our understanding of the spread of dieseases and has rekindled the interest in game theory (e.g. netwokred Prisoners Dilemma).</p>
-<p>In our case, edges will allow or prohibit the information transmission from one individual to another. We would expect that different networks (e.g. many edges versus few edges) will affect information transmission differently.</p>
-<p>In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations.</p>
-<!-- Generate simple networks from text -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(igraph)</code></pre></div>
+<h1><span class="header-section-number">10</span> Social network structure</h1>
+<p>As we have seen in the previous chapter, sometimes more detailed modelling can lead to different results (compared to the abstract case) …….
+Henrich’s model, for example, has shown that a populations ability to maintain and accumulate cultural traits depends on its size, whereby larger populations are more likely to retain and improve cultural traits than smaller ones. We used this model as an example that population-level characteristics (here, demography) play a role in cultural dynamics. Given that individuals acquire information from other individuals through social learning, we might also suspect that individual-level phenomena are important, too. Commonly, individual interactions are represented as networks, whereby nodes (also referred to as vertex, <em>pl.</em> vertices) represent individuals, and ties (also referred to as edges) between any two nodes indicate a relationship (e.g. friendship or kinship, or willingness to cooperate, etc.). Note, as with the term individaul-based models, the individual can be a person but it can also represent a country, an institution, or any other kind of actor.</p>
+<p>In this chapter, we will cover the basics of social networks, how to create, analyse, and use them. Finally, we will use all of that to find an answer to the question: how do individual-level interaction patterns affect population-level cultural dynamics?</p>
+<div id="the-basics" class="section level2">
+<h2><span class="header-section-number">10.1</span> The Basics</h2>
+<p>Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as the socially transmitted information. Say, we want to better undersand how gossip is spreading through this group. At simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spead in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix. It is a square matrix where all individuals of a population are represent as columns and rows.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">byrow=</span>T)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">row.names</span>(m) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">colnames</span>(m) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">m</a></code></pre></div>
+<pre><code>##   A B C
+## A 0 1 1
+## B 0 0 1
+## C 1 1 0</code></pre>
+<p>The matrix above is an example for such an adjacency matrix. Shown are the relationships between three individuals (A, B, and C). When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row we see that B is only interacting with C, and the last row tell us that C interacting both with A and with B. This is an example for an asymmetrix adjacency matrix, because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper trianle of the matrix with the lower triangle of the matrix:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">all</span>(m[<span class="kw">upper.tri</span>(m)] <span class="op">==</span><span class="st"> </span>m[<span class="kw">lower.tri</span>(m)])</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>We can make this matrix symmetric by replacing the lower matrix triangle with the upper one (this requires us to first transpose the triangle using the <code>t()</code> function):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Either</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">m[<span class="kw">lower.tri</span>(m)] &lt;-<span class="st"> </span><span class="kw">t</span>(m)[<span class="kw">lower.tri</span>(m)]</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># or use m[2,1] &lt;- 1</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">m</a></code></pre></div>
+<pre><code>##   A B C
+## A 0 1 1
+## B 1 0 1
+## C 1 1 0</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Check whether the matrix is symmetric now:</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">all</span>(m[<span class="kw">upper.tri</span>(m)] <span class="op">==</span><span class="st"> </span>m[<span class="kw">lower.tri</span>(m)])</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Now let us turn back to out group of co-workers, and let us create a random friendship network. We start with an empty adjacency matrix, add friendships to the upper triangle and then copy the mirror image to the lower triangle (this is assuming that friendships are reciprocal):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">adjm &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol=</span>n, <span class="dt">nrow=</span>n)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">adjm</a></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [2,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [3,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [4,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [5,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [6,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [7,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [8,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+##  [9,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA
+## [10,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA</code></pre>
+<p>Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with equal probability (we could change this value to be higher or lower to simulate groups with more or less friendships):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">friendshipRatio &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">adjm[<span class="kw">upper.tri</span>(adjm)] &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">                                <span class="dt">size =</span> n<span class="op">*</span>(n<span class="dv">-1</span>)<span class="op">/</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">                                <span class="dt">replace =</span> T, </a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">                                <span class="dt">prob =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">-</span>friendshipRatio, friendshipRatio))</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">adjm</a></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]   NA    1    1    1    0    1    1    1    1     1
+##  [2,]   NA   NA    1    1    1    1    0    1    0     1
+##  [3,]   NA   NA   NA    0    0    1    0    1    0     0
+##  [4,]   NA   NA   NA   NA    0    0    0    0    1     1
+##  [5,]   NA   NA   NA   NA   NA    0    0    0    1     0
+##  [6,]   NA   NA   NA   NA   NA   NA    1    1    1     1
+##  [7,]   NA   NA   NA   NA   NA   NA   NA    0    0     0
+##  [8,]   NA   NA   NA   NA   NA   NA   NA   NA    0     0
+##  [9,]   NA   NA   NA   NA   NA   NA   NA   NA   NA     1
+## [10,]   NA   NA   NA   NA   NA   NA   NA   NA   NA    NA</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># add the mirror image to the lower triangle</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">adjm[<span class="kw">lower.tri</span>(adjm)] &lt;-<span class="st"> </span><span class="kw">t</span>(adjm)[<span class="kw">lower.tri</span>(adjm)]</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">adjm</a></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]   NA    1    1    1    0    1    1    1    1     1
+##  [2,]    1   NA    1    1    1    1    0    1    0     1
+##  [3,]    1    1   NA    0    0    1    0    1    0     0
+##  [4,]    1    1    0   NA    0    0    0    0    1     1
+##  [5,]    0    1    0    0   NA    0    0    0    1     0
+##  [6,]    1    1    1    0    0   NA    1    1    1     1
+##  [7,]    1    0    0    0    0    1   NA    0    0     0
+##  [8,]    1    1    1    0    0    1    0   NA    0     0
+##  [9,]    1    0    0    1    1    1    0    0   NA     1
+## [10,]    1    1    0    1    0    1    0    0    1    NA</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># replace diagonal (these indicate self-references) with zeros</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">diag</span>(adjm) &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">adjm</a></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    1    1    1    0    1    1    1    1     1
+##  [2,]    1    0    1    1    1    1    0    1    0     1
+##  [3,]    1    1    0    0    0    1    0    1    0     0
+##  [4,]    1    1    0    0    0    0    0    0    1     1
+##  [5,]    0    1    0    0    0    0    0    0    1     0
+##  [6,]    1    1    1    0    0    0    1    1    1     1
+##  [7,]    1    0    0    0    0    1    0    0    0     0
+##  [8,]    1    1    1    0    0    1    0    0    0     0
+##  [9,]    1    0    0    1    1    1    0    0    0     1
+## [10,]    1    1    0    1    0    1    0    0    1     0</code></pre>
+<p>This is all we need to describe the interactions and the flow of information within this group. And while we could already use other tools in R to analyse it, we should first try to visualise this network to get a better intuition of what this group actualy looks like. The <code>igraph</code> package provides many incredibly useful functions and tools to create, work with, and analyse networks. We will rely on many of its functions in this chapter.</p>
+</div>
+<div id="plotting-networks" class="section level2">
+<h2><span class="header-section-number">10.2</span> Plotting networks</h2>
+<p>Given that we already have an adjacency matrix, we can create a network using the <code>graph_from_adjacency_matrix()</code> function.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">library</span>(igraph)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;igraph&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     as_data_frame, groups, union</code></pre>
-<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
-## 
-##     compose, simplify</code></pre>
-<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
-## 
-##     crossing</code></pre>
-<pre><code>## The following object is masked from &#39;package:tibble&#39;:
-## 
-##     as_data_frame</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     decompose, spectrum</code></pre>
 <pre><code>## The following object is masked from &#39;package:base&#39;:
 ## 
 ##     union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">graph_from_literal</span>(A<span class="op">--</span>B, C<span class="op">--</span>D<span class="op">--</span>E, F<span class="op">--</span>G<span class="op">--</span>H, G<span class="op">--</span>I, F<span class="op">--</span>H)
-<span class="kw">plot</span>(net)</code></pre></div>
-<p><img src="_main_files/figure-html/11.1-1.png" width="672" /></p>
-<!-- Plot networks, with different styling explained -->
-<!-- Generate simple networks from matrix -->
-<!-- Generate random networks, scale-free, small world networks -->
-<!-- How to characterise networks - Degree, path length, transitivity, centrality measures -->
-<!-- How to simulate transmission of information along the edges of a network -->
-<!-- Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
-<!-- Finally, let network change dynamically change over time -->
-<!-- Further Reading -->
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">net &lt;-<span class="st"> </span><span class="kw">graph_from_adjacency_matrix</span>(adjm)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">net</a></code></pre></div>
+<pre><code>## IGRAPH 51ffaec D--- 10 48 -- 
+## + edges from 51ffaec:
+##  [1]  1-&gt; 2  1-&gt; 3  1-&gt; 4  1-&gt; 6  1-&gt; 7  1-&gt; 8  1-&gt; 9  1-&gt;10
+##  [9]  2-&gt; 1  2-&gt; 3  2-&gt; 4  2-&gt; 5  2-&gt; 6  2-&gt; 8  2-&gt;10  3-&gt; 1
+## [17]  3-&gt; 2  3-&gt; 6  3-&gt; 8  4-&gt; 1  4-&gt; 2  4-&gt; 9  4-&gt;10  5-&gt; 2
+## [25]  5-&gt; 9  6-&gt; 1  6-&gt; 2  6-&gt; 3  6-&gt; 7  6-&gt; 8  6-&gt; 9  6-&gt;10
+## [33]  7-&gt; 1  7-&gt; 6  8-&gt; 1  8-&gt; 2  8-&gt; 3  8-&gt; 6  9-&gt; 1  9-&gt; 4
+## [41]  9-&gt; 5  9-&gt; 6  9-&gt;10 10-&gt; 1 10-&gt; 2 10-&gt; 4 10-&gt; 6 10-&gt; 9</code></pre>
+<p>When we return the <code>net</code> object, we receive a lot of information about our network, for example, that it is there are 10 vertices and 48 edges (for more information be sure to have a look at this short <a href="https://igraph.org/r/doc/aaa-igraph-package.html">igraph introduction</a>). However, we did not receive an actual network figure. For this, we can use the R’s generic plot function:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">#set.seed(1)</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">plot</span>(net)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>This is the most basic network plot where each node (with the numbers 1 to 10) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that receive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the <code>set.seed()</code> function in the code chunck above.</p>
+<p>There are many ways to change the looks of network plots. The igraph manual is an ideal starting point to learn more about it. For example, we could plot nodes based on specific layout functions:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">plot</span>(net, <span class="dt">layout=</span><span class="kw">layout.grid</span>(net), <span class="dt">main=</span><span class="st">&quot;Grid layout&quot;</span>)</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw">plot</span>(net, <span class="dt">layout=</span><span class="kw">layout.circle</span>(net), <span class="dt">main=</span><span class="st">&quot;Ring layout&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Or we can directly change the size, and colour of nodes:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">plot</span>(net, </a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">     <span class="dt">vertex.color=</span><span class="st">&quot;dodgerblue&quot;</span>, </a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">     <span class="dt">vertex.label.color=</span><span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">     <span class="dt">vertex.size=</span><span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">     <span class="dt">edge.color=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">     <span class="dt">edge.width=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">     <span class="dt">edge.arrow.size=</span><span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">     <span class="dt">main=</span><span class="st">&quot;Default layout with styling&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>In the previous example, we have changed the colour of the nodes’ background and text, and their overall size (attributes starting with <code>vertex.</code>). We have also changed the colour of the edges, their width, and the size of the tips (attributes starting with <code>edge.</code>).</p>
+<p>Let’s say, we know the age of each individual and we would like to visualise age as different colours of the nodes. For that, we should first store the colour information for each vertex (using the <code>V()</code> function) and then change the vertex colour in the plot function:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># There is no age attribute set</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw">V</span>(net)<span class="op">$</span>age</a></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># Add an age attribute and randomly assign an age class</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">V</span>(net)<span class="op">$</span>age &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">size=</span>n, <span class="dt">replace=</span>T)</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co"># The network now has an age attribute</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="kw">V</span>(net)<span class="op">$</span>age</a></code></pre></div>
+<pre><code>##  [1]  7  4  1  8  5  8 10 10  5  1</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">V</span>(net)<span class="op">$</span>colour &lt;-<span class="st"> </span><span class="kw">heat.colors</span>(<span class="dt">n=</span><span class="dv">10</span>)[<span class="kw">V</span>(net)<span class="op">$</span>age]</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">net</a></code></pre></div>
+<pre><code>## IGRAPH 51ffaec D--- 10 48 -- 
+## + attr: age (v/n), colour (v/c)
+## + edges from 51ffaec:
+##  [1]  1-&gt; 2  1-&gt; 3  1-&gt; 4  1-&gt; 6  1-&gt; 7  1-&gt; 8  1-&gt; 9  1-&gt;10
+##  [9]  2-&gt; 1  2-&gt; 3  2-&gt; 4  2-&gt; 5  2-&gt; 6  2-&gt; 8  2-&gt;10  3-&gt; 1
+## [17]  3-&gt; 2  3-&gt; 6  3-&gt; 8  4-&gt; 1  4-&gt; 2  4-&gt; 9  4-&gt;10  5-&gt; 2
+## [25]  5-&gt; 9  6-&gt; 1  6-&gt; 2  6-&gt; 3  6-&gt; 7  6-&gt; 8  6-&gt; 9  6-&gt;10
+## [33]  7-&gt; 1  7-&gt; 6  8-&gt; 1  8-&gt; 2  8-&gt; 3  8-&gt; 6  9-&gt; 1  9-&gt; 4
+## [41]  9-&gt; 5  9-&gt; 6  9-&gt;10 10-&gt; 1 10-&gt; 2 10-&gt; 4 10-&gt; 6 10-&gt; 9</code></pre>
+<p>The <code>net</code> object now has two attributes (one is called age, with numeric values, and one is called colour, with character values). We can now plot this graph:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">plot</span>(net, </a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">     <span class="dt">vertex.color=</span><span class="kw">V</span>(net)<span class="op">$</span>colour, </a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">     <span class="dt">vertex.label.color=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">     <span class="dt">vertex.size=</span><span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">     <span class="dt">edge.color=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">     <span class="dt">edge.width=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">     <span class="dt">edge.arrow.size=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>It can be useful to remove the text in each node and make the nodes smaller, especially when the networks become large. Also, given that we have a symmetric network (all relationships are reciprocal), we can get rid of the arrow tips. We do this by telling igraph that the network is undirected.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">net &lt;-<span class="st"> </span><span class="kw">as.undirected</span>(net)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">plot</span>(net, </a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">     <span class="dt">vertex.color=</span><span class="kw">V</span>(net)<span class="op">$</span>colour, </a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">     <span class="dt">vertex.label=</span><span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">     <span class="dt">vertex.size=</span><span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">     <span class="dt">edge.width=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">     <span class="dt">edge.arrow.size=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continous variable (from strong$=<span class="math inline">\(1 to none\)</span>=$0). Using the edge function <code>E()</code>, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to contionous values) and then plot the new network.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># create a copy of the adjacency matrix</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">adjm2 &lt;-<span class="st"> </span>adjm</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co"># draw random values from a uniform distribution and replace the matrix entries that have a value of 1</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">adjm2[<span class="kw">upper.tri</span>(adjm2)] &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span><span class="kw">sum</span>(<span class="kw">upper.tri</span>(adjm2))) <span class="op">*</span><span class="st"> </span>adjm2[<span class="kw">upper.tri</span>(adjm2)]</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="co"># copy the mirror image to the lower triangle</span></a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">adjm2[<span class="kw">lower.tri</span>(adjm2)] &lt;-<span class="st"> </span><span class="kw">t</span>(adjm2)[<span class="kw">lower.tri</span>(adjm2)]</a>
+<a class="sourceLine" id="cb34-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb34-10" data-line-number="10"><span class="co"># create the network</span></a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">net2 &lt;-<span class="st"> </span><span class="kw">graph_from_adjacency_matrix</span>(adjm2, <span class="dt">weighted=</span><span class="ot">TRUE</span>, <span class="dt">mode=</span><span class="st">&quot;undirected&quot;</span>)</a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">net2</a></code></pre></div>
+<pre><code>## IGRAPH 22dab45 U-W- 10 24 -- 
+## + attr: weight (e/n)
+## + edges from 22dab45:
+##  [1] 1-- 2 1-- 3 1-- 4 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4
+## [11] 2-- 5 2-- 6 2-- 8 2--10 3-- 6 3-- 8 4-- 9 4--10 5-- 9 6-- 7
+## [21] 6-- 8 6-- 9 6--10 9--10</code></pre>
+<p>Note, igraph automatically added an attribute called <code>weight</code>. Now, let’s plot this network with the edge width representing their weight:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">V</span>(net2)<span class="op">$</span>age &lt;-<span class="st"> </span><span class="kw">V</span>(net)<span class="op">$</span>age</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">V</span>(net2)<span class="op">$</span>colour &lt;-<span class="st"> </span><span class="kw">V</span>(net)<span class="op">$</span>colour</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="kw">plot</span>(net2, </a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">     <span class="dt">vertex.color=</span><span class="kw">V</span>(net2)<span class="op">$</span>colour,</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">     <span class="dt">vertex.label=</span><span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">     <span class="dt">vertex.size=</span><span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">     <span class="dt">edge.width=</span><span class="kw">E</span>(net2)<span class="op">$</span>weight<span class="op">*</span><span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">     <span class="dt">edge.arrow.size=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>You can now observe strong and week relationships between individuals, their location in relation to each other, and how they cluster. In the next section, we will try to quantify what we observe here.</p>
+</div>
+<div id="analyse-networks" class="section level2">
+<h2><span class="header-section-number">10.3</span> Analyse networks</h2>
+<p>There is a variety of measures to describe the structure of our graph (another term for network). We can generally differentiate between properties of the network and properties of the vertices:</p>
+<div id="network-properties" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Network properties</h3>
+<p>We can retrieve the most basic information about our network using:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># vertex information</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">V</span>(net)</a></code></pre></div>
+<pre><code>## + 10/10 vertices, from 23272e3:
+##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># edge information</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">E</span>(net)</a></code></pre></div>
+<pre><code>## + 24/24 edges from 23272e3:
+##  [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 1-- 6 2-- 6 3-- 6 1-- 7
+## [11] 6-- 7 1-- 8 2-- 8 3-- 8 6-- 8 1-- 9 4-- 9 5-- 9 6-- 9 1--10
+## [21] 2--10 4--10 6--10 9--10</code></pre>
+<p>If our networks have attributes stored (for the vertices or edges), we can retrieve them with the following two functions:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># vertex attributes</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">get.vertex.attribute</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## $age
+##  [1]  7  4  1  8  5  8 10 10  5  1
+## 
+## $colour
+##  [1] &quot;#FFDB00FF&quot; &quot;#FF6D00FF&quot; &quot;#FF0000FF&quot; &quot;#FFFF00FF&quot; &quot;#FF9200FF&quot;
+##  [6] &quot;#FFFF00FF&quot; &quot;#FFFFBFFF&quot; &quot;#FFFFBFFF&quot; &quot;#FF9200FF&quot; &quot;#FF0000FF&quot;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># edge attributes</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">get.edge.attribute</span>(net)</a></code></pre></div>
+<pre><code>## named list()</code></pre>
+<p>With <code>vcount()</code> and <code>ecount()</code>, we can return the number of vertices (10) and edges (24) in our graph.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># vertex count</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">vcount</span>(net)</a></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># edge count</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">ecount</span>(net)</a></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>Let us now look at a variety of measures that we can calculate to characterise our network.</p>
+<p><strong>Diameter</strong> is a measure for the longest (geodesic) path, i.e. the largest number of steps that are necessary to reach two vertices in a network (using <code>farthest_vertices()</code> we can return the ID of the two vertices).</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">diameter</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p><strong>Average path length</strong> is the average number of steps that need to be traveresed between any two vertices (aka as dyad). We can also use the <code>distance()</code> function to return a distance matrix similar to the adjacency matrix.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># average distance between any dyad</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">mean_distance</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## [1] 1.488889</code></pre>
+<p><strong>Edge density</strong> is the proportion of edges present in the graph relative to the number of possible edges (i.e. in a fully connected network with the same number of nodes).</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">edge_density</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## [1] 0.5333333</code></pre>
+<p><strong>Reciprocity</strong> (relevant for directed graphs only) calculates the proportion of mutual edges. As we have a directed graph, this value is one.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">reciprocity</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p><strong>Clustering coefficient</strong> (aka transitivity, or cliquishness) is the probability that the two neighbours of a vertex are neighbours of each other. This is also called a triangle, and often the image of ‘my friends are friends with each other’ is used.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">transitivity</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>## [1] 0.6</code></pre>
+</div>
+<div id="vertex-properties" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> Vertex properties</h3>
+<p>Additional to these high-level measures, we can use a series of node-level measures to describe connectivity in more detail:</p>
+<p><strong>Degree centrality</strong> refers to the number of (incoming/outgoing/both) edges of a vertex. We can use the <code>degree()</code> function to determine the degree centrality of each node:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="co"># number of edges that connected with each node</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="kw">degree</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>##  [1] 8 7 4 4 2 7 2 4 5 5</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co"># as we have an undirected network, the count of incoming and outgoing edges is identical</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">identical</span>(<span class="kw">degree</span>(<span class="dt">graph=</span>net, <span class="dt">mode=</span><span class="st">&quot;in&quot;</span>), </a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">          <span class="kw">degree</span>(<span class="dt">graph=</span>net, <span class="dt">mode=</span><span class="st">&quot;out&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># we can use the mean of all degree centralities as a general measure for the entire network</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">mean</span>(<span class="kw">degree</span>(<span class="dt">graph=</span>net))</a></code></pre></div>
+<pre><code>## [1] 4.8</code></pre>
+<p><strong>Strength</strong> is similar to degree centrality but relevant for weighted networks. It is the sum of all adjacent edge weights (a node might have many edges but with very low weights and so with high degree centrality but low strength). In our case (unweighted network), <code>degree()</code> and <code>strength()</code> produce the same result:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">sort</span>(<span class="kw">strength</span>(<span class="dt">graph=</span>net))</a></code></pre></div>
+<pre><code>##  [1] 2 2 4 4 4 5 5 7 7 8</code></pre>
+<p><strong>Closeness centrality</strong> represents the number ofsteps it takes from a given vertex to any other vertex in the network. It is a measure for hoe long information on average takes to arrive at this node.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">closeness</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>##  [1] 0.10000000 0.09090909 0.07142857 0.07142857 0.05882353
+##  [6] 0.09090909 0.05882353 0.07142857 0.07692308 0.07692308</code></pre>
+<p>Note that the values are $&lt;$1. This is because <code>igraph</code> defines closeness centrality as ‘the inverse of the average length of the shortest paths to/from all the other vertices in the graph.’</p>
+<p><strong>Betweenness centrality</strong> is the number of shortest paths between nodes that pass through a particular node. It is often seen as a measure for a node’s gatekeeping or brokerage potential:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">betweenness</span>(<span class="dt">graph=</span>net)</a></code></pre></div>
+<pre><code>##  [1] 7.116667 6.416667 0.000000 0.200000 0.200000 4.866667
+##  [7] 0.000000 0.000000 2.750000 0.450000</code></pre>
+<p><strong>Eigentvector centrality</strong> is the eigenvector of the adjacency matrix. Vertices with a high eigenvector centrality are connected to many individuals who are connected to many individuals, and so on (see also page rank, <code>page_rank()</code>, and authority, <code>authority_score()</code>, score functions).</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">eigen_centrality</span>(<span class="dt">graph=</span>net)<span class="op">$</span>vector</a></code></pre></div>
+<pre><code>##  [1] 1.0000000 0.8876106 0.6321015 0.6071980 0.2845588 0.9054004
+##  [7] 0.3516400 0.6321015 0.6543030 0.7482566</code></pre>
+</div>
+</div>
+<div id="using-social-networks-to-model-information-transmission" class="section level2">
+<h2><span class="header-section-number">10.4</span> Using social networks to model information transmission</h2>
+<p>How can we</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="group-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="social-learning-of-social-learning-rules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="demography.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="group-structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -262,12 +577,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -279,6 +593,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -295,10 +613,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

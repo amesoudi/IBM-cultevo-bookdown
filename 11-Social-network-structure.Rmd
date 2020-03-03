@@ -2,12 +2,12 @@
 # Social network structure
 
 As we have seen in the previous chapter, sometimes more detailed modelling can lead to different results (compared to the abstract case) ....... 
-Henrich's model, for example, has shown that a populations ability to maintain and accumulate cultural traits depends on its size, whereby larger populations are more likely to retain and improve cultural traits than smaller ones. We used this model as an example that population-level characteristics (here, demography) play a role in cultural dynamics. Given that  individuals acquire information from other individuals through social learning, we might also suspect that individual-level phenomena are important, too. Commonly, individual interactions are represented as networks, whereby nodes (also referred to as vertex, _pl._ vertices) represent individuals, and ties (also referred to as edges) between any two nodes indicate a relationship (e.g. friendship or kinship, or willingness to cooperate, etc.). Note, as with the term individaul-based models, the individual can be a person but it can also represent a country, an institution, or any other kind of actor. 
+Henrich's model, for example, has shown that a populations ability to maintain and accumulate cultural traits depends on its size, whereby larger populations are more likely to retain and improve cultural traits than smaller ones. We used this model as an example that population-level characteristics (here, demography) play a role in cultural dynamics. Given that individuals acquire information from other individuals through social learning, we might also suspect that individual-level phenomena are important, too. Commonly, individual interactions are represented as networks, whereby nodes (also referred to as vertex, _pl._ vertices) represent individuals, and ties (also referred to as edges) between any two nodes indicate a relationship (e.g. friendship or kinship, or willingness to cooperate, etc.). Note, as with the term individual-based models, the individual can be a person but it can also represent a country, an institution, or any other kind of actor. 
 
 In this chapter, we will cover the basics of social networks, how to create, analyse, and use them. Finally, we will use all of that to find an answer to the question: how do individual-level interaction patterns affect population-level cultural dynamics?
 
 ## The Basics
-Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as the socially transmitted information. Say, we want to better undersand how gossip is spreading through this group. At simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spead in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix. It is a square matrix where all individuals of a population are represent as columns and rows. 
+Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as socially transmitted information. Say, we want to better understand how gossip is spreading through this group. At the simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spread in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix. It is a square matrix where all individuals of a population are represented as columns and rows. 
 
 ```{r}
 m <- matrix(c(0,1,1, 0,0,1, 1,1,0), nrow=3, byrow=T)
@@ -16,7 +16,7 @@ colnames(m) <- c("A","B","C")
 m
 ```
 
-The matrix above is an example for such an adjacency matrix. Shown are the relationships between three individuals (A, B, and C). When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row we see that B is only interacting with C, and the last row tell us that C interacting both with A and with B. This is an example for an asymmetrix adjacency matrix, because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper trianle of the matrix with the lower triangle of the matrix:
+The matrix above is an example of such an adjacency matrix. Shown are the relationships between three individuals (A, B, and C). When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row, we see that B is only interacting with C, and the last row tells us that C interacting both with A and with B. This is an example for an asymmetric adjacency matrix because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper triangle of the matrix with the lower triangle of the matrix:
 
 ```{r}
 all(m[upper.tri(m)] == m[lower.tri(m)])
@@ -33,7 +33,7 @@ m
 all(m[upper.tri(m)] == m[lower.tri(m)])
 ```
 
-Now let us turn back to out group of co-workers, and let us create a random friendship network. We start with an empty adjacency matrix, add friendships to the upper triangle and then copy the mirror image to the lower triangle (this is assuming that friendships are reciprocal):
+Now let us turn back to our group of co-workers, and let us create a random friendship network. We start with an empty adjacency matrix, add friendships to the upper triangle and then copy the mirror image to the lower triangle (this is assuming that friendships are reciprocal):
 
 ```{r}
 n <- 10
@@ -41,7 +41,7 @@ adjm <- matrix(NA, ncol=n, nrow=n)
 adjm
 ```
 
-Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with equal probability (we could change this value to be higher or lower to simulate groups with more or less friendships):
+Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with equal probability (we could change this value to be higher or lower to simulate groups with more or fewer friendships):
 
 ```{r}
 friendshipRatio <- 0.5
@@ -63,7 +63,7 @@ diag(adjm) <- 0
 adjm
 ```
 
-This is all we need to describe the interactions and the flow of information within this group. And while we could already use other tools in R to analyse it, we should first try to visualise this network to get a better intuition of what this group actualy looks like. The `igraph` package provides many incredibly useful functions and tools to create, work with, and analyse networks. We will rely on many of its functions in this chapter. 
+This is all we need to describe the interactions and the flow of information within this group. And while we could already use other tools in R to analyse it, we should first try to visualise this network to get a better intuition of what this group looks like. The `igraph` package provides many incredibly useful functions and tools to create, work with, and analyse networks. We will rely on many of its functions in this chapter. 
 
 ## Plotting networks 
 Given that we already have an adjacency matrix, we can create a network using the `graph_from_adjacency_matrix()` function. 
@@ -81,7 +81,7 @@ When we return the `net` object, we receive a lot of information about our netwo
 plot(net)
 ```
 
-This is the most basic network plot where each node (with the numbers 1 to `r n`) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that receive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the `set.seed()` function in the code chunck above.
+This is the most basic network plot where each node (with the numbers 1 to `r n`) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that receive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the `set.seed()` function in the code chunk above.
 
 There are many ways to change the looks of network plots. The igraph manual is an ideal starting point to learn more about it. For example, we could plot nodes based on specific layout functions:
 
@@ -148,7 +148,7 @@ plot(net,
      edge.arrow.size=0.5)
 ```
 
-One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continous variable (from strong$=$1 to none$=$0). Using the edge function `E()`, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to contionous values) and then plot the new network.
+One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continuous variable (from strong$=$1 to none$=$0). Using the edge function `E()`, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to continuous values) and then plot the new network.
 
 ```{r}
 # create a copy of the adjacency matrix
@@ -179,7 +179,7 @@ plot(net2,
      edge.arrow.size=0.5)
 ```
 
-You can now observe strong and week relationships between individuals, their location in relation to each other, and how they cluster. In the next section, we will try to quantify what we observe here. 
+You can now observe strong and week relationships between individuals, their location relative to each other, and how they cluster. In the next section, we will try to quantify what we observe here. 
 
 ## Analyse networks
 There is a variety of measures to describe the structure of our graph (another term for network). We can generally differentiate between properties of the network and properties of the vertices:
@@ -262,7 +262,7 @@ mean(degree(graph=net))
 sort(strength(graph=net))
 ```
 
-**Closeness centrality** represents the number ofsteps it takes from a given vertex to any other vertex in the network. It is a measure for hoe long information on average takes to arrive at this node. 
+**Closeness centrality** represents the number of steps it takes from a given vertex to any other vertex in the network. It is a measure for how long information on average takes to arrive at this node. 
 ```{r}
 closeness(graph=net)
 ```
@@ -273,7 +273,7 @@ Note that the values are $<$1. This is because `igraph` defines closeness centra
 betweenness(graph=net)
 ```
 
-**Eigentvector centrality** is the eigenvector of the adjacency matrix. Vertices with a high eigenvector centrality are connected to many individuals who are connected to many individuals, and so on (see also page rank, `page_rank()`, and authority, `authority_score()`, score functions).
+**Eigenvector centrality** is the eigenvector of the adjacency matrix. Vertices with a high eigenvector centrality are connected to many individuals who are connected to many individuals, and so on (see also page rank, `page_rank()`, and authority, `authority_score()`, score functions).
 ```{r}
 eigen_centrality(graph=net)$vector
 ```
@@ -283,155 +283,3 @@ eigen_centrality(graph=net)$vector
 
 
 
-
-<!-- 
-Generate simple networks from text
-To generate and plot networks, we wil use the `igraph` package that provides many useful functions. The simplest function to generate a network is called `graph_from_literal()`, which takes, for example, names and generates a network based on wheter these names are connected with each othe (using `--`). (Note: instead of names we could have also used letters or even numbers.) In the example below, we generate a friendship network, where each node represents an individual and each edge a strong reciprocal friendship. We store the generated network in **net**, and then apply the `plot` function to have a look at the network.
-
-```{r 11.1}
-library(igraph)
-net <- graph_from_literal(Iris--Eva--Anna, 
-                          Jacob--Pete--Felix, 
-                          Julia--Anna--Mia, 
-                          Anna--Iris, 
-                          Anna--Pete,
-                          Julia--Mia)
-plot(net)
-```
-
-
-The output tells us that there are eight named vertices and nine edges stored. The functions also tell us the names of the vertices and which nodes each edge connects. The functions can be used to return stored information in the **net** object (try, for example, `V(net)$name`) but also to store additional information. For example, let us add the information whether a node represents a girl or a boy. 
-
-```{r 11.4}
-V(net)$sex <- "girl"
-V(net)$sex[ V(net)$name %in% c("Felix","Jacob","Pete") ] <- "boy"
-V(net)$sex
-```
-
-In the first line, we create a new node variable as part of the **net** object, called 'sex.' We set this variable to be 'girl' for all entries. In the next line we replace all 'girl' entries with 'boy' where the name of the vertex is one of the three boy names. We can now use this information to change the colour of the nodes depending on their sex.
-
-```{r 11.5}
-V(net)$col <- 'dodgerblue'
-V(net)$col[ V(net)$sex=="boy" ] <- 'firebrick3'
-
-plot(net, 
-     vertex.color=V(net)$col, 
-     vertex.size=42,
-     vertex.label.color="white",
-     edge.color="black",
-     edge.width=3)
-```
-
-With the added colour, we can now see that there is a divide between boys and girls and we can see that Anna and Pete connect the two subsets. There are of course many other ways to change the appearence of the network, which we will try out as we go a long this chapter. First, however, let us try to generate larger networks. 
-
-Generate simple networks from matrix
-A second function that allows to generate simple networks is 
-```{r}
-m <- matrix(sample(x=0:1, size=25, replace=T), ncol=5)
-net <- graph_from_adjacency_matrix(adjmatrix=m)
-plot(net, 
-     vertex.color="gold")
-#randomly generated, matrix based
-#see, arrows
-#can make them undirected
-plot(as.undirected(net))
-#see, self-arrows
-#can get rid of self-loops
-plot(simplify(net))
-#which is the same as setting the diagonal of m to be 0
-diag(m) <- 0
-net <- graph_from_adjacency_matrix(adjmatrix=m)
-plot(net, 
-     vertex.color="gold")
-```
-
-
-Generate random networks, scale-free, small world networks
-```{r}
-#make ring
-net_ring <- make_ring(n=25)
-plot(net_ring, vertex.color="gold")
-#make lattice
-net_lat <- make_lattice(dimvector=c(3,5))
-plot(net_lat, vertex.color="gold")
-#make random
-net_rand <- erdos.renyi.game(n=25, p.or.m=.15, type="gnp")
-plot(net_rand, vertex.color="gold")
-#make scale-free
-net_scale <- barabasi.game(n=25, power=3, m=2, directed=FALSE)
-plot(net_scale, vertex.color="gold")
-#make small-world
-net_small <- watts.strogatz.game(dim=1, size=25, nei=2, p=.05)
-plot(net_small, vertex.color="gold")
-```
-
-
-How to characterise networks - Degree, path length, transitivity, centrality measures
-Different measures, descriptive (size, connectivity, path length)
-Different measures of centrality (transitivity, betweeness, closeness)
-
-```{r}
-net <- net_small
-vcount(net)
-degree(graph=net)
-degree(graph=net, mode="out")
-mean(degree(graph=net, mode="out"))
-
-average.path.length(graph=net)
-
-transitivity(graph=net)
-
-betweenness(graph=net)
-
-closeness(graph=net)
-```
-
-
-Next, how are we going to use this?
-Another way to represent a network is in the shape of a matrix
-```{r}
-get.adjacency(net)
-net_m <- as.matrix(get.adjacency(net))
-```
-
-Undirected network (which we will look at here to keep things simple)
-
-If we want to know who is connected to individual 3
-
-```{r}
-net_m[3,]
-which(net_m[3,]==1)
-```
-
-Contagion on this network
-
-Select individaul to have information/innovation
-Set repertoire to 1 for this individual
-Loop
-Select individual with repertoire == 1, then select random neighbour, transmit information
-Record how many individuals have repertoire == 1
-
-
-How to simulate transmission of information along the edges of a network
-E.g. using a simple contagion method
-
-how long does it take for information to spread in networks with different shape and characteristics (more or less clustered)?
-
-Combining the previous two sections, how do different network characteristics affect informatin diffusion?; Compare with Full Graph -->
-
-<!-- Finally, let networks dynamically change over time -->
-
-<!-- Further Reading -->
-
-
-
-
-<!--Most models, especially those from population genetics, generally assume large/infinite population sizes. This allows to work with changing proportions instead of individual counts. However, we know from ecology that interesting dynamics can emerge where populations are finite/small. Effects that are usually too weak to drive evolutionary dynamics, such as genetic drift, can have a much stronger impact on small populations (see island populations). In analogy, there might be similar effects observable when we look at cultural dynamics in finite or small populations.
-
-In the previous chapter, we have introduced the concept of group structured populations. Here, we want to go one step further and look at the fine-grained interactions at the individual level. Similartly to chapter \@ref(#group-structure) some individuals are more likely to interact with some than with other individuals. This could be based on personl experiences or preferences but also on spatial or temporal distribution of individuals. 
-
-A common way to visualise structure on the individual level are networks, where individuals are represented by nodes and their interactions or relationhsips are depicted by edges (or links). Depending on the number of edges (connections) an individaul might be able to interact with more or fewer or specific individuals. In fact, the use of networks has greatly improved our understanding of the spread of dieseases and has rekindled the interest in game theory (e.g. netwokred Prisoners Dilemma).
-
-In our case, edges will allow or prohibit the information transmission from one individual to another. We would expect that different networks (e.g. many edges versus few edges) will affect information transmission differently. 
-
-In this chapter, we will generate, plot, and analyse networks. Then we will model information diffusion through networked populations and how diffusion might differ from dynamics in fully connected populations. -->
