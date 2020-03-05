@@ -41,7 +41,7 @@ adjm <- matrix(NA, ncol=n, nrow=n)
 adjm
 ```
 
-Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with equal probability (we could change this value to be higher or lower to simulate groups with more or fewer friendships):
+Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with with a probability that indicates how many friendships there are in the network (`friendschipRatio`):
 
 ```{r}
 friendshipRatio <- 0.5
@@ -61,7 +61,9 @@ adjm
 # replace diagonal (these indicate self-references) with zeros
 diag(adjm) <- 0
 adjm
+
 ```
+
 
 This is all we need to describe the interactions and the flow of information within this group. And while we could already use other tools in R to analyse it, we should first try to visualise this network to get a better intuition of what this group looks like. The `igraph` package provides many incredibly useful functions and tools to create, work with, and analyse networks. We will rely on many of its functions in this chapter. 
 
@@ -279,6 +281,279 @@ eigen_centrality(graph=net)$vector
 ```
 
 ## Using social networks to model information transmission
+Now that we know how to generate, plot, and analyse networks: how can we use them in the context of information sharing. Or to come back to our initial example, the spread of gossip? Let us start with a very simple model: we initiate the simulation be endowing one individual with a piece of information (or gossip). We then simulate how many time steps it will take until the information has spread through the entire network. 
+
+### Gossip transmission on networked populations
+```{r}
+# set up vector that stores whether an individual possesses the latest gossip:
+gossip_meter <- rep(F, n)
+gossip_meter
+
+# choose a random individual to start gossipping
+gossip_meter[sample(x=n, size=1)] <- T
+gossip_meter
+
+# choose an individual with gossip
+if(sum(gossip_meter)==1){
+  gossip_provider <- which(gossip_meter)
+} else {
+  gossip_provider <- sample(x=which(gossip_meter), size=1)
+}
+
+# choose a neighbour in the network
+neighbours <- which(adjm[gossip_provider,]==1)
+
+# only execute if there is a neighbour
+if(length(neighbours)>0){
+  # choose one neighbour if several are present
+  if(length(neighbours)==1){
+    neighbour <- neighbours
+  } else {
+    neighbour <- sample(x=neighbours, size=1)
+  }
+  # update gossip indicator of the neighbour
+  gossip_meter[neighbour] <- T
+}
+gossip_meter
+```
+This is already sufficient to simulate the spread of gossip on a network. In the next step, let us loop over these instructions and record the number of time steps it takes until everyone received the gossip. But first, we should write a different `sample()` function, as the generic function misbehaves with samples of length equal to one. We will use the following: 
+```{r}
+mySample <- function(x, prob=NULL){
+  if(length(x)==1){
+    return(x)
+  } else {
+    return(sample(x=x, size=1, prob=prob))
+  }
+}
+```
+Now we can use this simpler version of the sampling function (which is directly tailored to our needs), replace it in the code above, and add a `for` loop: 
+```{r}
+# total number of turns to loop over
+Turns <- 50
+
+# a matrix to record how many individuals have the gossip at time x
+res <- data.frame(turn=1:Turns, gossipers=rep(0, Turns))
+
+# set up gossip indicator
+gossip_meter <- rep(F, n)
+
+# choose a random individual to start gossipping
+gossip_meter[sample(x=n, size=1)] <- T
+
+for(turns in 1:Turns){
+  res[turns,2] <- sum(gossip_meter)/n
+  # choose an individual with gossip
+  gossip_provider <- mySample(which(gossip_meter))
+  
+  # choose a neighbour in the network
+  neighbours <- which(adjm[gossip_provider,]==1)
+  
+  # only execute if there is a neighbour
+  if(length(neighbours)>0){
+    # choose one neighbour ...
+    neighbour <- mySample(neighbours)
+    # and update its gossip indicator
+    gossip_meter[neighbour] <- T
+  }
+}
+
+# have a look at the time course
+res$turn
+
+# plot result
+library(ggplot2)
+ggplot(res) + 
+  geom_line(aes(x=turn, y=gossipers)) +
+  theme_bw()
+```
+
+Let us adapt the code so that we can run it repeatedly, to get a better feeling for the average amount of time it takes for the information to spread. 
+
+```{r}
+gossip_model <- function(ADJM, TURNS, SIM=1){
+  n <- nrow(ADJM)
+  # a matrix to record how many individuals have the gossip at time x
+  res <- data.frame(turn=1:TURNS, gossipers=rep(0, TURNS))
+  # set up gossip indicator
+  gossip_meter <- rep(F, n)
+  # choose a random individual to start gossipping
+  gossip_meter[sample(x=n, size=1)] <- T
+  
+  for(turns in 1:TURNS){
+    res[turns,2] <- sum(gossip_meter)/n
+    # choose an individual with gossip
+    gossip_provider <- mySample(which(gossip_meter))
+    # choose a neighbour in the network
+    neighbours <- which(ADJM[gossip_provider,]==1)
+    # only execute if there is a neighbour
+    if(length(neighbours)>0){
+      # choose one neighbour ...
+      neighbour <- mySample(neighbours)
+      # and update its gossip indicator
+      gossip_meter[neighbour] <- T
+    }
+  }
+  res$simulation <- SIM
+  return(res)
+}
+```
+
+With this function of our model, we can easily re-run the simulation several times and receive the time trajectories for each simulation:
+
+```{r, cache=TRUE}
+data <- do.call("rbind", lapply(1:100, function(sim){
+  gossip_model(ADJM=adjm, TURNS=100, SIM=sim)
+}))
+```
+
+```{r}
+ggplot(data) + 
+  geom_line(aes(x=turn, y=gossipers, group=simulation), alpha=.33) +
+  theme_bw()
+```
+
+We can see that the initial spread is very fast and then tapers off. At the beginning there are a lot of individuals who do not have the gossip and transmission will be successful. However, the more individuals with the gossip there are, the less likely it is to find someone who does not yet have the gossip. How does this result compare to simulations with a fully connected network (i.e. where every individual is equally likely to interact with any other individual):
+
+```{r, cache=TRUE}
+adjm_full <- createNetwork(N=n, FRIENDSHIPRATIO=1)
+
+data_full <- do.call("rbind", lapply(1:100, function(sim){
+  gossip_model(ADJM=adjm_full, TURNS=100, SIM=sim)
+}))
+```
+
+```{r}
+data$type <- "colleague network"
+data_full$type <- "fully connected"
+data_combined <- rbind(data, data_full)
+
+ggplot(data_combined) + 
+  geom_point(aes(x=turn, y=gossipers, color=type), alpha=.05) +
+  geom_smooth(aes(x=turn, y=gossipers, color=type)) +
+  ylab("Proportion with gossip") +
+  theme_bw()
+```
+
+This plot shows that the fully connected network reaches saturation faster than the friend network. 
+
+<!--When we re-run this simulation with larger networks and a sparser friendship network, this difference becomes even bigger:
+```{r, cache=TRUE}
+adjm_colleagues <- createNetwork(N=25, FRIENDSHIPRATIO=.20)
+adjm_full <- createNetwork(N=25, FRIENDSHIPRATIO=1)
+
+data_colleagues <- do.call("rbind", lapply(1:100, function(sim){
+  gossip_model(ADJM=adjm_colleagues, TURNS=100, SIM=sim)
+}))
+
+data_full <- do.call("rbind", lapply(1:100, function(sim){
+  gossip_model(ADJM=adjm_full, TURNS=100, SIM=sim)
+}))
+```
+
+```{r}
+data_colleagues$type <- "colleague network"
+data_full$type <- "fully connected"
+data_combined2 <- rbind(data_full, data_colleagues)
+
+ggplot(data_combined2) + 
+  geom_point(aes(x=turn, y=gossipers, color=type), alpha=.05) +
+  geom_smooth(aes(x=turn, y=gossipers, color=type)) +
+  ylab("Proportion with gossip") +
+  theme_bw()
+```
+-->
+
+
+
+### How does network structure affect information transmission?
+While the previous example has shown us the difference in the transmission speed of information in a structured versus an unstructured population (i.e. the fully connected nework whihc is equivalent to a well-mixed population), we still do not know how network characteristics affect the transmission of information. To get a better understanding of it, we will extend the above simulations to run for different network sizes and different friendship ratios (which influences the connectivity in the network).
+
+First, let us write down a function to generate networks as we have done above:
+```{r}
+createNetwork <- function(N, FRIENDSHIPRATIO){
+  adjm <- matrix(0, ncol=N, nrow=N)
+  adjm[upper.tri(adjm)] <- sample(x = 0:1, 
+                                  size = N*(N-1)/2, 
+                                  replace = T, 
+                                  prob = c(1-FRIENDSHIPRATIO, FRIENDSHIPRATIO))
+  adjm[lower.tri(adjm)] <- t(adjm)[lower.tri(adjm)]
+  return(adjm)
+}
+```
+
+For this type of analysis we do not need to record each time step, instead, we can let our function return the time step at which, e.g. 75\% of the population have the gossip:
+
+```{r}
+gossip_model <- function(ADJM, PROP, TURNS, SIM=1){
+  n <- nrow(ADJM)
+  # set up gossip indicator
+  gossip_meter <- rep(F, n)
+  # choose a random individual to start gossipping
+  gossip_meter[sample(x=n, size=1)] <- T
+  
+  timestep <- NA
+  for(turns in 1:TURNS){
+    # record the time step when a defined proportion of the population has the gossip
+    if(sum(gossip_meter)/n >= PROP & is.na(timestep)){
+      timestep <- turns 
+    }
+    # choose an individual with gossip
+    gossip_provider <- mySample(which(gossip_meter))
+    # choose a neighbour in the network
+    neighbours <- which(ADJM[gossip_provider,]==1)
+    # only execute if there is a neighbour
+    if(length(neighbours)>0){
+      # choose one neighbour ...
+      neighbour <- mySample(neighbours)
+      # and update its gossip indicator
+      gossip_meter[neighbour] <- T
+    }
+  }
+  # if PROP is not reached, return the maximum value
+  if(is.na(timestep)){
+    timestep <- TURNS
+  }
+  return(timestep)
+}
+```
+
+```{r}
+adjm <- createNetwork(N=50, FRIENDSHIPRATIO=.25)
+gossip_model(ADJM=adjm, PROP=.75, TURNS=100, SIM=1)
+```
+
+Now, let us run these functions for different group sizes, different connectivites, and several repertitions:
+
+```{r, cache=TRUE}
+parameters <- expand.grid(groupSize=c(10,30,50,70,90),
+                          connectivity=c(.2,.4,.6,.8,1),
+                          repetition=1:10)
+
+tmp <- lapply(1:nrow(parameters), function(p){
+  adjm <- createNetwork(N=parameters[p,"groupSize"], FRIENDSHIPRATIO=parameters[p,"connectivity"])
+  # adjm <- get.adjacency(watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=1, p=parameters[p,"connectivity"], loops=F, multiple=F))
+  gossip_model(ADJM=adjm, PROP=.5, TURNS=100, SIM=parameters[p,"repetition"])
+})
+
+parameters$time <- unlist(tmp)
+```
+
+To plot the average time of our repeated simulations, we need to first calculate this average:
+
+```{r}
+library(dplyr)
+parameters %>% group_by(groupSize, connectivity) %>% summarise(meanTime=mean(time)) -> data
+```
+
+Now we can plot the results:
+
+```{r}
+# ggplot(data) + 
+#   geom_raster(aes(x=factor(connectivity), y=factor(groupSize), fill=meanTime))
+
+ggplot(data, aes(x=connectivity, y=meanTime, col=factor(groupSize))) + geom_line() + geom_point() + theme_bw()
+```
+
 
 
 
