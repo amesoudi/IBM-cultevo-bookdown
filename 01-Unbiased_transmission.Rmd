@@ -13,7 +13,7 @@ We start by simulating a simple case of unbiased cultural transmission. We will 
 
 Here we will simulate a case where $N$ individuals each possess one of two mutually exclusive cultural traits. These alternative traits are denoted $A$ and $B$. For example, $A$ might be eating a vegetarian diet, and $B$ might be eating a non-vegetarian diet. In reality, traits are seldom clear-cut (e.g. what about pescatarians?), but models are designed to cut away all the complexity to give tractable answers to simplified situations.
 
-Our model has non-overlapping generations. In each generation, all $N$ individuals are replaced with $N$ new individuals. Again, this is unlike any real biological group, but provides a simple way of simulating change over time. Generations here could correspond to biological generations, but could equally be 'cultural generations' (or learning episodes), which might be much shorter.
+Our model has non-overlapping generations. In each generation, all $N$ individuals are replaced with $N$ new individuals. Again, this is unlike any real biological group but provides a simple way of simulating change over time. Generations here could correspond to biological generations, but could equally be 'cultural generations' (or learning episodes), which might be much shorter.
 
 Each new individual of each new generation picks a member of the previous generation at random and copies their cultural trait. This is known as unbiased oblique cultural transmission. 'Unbiased' refers to the fact that traits are copied entirely at random. The term 'oblique' means that members of one generation learn from those of the previous, non-overlapping, generation. This is different from, for example, horizontal cultural transmission, where individuals copy members of the same generation, and vertical cultural transmission, where offspring copy their biological parents.
 
@@ -21,7 +21,7 @@ If we assume that the two cultural traits are transmitted in an unbiased way, wh
 
 The output of the model will be a plot showing $p$ over all generations up to the last generation. Generations (or time steps) are denoted by $t$, where generation one is $t=1$, generation two is $t=2$, up to the last generation $t=t_{\text{max}}$. 
 
-First, we need to specify the fixed parameters of the model. These are quantities that we decide on at the start, and do not change during the simulation. In this model these are $N$ (the number of individuals) and $t_{\text{max}}$ (the number of generations). Let's start with $N=100$ and $t_{\text{max}}=200$:
+First, we need to specify the fixed parameters of the model. These are quantities that we decide on at the start and do not change during the simulation. In this model these are $N$ (the number of individuals) and $t_{\text{max}}$ (the number of generations). Let's start with $N=100$ and $t_{\text{max}}=200$:
 
 ```{r 1.1}
 N <- 100
@@ -58,7 +58,7 @@ This should match the fourth row in the table above.
 
 We also need a tibble to record the output of our simulation, that is, to track the trait frequency $p$ in each generation. This will have two columns with $t_{\text{max}}$ rows, one row for each generation. The first column is simply a counter of the generations, from 1 to $t_{\text{max}}$. This will be useful to plot the output later. The other column contains the values of $p$ for each generation. 
 
-At this stage we don't know what $p$ will be in each generation, so for now let's fill the **output** tibble with lots of NAs, which is R's symbol for Not Available, or missing value. We can use the `rep()` (repeat) command to repeat NA $t_{\text{max}}$ times. We're using NA rather than, say, zero, because zero could be misinterpreted as $p = 0$, which would mean that all individuals have trait $B$. This would be misleading, because at the moment we haven't yet calculated $p$, so it's nonexistent, rather than zero.
+At this stage we don't know what $p$ will be in each generation, so, for now, let's fill the **output** tibble with lots of NAs, which is R's symbol for Not Available, or missing value. We can use the `rep()` (repeat) command to repeat NA $t_{\text{max}}$ times. We're using NA rather than, say, zero, because zero could be misinterpreted as $p = 0$, which would mean that all individuals have trait $B$. This would be misleading, because at the moment we haven't yet calculated $p$, so it's nonexistent, rather than zero.
 
 ```{r 1.5}
 output <- tibble(generation = 1:t_max, p = rep(NA, t_max))
@@ -71,7 +71,7 @@ output$p[1] <- sum(population$trait == "A") / N
 output
 ```
 
-This first value of $p$ is 0.51, meaning that 51 individuals have trait $A$, and 49 have trait $B$. Even though `sample()` gives equal probability of picking each trait, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, re-run the above code with different values of the random number seed.
+This first value of $p$ is 0.51, meaning that 51 individuals have trait $A$, and 49 have trait $B$. Even though `sample()` returns either trait with equal probability, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, re-run the above code with different values of the random number seed.
 
 ## Execute generation turn-over many times
 
@@ -101,11 +101,11 @@ Now we should have 200 values of $p$ stored in **output**, one for each generati
 
 We use `ggplot()` to plot our data. The syntax of ggplot may be slightly obscure at the beginning, but it forces us to have a clear picture of the data before plotting.
 
-In the first line in the code below, we are telling ggplot that the data we want to plot are in the tibble **output**. Then, with the command `aes()` we declare the 'aesthetics' of the plot, that is, how we want our data mapped in our plot. In this case, we want the values of $p$ on the y-axis, and the values of $generation$ on the x-axis (this is why we created earlier, in the tibble **output**, a column to keep the count of generations).
+In the first line in the code below, we are telling ggplot that the data we want to plot is in the tibble **output**. Then, with the command `aes()` we declare the 'aesthetics' of the plot, that is, how we want our data mapped in our plot. In this case, we want the values of $p$ on the y-axis, and the values of $generation$ on the x-axis (this is why we created earlier, in the tibble **output**, a column to keep the count of generations).
 
-We then use `geom_line()`. In ggplot, 'geoms' describe what kind of visual representation should be plotted: lines, bars, boxes and so on. This visual representation is independent from the mapping that we declared before with `aes()`. The same data, with the same mapping, can be visually represented in many different ways. In this case, we are asking ggplot to represent the data as a line. You can change `geom_line()` in the code below to `geom_point()`, and see what happens (other geoms have less obvious effects, and we will see some of them in the later chapters).
+We then use `geom_line()`. In ggplot, 'geoms' describe what kind of visual representation should be plotted: lines, bars, boxes and so on. This visual representation is independent of the mapping that we declared before with `aes()`. The same data, with the same mapping, can be visually represented in many different ways. In this case, we are asking ggplot to represent the data as a line. You can change `geom_line()` in the code below to `geom_point()`, and see what happens (other geoms have less obvious effects, and we will see some of them in the later chapters).
 
-The other commands are mainly to make the plot look nicer. We want the y-axis to span all the possible values of $p$, from 0 to 1, and we use a particular 'theme' for our plot, in this case a standard theme with white background. With the command `labs()` we give a more informative label to the y-axis (ggplot automatically labels the axis with the name of the tibble columns that are plotted: this is good for $generation$, but less so for $p$).
+The other commands are mainly to make the plot look nicer. We want the y-axis to span all the possible values of $p$, from 0 to 1, and we use a particular 'theme' for our plot, in this case, a standard theme with white background. With the command `labs()` we give a more informative label to the y-axis (ggplot automatically labels the axis with the name of the tibble columns that are plotted: this is good for $generation$, but less so for $p$).
 
 ```{r 1.8}
 ggplot(data = output, aes(y = p, x = generation)) +
@@ -119,7 +119,7 @@ The proportion of individuals with trait $A$ starts off hovering around 0.5, and
 
 ## Write a function to wrap the model code
 
-Ideally we would like to repeat the simulation to explore this idea in more detail, perhaps changing some of the parameters. For example, if we increase $N$, are we more or less likely to lose one of the traits? As noted above, individual based models like this one are probabilistic or stochastic, thus it is essential to run simulations many times to understand what happens. With our code scattered about in chunks, it is hard to quickly repeat the simulation. Instead we can wrap it all up in a function:
+Ideally, we would like to repeat the simulation to explore this idea in more detail, perhaps changing some of the parameters. For example, if we increase $N$, are we more or less likely to lose one of the traits? As noted above, individual-based models like this one are probabilistic or stochastic, thus it is essential to run simulations many times to understand what happens. With our code scattered about in chunks, it is hard to quickly repeat the simulation. Instead, we can wrap it all up in a function:
 
 ```{r 1.9}
 unbiased_transmission_1 <- function(N, t_max) {
@@ -143,7 +143,7 @@ unbiased_transmission_1 <- function(N, t_max) {
 
 This is just all of the code snippets that we already ran above, but all within a function with parameters $N$ and $t_{\text{max}}$ as arguments to the function. In addition, `unbiased_transmission_1()`  ends with the line `output`. This means that this tibble will be exported from the function when it is run. This is useful for storing data from simulations wrapped in functions, otherwise that data is lost after the function is executed. 
 
-Nothing will happen when you run the above code, because all you've done is define the function, not actually run it. The point is that we can now call the function in one go, easily changing the values of $N$ and $t_{\text{max}}$. Let's try first with the same values of $N$ and $t_{\text{max}}$ as before, and save the output from the simulation into **data_model**, as a record of what happened.
+Nothing will happen when you run the above code, because all you have done is define the function but not actually run it. The point is that we can now call the function in one go, easily changing the values of $N$ and $t_{\text{max}}$. Let's try first with the same values of $N$ and $t_{\text{max}}$ as before, and save the output from the simulation into **data_model**, as a record of what happened.
 
 ```{r 1.10}
 data_model <- unbiased_transmission_1(N = 100, t_max = 200)
@@ -209,7 +209,7 @@ unbiased_transmission_2 <- function(N, t_max, r_max) {
 
 There are a few changes here. First, we need a different **output** tibble, because we need to store data for all the runs. For that, we initialise the same $generation$ and $p$ columns as before, but with space for all the runs. $generation$ is now built by repeating the count of each generation $r_{\text{max}}$ times, and $p$ is NA repeated for all generations, for all runs.
 
-We also need a new column called $run$ that keeps track of which run the data in the other two columns belongs to. Note that the definition of $run$ is preceded by `as.factor()`. This specifies the type of data to put in the $run$ column. We want $run$ to be a 'factor' or categorical variable so that, even if runs are labeled with numbers (1, 2, 3...), this should not be misinterpreted as a continuous, real number: there is no sense in which run 2 is twice as 'runny' as run 1, or run 3 half as 'runny' as run 6. Runs could equally have been labelled using letters, or any other arbitrary scheme. While omitting `as.factor()` does not make any difference when running the simulation, it would create problems when plotting the data because ggplot would treat runs as continuous real numbers rather than discrete categories (you can see this yourself by modifying the definition of **output** in the previous code chunk). This is a good example of how it is important to have a clear understanding of your data before trying to plot or analyse them.
+We also need a new column called $run$ that keeps track of which run the data in the other two columns belongs to. Note that the definition of $run$ is preceded by `as.factor()`. This specifies the type of data to put in the $run$ column. We want $run$ to be a 'factor' or categorical variable so that, even if runs are labelled with numbers (1, 2, 3...), this should not be misinterpreted as a continuous, real number: there is no sense in which run 2 is twice as 'runny' as run 1, or run 3 half as 'runny' as run 6. Runs could equally have been labelled using letters, or any other arbitrary scheme. While omitting `as.factor()` does not make any difference when running the simulation, it would create problems when plotting the data because ggplot would treat runs as continuous real numbers rather than discrete categories (you can see this yourself by modifying the definition of **output** in the previous code chunk). This is a good example of how it is important to have a clear understanding of your data before trying to plot or analyse them.
 
 Going back to the function, we then set up an $r$ loop, which executes once for each run. The code within this loop is mostly the same as before, except that we now use the `[output$generation == t & output$run == r, ]` notation to put $p$ into the right place in **output**. 
 
@@ -365,4 +365,4 @@ More generally, creating deterministic recursion-based models can be a good way 
 
 ## Further reading
 
-@cavalli-sforza_cultural_1981 explored how cultural drift affects cultural evolution, which was extended by @neiman_stylistic_1995 in an archaeological context. @bentley_random_2004 present models of unbiased transmission with respect to several cultural datasets. @lansing_domain_2011 and commentaries explore the underlying assumptions of applying random drift to cultural evolution.
+@cavalli-sforza_cultural_1981 explored how cultural drift affects cultural evolution, which was extended by @neiman_stylistic_1995 in an archaeological context. @bentley_random_2004 present models of unbiased transmission for several cultural datasets. @lansing_domain_2011 and commentaries explore the underlying assumptions of applying random drift to cultural evolution.
