@@ -3,15 +3,15 @@
 
 ## The logic of conformity 
 
-In [Chapter 3][Biased transmission: direct bias] we looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will start looking at the other kind of biased transmission, when traits are equivalent, but individuals are more likely to adopt a trait according to the characteristics of the population, and in particular which other individuals already have it. (As we mentioned previously, these are often called 'indirect' or 'context' biases).
+In [Chapter 3][Biased transmission: direct bias] we looked at the case where one cultural trait is intrinsically more likely to be copied than another trait. Here we will start looking at the other kind of biased transmission when traits are equivalent, but individuals are more likely to adopt a trait according to the characteristics of the population, and in particular which other individuals already have it. (As we mentioned previously, these are often called 'indirect' or 'context' biases).
 
-A first possibility is that we may be influenced by the frequency of the trait in the population, i.e. how many other individuals already have the trait. Conformity (or 'positive frequency dependent bias') has been most studied. Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics. (The opposite case, anti-conformity or negative frequency dependent bias is also possible, where the least common trait is more likely to be copied. This is probably less common in real life.)
+A first possibility is that we may be influenced by the frequency of the trait in the population, i.e. how many other individuals already have the trait. Conformity (or 'positive frequency-dependent bias') has been most studied. Here, individuals are disproportionately more likely to adopt the most common trait in the population, irrespective of its intrinsic characteristics. (The opposite case, anti-conformity or negative frequency-dependent bias is also possible, where the least common trait is more likely to be copied. This is probably less common in real life.)
 
-For example, imagine trait $A$ has a frequency of 0.7 in the population, with the rest possessing trait $B$. An unbiased learner would adopt trait $A$ with a probability exactly equal to 0.7. This is unbiased transmission, and is what happens the model described in ([Chapter 1][Unbiased transmission]: by picking a member of the previous generation at random, the probability of adoption is equal to the frequency of that trait among the previous generation.
+For example, imagine trait $A$ has a frequency of 0.7 in the population, with the rest possessing trait $B$. An unbiased learner would adopt trait $A$ with a probability exactly equal to 0.7. This is unbiased transmission and is what happens the model described in ([Chapter 1][Unbiased transmission]: by picking a member of the previous generation at random, the probability of adoption is equal to the frequency of that trait among the previous generation.
 
 A conformist learner, on the other hand, would adopt trait $A$ with a probability greater than 0.7. In other words, common traits get an 'adoption boost' relative to unbiased transmission. Uncommon traits get an equivalent 'adoption penalty'. The magnitude of this boost or penalty can be controlled by a parameter, which we will call $D$.
 
-Let's keep things simple in our model. Rather than assuming that individuals sample across the entire population, which in any case might be implausible in large populations, let's assume they pick only three demonstrators at random. Why three? This is the minimum number of demonstrators that can yield a majority (i.e. 2 vs 1), which we need in order to implement conformity. When two demonstrators have one trait and the other demonstrator has a different trait, we want to boost the probability of adoption for the majority trait, and reduce it for the minority trait. 
+Let's keep things simple in our model. Rather than assuming that individuals sample across the entire population, which in any case might be implausible in large populations, let's assume they pick only three demonstrators at random. Why three? This is the minimum number of demonstrators that can yield a majority (i.e. 2 vs 1), which we need to implement conformity. When two demonstrators have one trait and the other demonstrator has a different trait, we want to boost the probability of adoption for the majority trait, and reduce it for the minority trait. 
 
 We can specify the probability of adoption as follows:
 
@@ -37,9 +37,9 @@ For the three combinations where there are two $A$s and one $B$, the probability
 
 Similarly, for the three combinations where there are two $B$s and one $A$, the probability of adopting $A$ is 1/3 minus the conformist adoption penalty specified by $D$.
 
-Let's implement these assumptions in the kind of individual based model we've been building so far. As before, assume $N$ individuals each of whom possess one of two traits $A$ or $B$. The frequency of $A$ is denoted by $p$. The initial frequency of $A$ in generation $t = 1$ is $p_0$. Rather than going straight to a function, let's go step by step.
+Let's implement these assumptions in the kind of individual-based model we've been building so far. As before, assume $N$ individuals each of whom possesses one of two traits $A$ or $B$. The frequency of $A$ is denoted by $p$. The initial frequency of $A$ in generation $t = 1$ is $p_0$. Rather than going straight to a function, let's go step by step.
 
-First we'll specify our parameters, $N$ and $p_0$ as before, plus the new conformity parameter $D$. We  also create the usual **population** tibble and fill it with $A$s and $B$s in the proportion specified by $p_0$, again exactly as before. 
+First, we'll specify our parameters, $N$ and $p_0$ as before, plus the new conformity parameter $D$. We also create the usual **population** tibble and fill it with $A$s and $B$s in the proportion specified by $p_0$, again exactly as before. 
 
 ```{r 4.1}
 library(tidyverse)
@@ -52,7 +52,7 @@ D <- 1
 population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0))) # create first generation
 ```
 
-Now we create another tibble, called **demonstrators** that picks, for each new individual in the next generation, three demonstrators at random from the current population of individuals. It therefore needs three columns/variables, one for each of the demonstrators, and $N$ rows, one for each individual. We fill each column with randomly chosen traits from the **population** tibble. We can have a look at **demonstrators** by entering its name in the R console.
+Now we create another tibble, called **demonstrators** that picks, for each new individual in the next generation, three demonstrators at random from the current population of individuals. It, therefore, needs three columns/variables, one for each of the demonstrators, and $N$ rows, one for each individual. We fill each column with randomly chosen traits from the **population** tibble. We can have a look at **demonstrators** by entering its name in the R console.
 
 ```{r 4.2}
 # create dataframe with a set of 3 randomly-picked demonstrators for each agent
@@ -101,7 +101,7 @@ demonstrators <- add_column(demonstrators, new_trait = population$trait)
 demonstrators
 ```
 
-Because we set $D=1$ above, the new trait is always the majority trait among the three demonstrators. This is perfect conformity. We can weaken conformity by reducing $D$. Here an example with $D=0.5$. All the code is the same of what we already discussed above.
+Because we set $D=1$ above, the new trait is always the majority trait among the three demonstrators. This is perfect conformity. We can weaken conformity by reducing $D$. Here an example with $D=0.5$. All the code is the same as what we already discussed above.
 
 ```{r 4.5}
 
@@ -217,7 +217,7 @@ data_model <- conformist_transmission(N = 1000, p_0 = 0.5, D = 1, t_max = 50, r_
 plot_multiple_runs(data_model)
 ```
 
-Here we should see some lines going to $p = 1$, and some lines going to $p = 0$. Conformity acts to favour the majority trait. This will depend on the initial frequency of $A$ in the population. In different runs with $p_0 = 0.5$, sometimes there will be slightly more $A$s, sometimes slightly more $B$s (remember, in our model this is probabilistic, like flipping coins, so initial frequencies will rarely be precisely 0.5).
+Here we should see some lines going to $p = 1$, and some lines going to $p = 0$. Conformity acts to favour the majority trait. This will depend on the initial frequency of $A$ in the population. In different runs with $p_0 = 0.5$, sometimes there will be slightly more $A$s, sometimes slightly more $B$s (remember, in our model, this is probabilistic, like flipping coins, so initial frequencies will rarely be precisely 0.5).
 
 What happens if we set $D = 0$?
 
@@ -238,7 +238,7 @@ plot_multiple_runs(data_model)
 
 ```
 
-When $A$ starts off in a slight majority ($p_0 = 0.55$), all of the runs result in $A$ going to fixation (notice this partly depends on the random initialisation: you can change the number in `set.seed()` to see what happens. However, most if not all runs should result in $A$ going to fixation). Now let's try the reverse.
+When $A$ starts with a slight majority ($p_0 = 0.55$), all of the runs result in $A$ going to fixation (notice this partly depends on the random initialisation: you can change the number in `set.seed()` to see what happens. However, most if not all runs should result in $A$ going to fixation). Now let's try the reverse.
 
 ```{r 4.11}
 data_model <- conformist_transmission(N = 1000, p_0 = 0.45, D = 1, t_max = 50, r_max = 10)
@@ -253,9 +253,9 @@ When $A$ starts off in a minority ($p_0 = 0.45$), all runs result in $A$ disappe
 
 In this chapter, we explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this indirect bias with the direct (or content) biased transmission from [Chapter 3][Biased transmission (direct bias)], where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.
 
-We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This in turn makes stochasticity important, which in small populations can affect initial frequencies.
+We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This, in turn, makes stochasticity important, which in small populations can affect initial frequencies.
 
-We also discussed the subtle, but fundamental, difference between unbiased copying and conformity. In both, majority traits are favoured, but it is only with conformity that they are *disproportionally* favoured. In large populations, unbiased transmission rarely leads to trait fixation, whereas conformist transmission often does. Furthermore, as we will see later, conformity also makes majority traits resistant to external disturbances, such as the introduction of other traits via innovation or migration. 
+We also discussed the subtle but fundamental difference between unbiased copying and conformity. In both, majority traits are favoured, but it is only with conformity that they are *disproportionally* favoured. In large populations, unbiased transmission rarely leads to trait fixation, whereas conformist transmission often does. Furthermore, as we will see later, conformity also makes majority traits resistant to external disturbances, such as the introduction of other traits via innovation or migration. 
 
 ***
 
@@ -310,7 +310,7 @@ You can change the values of $p_0$ in the code above, (for example less than 0.5
 
 Finally, we can use the recursion equation to generate a plot that has become a signature for conformity in the cultural evolution literature. The following code plots, for all possible values of $p$, the probability of adopting $p$ in the next generation.
 
-Note first two new R commands. We use the function `seq()` to generate a sequence of 101, equally spaced, numbers from 0 to 1, and we use a new ggplot 'geom'. `geom_abline()` draws a custom line for which we can pass slop and intercept, as well as other aesthetic properties (such as here `linetype = "dashed"`).  
+Note the first two new R commands. We use the function `seq()` to generate a sequence of 101, equally spaced, numbers from 0 to 1, and we use a new ggplot 'geom'. `geom_abline()` draws a custom line for which we can pass the slope and intercept, as well as other aesthetic properties (such as here `linetype = "dashed"`).  
 
 ```{r 4.13}
 D <- 1
