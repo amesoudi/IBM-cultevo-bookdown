@@ -412,7 +412,21 @@ ggplot(data) +
   theme_bw()
 ```
 
-We can see that the initial spread is very fast and then tapers off. At the beginning there are a lot of individuals who do not have the gossip and transmission will be successful. However, the more individuals with the gossip there are, the less likely it is to find someone who does not yet have the gossip. How does this result compare to simulations with a fully connected network (i.e. where every individual is equally likely to interact with any other individual):
+We can see that the initial spread is very fast and then tapers off. At the beginning there are a lot of individuals who do not have the gossip and transmission will be successful. However, the more individuals with the gossip there are, the less likely it is to find someone who does not yet have the gossip. How does this result compare to simulations with a fully connected network (i.e. where every individual is equally likely to interact with any other individual).
+
+To make the creation of networks easier, let us write down a function to generate networks as we have done before:
+```{r}
+createNetwork <- function(N, FRIENDSHIPRATIO){
+  adjm <- matrix(0, ncol=N, nrow=N)
+  adjm[upper.tri(adjm)] <- sample(x = 0:1, 
+                                  size = N*(N-1)/2, 
+                                  replace = T, 
+                                  prob = c(1-FRIENDSHIPRATIO, FRIENDSHIPRATIO))
+  adjm[lower.tri(adjm)] <- t(adjm)[lower.tri(adjm)]
+  return(adjm)
+}
+```
+
 
 ```{r, cache=TRUE}
 adjm_full <- createNetwork(N=n, FRIENDSHIPRATIO=1)
@@ -467,19 +481,6 @@ ggplot(data_combined2) +
 
 ### How does network structure affect information transmission?
 While the previous example has shown us the difference in the transmission speed of information in a structured versus an unstructured population (i.e. the fully connected nework whihc is equivalent to a well-mixed population), we still do not know how network characteristics affect the transmission of information. To get a better understanding of it, we will extend the above simulations to run for different network sizes and different friendship ratios (which influences the connectivity in the network).
-
-First, let us write down a function to generate networks as we have done above:
-```{r}
-createNetwork <- function(N, FRIENDSHIPRATIO){
-  adjm <- matrix(0, ncol=N, nrow=N)
-  adjm[upper.tri(adjm)] <- sample(x = 0:1, 
-                                  size = N*(N-1)/2, 
-                                  replace = T, 
-                                  prob = c(1-FRIENDSHIPRATIO, FRIENDSHIPRATIO))
-  adjm[lower.tri(adjm)] <- t(adjm)[lower.tri(adjm)]
-  return(adjm)
-}
-```
 
 For this type of analysis we do not need to record each time step, instead, we can let our function return the time step at which, e.g. 75\% of the population have the gossip:
 
@@ -551,10 +552,140 @@ Now we can plot the results:
 # ggplot(data) + 
 #   geom_raster(aes(x=factor(connectivity), y=factor(groupSize), fill=meanTime))
 
-ggplot(data, aes(x=connectivity, y=meanTime, col=factor(groupSize))) + geom_line() + geom_point() + theme_bw()
+ggplot(data, aes(x=groupSize, y=meanTime, col=factor(connectivity))) + geom_line() + geom_point() + theme_bw()
 ```
 
 
 
+### Complex contagion
+
+Often, information is not just transmitted from one individual to another in a simple contagion like manner but instead requires increased social facilitation. In other words, often we are more likely to acquire behaviours from others if this behaviour is more frequent in our neighbourhood. 
+
+Centola 2010 paper
+
+Let us model this here
+Here, instead of selecting an individual to spread information, we turn the process around and randomly pick an individaul in the population that 
+
+```{r}
+healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100){
+  mod <- ifelse(test=MODE=="simple", yes=1, no=2)
+  N <- nrow(ADJM)
+  
+  # set up behaviour
+  behaviour <- rep(F, N)
+  behaviour[sample(N,size=10)] <- T
+  
+  # recording data
+  fraction <- rep(0, ROUNDS)
+  
+  # loop
+  for(round in 1:ROUNDS){
+    # record
+    fraction[round] <- sum(behaviour)/N
+    
+    # pick random individual
+    focal <- sample(x=N, size=1)
+    # who are its neighbours
+    neigh <- adjm[focal, ] == 1
+    # fraction of neighbours with healthy behaviour
+    frac <- sum(behaviour[neigh]) / sum(neigh)
+    # with probability frequency^2 add behaviour to repertoire
+    if(runif(1,0,1) < (frac^mod)){
+      behaviour[focal] <- T
+    } else {
+      # maybe: else have loss of behaviour if frequency^2 is below threshold
+      # behaviour[focal] <- F
+    }
+  }
+  return(data.frame(mode=MODE, frac=fraction, round=1:ROUNDS))
+}
+
+
+net <- make_lattice(length=11, dim=2, nei=2, circular=T)
+# plot(net, vertex.size=1, vertex.label="")
+# mean(degree(net))
+# transitivity(net)
+adjm <- as.matrix(get.adjacency(net))
+clu_simple <- healthBehaviourAdoption(ADJM=adjm, MODE="simple", ROUNDS=1000)
+clu_comp <- healthBehaviourAdoption(ADJM=adjm, MODE="complex", ROUNDS=1000)
+clu <- rbind(clu_simple, clu_comp)
+clu$network <- "clustered"
+
+net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5)
+# plot(net2, vertex.size=1, vertex.label="")
+# mean(degree(net2))
+# transitivity(net2)
+adjm2 <- as.matrix(get.adjacency(net2))
+rand_simple <- healthBehaviourAdoption(ADJM=adjm2, MODE="simple", ROUNDS=1000)
+rand_comp <- healthBehaviourAdoption(ADJM=adjm2, MODE="complex", ROUNDS=1000)
+rand <- rbind(rand_simple, rand_comp)
+rand$network <- "random"
+
+res <- rbind(clu, rand)
+
+ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.9)
+```
+
+
+
+```{r}
+# for repeated interactions 
+healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100){
+  if(NET=="clustered"){
+    net <- make_lattice(length=11, dim=2, nei=2, circular=T)
+    adjm <- as.matrix(get.adjacency(net))
+  } else if(NET=="random"){
+   net <- watts.strogatz.game(size=11, dim=2, nei=2, p=1)
+   adjm <- as.matrix(get.adjacency(net)) 
+  }
+  mod <- ifelse(test=MODE=="simple", yes=1, no=2)
+  N <- nrow(adjm)
+  
+  # set up behaviour
+  behaviour <- rep(F, N)
+  behaviour[sample(N,size=6)] <- T
+  
+  # recording data
+  fraction <- rep(0, ROUNDS)
+  
+  # loop
+  for(round in 1:ROUNDS){
+    # record
+    # fraction[round] <- sum(behaviour)/N
+    
+    # pick random individual
+    focal <- sample(x=N, size=1)
+    # who are its neighbours
+    neigh <- adjm[focal, ] == 1
+    # fraction of neighbours with healthy behaviour
+    frac <- sum(behaviour[neigh]) / sum(neigh)
+    # with probability frequency^2 add behaviour to repertoire
+    if(runif(n=1,min=0,max=1) < (frac^mod)){
+      behaviour[focal] <- T
+    } else {
+      # maybe: else have loss of behaviour if frequency^2 is below threshold
+      # behaviour[focal] <- F
+    }
+    fraction[round] <- frac
+  }
+  return(data.frame(network=NET, mode=MODE, frac=fraction, round=1:ROUNDS))
+}
+
+#repeated runs
+reps <- 100
+clu_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", MODE="simple", ROUNDS=1000)))
+clu_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", MODE="complex", ROUNDS=1000)))
+clu <- rbind(clu_simple, clu_comp)
+
+net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5)
+adjm2 <- as.matrix(get.adjacency(net2))
+rand_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", MODE="simple", ROUNDS=1000)))
+rand_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", MODE="complex", ROUNDS=1000)))
+rand <- rbind(rand_simple, rand_comp)
+
+res <- rbind(clu, rand)
+
+ggplot(res) + stat_smooth(aes(x=round, y=frac, col=network, linetype=mode), size=.9, se=T)
+```
 
 
