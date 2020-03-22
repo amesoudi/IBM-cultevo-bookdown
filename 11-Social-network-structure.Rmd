@@ -526,24 +526,42 @@ gossip_model(ADJM=adjm, PROP=.75, TURNS=100, SIM=1)
 Now, let us run these functions for different group sizes, different connectivites, and several repertitions:
 
 ```{r, cache=TRUE}
-parameters <- expand.grid(groupSize=c(10,30,50,70,90),
-                          connectivity=c(.2,.4,.6,.8,1),
-                          repetition=1:10)
-
+parameters <- expand.grid(groupSize=c(10,50),#c(10,30,50,70,90),
+                          reconnections=c(0,.01,.05,.1,.5,1),
+                          repetition=1:50)
 tmp <- lapply(1:nrow(parameters), function(p){
-  adjm <- createNetwork(N=parameters[p,"groupSize"], FRIENDSHIPRATIO=parameters[p,"connectivity"])
-  # adjm <- get.adjacency(watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=1, p=parameters[p,"connectivity"], loops=F, multiple=F))
-  gossip_model(ADJM=adjm, PROP=.5, TURNS=100, SIM=parameters[p,"repetition"])
+  net <- watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=2, p=parameters[p,"reconnections"], loops=F, multiple=F)
+  adjm <- get.adjacency(net)
+  model <- gossip_model(ADJM=adjm, PROP=.5, TURNS=500, SIM=parameters[p,"repetition"])
+  data.frame(time=model, 
+             degree=mean(degree(net)), 
+             path=average.path.length(net))
 })
 
-parameters$time <- unlist(tmp)
+tmp2 <- do.call("rbind", tmp)
+parameters <- cbind(parameters, tmp2)
+
+# parameters <- expand.grid(groupSize=c(10,30,50,70,90),
+#                           connectivity=c(.2,.4,.6,.8,1),
+#                           repetition=1:10)
+# tmp <- lapply(1:nrow(parameters), function(p){
+#   adjm <- createNetwork(N=parameters[p,"groupSize"], FRIENDSHIPRATIO=parameters[p,"connectivity"])
+#   # adjm <- get.adjacency(watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=1, p=parameters[p,"connectivity"], loops=F, multiple=F))
+#   gossip_model(ADJM=adjm, PROP=.5, TURNS=100, SIM=parameters[p,"repetition"])
+# })
+# 
+# parameters$time <- unlist(tmp)
+
 ```
 
 To plot the average time of our repeated simulations, we need to first calculate this average:
 
 ```{r}
 library(dplyr)
-parameters %>% group_by(groupSize, connectivity) %>% summarise(meanTime=mean(time)) -> data
+# parameters %>% group_by(groupSize, connectivity) %>% summarise(meanTime=mean(time)) -> data
+parameters %>% group_by(groupSize, reconnections) %>% summarise(meanTime=mean(time), 
+                                                                meanDegree=mean(degree),
+                                                                meanPath=mean(path)) -> data
 ```
 
 Now we can plot the results:
@@ -552,7 +570,21 @@ Now we can plot the results:
 # ggplot(data) + 
 #   geom_raster(aes(x=factor(connectivity), y=factor(groupSize), fill=meanTime))
 
-ggplot(data, aes(x=groupSize, y=meanTime, col=factor(connectivity))) + geom_line() + geom_point() + theme_bw()
+# ggplot(data, aes(x=groupSize, y=meanTime, col=factor(reconnections))) + geom_line() + geom_point() + theme_bw()
+
+# ggplot(data, aes(x=reconnections, y=meanDegree)) + geom_line() + geom_point() + theme_bw()
+# ggplot(data, aes(x=reconnections, y=meanPath)) + geom_line() + geom_point() + theme_bw()
+# ggplot(data, aes(x=meanPath, y=meanTime)) + geom_line() + geom_point() + theme_bw()
+
+# ggplot(data, aes(x=reconnections, y=meanDegree, col=groupSize)) + geom_line() + geom_point() + theme_bw()
+# ggplot(data, aes(x=reconnections, y=meanPath, col=factor(groupSize))) + geom_line() + geom_point() + theme_bw()
+# ggplot(data, aes(x=meanPath, y=meanTime, col=factor(groupSize))) + geom_line() + geom_point() + theme_bw()
+
+
+ggplot(parameters, aes(x=reconnections, y=degree, col=factor(groupSize))) + geom_point() + theme_bw()
+ggplot(parameters, aes(x=reconnections, y=path, col=factor(groupSize))) + geom_point() + theme_bw()
+ggplot(parameters, aes(x=path, y=time, col=factor(groupSize))) + geom_point() + theme_bw()
+
 ```
 
 
@@ -566,10 +598,11 @@ Centola 2010 paper
 Let us model this here
 Here, instead of selecting an individual to spread information, we turn the process around and randomly pick an individaul in the population that 
 
-```{r}
-healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100){
+```{r, cache=TRUE}
+healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100, CONTACTS=1){
   mod <- ifelse(test=MODE=="simple", yes=1, no=2)
   N <- nrow(ADJM)
+  
   
   # set up behaviour
   behaviour <- rep(F, N)
@@ -587,39 +620,61 @@ healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100){
     focal <- sample(x=N, size=1)
     # who are its neighbours
     neigh <- adjm[focal, ] == 1
-    # fraction of neighbours with healthy behaviour
-    frac <- sum(behaviour[neigh]) / sum(neigh)
-    # with probability frequency^2 add behaviour to repertoire
-    if(runif(1,0,1) < (frac^mod)){
+    
+    if(sum(behaviour[neigh]) >= CONTACTS){
       behaviour[focal] <- T
-    } else {
-      # maybe: else have loss of behaviour if frequency^2 is below threshold
-      # behaviour[focal] <- F
     }
+    
+    # # fraction of neighbours with healthy behaviour
+    # frac <- sum(behaviour[neigh]) / sum(neigh)
+    # with probability frequency^2 add behaviour to repertoire
+    # if(runif(1,0,1) < (frac^mod)){
+    #   behaviour[focal] <- T
+    # } else {
+    #   # maybe: else have loss of behaviour if frequency^2 is below threshold
+    #   # behaviour[focal] <- F
+    # }
+    
+    
+    
   }
   return(data.frame(mode=MODE, frac=fraction, round=1:ROUNDS))
 }
 
 
+# net <- make_lattice(length=11, dim=2, nei=2, circular=T)
+# # plot(net, vertex.size=1, vertex.label="")
+# # mean(degree(net))
+# # transitivity(net)
+# adjm <- as.matrix(get.adjacency(net))
+# clu_simple <- healthBehaviourAdoption(ADJM=adjm, MODE="simple", ROUNDS=1000, CONTACTS=1)
+# clu_comp <- healthBehaviourAdoption(ADJM=adjm, MODE="complex", ROUNDS=1000)
+# clu <- rbind(clu_simple, clu_comp)
+# clu$network <- "clustered"
+# 
+# net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5)
+# # plot(net2, vertex.size=1, vertex.label="")
+# # mean(degree(net2))
+# # transitivity(net2)
+# adjm2 <- as.matrix(get.adjacency(net2))
+# rand_simple <- healthBehaviourAdoption(ADJM=adjm2, MODE="simple", ROUNDS=1000)
+# rand_comp <- healthBehaviourAdoption(ADJM=adjm2, MODE="complex", ROUNDS=1000)
+# rand <- rbind(rand_simple, rand_comp)
+# rand$network <- "random"
+
+
+
 net <- make_lattice(length=11, dim=2, nei=2, circular=T)
-# plot(net, vertex.size=1, vertex.label="")
-# mean(degree(net))
-# transitivity(net)
 adjm <- as.matrix(get.adjacency(net))
-clu_simple <- healthBehaviourAdoption(ADJM=adjm, MODE="simple", ROUNDS=1000)
-clu_comp <- healthBehaviourAdoption(ADJM=adjm, MODE="complex", ROUNDS=1000)
-clu <- rbind(clu_simple, clu_comp)
+clu <- healthBehaviourAdoption(ADJM=adjm, MODE="simple", ROUNDS=1000, CONTACTS=3)
 clu$network <- "clustered"
 
 net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5)
-# plot(net2, vertex.size=1, vertex.label="")
-# mean(degree(net2))
-# transitivity(net2)
 adjm2 <- as.matrix(get.adjacency(net2))
-rand_simple <- healthBehaviourAdoption(ADJM=adjm2, MODE="simple", ROUNDS=1000)
-rand_comp <- healthBehaviourAdoption(ADJM=adjm2, MODE="complex", ROUNDS=1000)
-rand <- rbind(rand_simple, rand_comp)
+rand <- healthBehaviourAdoption(ADJM=adjm2, MODE="simple", ROUNDS=1000, CONTACTS=3)
 rand$network <- "random"
+
+
 
 res <- rbind(clu, rand)
 
@@ -628,22 +683,22 @@ ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.
 
 
 
-```{r}
+```{r, cache=TRUE}
 # for repeated interactions 
-healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100){
+healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100, CONTACTS=1){
   if(NET=="clustered"){
     net <- make_lattice(length=11, dim=2, nei=2, circular=T)
-    adjm <- as.matrix(get.adjacency(net))
   } else if(NET=="random"){
    net <- watts.strogatz.game(size=11, dim=2, nei=2, p=1)
-   adjm <- as.matrix(get.adjacency(net)) 
   }
+ adjm <- as.matrix(get.adjacency(net)) 
+ 
   mod <- ifelse(test=MODE=="simple", yes=1, no=2)
   N <- nrow(adjm)
   
   # set up behaviour
   behaviour <- rep(F, N)
-  behaviour[sample(N,size=6)] <- T
+  behaviour[sample(N,size=10)] <- T
   
   # recording data
   fraction <- rep(0, ROUNDS)
@@ -651,36 +706,40 @@ healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100){
   # loop
   for(round in 1:ROUNDS){
     # record
-    # fraction[round] <- sum(behaviour)/N
+    fraction[round] <- sum(behaviour)/N
     
     # pick random individual
     focal <- sample(x=N, size=1)
     # who are its neighbours
     neigh <- adjm[focal, ] == 1
-    # fraction of neighbours with healthy behaviour
-    frac <- sum(behaviour[neigh]) / sum(neigh)
-    # with probability frequency^2 add behaviour to repertoire
-    if(runif(n=1,min=0,max=1) < (frac^mod)){
+    
+    # if( (1-(1-CONTACTS)^(sum(behaviour[neigh]) )) >= CONTACTS){
+    if(sum(behaviour[neigh]) >= CONTACTS){
       behaviour[focal] <- T
-    } else {
-      # maybe: else have loss of behaviour if frequency^2 is below threshold
-      # behaviour[focal] <- F
     }
-    fraction[round] <- frac
+    
+    # # fraction of neighbours with healthy behaviour
+    # frac <- sum(behaviour[neigh]) / sum(neigh)
+    # with probability frequency^2 add behaviour to repertoire
+    # if(runif(1,0,1) < (frac^mod)){
+    #   behaviour[focal] <- T
+    # } else {
+    #   # maybe: else have loss of behaviour if frequency^2 is below threshold
+    #   # behaviour[focal] <- F
+    # }
+    
   }
   return(data.frame(network=NET, mode=MODE, frac=fraction, round=1:ROUNDS))
 }
 
 #repeated runs
 reps <- 100
-clu_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", MODE="simple", ROUNDS=1000)))
-clu_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", MODE="complex", ROUNDS=1000)))
+clu_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", ROUNDS=1000, CONTACTS=1, MODE="simple")))
+clu_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", ROUNDS=1000, CONTACTS=4, MODE="complex")))
 clu <- rbind(clu_simple, clu_comp)
 
-net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5)
-adjm2 <- as.matrix(get.adjacency(net2))
-rand_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", MODE="simple", ROUNDS=1000)))
-rand_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", MODE="complex", ROUNDS=1000)))
+rand_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", ROUNDS=1000, CONTACTS=1, MODE="simple")))
+rand_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", ROUNDS=1000, CONTACTS=4, MODE="complex")))
 rand <- rbind(rand_simple, rand_comp)
 
 res <- rbind(clu, rand)
