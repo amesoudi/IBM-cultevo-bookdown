@@ -41,7 +41,7 @@ adjm <- matrix(NA, ncol=n, nrow=n)
 adjm
 ```
 
-Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with with a probability that indicates how many friendships there are in the network (`friendschipRatio`):
+Now, we randomly assign friendships to one of the triangles. We sample from zeros (no friends) and ones (friends) with a probability that indicates how many friendships there are in the network (`friendschipRatio`):
 
 ```{r 11.5}
 friendshipRatio <- 0.5
@@ -80,7 +80,7 @@ When we return the `net` object, we receive a lot of information about our netwo
 plot(net)
 ```
 
-This is the most basic network plot where each node (with the numbers 1 to `r n`) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that receive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the `set.seed()` function in the code chunk above.
+This is the most basic network plot where each node (with the numbers 1 to `r n`) and their connections (edges/ties) are plotted such that nodes that receive more connections are more central and those that rec#eive less are more peripheral. Note, every time you plot the network, it will have a slightly different layout. If you would like to preserve the node positions you can uncomment the `set.seed()` function in the code chunk above.
 
 There are many ways to change the looks of network plots. The igraph manual is an ideal starting point to learn more about it. For example, we could plot nodes based on specific layout functions:
 
@@ -147,7 +147,7 @@ plot(net,
      edge.arrow.size=0.5)
 ```
 
-One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continuous variable (from strong$=$1 to none$=$0). Using the edge function `E()`, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to continuous values) and then plot the new network.
+One final styling example. So far, we have the edges indicate the existence of friendship relationships, which is a binary quality. However, we can also imagine friendship as a continuous variable (from strong = 1 to none = 0). Using the edge function `E()`, we can add attributes to the edges in the network. We can use those to alter the width of edges depending on their relationship strength. To do that, we will first change the adjacency matrix (from binary to continuous values) and then plot the new network.
 
 ```{r 11.13}
 # create a copy of the adjacency matrix
@@ -218,7 +218,7 @@ Let us now look at a variety of measures that we can calculate to characterise o
 diameter(graph=net)
 ```
 
-**Average path length** is the average number of steps that need to be traveresed between any two vertices (aka as dyad). We can also use the `distance()` function to return a distance matrix similar to the adjacency matrix.
+**Average path length** is the average number of steps that need to be traversed between any two vertices (aka as dyad). We can also use the `distance()` function to return a distance matrix similar to the adjacency matrix.
 ```{r 11.19}
 # average distance between any dyad
 mean_distance(graph=net)
@@ -413,7 +413,7 @@ ggplot(data) +
   theme_bw()
 ```
 
-We can see that the initial spread is very fast and then tapers off. At the beginning there are a lot of individuals who do not have the gossip and transmission will be successful. However, the more individuals with the gossip there are, the less likely it is to find someone who does not yet have the gossip. How does this result compare to simulations with a fully connected network (i.e. where every individual is equally likely to interact with any other individual).
+We can see that the initial spread is very fast and then tapers off. At the beginning there are a lot of individuals who do not have the gossip and transmission will be successful. However, the more individuals with the gossip there are, the less likely it is to find someone who does not yet have the gossip. How does this result compare to simulations with a fully connected network (i.e. where every individual is equally likely to interact with any other individual)?
 
 To make the creation of networks easier, let us write down a function to generate networks as we have done before:
 
@@ -429,8 +429,9 @@ createNetwork <- function(N, FRIENDSHIPRATIO){
 }
 ```
 
+Now we can create a fully connected network, run the gossip model on it, and plot the results:
 
-```{r 11., cache=TRUE}
+```{r 11.35, cache=TRUE}
 adjm_full <- createNetwork(N=n, FRIENDSHIPRATIO=1)
 
 data_full <- do.call("rbind", 
@@ -441,7 +442,7 @@ data_full <- do.call("rbind",
                      )
 ```
 
-```{r 11.}
+```{r 11.36}
 data$type <- "colleague network"
 data_full$type <- "fully connected"
 data_combined <- rbind(data, data_full)
@@ -453,9 +454,9 @@ ggplot(data_combined) +
   theme_bw()
 ```
 
-This plot shows that the fully connected network reaches saturation faster than the friend network. The difference becomes even more obvious when we re-run this simulation with larger networks:
+This plot shows that the fully connected network reaches saturation faster than the colleague network. The difference becomes even more obvious when we re-run this simulation with larger networks:
 
-```{r 11., cache=TRUE}
+```{r 11.37, cache=TRUE}
 adjm_colleagues <- createNetwork(N=25, FRIENDSHIPRATIO=.20)
 adjm_full <- createNetwork(N=25, FRIENDSHIPRATIO=1)
 
@@ -468,7 +469,7 @@ data_full <- do.call("rbind", lapply(1:100, function(sim){
 }))
 ```
 
-```{r 11.}
+```{r 11.38}
 data_colleagues$type <- "colleague network"
 data_full$type <- "fully connected"
 data_combined2 <- rbind(data_full, data_colleagues)
@@ -483,11 +484,11 @@ ggplot(data_combined2) +
 
 
 ### How does network structure affect information transmission?
-While the previous example has shown us the difference in the transmission speed of information in a structured versus an unstructured population (i.e. the fully connected nework whihc is equivalent to a well-mixed population), we still do not know how network characteristics affect the transmission of information. To get a better understanding of it, we will extend the above simulations to run for different network sizes and different friendship ratios (which influences the connectivity in the network).
+While the previous example has shown us the difference in the transmission speed of information in a structured versus an unstructured population (i.e. the fully connected network which is equivalent to a well-mixed population), we still do not know how network characteristics affect the transmission of information. To get a better understanding of it, we will simulate the transmission of information in networks of different sizes and connectivity. Here, we will simulate Small-World networks (also known as Watts-Strogatz graphs). These are networks that are characterised by high clustering and short average path length. 
 
-For this type of analysis we do not need to record each time step, instead, we can let our function return the time step at which, e.g. 75\% of the population have the gossip:
+For this type of analysis we do not need to record each time step, instead, we can let our function return the time step at which, e.g. 75\% of the population have heard the gossip:
 
-```{r 11.}
+```{r 11.39}
 gossip_model <- function(ADJM, PROP, TURNS, SIM=1){
   n <- nrow(ADJM)
   # set up gossip indicator
@@ -521,14 +522,14 @@ gossip_model <- function(ADJM, PROP, TURNS, SIM=1){
 }
 ```
 
-```{r 11.}
+```{r 11.40}
 adjm <- createNetwork(N=50, FRIENDSHIPRATIO=.25)
 gossip_model(ADJM=adjm, PROP=.75, TURNS=100, SIM=1)
 ```
 
-Now, let us run these functions for different group sizes, different connectivites, and several repertitions:
+Now, let us run these functions for different group sizes and different connectivites, and let us repeat these simulations several times to get a better estimate:
 
-```{r 11., cache=TRUE}
+```{r 11.41, cache=TRUE}
 parameters <- expand.grid(groupSize=c(10,50),#c(10,30,50,70,90),
                           reconnections=c(0,.01,.05,.1,.5,1),
                           repetition=1:50)
@@ -543,25 +544,12 @@ tmp <- lapply(1:nrow(parameters), function(p){
 
 tmp2 <- do.call("rbind", tmp)
 parameters <- cbind(parameters, tmp2)
-
-# parameters <- expand.grid(groupSize=c(10,30,50,70,90),
-#                           connectivity=c(.2,.4,.6,.8,1),
-#                           repetition=1:10)
-# tmp <- lapply(1:nrow(parameters), function(p){
-#   adjm <- createNetwork(N=parameters[p,"groupSize"], FRIENDSHIPRATIO=parameters[p,"connectivity"])
-#   # adjm <- get.adjacency(watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=1, p=parameters[p,"connectivity"], loops=F, multiple=F))
-#   gossip_model(ADJM=adjm, PROP=.5, TURNS=100, SIM=parameters[p,"repetition"])
-# })
-# 
-# parameters$time <- unlist(tmp)
-
 ```
 
 To plot the average time of our repeated simulations, we need to first calculate this average:
 
-```{r 11.}
+```{r 11.42}
 library(dplyr)
-# parameters %>% group_by(groupSize, connectivity) %>% summarise(meanTime=mean(time)) -> data
 parameters %>% group_by(groupSize, reconnections) %>% summarise(meanTime=mean(time), 
                                                                 meanDegree=mean(degree),
                                                                 meanPath=mean(path)) -> data
@@ -569,7 +557,7 @@ parameters %>% group_by(groupSize, reconnections) %>% summarise(meanTime=mean(ti
 
 Let us have a look at both the average network degree and the average path length of the networks:
 
-```{r 11.}
+```{r 11.43}
 parameters$groupSize <- factor(parameters$groupSize)
 
 ggplot(parameters, aes(x=reconnections, y=degree, col=groupSize)) + 
@@ -579,9 +567,9 @@ ggplot(parameters, aes(x=reconnections, y=degree, col=groupSize)) +
   theme_bw()
 ```
 
-Note, the average network degree is constant at $k =$`r mean(degree(net))`. This is due to the way the networks are created. We start with a regular lattice network and than randomly select an edge and change the vertex at its end (e.g. from A--B to A--C). Thus, while some individuals might now have fewer (or even zero) edges and others might have more, the average number of edges and so the average degree remains fixed an independent of the number of changed edges.
+Note, the average network degree is constant at $k =$ `r mean(parameters$degree)`. This is due to the way Small World networks are created. We start with a regular lattice network and then randomly select an edge and change the vertex on one end (e.g. from A--B to A--C). Thus, while some individuals might now have fewer (or even zero) edges and others might have more, the average number of edges and so the average degree remains fixed an independent of the number of rewired edges.
 
-```{r 11.}
+```{r 11.44}
 ggplot(parameters, aes(x=reconnections, y=path, col=groupSize)) + 
   geom_point() + 
   xlab("Prob. of reconnection") +
@@ -589,9 +577,9 @@ ggplot(parameters, aes(x=reconnections, y=path, col=groupSize)) +
   theme_bw()
 ```
 
-This, however, is not true for the path length. Here, we find that larger networks (with otherwise the same network parameters) have longer average path lengths (i.e. it takes on average more steps to get from one to another individual). Also, as we increase the probability to reconnect edges average path lenght goes down. This is because random connections might connect distant sections of the network and so drastically lower the number of steps required to get from one individual to another. 
+This, however, is not true for the path length. Instead, we find that larger networks (with otherwise the same network parameters) have longer average path lengths (i.e. it takes on average more steps to get from one to another individual). Also, as we increase the probability to reconnect edges average path length goes down. This is because random connections might connect distant sections of the network and so drastically lower the number of steps required to get from one individual to another. 
 
-```{r 11.}
+```{r 11.45}
 ggplot(parameters, aes(x=path, y=time, col=groupSize)) + 
   geom_point(alpha=.33) + 
   xlab("Average path length") +
@@ -599,22 +587,18 @@ ggplot(parameters, aes(x=path, y=time, col=groupSize)) +
   theme_bw()
 ```
 
+From this graph, we can see that the spread of information decreases as networks become larger and as average path length increases. 
 
 
-### Complex contagion
+### Complex versus simple contagion
 
-Often, information is not just transmitted from one individual to another in a simple contagion like manner but instead requires increased social facilitation. In other words, often we are more likely to acquire behaviours from others if this behaviour is more frequent in our neighbourhood. 
+The spread of information is not only affected by the network shape but also by the manner of information transmission. That is, often information is not simply transmitted from one individual to another in a simple contagion like manner but instead requires increased social facilitation. This can both be repeated exposure to the information or a certain proportion of social partners who possess this information. In other words, often we are more likely to acquire behaviours from others if this behaviour is more frequent in our neighbourhood. This kind of transmission is called complex contagion (see e.g. @centola_spread_2010). But how does simple and complex contagion affect the spread of information? To model this, we can write a small model where we randomly select individuals and check whether they acquire information from their social contacts based on a threshold value, i.e. the number of contacts required to acquire information. 
 
-Centola 2010 paper
+Let us start with a model of simple contagoin (requires only one social contact that possesses a new beahviour or information to acquire it):
 
-Let us model this here
-Here, instead of selecting an individual to spread information, we turn the process around and randomly pick an individaul in the population that 
-
-```{r 11., cache=TRUE}
-healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100, CONTACTS=1){
-  mod <- ifelse(test=MODE=="simple", yes=1, no=2)
+```{r 11.46, cache=TRUE}
+informationSpread <- function(ADJM, MODE="simple", ROUNDS=100, CONTACTS=1){
   N <- nrow(ADJM)
-  
   
   # set up behaviour
   behaviour <- rep(F, N)
@@ -642,15 +626,15 @@ healthBehaviourAdoption <- function(ADJM, MODE="simple", ROUNDS=100, CONTACTS=1)
 }
 
 # Simulations with clustered (lattice) networks
-net <- make_lattice(length=11, dim=2, nei=2, circular=T)
+net <- watts.strogatz.game(size=10, dim=2, nei=2, p=.1)
 adjm <- as.matrix(get.adjacency(net))
-clu <- healthBehaviourAdoption(ADJM=adjm, MODE="simple", ROUNDS=1000, CONTACTS=3)
+clu <- informationSpread(ADJM=adjm, MODE="simple", ROUNDS=1000, CONTACTS=1)
 clu$network <- "clustered"
 
 # Simulations with random (small world) networks
-net2 <- watts.strogatz.game(size=11, dim=2, nei=2, p=1)
+net2 <- erdos.renyi.game(n=100, p.or.m=600, type="gnm", directed=F, loops=F)
 adjm2 <- as.matrix(get.adjacency(net2))
-rand <- healthBehaviourAdoption(ADJM=adjm2, MODE="simple", ROUNDS=1000, CONTACTS=3)
+rand <- informationSpread(ADJM=adjm2, MODE="simple", ROUNDS=1000, CONTACTS=1)
 rand$network <- "random"
 
 res <- rbind(clu, rand)
@@ -658,19 +642,18 @@ res <- rbind(clu, rand)
 ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.9)
 ```
 
+For the simple contagion case we find very little differnce between the two network types. Let us now add the complex contagon case to the simulation:
 
-
-```{r 11., cache=TRUE}
+```{r 11.47, cache=TRUE}
 # for repeated interactions 
-healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100, CONTACTS=1){
+informationSpread <- function(NET, MODE="simple", ROUNDS=100, CONTACTS=1){
   if(NET=="clustered"){
-    net <- make_lattice(length=11, dim=2, nei=2, circular=T)
+    net <- watts.strogatz.game(size=10, dim=2, nei=2, p=.1, loops=F, multiple=F)
   } else if(NET=="random"){
-   net <- watts.strogatz.game(size=11, dim=2, nei=2, p=.5, loops=F, multiple=F)
+    net <- erdos.renyi.game(n=100, p.or.m=600, type="gnm", directed=F, loops=F)
   }
  adjm <- as.matrix(get.adjacency(net)) 
  
-  mod <- ifelse(test=MODE=="simple", yes=1, no=2)
   N <- nrow(adjm)
   
   # set up behaviour
@@ -698,22 +681,29 @@ healthBehaviourAdoption <- function(NET, MODE="simple", ROUNDS=100, CONTACTS=1){
   return(data.frame(network=NET, mode=MODE, frac=fraction, round=1:ROUNDS))
 }
 
-#repeated runs
-reps <- 100
+# repeated runs
+reps <- 10
 
-clu_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", ROUNDS=1000, CONTACTS=1, MODE="simple")))
-clu_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="clustered", ROUNDS=1000, CONTACTS=4, MODE="complex")))
+# simulte complex and simple contagion for clustered networks
+set.seed(1110)
+clu_simple <- do.call("rbind", lapply(1:reps, function(x) informationSpread(NET="clustered", ROUNDS=1000, CONTACTS=1, MODE="simple")))
+clu_comp <- do.call("rbind", lapply(1:reps, function(x) informationSpread(NET="clustered", ROUNDS=1000, CONTACTS=4, MODE="complex")))
 clu <- rbind(clu_simple, clu_comp)
 
-rand_simple <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", ROUNDS=1000, CONTACTS=1, MODE="simple")))
-rand_comp <- do.call("rbind", lapply(1:reps, function(x) healthBehaviourAdoption(NET="random", ROUNDS=1000, CONTACTS=4, MODE="complex")))
+# simulte complex and simple contagion for random networks
+rand_simple <- do.call("rbind", lapply(1:reps, function(x) informationSpread(NET="random", ROUNDS=1000, CONTACTS=1, MODE="simple")))
+rand_comp <- do.call("rbind", lapply(1:reps, function(x) informationSpread(NET="random", ROUNDS=1000, CONTACTS=4, MODE="complex")))
 rand <- rbind(rand_simple, rand_comp)
 
+# combine results
 res <- rbind(clu, rand)
 ```
 
-```{r 11.}
+```{r 11.48}
 ggplot(res) + 
-  stat_smooth(aes(x=round, y=frac, col=network, linetype=mode), size=.9, se=T)
+  stat_smooth(aes(x=round, y=frac, col=network, linetype=mode), size=.9, se=T) +
+  ylab("Proportion of individuals with information") +
+  xlab("Round")
 ```
 
+This figure tells us that, while there is no apparent difference in the spread of information in clustered and random networks for simple contagion, we find that information spreads faster in clustered networks if the transmission is akin to complex contagion. The reason for this is that in clustered networks an individual's neighbours are more likely to also be connected. This increases the likelihood that the neighbours also share the same information, and, in turn, increases the individual's exposure to this information. 
