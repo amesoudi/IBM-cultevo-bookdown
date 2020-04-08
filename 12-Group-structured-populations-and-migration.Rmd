@@ -8,6 +8,269 @@ In this chapter, we will simulate subdivided populations and test how this affec
 
 
 
-```{r 12.1}
+
+First, we need to set up the populaiton
+
+```{r 12.}
+# Kisses on cheek (binary, yes, no) / Hand shake
+subpops <- 2 # subpopulations
+startSize <- 10 # in each subpopulation
+behaviour <- 2 # binary behaviour 
+
+# set up populations
+# data.frame where columns are subpopulations and rows are number of carriers of that trait in the population
+population <- matrix(0, ncol=subpops, nrow=behaviour)
+# randomly assign subpopulations to one of the traits
+population[ cbind(sample(1:behaviour, size=subpops, replace=T), 1:subpops) ] <- startSize
+population
+```
+
+The following code allows us to simulate the movement between subgroups based on the migration probability $\mu$.
+
+Also, we should re-use the sample function from the previous chapter
+```{r}
+mySample <- function(x, size, replace, prob=NULL){
+  if(length(x)==1){
+    return(rep(x, size))
+  } else {
+    return(sample(x=x, size=size, replace=replace, prob=prob))
+  }
+}
+```
+
+
+```{r 12.}
+subpops <- 3 # subpopulations
+startSize <- 10 # in each subpopulation
+behaviour <- 2 # binary behaviour
+migrationProb <- 0.1
+
+# set up populations
+population <- matrix(0, ncol=subpops, nrow=behaviour)
+# randomly assign subpopulations to one of the traits
+population[ cbind(sample(1:behaviour, size=subpops, replace=T), 1:subpops) ] <- startSize
+
+## set up data recording
+
+## LOOP over all behaviours and all subpopulations
+for(s in 1:subpops){
+  for(b in 1:behaviour){
+    # how many individuals migrate from this population?
+    migrate <- sum(runif(n=population[b,s], min=0, max=1) <= migrationProb)
+    # if any migrate, move them to new subgroup
+    if(migrate>0){
+      whereTo <- mySample(x=(1:subpops)[-s], size=migrate, replace=T)
+      whereToCount <- table(whereTo)
+      # remove individuals from their previous subgroup
+      population[b,s] <- population[b,s] - sum(whereToCount)
+      # add individuals to other subgroups with the respective behaviour
+      population[b,as.numeric(names(whereToCount))] <- population[b,as.numeric(names(whereToCount))] + whereToCount
+    }
+  }
+};population; sum(population)
+```
+
+Next, let us add some rare innovation that makes individuals spontaneously flip from one behaviour to another (innovation).
+
+To see the result, let us set migration to 0 and start with 10 individuals in each behavioural group.
+
+```{r}
+subpops <- 3 # subpopulations
+startSize <- 10 # in each subpopulation
+behaviour <- 2 # binary behaviour
+migrationProb <- 0
+
+# set up populations
+population <- matrix(10, ncol=subpops, nrow=behaviour)
+
+for(s in 1:subpops){ # randomise by using sample function
+  for(b in 1:behaviour){ # randomise by using sample function
+    n <- population[b,s]
+    ### LEARNING
+    # Small chance to flip to any other behaviour (innovation)
+    innovate <- sum(runif(n=n) < 0.01)
+    if(innovate>0){
+      whichBehaviour <- mySample(x=(1:behaviour)[-b], size=innovate, replace=T)
+      whichBehaviourCount <- table(whichBehaviour)
+      # remove individuals from their previous behaviour
+      population[b,s] <- population[b,s] - sum(whichBehaviourCount)
+      # add individuals to new behaviour
+      population[as.numeric(names(whichBehaviourCount)), s] <- population[as.numeric(names(whichBehaviourCount)), s] + whichBehaviourCount
+    }
+    
+    
+    ### MIGRATION
+    # how many individuals migrate from this population?
+    migrate <- sum(runif(n=population[b,s], min=0, max=1) <= migrationProb)
+    # if any migrate, move them to new subgroup
+    if(migrate>0){
+      whereTo <- mySample(x=(1:subpops)[-s], size=migrate, replace=T)
+      whereToCount <- table(whereTo)
+      # remove individuals from their previous subgroup
+      population[b,s] <- population[b,s] - sum(whereToCount)
+      # add individuals to other subgroups with the respective behaviour
+      population[b,as.numeric(names(whereToCount))] <- population[b,as.numeric(names(whereToCount))] + whereToCount
+    }
+    
+  }
+};population; sum(population)
+
+```
+
+In the next step, we add the code that lets individuals copy behaviours from others
+
+```{r 12.}
+
+subpops <- 4 # subpopulations
+startSize <- 100 # in each subpopulation
+behaviour <- 2 # binary behaviour
+migrationProb <- 0.1
+conservative <- .1 # threshold to stick with own behaviour
+
+# set up populations
+population <- matrix(0, ncol=subpops, nrow=behaviour)
+# randomly assign subpopulations to one of the traits
+population[ cbind(sample(1:behaviour, size=subpops, replace=T), 1:subpops) ] <- startSize
+
+## set up data recording
+
+for(s in 1:subpops){ # randomise by using sample function
+  for(b in 1:behaviour){ # randomise by using sample function
+    n <- population[b,s]
+    ### LEARNING
+    # Small chance to flip to any other behaviour (individual learning)
+      innovate <- sum(runif(n=n) < 0.005)
+      if(innovate>0){
+        whichBehaviour <- mySample(x=(1:behaviour)[-b], size=innovate, replace=T)
+        whichBehaviourCount <- table(whichBehaviour)
+        # remove individuals from their previous behaviour
+        population[b,s] <- population[b,s] - sum(whichBehaviourCount)
+        # add individuals to new behaviour
+        population[as.numeric(names(whichBehaviourCount)), s] <- population[as.numeric(names(whichBehaviourCount)), s] + whichBehaviourCount
+      }
+    
+    n <- n-innovate
+    # Change behaviour based on that of others (social learning)
+      copy <- sum(runif(n=population[b,s]) < (1 - conservative))
+      # IFF there is any individual ready to copy AND there is at least one other individual with a different behaviour
+      if( copy>0 & (sum(population[,s][-b])>0) ){
+        whichBehaviour2 <- mySample( x=(1:behaviour)[-b], size=copy, replace=T, prob=(population[,s]/sum(population[,s]))[-b] )
+        whichBehaviourCount2 <- table(whichBehaviour2)
+        # remove individuals from their previous behaviour
+        population[b,s] <- population[b,s] - sum(whichBehaviourCount2)
+        # add individuals to new behaviour
+        population[as.numeric(names(whichBehaviourCount2)), s] <- population[as.numeric(names(whichBehaviourCount2)), s] + whichBehaviourCount2
+      }
+    
+    
+    ### MIGRATION
+    # how many individuals migrate from this population?
+    migrate <- sum(runif(n=population[b,s], min=0, max=1) <= migrationProb)
+    # if any migrate, move them to new subgroup
+    if(migrate>0){
+      whereTo <- mySample(x=(1:subpops)[-s], size=migrate, replace=T)
+      whereToCount <- table(whereTo)
+      # remove individuals from their previous subgroup
+      population[b,s] <- population[b,s] - sum(whereToCount)
+      # add individuals to other subgroups with the respective behaviour
+      population[b,as.numeric(names(whereToCount))] <- population[b,as.numeric(names(whereToCount))] + whereToCount
+    }
+    
+  }
+};population; sum(population)
+
+```
+
+
+The model is ready. Now we only need add a simulation loop to run it for several rounds, and add a reporting variable to record the frequency of the different behaviours. Additionally, we will wrap all this code up in a function so that it will be easier for us to re-use the code later. 
+
+
+```{r 12.}
+migrationModel <- 
+function(SUBPOPS = 3, STARTSIZE = 100, BEHAVIOUR = 2, MIGRATIONPROB = 0, CONSERVATIVE = 1, ROUNDS = 100, INNOVATION = 0){
+  # set up populations
+  population <- matrix(0, ncol=SUBPOPS, nrow=BEHAVIOUR)
+  popsize <- SUBPOPS*STARTSIZE
+  # randomly assign subpopulations to one of the traits
+  population[ cbind(sample(1:BEHAVIOUR, size=SUBPOPS, replace=T), 1:SUBPOPS) ] <- STARTSIZE
+  
+  ## set up data recording
+  recFST <- rep(NA, ROUNDS)#matrix(ncol=BEHAVIOUR, nrow=ROUNDS)
+  
+  ## LOOP
+  for(i in 1:ROUNDS){
+    for(s in sample(1:SUBPOPS)){ # randomise by using sample function
+      for(b in sample(1:BEHAVIOUR)){ # randomise by using sample function
+        ### LEARNING
+        # Small chance to flip to any other behaviour (individual learning)
+          innovate <- sum(runif(n=population[b,s]) < INNOVATION)
+          if(innovate>0){
+            whichBehaviour <- mySample(x=(1:BEHAVIOUR)[-b], size=innovate, replace=T)
+            whichBehaviourCount <- table(whichBehaviour)
+            # remove individuals from their previous behaviour
+            population[b,s] <- population[b,s] - sum(whichBehaviourCount)
+            # add individuals to new behaviour
+            population[as.numeric(names(whichBehaviourCount)), s] <- population[as.numeric(names(whichBehaviourCount)), s] + whichBehaviourCount
+          }
+        
+        # Change behaviour based on that of others (social learning)
+          copy <- sum(runif(n=population[b,s]) < (1 - CONSERVATIVE))
+          if( copy>0 & (sum(population[,s][-b])>0) ){
+            # whichBehaviour2 <- mySample( x=(1:BEHAVIOUR)[-b], size=copy, replace=T, prob=(population[,s]/sum(population[,s]))[-b] )
+            # acquire which ever is most frequent
+            whichBehaviour2 <- rep(which.max(population[,s]), copy)
+            whichBehaviourCount2 <- table(whichBehaviour2)
+            # remove individuals from their previous behaviour
+            population[b,s] <- population[b,s] - sum(whichBehaviourCount2)
+            # add individuals to new behaviour
+            population[as.numeric(names(whichBehaviourCount2)), s] <- population[as.numeric(names(whichBehaviourCount2)), s] + whichBehaviourCount2
+          }
+        
+        ### MIGRATION
+        # how many individuals migrate from this population?
+        migrate <- sum(runif(n=population[b,s], min=0, max=1) <= MIGRATIONPROB)
+        # if any migrate, move them to new subgroup
+        if(migrate>0){
+          whereTo <- mySample(x=(1:SUBPOPS)[-s], size=migrate, replace=T)
+          whereToCount <- table(whereTo)
+          # remove individuals from their previous subgroup
+          population[b,s] <- population[b,s] - sum(whereToCount)
+          # add individuals to other subgroups with the respective behaviour
+          population[b,as.numeric(names(whereToCount))] <- population[b,as.numeric(names(whereToCount))] + whereToCount
+        }
+        
+      }
+    }
+    # record frequency of behaviours in population
+    # recPopulation[i,] <- apply(population, 2, which.max)
+    # recPopulation[i,] <- rowSums(population) / sum(population)
+    recFST[i] <- F_ST(POPULATION=population, SUBPOPS=SUBPOPS)
+  }
+  # recPopulation <- cbind(1:ROUNDS, recPopulation[,1])
+  # recPopulation <- data.frame(time=1:ROUNDS, freq=recPopulation[,1])
+  return(recFST)
+}
+
+
+F_ST <- function(POPULATION, SUBPOPS){
+  var_total <- 1 - sum(apply(POPULATION/rowSums(POPULATION), 1, mean)^2)
+  var_within <- sum(1-colSums(apply(POPULATION, 2, function(x) (x/sum(x))^2))) / SUBPOPS
+  
+  return( (var_total-var_within)/var_total )
+  }
+
+
+res <- migrationModel(SUBPOPS=3, STARTSIZE=20, MIGRATIONPROB=0, CONSERVATIVE=0, ROUNDS=100, INNOVATION=1);res
+# library(ggplot2)
+ggplot(res) + 
+  geom_line(aes(x=time, y=freq)) +
+  scale_y_continuous(limits=c(0,1))
+
+
+
+# Kisses, elaborate (none, left, right, both) / Hand shake (neitherm left hand, right hand, both hands)
+# data.frame where columns are subpopulations and rows are number of carriers of that trait in the population
+
+
 
 ```
