@@ -39,7 +39,7 @@ mySample <- function(x, size, replace, prob=NULL){
 ```
 
 
-```{r 12.}
+```{r}
 subpops <- 3 # subpopulations
 startSize <- 10 # in each subpopulation
 behaviour <- 2 # binary behaviour
@@ -83,8 +83,8 @@ migrationProb <- 0
 # set up populations
 population <- matrix(10, ncol=subpops, nrow=behaviour)
 
-for(s in 1:subpops){ # randomise by using sample function
-  for(b in 1:behaviour){ # randomise by using sample function
+for(s in 1:subpops){ # permutate by using sample function
+  for(b in 1:behaviour){ # permutate by using sample function
     n <- population[b,s]
     ### LEARNING
     # Small chance to flip to any other behaviour (innovation)
@@ -119,12 +119,49 @@ for(s in 1:subpops){ # randomise by using sample function
 
 In the next step, we add the code that lets individuals copy behaviours from others
 
-```{r 12.}
+```{r }
 
 subpops <- 4 # subpopulations
 startSize <- 100 # in each subpopulation
 behaviour <- 2 # binary behaviour
 migrationProb <- 0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#REMOVE CONSERVATIVE AND REPLACE WITH COPYFROM_N_INDIVIDUALS:
 conservative <- .1 # threshold to stick with own behaviour
 
 # set up populations
@@ -185,7 +222,7 @@ for(s in 1:subpops){ # randomise by using sample function
 The model is ready. Now we only need add a simulation loop to run it for several rounds, and add a reporting variable to record the frequency of the different behaviours. Additionally, we will wrap all this code up in a function so that it will be easier for us to re-use the code later. 
 
 
-```{r 12.}
+```{r, eval=FALSE}
 migrationModel <- 
 function(SUBPOPS = 3, STARTSIZE = 100, BEHAVIOUR = 2, MIGRATIONPROB = 0, CONSERVATIVE = 1, ROUNDS = 100, INNOVATION = 0){
   # set up populations
