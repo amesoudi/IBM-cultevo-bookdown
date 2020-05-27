@@ -8,6 +8,22 @@ In this chapter, we will simulate subdivided populations and test how this affec
 
 
 
+<!-- Maybe a simpler example 
+where we have three populations and three behaviours (shake left hand (red), right hand (red), clap both hands together). 
+Individuals are replaced and copy behaviour of the majory of N samples within their group
+That leads to stable greeting traditions within each group
+(display populations as network, colour nodes based on behaviour)
+
+If we now allow migration (after learning) between groups, stability will depend on strength of migration (if we allowed migrationi before learning then individuals wouldn't be 'tradition carrier')
+
+If we go all the way up to migration = 1, we find that the subgroups behave like one big group
+
+Maybe suggest as additional examples (but not exercise here?): 
+* In addition to A--B, B--C, A--C, we can also test A--B, B--C (line) to see what happens to the fate of the central population with two neighbours
+* Finally, we can use the same set up (A--B, B--C) with larger flow towards B and less towards C
+--> 
+
+
 
 First, we need to set up the populaiton
 
@@ -125,44 +141,7 @@ subpops <- 4 # subpopulations
 startSize <- 100 # in each subpopulation
 behaviour <- 2 # binary behaviour
 migrationProb <- 0.1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#REMOVE CONSERVATIVE AND REPLACE WITH COPYFROM_N_INDIVIDUALS:
-conservative <- .1 # threshold to stick with own behaviour
+copyFromN <- 1 # number of individuals to copy from (test 0, 1, 3, 50)
 
 # set up populations
 population <- matrix(0, ncol=subpops, nrow=behaviour)
@@ -174,6 +153,7 @@ population[ cbind(sample(1:behaviour, size=subpops, replace=T), 1:subpops) ] <- 
 for(s in 1:subpops){ # randomise by using sample function
   for(b in 1:behaviour){ # randomise by using sample function
     n <- population[b,s]
+    browser()
     ### LEARNING
     # Small chance to flip to any other behaviour (individual learning)
       innovate <- sum(runif(n=n) < 0.005)
@@ -190,7 +170,7 @@ for(s in 1:subpops){ # randomise by using sample function
     # Change behaviour based on that of others (social learning)
       copy <- sum(runif(n=population[b,s]) < (1 - conservative))
       # IFF there is any individual ready to copy AND there is at least one other individual with a different behaviour
-      if( copy>0 & (sum(population[,s][-b])>0) ){
+        if( copy>0 & (sum(population[,s][-b])>0) ){
         whichBehaviour2 <- mySample( x=(1:behaviour)[-b], size=copy, replace=T, prob=(population[,s]/sum(population[,s]))[-b] )
         whichBehaviourCount2 <- table(whichBehaviour2)
         # remove individuals from their previous behaviour
