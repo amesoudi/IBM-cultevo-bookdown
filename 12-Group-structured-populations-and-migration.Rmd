@@ -67,17 +67,17 @@ ggplot(rectraits_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour
 As we have seen in the chapter on unbiased transmission (REF), the frequency of the two traits will move around 0.5. For smaller populations, more traits or longer time, drift will lead to the exclusion of one of the traits. We can test this with a small population: 
 
 ```{r}
-migrationModel <- function(){
-  npop <- 1
-  popsize <- 20
-  nbehaviour <- 2
-  traits <- sample(x=nbehaviour, size=popsize, replace=TRUE)
-  ntimesteps <- 1000
-  rectraits <- matrix(NA, nrow=ntimesteps, ncol=nbehaviour)
+popsize <- 20
+nbehaviour <- 2
+ntimesteps <- 1000
+
+migrationModel <- function(POPSIZE, NBEHAVIOUR, NTIMESTEPS){
+  traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
+  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NBEHAVIOUR)
   
-  for(timestep in 1:ntimesteps){
+  for(timestep in 1:NTIMESTEPS){
     # choose a random observer and a random individual to observe 
-    observer_model <- sample(x=popsize, size=2, replace=F)
+    observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
     traits[ observer_model[1] ] <- traits[ observer_model[2] ]
     rectraits[timestep,] <- as.numeric(table(traits))
@@ -85,7 +85,7 @@ migrationModel <- function(){
   return(rectraits)
 }
 
-res <- migrationModel()
+res <- migrationModel(POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
 rectraits_d <- melt(res)
 colnames(rectraits_d) <- c("time", "behaviour","freq")
 ggplot(rectraits_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
@@ -95,18 +95,19 @@ Now let us assume that the population we are looking at is subdivided into two c
 We will keep track which individual belongs to which cluster and then record the frequency of one of the traits (with two traits knowing the frequency of one is telling you the frequency of the other) in each cluster:
 
 ```{r}
-migrationModel <- function(){
-  npop <- 2
-  popsize <- 100
-  nbehaviour <- 2
-  traits <- sample(x=nbehaviour, size=popsize, replace=TRUE)
-  cluster <- sample(x=npop, size=popsize, replace=TRUE)
-  ntimesteps <- 1000
-  rectraits <- matrix(NA, nrow=ntimesteps, ncol=npop)
+npop <- 2
+popsize <- 100
+nbehaviour <- 2
+ntimesteps <- 1000
+
+migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
+  traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
+  cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
+  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
-  for(timestep in 1:ntimesteps){
+  for(timestep in 1:NTIMESTEPS){
     # choose a random observer and a random individual to observe 
-    observer_model <- sample(x=popsize, size=2, replace=F)
+    observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
     traits[ observer_model[1] ] <- traits[ observer_model[2] ]
     rectraits[timestep,] <- c(sum( traits[cluster==1]==1 ) / sum(cluster==1),
@@ -115,36 +116,38 @@ migrationModel <- function(){
   return(rectraits)
 }
 
-res <- migrationModel()
+res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
 rectraits_d <- melt(res)
 colnames(rectraits_d) <- c("time", "cluster","freq")
 ggplot(rectraits_d) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
 ```
 
-If you rund this code repeatedly, you will see that on average the frequency of the behaviour will still be around 0.5. This is what we expect because individuals do not choose one over the other cluster to learn from. 
+If you rund this code repeatedly, you will see that on average the frequency of the behaviour will still be around 0.5 and that the frequency in both clusters is correlated. This is what we expect because individuals do not choose one over the other cluster to learn from. 
 
 With a small change in the line where we record the frequency of traits, we can make this code work for more than two clusters:
+
 ```{r}
-migrationModel <- function(){
-  npop <- 4
-  popsize <- 100
-  nbehaviour <- 2
-  traits <- sample(x=nbehaviour, size=popsize, replace=TRUE)
-  cluster <- sample(x=npop, size=popsize, replace=TRUE)
-  ntimesteps <- 1000
-  rectraits <- matrix(NA, nrow=ntimesteps, ncol=npop)
+npop <- 4
+popsize <- 100
+nbehaviour <- 2
+ntimesteps <- 1000
+
+migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
+  traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
+  cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
+  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
   for(timestep in 1:ntimesteps){
     # choose a random observer and a random individual to observe 
-    observer_model <- sample(x=popsize, size=2, replace=F)
+    observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
     traits[ observer_model[1] ] <- traits[ observer_model[2] ]
-    rectraits[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
+    rectraits[timestep,] <- unlist(lapply(1:NPOP, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
   }
   return(rectraits)
 }
 
-res <- migrationModel()
+res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
 rectraits_d <- melt(res)
 colnames(rectraits_d) <- c("time", "cluster","freq")
 ggplot(rectraits_d) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
