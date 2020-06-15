@@ -228,7 +228,7 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION){
   # traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
   # cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
   traits <- rep(1:NBEHAVIOUR, each=POPSIZE/NPOP)
-  cluster <- rep(1:NPOP, each=POPSIZE/NPOP)
+  cluster <- rep(sample(NPOP), each=POPSIZE/NPOP)
   rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   for(timestep in 1:NTIMESTEPS){
     # choose a random cluster
@@ -274,7 +274,73 @@ ggplot(res) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_cont
 
 Now, let's check how correlated the groups are. To do so, run repeatedly (100) and check correlation between end points of the two populations, do this for different migration rates. 
 
-...
+```{r}
+repeatedRun <- do.call("rbind", 
+  lapply(1:100, function(run){
+    # run individual simulation
+    res <- migrationModel(NPOP=2, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRATION=.5)
+    # return only the frequency for each cluster at the last time step
+    resLast <- res[res[,"time"]==max(res[,"time"]),"freq"]
+    return(resLast)
+  })
+  )
+
+ggplot(as.data.frame(repeatedRun)) + 
+  geom_point(aes(x=V1, y=V2)) + xlab("Frequency in cluster 1") + ylab("Frequency in cluster 2")
+
+mean(abs(repeatedRun[,1]-repeatedRun[,2]))
+```
+
+let's change the function so that the model will return the analysis right away
+
+```{r}
+migrationModelAnalysed <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION, REPETITIONS){
+  rectraitsFreq <- matrix(NA, ncol=NPOP, nrow=REPETITIONS)
+  for(repetitions in 1:REPETITIONS){
+    traits <- rep(1:NBEHAVIOUR, each=POPSIZE/NPOP)
+    cluster <- rep(sample(NPOP), each=POPSIZE/NPOP)
+    for(timestep in 1:NTIMESTEPS){
+      # choose a random cluster
+      clusterid <- sample(npop, 1)
+      # if there are at least two individuals in this cluster
+      if(sum(cluster==clusterid)>1){
+        # choose a random observer and a random individual to observe within the same cluster 
+        observer_model <- sample(x=POPSIZE, size=2, replace=F, prob=(cluster==clusterid)*1)
+        # let observer acquire trait from model
+        traits[ observer_model[1] ] <- traits[ observer_model[2] ]
+      }
+      # migrate
+      if(runif(1,0,1) <= MIGRATION){
+        cluster[ observer_model[1] ] <- sample(npop, 1)
+      }
+    }
+    rectraitsFreq[repetitions, ] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x))) 
+  }
+
+  return(
+  data.frame(migration=MIGRATION, 
+             # rsq      = cor(x=rectraitsFreq[,1], y=rectraitsFreq[,2])^2,
+             absdiff  = mean(abs(rectraitsFreq[,1]-rectraitsFreq[,2])))
+  )
+}
+
+migrationModelAnalysed(NPOP=2, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRATION=.125, REPETITIONS=2)
+```
+
+Now we can easily run this simulation for various different values of migration rates
+
+```{r}
+repeatedRun <- do.call("rbind",
+  lapply(seq(from=0, to=1, by=0.05), function(migration){
+  # lapply(runif(n=50, min=0, max=1), function(migration){
+    migrationModelAnalysed(NPOP=2, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRATION=migration, REPETITIONS=20)
+  })
+  )
+
+ggplot(repeatedRun) + 
+  geom_point(aes(x=migration, y=absdiff)) + xlab("Migration rate") + ylab("Average frequency difference between clusters")
+```
+
 
 
 
