@@ -1,105 +1,106 @@
 
 # Group structured populations and migration
 
-Many simulations assume well-mixed populations, that is, populations of individuals that haven an equal chance of encountering each other. In the previouse chapter, we have looked at the effects of structured interactions on the transmission of cultural traits. Both, structured and unstructued populations, can be good approximations to the real world, depending on the context and research question. In this chapter, we will look at a combination of the two, structured populations. That is, a large population of individuals is divided into subpopulations, where individauls _within_ a subpopulation are equally likely to encounter each other, whereas encounter frequency _between_ subpopulations is significantly reduced. As such learning only occurs within each subpopulation. However, individuals can migrate between subpopulations, bringing along their version of a cultural trait. 
+Many simulations assume well-mixed populations, that is, populations of individuals that haven an equal chance of encountering each other. In the previous chapter, we have looked at the effects of structured interactions on the transmission of cultural traits. Both, structured and unstructured populations, can be good approximations to the real world, depending on the context and research question. In this chapter, we will look at structured populations, a combination of the two. That is, a large population of individuals is divided into sub-populations, where individuals _within_ a sub-population are equally likely to encounter each other, whereas encounter frequency _between_ sub-populations is significantly reduced. As such learning only occurs within each sub-population. However, individuals can migrate between sub-populations, bringing along their version of a cultural trait. 
 
-In this chapter, we will simulate this movement between subpopulations to study its effect on the transmission of a socially acquired behaviour. We model a population of size $n$, with $s$ subpopulations, and $b$ instances of a behavioural trait. For most of this chapter, we assume that there are two versions of the behaviour, for example, two individauls greet each other either with a handshake or with a hug. You will see that there are many opportunities to alter the model (have more subpopulations, behaviours, learning events, etc.). We will start very simply with one large population where individuals acquire a behavioural trait from a random individual in their population, and then add layers to the model. But first, we need to set up the population:
+In this chapter, we will simulate this movement between sub-populations to study its effect on the transmission of a socially acquired behaviour. We model a population of size $n$, with $s$ sub-populations, and $b$ instances of a behavioural trait. For most of this chapter, we assume that there are two versions of the behaviour, for example, two individuals greet each other either with a handshake or with a hug. You will see that there are many opportunities to alter the model (have more sub-populations, behaviours, learning events, etc.). We will start very simply with one large population where individuals acquire a behavioural trait from a random individual in their population, and then add layers to the model. 
+
+Let us set up a population:
 
 ```{r 12.1}
-n <- 100
-b <- 2
+popsize <- 100
+nbehaviour <- 2
 
-behaviours <- sample(x=b, size=n, replace=TRUE)
+behaviours <- sample(x=nbehaviour, size=popsize, replace=TRUE)
+behaviours
 table(behaviours)
 ```
 
-Because we are only interested in which instance of the behaviour an individual expresses, an individual is fully characterised by that behaviour, and so, we can represent the entire population as a vector (`behaviours`) of expressed behaviours. 
+Because we are only interested which instance of a particular behaviour an individual expresses, each individual can be fully described by its behaviour, and so, we can represent the entire population as a vector of expressed behaviours (`behaviours`). 
 
-Now we add a loop to select a random individaul (which is only represented as a behaviour along the poptraits vector) and let this individual copy a random other individual:
-We will also add a reporting variable to keep an eye on the frequency of traits
+In our populations, each individual is constantly exhibiting their behaviour. Occasionally, an individual will copy the behaviour they observe by another individual. To simulate this updating, we will add a loop to select a random individual (which is only represented as a behaviour along the `behaviours` vector) and let this individual copy a random other individual:
 
 ```{r 12.2}
-t <- ntimesteps <- 1000
-recbehav <- rectraits <- matrix(NA, nrow=ntimesteps, ncol=nbehaviour)
+ntimesteps <- 1000
+recbehav <- matrix(NA, nrow=ntimesteps, ncol=nbehaviour)
 
 for(timestep in 1:ntimesteps){
   # choose a random observer and a random individual to observe 
   observer_model <- sample(x=popsize, size=2, replace=F)
   # let observer acquire trait from model
-  traits[ observer_model[1] ] <- traits[ observer_model[2] ]
+  behaviours[ observer_model[1] ] <- behaviours[ observer_model[2] ]
   # record the frequency of each trait in each timestep
-  rectraits[timestep,] <- table(traits)
+  recbehav[timestep,] <- table(behaviours)
 }
 ```
 
-Let us have a look at the time line for this simulation:
+We can plot the frequency of each trait over time, which we recorded in the `recbehav` matrix. :
 
-```{r}
+```{r 12.3}
 library(ggplot2)
 library(reshape2)
-rectraits_d <- melt(rectraits)
-colnames(rectraits_d) <- c("time", "behaviour","freq")
+recbehav_d <- melt(recbehav)
+colnames(recbehav_d) <- c("time", "behaviour","freq")
 
-ggplot(rectraits_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
+ggplot(recbehav_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
 ```
 
-As we have seen in the chapter on unbiased transmission (REF), the frequency of the two traits will move around 0.5. For smaller populations, more traits, or longer time drift will lead to the exclusion of one of the traits. We can test this by using a much smaller population: 
+As we have seen in the chapter on unbiased transmission (REF), the frequency of the two traits will move around 0.5. For smaller populations, more traits, or longer time drift will lead to the exclusion of one of the traits. We can test this by using a much smaller population. 
 
-```{r}
-popsize <- 20
-nbehaviour <- 2
-ntimesteps <- 1000
-
+```{r 12.4}
 migrationModel <- function(POPSIZE, NBEHAVIOUR, NTIMESTEPS){
-  traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NBEHAVIOUR)
+  behaviours <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NBEHAVIOUR)
   
   for(timestep in 1:NTIMESTEPS){
     # choose a random observer and a random individual to observe 
     observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
-    traits[ observer_model[1] ] <- traits[ observer_model[2] ]
-    rectraits[timestep,] <- as.numeric(table(traits))
+    behaviours[ observer_model[1] ] <- behaviours[ observer_model[2] ]
+    recbehav[timestep,] <- as.numeric(table(behaviours)) / POPSIZE
   }
-  return(rectraits)
+  return(recbehav)
 }
 
-res <- migrationModel(POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
-rectraits_d <- melt(res)
-colnames(rectraits_d) <- c("time", "behaviour","freq")
-ggplot(rectraits_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
+# run simulation
+res <- migrationModel(POPSIZE=20, NBEHAVIOUR=2, NTIMESTEPS=1000)
+# turn results matrix into long format
+recbehav_d <- melt(res)
+colnames(recbehav_d) <- c("time", "behaviour","freq")
+# plot results
+ggplot(recbehav_d) + 
+  geom_line(aes(x=time, y=freq, col=factor(behaviour))) + 
+  scale_y_continuous(limits=c(0,1))
 ```
 
 Now let us assume that the population we are looking at is subdivided into two clusters. 
-We will keep track which individual belongs to which cluster and then record the frequency of one of the traits (with two traits knowing the frequency of one is telling you the frequency of the other) in each cluster:
+We will keep track which individual belongs to which cluster and then record the frequency of one of the behaviours, $p$, (with two traits the frequency of the other behaviour, $q$, is simply $1-p$) in each cluster. 
 
-```{r}
-npop <- 2
-popsize <- 100
-nbehaviour <- 2
-ntimesteps <- 1000
-
+```{r 12.5}
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
-  traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
   cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
+  behaviours <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
   for(timestep in 1:NTIMESTEPS){
     # choose a random observer and a random individual to observe 
     observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
-    traits[ observer_model[1] ] <- traits[ observer_model[2] ]
-    rectraits[timestep,] <- c(sum( traits[cluster==1]==1 ) / sum(cluster==1),
-                              sum( traits[cluster==2]==1 ) / sum(cluster==2))
+    behaviours[ observer_model[1] ] <- behaviours[ observer_model[2] ]
+    recbehav[timestep,] <- c(sum( behaviours[cluster==1]==1 ) / sum(cluster==1),
+                              sum( behaviours[cluster==2]==1 ) / sum(cluster==2))
   }
   
-  rectraits_d <- melt(rectraits)
-  colnames(rectraits_d) <- c("time", "cluster","freq")
-  return(rectraits_d)
+  recbehav_d <- melt(recbehav)
+  colnames(recbehav_d) <- c("time", "cluster","freq")
+  return(recbehav_d)
 }
 
-res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
-ggplot(res) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
+res <- migrationModel(NPOP=2, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000)
+ggplot(res) + 
+  geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
+  scale_y_continuous(limits=c(0,1)) + 
+  ylab("Relative frequency of behaviour 1")
 ```
 
 If you rund this code repeatedly, you will see that on average the frequency of the behaviour will still be around 0.5 and that the frequency in both clusters is correlated. This is what we expect because individuals do not choose one over the other cluster to learn from. 
@@ -115,26 +116,26 @@ ntimesteps <- 1000
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
   cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
   for(timestep in 1:NTIMESTEPS){
     # choose a random observer and a random individual to observe 
     observer_model <- sample(x=POPSIZE, size=2, replace=F)
     # let observer acquire trait from model
     traits[ observer_model[1] ] <- traits[ observer_model[2] ]
-    rectraits[timestep,] <- unlist(lapply(1:NPOP, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
+    recbehav[timestep,] <- unlist(lapply(1:NPOP, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
   }
   
-  rectraits_d <- melt(rectraits)
-  colnames(rectraits_d) <- c("time", "cluster","freq")
-  return(rectraits_d)
+  recbehav_d <- melt(recbehav)
+  colnames(recbehav_d) <- c("time", "cluster","freq")
+  return(recbehav_d)
 }
 
 res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
 ggplot(res) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
 ```
 
-So far, an individual is equally likely to learn from any other individual in the entire population. What would happen if clusters were completely isolated from each other, and so an individaul would only learn from within its cluster? One way to do this is to change the sample function that selects a cultural model. Instead of selecting among all individuals, we limit it to individuals in the same cluster (same cluster ID). In anticipation of migration, let's also add an if statement to check whether there is any model left in that cluster:
+So far, an individual is equally likely to learn from any other individual in the entire population. What would happen if clusters were completely isolated from each other, and so an individual would only learn from within its cluster? One way to do this is to change the sample function that selects a cultural model. Instead of selecting among all individuals, we limit it to individuals in the same cluster (same cluster ID). In anticipation of migration, let's also add an if statement to check whether there is any model left in that cluster:
 
 ```{r}
 npop <- 2
@@ -145,7 +146,7 @@ ntimesteps <- 1000
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
   cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
   for(timestep in 1:NTIMESTEPS){
     # choose a random cluster
@@ -157,12 +158,12 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
       # let observer acquire trait from model
       traits[ observer_model[1] ] <- traits[ observer_model[2] ]
     }
-    rectraits[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
+    recbehav[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
   }
   
-  rectraits_d <- melt(rectraits)
-  colnames(rectraits_d) <- c("time", "cluster","freq")
-  return(rectraits_d)
+  recbehav_d <- melt(recbehav)
+  colnames(recbehav_d) <- c("time", "cluster","freq")
+  return(recbehav_d)
 }
 
 res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
@@ -177,7 +178,7 @@ Let's test that these clusters are in fact independent by fixing each population
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   traits <- rep(1:NBEHAVIOUR, each=POPSIZE/NPOP)
   cluster <- rep(1:NPOP, each=POPSIZE/NPOP)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   
   for(timestep in 1:NTIMESTEPS){
     # choose a random cluster
@@ -189,12 +190,12 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
       # let observer acquire trait from model
       traits[ observer_model[1] ] <- traits[ observer_model[2] ]
     }
-    rectraits[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
+    recbehav[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
   }
   
-  rectraits_d <- melt(rectraits)
-  colnames(rectraits_d) <- c("time", "cluster","freq")
-  return(rectraits_d)
+  recbehav_d <- melt(recbehav)
+  colnames(recbehav_d) <- c("time", "cluster","freq")
+  return(recbehav_d)
 }
 
 res <- migrationModel(NPOP=2, POPSIZE=50, NBEHAVIOUR=2, NTIMESTEPS=100)
@@ -212,7 +213,7 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION){
   # cluster <- sample(x=NPOP, size=POPSIZE, replace=TRUE)
   traits <- rep(1:NBEHAVIOUR, each=POPSIZE/NPOP)
   cluster <- rep(sample(NPOP), each=POPSIZE/NPOP)
-  rectraits <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
+  recbehav <- matrix(NA, nrow=NTIMESTEPS, ncol=NPOP)
   for(timestep in 1:NTIMESTEPS){
     # choose a random cluster
     clusterid <- sample(npop, 1)
@@ -227,12 +228,12 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION){
     if(runif(1,0,1) <= MIGRATION){
       cluster[ observer_model[1] ] <- sample(npop, 1)
     }
-    rectraits[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
+    recbehav[timestep,] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x)))
   }
   
-  rectraits_d <- melt(rectraits)
-  colnames(rectraits_d) <- c("time", "cluster","freq")
-  return(rectraits_d)
+  recbehav_d <- melt(recbehav)
+  colnames(recbehav_d) <- c("time", "cluster","freq")
+  return(recbehav_d)
 }
 ```
 
@@ -278,7 +279,7 @@ let's change the function so that the model will return the analysis right away
 
 ```{r}
 migrationModelAnalysed <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION, REPETITIONS){
-  rectraitsFreq <- matrix(NA, ncol=NPOP, nrow=REPETITIONS)
+  recbehavFreq <- matrix(NA, ncol=NPOP, nrow=REPETITIONS)
   for(repetitions in 1:REPETITIONS){
     traits <- rep(1:NBEHAVIOUR, each=POPSIZE/NPOP)
     cluster <- rep(sample(NPOP), each=POPSIZE/NPOP)
@@ -297,13 +298,13 @@ migrationModelAnalysed <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRAT
         cluster[ observer_model[1] ] <- sample(npop, 1)
       }
     }
-    rectraitsFreq[repetitions, ] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x))) 
+    recbehavFreq[repetitions, ] <- unlist(lapply(1:npop, function(x) sum( traits[cluster==x]==1 ) / sum(cluster==x))) 
   }
 
   return(
   data.frame(migration=MIGRATION, 
-             # rsq      = cor(x=rectraitsFreq[,1], y=rectraitsFreq[,2])^2,
-             absdiff  = mean(abs(rectraitsFreq[,1]-rectraitsFreq[,2])))
+             # rsq      = cor(x=recbehavFreq[,1], y=recbehavFreq[,2])^2,
+             absdiff  = mean(abs(recbehavFreq[,1]-recbehavFreq[,2])))
   )
 }
 
@@ -334,7 +335,7 @@ ggplot(repeatedRun) +
 
 This model ...
 
-Finally, suggest that this model can be extended to accomodate different population structures. Here, we have only looked at symeetric connectiongs between populations (all subpopulations are connected). But the structure could also be a line, a circle, or a star. The only thing we would need to change for that is the probability vector in the sample function of the migration part. Thus, not choosing randomly among all subpopulations, but among those that share a connection with the cluster the individual is in.
+Finally, suggest that this model can be extended to accomodate different population structures. Here, we have only looked at symeetric connectiongs between populations (all sub-populations are connected). But the structure could also be a line, a circle, or a star. The only thing we would need to change for that is the probability vector in the sample function of the migration part. Thus, not choosing randomly among all sub-populations, but among those that share a connection with the cluster the individual is in.
 
 ***
 
