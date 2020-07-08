@@ -8,10 +8,10 @@ In this chapter, we will simulate this movement between sub-populations to study
 Let us set up a population:
 
 ```{r 12.1}
-popsize <- 100
-nbehaviour <- 2
+n <- 100
+b <- 2
 
-behaviours <- sample(x=nbehaviour, size=popsize, replace=TRUE)
+behaviours <- sample(x=b, size=n, replace=TRUE)
 behaviours
 table(behaviours)
 ```
@@ -21,12 +21,12 @@ Because we are only interested which instance of a particular behaviour an indiv
 In our populations, each individual is constantly exhibiting their behaviour. Occasionally, an individual will copy the behaviour they observe by another individual. To simulate this updating, we will add a loop to select a random individual (which is only represented as a behaviour along the `behaviours` vector) and let this individual copy a random other individual:
 
 ```{r 12.2}
-ntimesteps <- 1000
-recbehav <- matrix(NA, nrow=ntimesteps, ncol=nbehaviour)
+t <- 1000
+recbehav <- matrix(NA, nrow=t, ncol=b)
 
-for(timestep in 1:ntimesteps){
+for(timestep in 1:t){
   # choose a random observer and a random individual to observe 
-  observer_model <- sample(x=popsize, size=2, replace=F)
+  observer_model <- sample(x=n, size=2, replace=F)
   # let observer acquire trait from model
   behaviours[ observer_model[1] ] <- behaviours[ observer_model[2] ]
   # record the frequency of each trait in each timestep
@@ -42,7 +42,7 @@ library(reshape2)
 recbehav_d <- melt(recbehav)
 colnames(recbehav_d) <- c("time", "behaviour","freq")
 
-ggplot(recbehav_d) + geom_line(aes(x=time, y=freq/popsize, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
+ggplot(recbehav_d) + geom_line(aes(x=time, y=freq/n, col=factor(behaviour))) + scale_y_continuous(limits=c(0,1))
 ```
 
 As we have seen in the chapter on unbiased transmission (REF), the frequency of the two traits will move around 0.5. For smaller populations, more traits, or longer time drift will lead to the exclusion of one of the traits. We can test this by using a much smaller population. 
@@ -109,9 +109,9 @@ With a small change in the line where we record the frequency of traits, we can 
 
 ```{r}
 npop <- 4
-popsize <- 100
-nbehaviour <- 2
-ntimesteps <- 1000
+n <- 100
+b <- 2
+t <- 1000
 
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
@@ -131,7 +131,7 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   return(recbehav_d)
 }
 
-res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
+res <- migrationModel(NPOP=npop, POPSIZE=n, NBEHAVIOUR=b, NTIMESTEPS=t)
 ggplot(res) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
 ```
 
@@ -139,9 +139,9 @@ So far, an individual is equally likely to learn from any other individual in th
 
 ```{r}
 npop <- 2
-popsize <- 50
-nbehaviour <- 2
-ntimesteps <- 1000
+n <- 50
+b <- 2
+t <- 1000
 
 migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   traits <- sample(x=NBEHAVIOUR, size=POPSIZE, replace=TRUE)
@@ -166,7 +166,7 @@ migrationModel <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){
   return(recbehav_d)
 }
 
-res <- migrationModel(NPOP=npop, POPSIZE=popsize, NBEHAVIOUR=nbehaviour, NTIMESTEPS=ntimesteps)
+res <- migrationModel(NPOP=npop, POPSIZE=n, NBEHAVIOUR=b, NTIMESTEPS=t)
 ggplot(res) + geom_line(aes(x=time, y=freq, col=factor(cluster))) + scale_y_continuous(limits=c(0,1)) + ylab("Relative frequency of behaviour 1")
 ```
 
