@@ -114,6 +114,7 @@ ggplot(data = output, aes(y = p, x = generation)) +
   theme_bw() +
   labs(y = "p (proportion of individuals with trait A)")
 ```
+<!-- This descriptions depend on the random generation. This changes with different R version, so we need to change it -->
 
 The proportion of individuals with trait $A$ starts off hovering around 0.5, and after around 120 generations drops to 0. Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code, trying different seeds of the random number generator, you will get something different. In all likelihood, $p$ might go to 0 or 1 at some point. At $p = 0$ there are no $A$s and every individual possesses $B$. At $p = 1$ there are no $B$s and every individual possesses $A$. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance after some generations.
 
@@ -184,9 +185,13 @@ Wrapping a simulation in a function like this is good because we can easily re-r
 
 Let's use a new parameter $r_{\text{max}}$ to specify the number of independent runs, and use another for-loop to cycle over the $r_{\text{max}}$ runs. Let's rewrite the `unbiased_transmission_1()` function to handle multiple runs. We will call the new function `unbiased_transmission_2()`.
 
+<!-- AA 24/07/2020 I had to add "as.numeric" when defining the output data structure to make the code 
+compile. Otherwise it considered it logical and it was giving an error when assigning to it 
+sum(population$trait == "A") / N. This must be something that changed with the more recent version of the tidyverse. This may need to be changed everywhere. -->
+
 ```{r 1.14}
 unbiased_transmission_2 <- function(N, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
 
   for (r in 1:r_max) { # for each run
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE))
@@ -280,9 +285,10 @@ Let's add one final modification. So far the starting frequencies of $A$ and $B$
 
 To find out, we can add another parameter, $p_0$, which specifies the initial probability of an individual having an $A$ rather than a $B$ in the first generation. Previously this was always $p_0 = 0.5$, but in the new function below we add it to the `sample()` function to weight the initial allocation of traits in $t = 1$.
 
+<!-- see the comment above for the "as.numeric" -->
 ```{r 1.22}
 unbiased_transmission_3 <- function(N, p_0, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
 
   for (r in 1:r_max) {
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)))
