@@ -25,7 +25,7 @@ Second, how do we measure the frequency of the traits in each generation? The ba
 ```{r 7.3}
 multiple_traits <- function(N, t_max) {
   
-  output <- tibble(trait = as.factor(rep(1:N, each = t_max)), generation = rep(1:t_max, N), p = rep(NA, t_max * N))
+  output <- tibble(trait = as.factor(rep(1:N, each = t_max)), generation = rep(1:t_max, N), p = as.numeric(rep(NA, t_max * N)))
 
   population <- tibble(trait = sample(1:N, N, replace = TRUE))  # create first generation
   
@@ -104,7 +104,7 @@ We can now, as usual, wrap everything in a function:
 multiple_traits_2 <- function(N, t_max, mu) {
   max_traits <- N + N * mu * t_max
 
-  output <- tibble(trait = as.factor(rep(1:max_traits, each = t_max)), generation = rep(1:t_max, max_traits), p = rep(NA, t_max * max_traits))
+  output <- tibble(trait = as.factor(rep(1:max_traits, each = t_max)), generation = rep(1:t_max, max_traits), p = as.numeric(rep(NA, t_max * max_traits)))
 
   population <- tibble(trait = sample(1:N, N, replace = TRUE))  # create first generation
   

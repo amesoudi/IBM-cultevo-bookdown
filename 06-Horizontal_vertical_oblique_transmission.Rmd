@@ -22,7 +22,7 @@ library(tidyverse)
 set.seed(111)
 
 vertical_transmission <- function(N, p_0, b, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   
   for (r in 1:r_max) {
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)))
@@ -36,7 +36,7 @@ vertical_transmission <- function(N, p_0, b, t_max, r_max) {
       mother <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))  # randomly pick mothers
       father <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))  # randomly pick fathers
       
-      population <- tibble(trait = rep(NA, N))  # next generation
+      population <- tibble(trait = as.character(rep(NA, N))) # next generation
       
       both_A <- mother$trait == "A" & father$trait == "A"
       if (sum(both_A) > 0) {
@@ -108,7 +108,7 @@ The following code implements this horizontal transmission in a new function `ve
 
 ```{r 6.5}
 vertical_horizontal_transmission <- function(N, p_0, b, n, g, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   
   for (r in 1:r_max) {
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)))
@@ -123,7 +123,7 @@ vertical_horizontal_transmission <- function(N, p_0, b, n, g, t_max, r_max) {
       mother <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))  # randomly pick mothers
       father <- tibble(trait = sample(previous_population$trait, N, replace = TRUE))  # randomly pick fathers
       
-      population <- tibble(trait = rep(NA, N))  # next generation
+      population <- tibble(trait = as.character(rep(NA, N)))  # next generation
       
       both_A <- mother$trait == "A" & father$trait == "A"
       if ( sum(both_A) > 0 ) {

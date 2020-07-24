@@ -13,12 +13,16 @@ At each generation, however, there is a probability $\mu$ that each individual m
 
 We'll wrap this in a function called `unbiased_mutation()`, using much of the same code as `unbiased_transmission_3()`. As before, we need to call the tidyverse library and set a seed for the random number generator, so the results will be the same each time we rerun the code. Of course, if you want to see the stochasticity inherent in the simulation, you can remove the set.seed command, or set it to a different number.
 
+<!-- AA 24/07/2020 I had to add "as.numeric" when defining the output data structure to make the code 
+compile. Otherwise it considered it logical and it was giving an error when assigning to it 
+sum(population$trait == "A") / N. This must be something that changed with the more recent version of the tidyverse. This may need to be changed everywhere. -->
+
 ```{r 2.1, message = FALSE}
 library(tidyverse)
 set.seed(111)
 
 unbiased_mutation <- function(N, mu, p_0, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
 
   for (r in 1:r_max) {
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)))
@@ -95,7 +99,7 @@ The function `biased_mutation()` captures this unidirectional mutation.
 
 ```{r 2.5}
 biased_mutation <- function(N, mu_b, p_0, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max))) # create the output tibble
 
   for (r in 1:r_max) {
     population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE, prob = c(p_0, 1 - p_0)))

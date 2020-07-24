@@ -154,7 +154,7 @@ As in the previous chapters, we can put all this code together into a function t
 
 conformist_transmission <- function (N, p_0, D, t_max, r_max) {
   
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   
   for (r in 1:r_max) {
     

@@ -58,7 +58,7 @@ As usual, we can wrap everything in a function.
 ```{r 5.5}
 biased_transmission_demonstrator <- function(N, p_0, p_s, p_low, t_max, r_max) {
   
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   
   for (r in 1:r_max) {
     
@@ -127,7 +127,7 @@ Currently the output we obtain from the simulations is not suitable for this pur
 ```{r 5.9}
 biased_transmission_demonstrator_2 <- function(N, p_0, p_s, p_low, t_max, r_max) {
   
-  output <- tibble(status_A = rep(NA, r_max), p = rep(NA, r_max))
+  output <- tibble(status_A = as.numeric(rep(NA, r_max)), p = as.numeric(rep(NA, r_max)))
   
   for (r in 1:r_max) {
     
@@ -174,6 +174,7 @@ The main novelties in this code are the new ggplot 'geoms' `geom_boxplot()` and 
 
 ```{r 5.11}
 data_model <- filter(data_model, p == 1 | p == 0)
+data_model$p <- as.character(data_model$p)
 data_model[data_model$p==1, ]$p <- "A"
 data_model[data_model$p==0, ]$p <- "B"
 
@@ -192,6 +193,7 @@ The plot shows that when trait $A$ reaches fixation there are more high-status i
 data_model <- biased_transmission_demonstrator_2(N = 10000, p_s = 0.005, p_low=0.0001, p_0 = 0.5, t_max = 200, r_max = 50)
 
 data_model <- filter(data_model, p == 1 | p == 0)
+data_model$p <- as.character(data_model$p)
 data_model[data_model$p==1, ]$p <- "A"
 data_model[data_model$p==0, ]$p <- "B"
 

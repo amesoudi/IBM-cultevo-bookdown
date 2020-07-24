@@ -17,7 +17,7 @@ set.seed(111)
 
 biased_transmission_direct <- function (N, s_a, s_b, p_0, t_max, r_max) {
   
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   
   for (r in 1:r_max) {
   
