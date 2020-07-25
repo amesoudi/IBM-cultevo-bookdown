@@ -108,7 +108,7 @@ multiple_traits_2 <- function(N, t_max, mu) {
 
   population <- tibble(trait = sample(1:N, N, replace = TRUE))  # create first generation
   
-  output[output$generation == 1, ]$p <- tabulate(population$trait, nbins = N) / N  # add first generation's p for all traits
+  output[output$generation == 1, ]$p <- tabulate(population$trait, nbins = max_traits) / N  # add first generation's p for all traits
 
   for (t in 2:t_max) {
     last_trait <- max(population) # record what is the last trait introduced in the population

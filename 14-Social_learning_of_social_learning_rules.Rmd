@@ -20,7 +20,7 @@ After initialising the population with a random uniform sample of values of *P*,
 
 ```{r 14.2}
 openness_conservatism <- function(N, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -71,7 +71,7 @@ However, even without considering the possible fitness advantages of copying fro
 
 ```{r 14.5}
 openness_conservatism_2 <- function(N, M, mu, p_death, t_max, r_max){
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), m = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), m = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   for (r in 1:r_max) {
     population_preferences <- matrix( runif(M * N), ncol = M, nrow = N)
     population_traits <- matrix(0, ncol = M, nrow = N)
@@ -162,7 +162,7 @@ This time the average openness stabilises to an even higher value (around $0.4$)
 We can explicitly visualise the relationship between $M$ and population openness after $1000$ generations for few representative values of $M$. We consider only a single run for each condition as, from the previous results, we know that different runs give very similar results.
   
 ```{r 14.12}
-test_openness <- tibble(M = c(1,5,10,20,50,100), p = rep(NA, 6))
+test_openness <- tibble(M = c(1,5,10,20,50,100), p = as.numeric(rep(NA, 6)))
 for(condition in test_openness$M){
   data_model <- openness_conservatism_2(N = 1000, M = condition, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 1)
   test_openness[test_openness$M == condition, ]$p <- data_model[data_model$generation == 1000, ]$p

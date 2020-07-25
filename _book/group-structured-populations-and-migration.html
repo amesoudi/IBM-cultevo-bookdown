@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12 Group structured populations and migration | Individual-based models of cultural evolution</title>
+  <meta name="description" content="A minimal working structure for the book" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12 Group structured populations and migration | Individual-based models of cultural evolution" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A minimal working structure for the book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12 Group structured populations and migration | Individual-based models of cultural evolution" />
+  
+  <meta name="twitter:description" content="A minimal working structure for the book" />
+  
+
+<meta name="author" content="Alberto Acerbi" />
+<meta name="author" content="Alex Mesoudi" />
+<meta name="author" content="Marco Smolla" />
+
+
+<meta name="date" content="2020-07-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="social-network-structure.html"/>
+<link rel="next" href="reproduction-and-transformation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Individual-based models of cultural evolution</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>Basics</b></span></li>
+<li class="chapter" data-level="1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html"><i class="fa fa-check"></i><b>1</b> Unbiased transmission</a><ul>
+<li class="chapter" data-level="1.1" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#initialising-the-simulation"><i class="fa fa-check"></i><b>1.1</b> Initialising the simulation</a></li>
+<li class="chapter" data-level="1.2" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#execute-generation-turn-over-many-times"><i class="fa fa-check"></i><b>1.2</b> Execute generation turn-over many times</a></li>
+<li class="chapter" data-level="1.3" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#plotting-the-model-results"><i class="fa fa-check"></i><b>1.3</b> Plotting the model results</a></li>
+<li class="chapter" data-level="1.4" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#write-a-function-to-wrap-the-model-code"><i class="fa fa-check"></i><b>1.4</b> Write a function to wrap the model code</a></li>
+<li class="chapter" data-level="1.5" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#run-several-independent-simulations-and-plot-their-results"><i class="fa fa-check"></i><b>1.5</b> Run several independent simulations and plot their results</a></li>
+<li class="chapter" data-level="1.6" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#varying-initial-conditions"><i class="fa fa-check"></i><b>1.6</b> Varying initial conditions</a></li>
+<li class="chapter" data-level="1.7" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#summary-of-the-model"><i class="fa fa-check"></i><b>1.7</b> Summary of the model</a></li>
+<li class="chapter" data-level="1.8" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#analytical-appendix"><i class="fa fa-check"></i><b>1.8</b> Analytical appendix</a></li>
+<li class="chapter" data-level="1.9" data-path="unbiased-transmission.html"><a href="unbiased-transmission.html#further-reading"><i class="fa fa-check"></i><b>1.9</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html"><i class="fa fa-check"></i><b>2</b> Unbiased and biased mutation</a><ul>
+<li class="chapter" data-level="2.1" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#unbiased-mutation"><i class="fa fa-check"></i><b>2.1</b> Unbiased mutation</a></li>
+<li class="chapter" data-level="2.2" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#biased-mutation"><i class="fa fa-check"></i><b>2.2</b> Biased mutation</a></li>
+<li class="chapter" data-level="2.3" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#summary-of-the-model-1"><i class="fa fa-check"></i><b>2.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="2.4" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#analytical-appendix-1"><i class="fa fa-check"></i><b>2.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="2.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: direct bias</a><ul>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strength-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strength of selection</a></li>
+<li class="chapter" data-level="3.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>3.2</b> Summary of the model</a></li>
+<li class="chapter" data-level="3.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>3.3</b> Analytical appendix</a></li>
+<li class="chapter" data-level="3.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>3.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html"><i class="fa fa-check"></i><b>4</b> Biased transmission: frequency-dependent indirect bias</a><ul>
+<li class="chapter" data-level="4.1" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#the-logic-of-conformity"><i class="fa fa-check"></i><b>4.1</b> The logic of conformity</a></li>
+<li class="chapter" data-level="4.2" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#testing-conformist-transmission"><i class="fa fa-check"></i><b>4.2</b> Testing conformist transmission</a></li>
+<li class="chapter" data-level="4.3" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#summary-of-the-model-3"><i class="fa fa-check"></i><b>4.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="4.4" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#analytical-appendix-3"><i class="fa fa-check"></i><b>4.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="4.5" data-path="biased-transmission-frequency-dependent-indirect-bias.html"><a href="biased-transmission-frequency-dependent-indirect-bias.html#further-readings"><i class="fa fa-check"></i><b>4.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html"><i class="fa fa-check"></i><b>5</b> Biased transmission: demonstrator-based indirect bias</a><ul>
+<li class="chapter" data-level="5.1" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#a-simple-demonstrator-bias"><i class="fa fa-check"></i><b>5.1</b> A simple demonstrator bias</a></li>
+<li class="chapter" data-level="5.2" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#predicting-the-winning-trait"><i class="fa fa-check"></i><b>5.2</b> Predicting the ‘winning’ trait</a></li>
+<li class="chapter" data-level="5.3" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#summary-of-the-model-4"><i class="fa fa-check"></i><b>5.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="5.4" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#analytical-appendix-4"><i class="fa fa-check"></i><b>5.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="5.5" data-path="biased-transmission-demonstrator-based-indirect-bias.html"><a href="biased-transmission-demonstrator-based-indirect-bias.html#further-readings-1"><i class="fa fa-check"></i><b>5.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html"><i class="fa fa-check"></i><b>6</b> Vertical and horizontal transmission</a><ul>
+<li class="chapter" data-level="6.1" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#vertical-cultural-transmission"><i class="fa fa-check"></i><b>6.1</b> Vertical cultural transmission</a></li>
+<li class="chapter" data-level="6.2" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#horizontal-cultural-transmission"><i class="fa fa-check"></i><b>6.2</b> Horizontal cultural transmission</a></li>
+<li class="chapter" data-level="6.3" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#summary-of-the-model-5"><i class="fa fa-check"></i><b>6.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="6.4" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#analytical-appendix-5"><i class="fa fa-check"></i><b>6.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="6.5" data-path="vertical-and-horizontal-transmission.html"><a href="vertical-and-horizontal-transmission.html#further-reading-3"><i class="fa fa-check"></i><b>6.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html"><i class="fa fa-check"></i><b>7</b> Multiple traits models</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#introducing-innovation"><i class="fa fa-check"></i><b>7.1</b> Introducing innovation</a></li>
+<li class="chapter" data-level="7.2" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#optimising-the-code"><i class="fa fa-check"></i><b>7.2</b> Optimising the code</a></li>
+<li class="chapter" data-level="7.3" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#the-distribution-of-popularity"><i class="fa fa-check"></i><b>7.3</b> The distribution of popularity</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#summary-of-the-model-6"><i class="fa fa-check"></i><b>7.4</b> Summary of the model</a></li>
+<li class="chapter" data-level="7.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>7.5</b> Analytical appendix</a></li>
+<li class="chapter" data-level="7.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-2"><i class="fa fa-check"></i><b>7.6</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="rogers-paradox.html"><a href="rogers-paradox.html"><i class="fa fa-check"></i><b>8</b> Rogers’ Paradox</a><ul>
+<li class="chapter" data-level="8.1" data-path="rogers-paradox.html"><a href="rogers-paradox.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>8.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="8.2" data-path="rogers-paradox.html"><a href="rogers-paradox.html#further-reading-4"><i class="fa fa-check"></i><b>8.2</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html"><i class="fa fa-check"></i><b>9</b> Rogers’ Paradox: A Solution</a><ul>
+<li class="chapter" data-level="9.1" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>9.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="9.2" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#further-reading-5"><i class="fa fa-check"></i><b>9.2</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="demography.html"><a href="demography.html"><i class="fa fa-check"></i><b>10</b> Demography</a><ul>
+<li class="chapter" data-level="10.1" data-path="demography.html"><a href="demography.html#summary-of-the-model-9"><i class="fa fa-check"></i><b>10.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="10.2" data-path="demography.html"><a href="demography.html#analytical-appendix-and-further-readings"><i class="fa fa-check"></i><b>10.2</b> Analytical appendix and further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>11</b> Social network structure</a><ul>
+<li class="chapter" data-level="11.1" data-path="social-network-structure.html"><a href="social-network-structure.html#the-basics"><i class="fa fa-check"></i><b>11.1</b> The Basics</a></li>
+<li class="chapter" data-level="11.2" data-path="social-network-structure.html"><a href="social-network-structure.html#plotting-networks"><i class="fa fa-check"></i><b>11.2</b> Plotting networks</a></li>
+<li class="chapter" data-level="11.3" data-path="social-network-structure.html"><a href="social-network-structure.html#analyse-social-networks"><i class="fa fa-check"></i><b>11.3</b> Analyse social networks</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="social-network-structure.html"><a href="social-network-structure.html#network-properties"><i class="fa fa-check"></i><b>11.3.1</b> Network properties</a></li>
+<li class="chapter" data-level="11.3.2" data-path="social-network-structure.html"><a href="social-network-structure.html#vertex-properties"><i class="fa fa-check"></i><b>11.3.2</b> Vertex properties</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="social-network-structure.html"><a href="social-network-structure.html#using-social-networks-to-model-information-transmission"><i class="fa fa-check"></i><b>11.4</b> Using social networks to model information transmission</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="social-network-structure.html"><a href="social-network-structure.html#gossip-transmission-on-networked-populations"><i class="fa fa-check"></i><b>11.4.1</b> Gossip transmission on networked populations</a></li>
+<li class="chapter" data-level="11.4.2" data-path="social-network-structure.html"><a href="social-network-structure.html#how-does-network-structure-affect-information-transmission"><i class="fa fa-check"></i><b>11.4.2</b> How does network structure affect information transmission?</a></li>
+<li class="chapter" data-level="11.4.3" data-path="social-network-structure.html"><a href="social-network-structure.html#complex-versus-simple-contagion"><i class="fa fa-check"></i><b>11.4.3</b> Complex versus simple contagion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html"><i class="fa fa-check"></i><b>12</b> Group structured populations and migration</a><ul>
+<li class="chapter" data-level="12.1" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#subdivided-population"><i class="fa fa-check"></i><b>12.1</b> Subdivided population</a></li>
+<li class="chapter" data-level="12.2" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#simulating-migration-between-sub-populations"><i class="fa fa-check"></i><b>12.2</b> Simulating migration between sub-populations</a></li>
+<li class="chapter" data-level="12.3" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#varying-the-strength-of-migration-for-repeated-simulation-runs"><i class="fa fa-check"></i><b>12.3</b> Varying the strength of migration for repeated simulation runs</a></li>
+<li class="chapter" data-level="12.4" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#model-extensions"><i class="fa fa-check"></i><b>12.4</b> Model extensions</a><ul>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#innovation-or-mutation"><i class="fa fa-check"></i>Innovation or mutation</a></li>
+<li><a href="group-structured-populations-and-migration.html#copy-m-models">Copy <span class="math inline">\(m\)</span> models</a></li>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#learn-from-but-not-moving-to-another-sub-population"><i class="fa fa-check"></i>Learn from but not moving to another sub-population</a></li>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#variable-migration-probability-among-sub-populations"><i class="fa fa-check"></i>Variable migration probability among sub-populations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#further-reading-6"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html"><i class="fa fa-check"></i><b>13</b> Reproduction and transformation</a><ul>
+<li class="chapter" data-level="13.1" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#emergent-similarity"><i class="fa fa-check"></i><b>13.1</b> Emergent similarity</a></li>
+<li class="chapter" data-level="13.2" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#cultural-fitness"><i class="fa fa-check"></i><b>13.2</b> Cultural fitness</a></li>
+<li class="chapter" data-level="13.3" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#summary-of-the-model-10"><i class="fa fa-check"></i><b>13.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="13.4" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#analytical-appendix-7"><i class="fa fa-check"></i><b>13.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="13.5" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#further-readings-3"><i class="fa fa-check"></i><b>13.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>14</b> Social learning of social learning rules</a><ul>
+<li class="chapter" data-level="14.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>14.1</b> Openness and conservatism</a></li>
+<li class="chapter" data-level="14.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>14.2</b> Maintaining open populations</a></li>
+<li class="chapter" data-level="14.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-11"><i class="fa fa-check"></i><b>14.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="14.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-8"><i class="fa fa-check"></i><b>14.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="14.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-4"><i class="fa fa-check"></i><b>14.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>15</b> Traits inter-dependence</a><ul>
+<li class="chapter" data-level="15.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>15.1</b> Compatible and incompatible traits</a></li>
+<li class="chapter" data-level="15.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>15.2</b> Many-traits model</a></li>
+<li class="chapter" data-level="15.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-12"><i class="fa fa-check"></i><b>15.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="15.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-9"><i class="fa fa-check"></i><b>15.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="15.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-5"><i class="fa fa-check"></i><b>15.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>16</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Individual-based models of cultural evolution</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="group-structured-populations-and-migration" class="section level1">
+<h1><span class="header-section-number">12</span> Group structured populations and migration</h1>
+<p>Many simulations assume well-mixed populations, that is, populations of individuals that have an equal chance of encountering each other. In the previous chapter, we have looked at the effects of structured interactions on the transmission of cultural traits. Both, structured and unstructured populations, can be good approximations to the real world, depending on the context and research question. In this chapter, we will look at structured populations, a combination of the two. That is, a large population of individuals is divided into sub-populations, where individuals <em>within</em> a sub-population are equally likely to encounter each other, whereas encounter frequency <em>between</em> sub-populations is significantly reduced. As such learning only occurs within each sub-population. However, individuals can migrate between sub-populations, bringing along their version of a cultural trait.</p>
+<p>In this chapter, we will simulate this movement between sub-populations to study its effect on the transmission of a socially acquired behaviour. We model a population of size <span class="math inline">\(n\)</span>, with <span class="math inline">\(s\)</span> sub-populations, and <span class="math inline">\(b\)</span> instances of a behavioural trait. For most of this chapter, we assume that there are two versions of the behaviour, for example, two individuals greet each other either with a handshake or with a hug. You will see that there are many opportunities to alter the model (have more sub-populations, behaviours, learning events, etc.).</p>
+<p>We will start very simply with one large population where individuals acquire a behavioural trait from a random individual in their population, and then add layers to the model. Let us set up a population:</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="group-structured-populations-and-migration.html#cb293-1"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb293-2"><a href="group-structured-populations-and-migration.html#cb293-2"></a>b &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb293-3"><a href="group-structured-populations-and-migration.html#cb293-3"></a></span>
+<span id="cb293-4"><a href="group-structured-populations-and-migration.html#cb293-4"></a>behaviours &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>b, <span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb293-5"><a href="group-structured-populations-and-migration.html#cb293-5"></a>behaviours[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##  [1] 2 1 2 2 1 1 2 2 2 2</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="group-structured-populations-and-migration.html#cb295-1"></a><span class="kw">table</span>(behaviours)</span></code></pre></div>
+<pre><code>## behaviours
+##  1  2 
+## 46 54</code></pre>
+<p>Because we are only interested which instance of a particular behaviour an individual expresses, each individual can be fully described by its behaviour, and so, we can represent the entire population as a vector of expressed behaviours (<code>behaviours</code>).</p>
+<p>Everyone in our population is constantly exhibiting their behaviour. Occasionally, one of the individuals will copy the behaviour of another individual. To simulate this behavioural updating, we select two random individuals (an observer and a model) and then copy the model’s behaviour into the observer’s entry. We wrap a loop around these two steps to simulate repeated updating events and add a record variable to store the frequency of each of the behaviours.</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="group-structured-populations-and-migration.html#cb297-1"></a>t &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb297-2"><a href="group-structured-populations-and-migration.html#cb297-2"></a>recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>t, <span class="dt">ncol=</span>b)</span>
+<span id="cb297-3"><a href="group-structured-populations-and-migration.html#cb297-3"></a></span>
+<span id="cb297-4"><a href="group-structured-populations-and-migration.html#cb297-4"></a><span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>t){</span>
+<span id="cb297-5"><a href="group-structured-populations-and-migration.html#cb297-5"></a>  <span class="co"># choose a random observer and a random individual to observe </span></span>
+<span id="cb297-6"><a href="group-structured-populations-and-migration.html#cb297-6"></a>  observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>n, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F)</span>
+<span id="cb297-7"><a href="group-structured-populations-and-migration.html#cb297-7"></a>  <span class="co"># let observer acquire trait from model</span></span>
+<span id="cb297-8"><a href="group-structured-populations-and-migration.html#cb297-8"></a>  behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb297-9"><a href="group-structured-populations-and-migration.html#cb297-9"></a>  <span class="co"># record the frequency of each trait in each timestep</span></span>
+<span id="cb297-10"><a href="group-structured-populations-and-migration.html#cb297-10"></a>  recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">table</span>(behaviours)</span>
+<span id="cb297-11"><a href="group-structured-populations-and-migration.html#cb297-11"></a>}</span></code></pre></div>
+<p>Now, we can plot the frequency of each behaviour over time, which we recorded in the <code>recbehav</code> matrix.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="group-structured-populations-and-migration.html#cb298-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb298-2"><a href="group-structured-populations-and-migration.html#cb298-2"></a><span class="kw">library</span>(reshape2)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     smiths</code></pre>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="group-structured-populations-and-migration.html#cb301-1"></a>recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(recbehav)</span>
+<span id="cb301-2"><a href="group-structured-populations-and-migration.html#cb301-2"></a><span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;behaviour&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb301-3"><a href="group-structured-populations-and-migration.html#cb301-3"></a></span>
+<span id="cb301-4"><a href="group-structured-populations-and-migration.html#cb301-4"></a><span class="kw">ggplot</span>(recbehav_d) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb301-5"><a href="group-structured-populations-and-migration.html#cb301-5"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq<span class="op">/</span>n, <span class="dt">col=</span><span class="kw">factor</span>(behaviour))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb301-6"><a href="group-structured-populations-and-migration.html#cb301-6"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.3-1.png" width="672" /></p>
+<p>As we would have expected from an unbiased transmission, the frequency of the two traits will move around <span class="math inline">\(0.5\)</span>. For smaller populations, more traits, or longer time drift will lead to the exclusion of one of the traits. We can test this by using a much smaller population. To do so, let us first wrap the simulation in a function called <code>migrationModel()</code>.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="group-structured-populations-and-migration.html#cb302-1"></a>migrationModel &lt;-<span class="st"> </span><span class="cf">function</span>(POPSIZE, NBEHAVIOUR, NTIMESTEPS){</span>
+<span id="cb302-2"><a href="group-structured-populations-and-migration.html#cb302-2"></a>  behaviours &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>NBEHAVIOUR, <span class="dt">size=</span>POPSIZE, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb302-3"><a href="group-structured-populations-and-migration.html#cb302-3"></a>  recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>NTIMESTEPS, <span class="dt">ncol=</span>NBEHAVIOUR)</span>
+<span id="cb302-4"><a href="group-structured-populations-and-migration.html#cb302-4"></a>  </span>
+<span id="cb302-5"><a href="group-structured-populations-and-migration.html#cb302-5"></a>  <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb302-6"><a href="group-structured-populations-and-migration.html#cb302-6"></a>    <span class="co"># choose a random observer and a random individual to observe </span></span>
+<span id="cb302-7"><a href="group-structured-populations-and-migration.html#cb302-7"></a>    observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>POPSIZE, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F)</span>
+<span id="cb302-8"><a href="group-structured-populations-and-migration.html#cb302-8"></a>    <span class="co"># let observer acquire trait from model</span></span>
+<span id="cb302-9"><a href="group-structured-populations-and-migration.html#cb302-9"></a>    behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb302-10"><a href="group-structured-populations-and-migration.html#cb302-10"></a>    recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">table</span>(behaviours)) <span class="op">/</span><span class="st"> </span>POPSIZE</span>
+<span id="cb302-11"><a href="group-structured-populations-and-migration.html#cb302-11"></a>  }</span>
+<span id="cb302-12"><a href="group-structured-populations-and-migration.html#cb302-12"></a>  <span class="kw">return</span>(recbehav)</span>
+<span id="cb302-13"><a href="group-structured-populations-and-migration.html#cb302-13"></a>}</span></code></pre></div>
+<p>The function makes it easy to quickly run simulations with different input parameters. Here, we run the simulation with a population size of <span class="math inline">\(n=20\)</span>:</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="group-structured-populations-and-migration.html#cb303-1"></a><span class="co"># run simulation</span></span>
+<span id="cb303-2"><a href="group-structured-populations-and-migration.html#cb303-2"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb303-3"><a href="group-structured-populations-and-migration.html#cb303-3"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">POPSIZE=</span><span class="dv">20</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>)</span>
+<span id="cb303-4"><a href="group-structured-populations-and-migration.html#cb303-4"></a><span class="co"># turn results matrix into long format</span></span>
+<span id="cb303-5"><a href="group-structured-populations-and-migration.html#cb303-5"></a>recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(res)</span>
+<span id="cb303-6"><a href="group-structured-populations-and-migration.html#cb303-6"></a><span class="co"># add descriptive column names</span></span>
+<span id="cb303-7"><a href="group-structured-populations-and-migration.html#cb303-7"></a><span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;behaviour&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb303-8"><a href="group-structured-populations-and-migration.html#cb303-8"></a><span class="co"># plot results</span></span>
+<span id="cb303-9"><a href="group-structured-populations-and-migration.html#cb303-9"></a><span class="kw">ggplot</span>(recbehav_d) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb303-10"><a href="group-structured-populations-and-migration.html#cb303-10"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(behaviour))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb303-11"><a href="group-structured-populations-and-migration.html#cb303-11"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.5-1.png" width="672" /></p>
+<p>As you can see, the two behaviours meander until, by chance, behaviour <span class="math inline">\(1\)</span> is completely replaced by behaviour <span class="math inline">\(2\)</span>.</p>
+<div id="subdivided-population" class="section level2">
+<h2><span class="header-section-number">12.1</span> Subdivided population</h2>
+<p>Now let us assume that the population we are looking at divided into two sub-populations, here <code>clusters</code>. We will keep track which individual belongs to which cluster and then record the frequency of one of the behaviours, <span class="math inline">\(p\)</span>, (the frequency of the other behaviour, <span class="math inline">\(q\)</span>, is simply <span class="math inline">\(1-p\)</span>) in each cluster. Also, note that cluster size <span class="math inline">\(n\)</span> is the same for all clusters.</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="group-structured-populations-and-migration.html#cb304-1"></a>migrationModel &lt;-<span class="st"> </span><span class="cf">function</span>(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){</span>
+<span id="cb304-2"><a href="group-structured-populations-and-migration.html#cb304-2"></a>  totalpop &lt;-<span class="st"> </span>NPOP<span class="op">*</span>POPSIZE</span>
+<span id="cb304-3"><a href="group-structured-populations-and-migration.html#cb304-3"></a>  cluster &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>NPOP, <span class="dt">size=</span>totalpop, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb304-4"><a href="group-structured-populations-and-migration.html#cb304-4"></a>  behaviours &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>NBEHAVIOUR, <span class="dt">size=</span>totalpop, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb304-5"><a href="group-structured-populations-and-migration.html#cb304-5"></a>  recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>NTIMESTEPS, <span class="dt">ncol=</span>NPOP)</span>
+<span id="cb304-6"><a href="group-structured-populations-and-migration.html#cb304-6"></a>  </span>
+<span id="cb304-7"><a href="group-structured-populations-and-migration.html#cb304-7"></a>  <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb304-8"><a href="group-structured-populations-and-migration.html#cb304-8"></a>    <span class="co"># choose a random observer and a random individual to observe </span></span>
+<span id="cb304-9"><a href="group-structured-populations-and-migration.html#cb304-9"></a>    observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F)</span>
+<span id="cb304-10"><a href="group-structured-populations-and-migration.html#cb304-10"></a>    <span class="co"># let observer acquire trait from model</span></span>
+<span id="cb304-11"><a href="group-structured-populations-and-migration.html#cb304-11"></a>    behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb304-12"><a href="group-structured-populations-and-migration.html#cb304-12"></a>    <span class="co"># record the relative frequency of behaviour 1 for each cluster</span></span>
+<span id="cb304-13"><a href="group-structured-populations-and-migration.html#cb304-13"></a>    recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="cf">function</span>(x) </span>
+<span id="cb304-14"><a href="group-structured-populations-and-migration.html#cb304-14"></a>                              <span class="kw">sum</span>(behaviours[cluster<span class="op">==</span>x]<span class="op">==</span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(cluster<span class="op">==</span>x)</span>
+<span id="cb304-15"><a href="group-structured-populations-and-migration.html#cb304-15"></a>                            ))</span>
+<span id="cb304-16"><a href="group-structured-populations-and-migration.html#cb304-16"></a>  }</span>
+<span id="cb304-17"><a href="group-structured-populations-and-migration.html#cb304-17"></a>  </span>
+<span id="cb304-18"><a href="group-structured-populations-and-migration.html#cb304-18"></a>  recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(recbehav)</span>
+<span id="cb304-19"><a href="group-structured-populations-and-migration.html#cb304-19"></a>  <span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;cluster&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb304-20"><a href="group-structured-populations-and-migration.html#cb304-20"></a>  <span class="kw">return</span>(recbehav_d)</span>
+<span id="cb304-21"><a href="group-structured-populations-and-migration.html#cb304-21"></a>}</span>
+<span id="cb304-22"><a href="group-structured-populations-and-migration.html#cb304-22"></a></span>
+<span id="cb304-23"><a href="group-structured-populations-and-migration.html#cb304-23"></a><span class="co"># run simulation</span></span>
+<span id="cb304-24"><a href="group-structured-populations-and-migration.html#cb304-24"></a><span class="kw">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb304-25"><a href="group-structured-populations-and-migration.html#cb304-25"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">100</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>)</span>
+<span id="cb304-26"><a href="group-structured-populations-and-migration.html#cb304-26"></a></span>
+<span id="cb304-27"><a href="group-structured-populations-and-migration.html#cb304-27"></a><span class="co"># plot results</span></span>
+<span id="cb304-28"><a href="group-structured-populations-and-migration.html#cb304-28"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb304-29"><a href="group-structured-populations-and-migration.html#cb304-29"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb304-30"><a href="group-structured-populations-and-migration.html#cb304-30"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb304-31"><a href="group-structured-populations-and-migration.html#cb304-31"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.6-1.png" width="672" /></p>
+<p>Running this code repeatedly will show you two things. First, on average the frequency of each behaviour will still be around 0.5, and second that the frequency changes are highly correlated between the two sub-populations. This is expected because, with the current version of our model, individuals do not distinguish between or have different access to individuals of either cluster.</p>
+<p>What would happen if members of a cluster preferentially learn from others within their cluster? This might be the case where individuals spent most of their time in their sub-populations. To make sure that we choose an observer and a model from the same cluster we can use the <code>prob</code> argument in the <code>sample()</code>. This argument gives a weight (or probability) with which an element of a provided set is chosen. By default, each element has a weight of <span class="math inline">\(1\)</span> and thus is equally likely to be selected. To limit our scope to individuals within the same cluster, we can simply set the weight to <span class="math inline">\(0\)</span> for all individuals that are in a different cluster. And so, we first select a cluster and then choose two individuals from that cluster to be our observer and model. We will add an <code>if</code> statement to make sure that there are at least two individuals in the cluster:</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="group-structured-populations-and-migration.html#cb305-1"></a>migrationModel &lt;-<span class="st"> </span><span class="cf">function</span>(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){</span>
+<span id="cb305-2"><a href="group-structured-populations-and-migration.html#cb305-2"></a>  totalpop &lt;-<span class="st"> </span>NPOP<span class="op">*</span>POPSIZE</span>
+<span id="cb305-3"><a href="group-structured-populations-and-migration.html#cb305-3"></a>  cluster &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>NPOP, <span class="dt">size=</span>totalpop, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb305-4"><a href="group-structured-populations-and-migration.html#cb305-4"></a>  behaviours &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>NBEHAVIOUR, <span class="dt">size=</span>totalpop, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb305-5"><a href="group-structured-populations-and-migration.html#cb305-5"></a>  recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>NTIMESTEPS, <span class="dt">ncol=</span>NPOP)</span>
+<span id="cb305-6"><a href="group-structured-populations-and-migration.html#cb305-6"></a>  </span>
+<span id="cb305-7"><a href="group-structured-populations-and-migration.html#cb305-7"></a>  <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb305-8"><a href="group-structured-populations-and-migration.html#cb305-8"></a>    <span class="co"># choose a random cluster</span></span>
+<span id="cb305-9"><a href="group-structured-populations-and-migration.html#cb305-9"></a>    clusterid &lt;-<span class="st"> </span><span class="kw">sample</span>(NPOP, <span class="dv">1</span>)</span>
+<span id="cb305-10"><a href="group-structured-populations-and-migration.html#cb305-10"></a>    <span class="co"># if there are at least two individuals in this cluster</span></span>
+<span id="cb305-11"><a href="group-structured-populations-and-migration.html#cb305-11"></a>    <span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb305-12"><a href="group-structured-populations-and-migration.html#cb305-12"></a>      <span class="co"># choose a random observer and a random individual to observe within the same cluster </span></span>
+<span id="cb305-13"><a href="group-structured-populations-and-migration.html#cb305-13"></a>      observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F, </span>
+<span id="cb305-14"><a href="group-structured-populations-and-migration.html#cb305-14"></a>                               <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb305-15"><a href="group-structured-populations-and-migration.html#cb305-15"></a>      behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb305-16"><a href="group-structured-populations-and-migration.html#cb305-16"></a>    }</span>
+<span id="cb305-17"><a href="group-structured-populations-and-migration.html#cb305-17"></a>    recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="cf">function</span>(x) </span>
+<span id="cb305-18"><a href="group-structured-populations-and-migration.html#cb305-18"></a>      <span class="kw">sum</span>( behaviours[cluster<span class="op">==</span>x]<span class="op">==</span><span class="dv">1</span> ) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(cluster<span class="op">==</span>x)))</span>
+<span id="cb305-19"><a href="group-structured-populations-and-migration.html#cb305-19"></a>  }</span>
+<span id="cb305-20"><a href="group-structured-populations-and-migration.html#cb305-20"></a>  </span>
+<span id="cb305-21"><a href="group-structured-populations-and-migration.html#cb305-21"></a>  recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(recbehav)</span>
+<span id="cb305-22"><a href="group-structured-populations-and-migration.html#cb305-22"></a>  <span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;cluster&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb305-23"><a href="group-structured-populations-and-migration.html#cb305-23"></a>  <span class="kw">return</span>(recbehav_d)</span>
+<span id="cb305-24"><a href="group-structured-populations-and-migration.html#cb305-24"></a>}</span>
+<span id="cb305-25"><a href="group-structured-populations-and-migration.html#cb305-25"></a></span>
+<span id="cb305-26"><a href="group-structured-populations-and-migration.html#cb305-26"></a><span class="kw">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb305-27"><a href="group-structured-populations-and-migration.html#cb305-27"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">50</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>)</span>
+<span id="cb305-28"><a href="group-structured-populations-and-migration.html#cb305-28"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb305-29"><a href="group-structured-populations-and-migration.html#cb305-29"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb305-30"><a href="group-structured-populations-and-migration.html#cb305-30"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb305-31"><a href="group-structured-populations-and-migration.html#cb305-31"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.7-1.png" width="672" /></p>
+<p>When you run this simulation repeatedly, you will see that sometimes one of the behaviours gets lost in one, both, or neither of the clusters. Because in this iteration of our simulation there are no interactions between individuals of different clusters, we are essentially simulating two independent populations. You can see that this is the case when we start the simulation monomorphic clusters, i.e. all individuals in a cluster start with the same behaviour:</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="group-structured-populations-and-migration.html#cb306-1"></a>migrationModel &lt;-<span class="st"> </span><span class="cf">function</span>(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS){</span>
+<span id="cb306-2"><a href="group-structured-populations-and-migration.html#cb306-2"></a>  totalpop &lt;-<span class="st"> </span>NPOP<span class="op">*</span>POPSIZE</span>
+<span id="cb306-3"><a href="group-structured-populations-and-migration.html#cb306-3"></a>  behaviours &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">sample</span>(NBEHAVIOUR,<span class="dt">size=</span>NPOP,<span class="dt">replace=</span>T), <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb306-4"><a href="group-structured-populations-and-migration.html#cb306-4"></a>  cluster &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb306-5"><a href="group-structured-populations-and-migration.html#cb306-5"></a>  recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>NTIMESTEPS, <span class="dt">ncol=</span>NPOP)</span>
+<span id="cb306-6"><a href="group-structured-populations-and-migration.html#cb306-6"></a>  </span>
+<span id="cb306-7"><a href="group-structured-populations-and-migration.html#cb306-7"></a>  <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb306-8"><a href="group-structured-populations-and-migration.html#cb306-8"></a>    clusterid &lt;-<span class="st"> </span><span class="kw">sample</span>(NPOP, <span class="dv">1</span>)</span>
+<span id="cb306-9"><a href="group-structured-populations-and-migration.html#cb306-9"></a>    <span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb306-10"><a href="group-structured-populations-and-migration.html#cb306-10"></a>      observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F, </span>
+<span id="cb306-11"><a href="group-structured-populations-and-migration.html#cb306-11"></a>                               <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb306-12"><a href="group-structured-populations-and-migration.html#cb306-12"></a>      behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb306-13"><a href="group-structured-populations-and-migration.html#cb306-13"></a>    }</span>
+<span id="cb306-14"><a href="group-structured-populations-and-migration.html#cb306-14"></a>    recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="cf">function</span>(x) </span>
+<span id="cb306-15"><a href="group-structured-populations-and-migration.html#cb306-15"></a>      <span class="kw">sum</span>( behaviours[cluster<span class="op">==</span>x]<span class="op">==</span><span class="dv">1</span> ) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(cluster<span class="op">==</span>x)))</span>
+<span id="cb306-16"><a href="group-structured-populations-and-migration.html#cb306-16"></a>  }</span>
+<span id="cb306-17"><a href="group-structured-populations-and-migration.html#cb306-17"></a>  </span>
+<span id="cb306-18"><a href="group-structured-populations-and-migration.html#cb306-18"></a>  recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(recbehav)</span>
+<span id="cb306-19"><a href="group-structured-populations-and-migration.html#cb306-19"></a>  <span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;cluster&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb306-20"><a href="group-structured-populations-and-migration.html#cb306-20"></a>  <span class="kw">return</span>(recbehav_d)</span>
+<span id="cb306-21"><a href="group-structured-populations-and-migration.html#cb306-21"></a>}</span>
+<span id="cb306-22"><a href="group-structured-populations-and-migration.html#cb306-22"></a></span>
+<span id="cb306-23"><a href="group-structured-populations-and-migration.html#cb306-23"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">50</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">100</span>)</span>
+<span id="cb306-24"><a href="group-structured-populations-and-migration.html#cb306-24"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb306-25"><a href="group-structured-populations-and-migration.html#cb306-25"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb306-26"><a href="group-structured-populations-and-migration.html#cb306-26"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb306-27"><a href="group-structured-populations-and-migration.html#cb306-27"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.8-1.png" width="672" /></p>
+<p>As you can see, there is no interaction between the two clusters and the frequency of behaviour 1 remains unchanged.</p>
+</div>
+<div id="simulating-migration-between-sub-populations" class="section level2">
+<h2><span class="header-section-number">12.2</span> Simulating migration between sub-populations</h2>
+<p>In the next step, we can add migration to our model. In the context of our model, migration means that an individual is moving from one sub-population to another. However, we could also think of a version where this move is not permanent. Instead, the individual could join another group, learn a new behaviour and return to its original sub-population. Here, we will focus on the former.</p>
+<p>To model (physical) migration, we will add the migration probability <span class="math inline">\(\mu\)</span> to the model (where <span class="math inline">\(0\)</span> means no migration, and <span class="math inline">\(1\)</span> means that an individual will always choose to move to another group):</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="group-structured-populations-and-migration.html#cb307-1"></a>migrationModel &lt;-<span class="st"> </span><span class="cf">function</span>(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION){</span>
+<span id="cb307-2"><a href="group-structured-populations-and-migration.html#cb307-2"></a>  totalpop &lt;-<span class="st"> </span>NPOP<span class="op">*</span>POPSIZE</span>
+<span id="cb307-3"><a href="group-structured-populations-and-migration.html#cb307-3"></a>  behaviours &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">sample</span>(NBEHAVIOUR,<span class="dt">size=</span>NPOP,<span class="dt">replace=</span>T), <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb307-4"><a href="group-structured-populations-and-migration.html#cb307-4"></a>  cluster &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb307-5"><a href="group-structured-populations-and-migration.html#cb307-5"></a>  recbehav &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span>NTIMESTEPS, <span class="dt">ncol=</span>NPOP)</span>
+<span id="cb307-6"><a href="group-structured-populations-and-migration.html#cb307-6"></a>  <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb307-7"><a href="group-structured-populations-and-migration.html#cb307-7"></a>    clusterid &lt;-<span class="st"> </span><span class="kw">sample</span>(NPOP, <span class="dv">1</span>)</span>
+<span id="cb307-8"><a href="group-structured-populations-and-migration.html#cb307-8"></a>    <span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb307-9"><a href="group-structured-populations-and-migration.html#cb307-9"></a>      observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F, </span>
+<span id="cb307-10"><a href="group-structured-populations-and-migration.html#cb307-10"></a>                               <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb307-11"><a href="group-structured-populations-and-migration.html#cb307-11"></a>      behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb307-12"><a href="group-structured-populations-and-migration.html#cb307-12"></a>    }</span>
+<span id="cb307-13"><a href="group-structured-populations-and-migration.html#cb307-13"></a>    <span class="co"># migration to another cluster</span></span>
+<span id="cb307-14"><a href="group-structured-populations-and-migration.html#cb307-14"></a>    <span class="cf">if</span>((<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>MIGRATION) <span class="op">&amp;</span><span class="st"> </span>(NPOP <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)){</span>
+<span id="cb307-15"><a href="group-structured-populations-and-migration.html#cb307-15"></a>      cluster[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span><span class="kw">sample</span>((<span class="dv">1</span><span class="op">:</span>NPOP)[<span class="op">-</span>clusterid], <span class="dv">1</span>)</span>
+<span id="cb307-16"><a href="group-structured-populations-and-migration.html#cb307-16"></a>    }</span>
+<span id="cb307-17"><a href="group-structured-populations-and-migration.html#cb307-17"></a>    recbehav[timestep,] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="cf">function</span>(x) </span>
+<span id="cb307-18"><a href="group-structured-populations-and-migration.html#cb307-18"></a>      <span class="kw">sum</span>( behaviours[cluster<span class="op">==</span>x]<span class="op">==</span><span class="dv">1</span> ) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(cluster<span class="op">==</span>x)))</span>
+<span id="cb307-19"><a href="group-structured-populations-and-migration.html#cb307-19"></a>  }</span>
+<span id="cb307-20"><a href="group-structured-populations-and-migration.html#cb307-20"></a>  </span>
+<span id="cb307-21"><a href="group-structured-populations-and-migration.html#cb307-21"></a>  recbehav_d &lt;-<span class="st"> </span><span class="kw">melt</span>(recbehav)</span>
+<span id="cb307-22"><a href="group-structured-populations-and-migration.html#cb307-22"></a>  <span class="kw">colnames</span>(recbehav_d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;cluster&quot;</span>,<span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb307-23"><a href="group-structured-populations-and-migration.html#cb307-23"></a>  <span class="kw">return</span>(recbehav_d)</span>
+<span id="cb307-24"><a href="group-structured-populations-and-migration.html#cb307-24"></a>}</span></code></pre></div>
+<p>The migration code chunk is doing three things. First, we make sure that migration only happens with the pre-set probability <span class="math inline">\(\mu\)</span> (<code>if(runif(1,0,1) &lt;= MIGRATION)</code>). Second, if the statement is <code>TRUE</code> we choose a new cluster ID that is different from the current one (<code>sample((1:NPOP)[-clusterid], 1)</code>). And finally, we make sure that migration only happens if there are at least two clusters (<code>NPOP &gt; 1</code>).</p>
+<p>Setting <span class="math inline">\(\mu=0\)</span> will recover the previous results, where the clusters behave independently:</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="group-structured-populations-and-migration.html#cb308-1"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">4</span>, <span class="dt">POPSIZE=</span><span class="dv">100</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>, <span class="dt">MIGRATION=</span><span class="dv">0</span>)</span>
+<span id="cb308-2"><a href="group-structured-populations-and-migration.html#cb308-2"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb308-3"><a href="group-structured-populations-and-migration.html#cb308-3"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb308-4"><a href="group-structured-populations-and-migration.html#cb308-4"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb308-5"><a href="group-structured-populations-and-migration.html#cb308-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.10-1.png" width="672" /></p>
+<p>Setting <span class="math inline">\(\mu=1\)</span>, we find that the frequency of the behaviours become correlated as more and more individuals keep moving between the clusters. It is as if there were no clusters.</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="group-structured-populations-and-migration.html#cb309-1"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb309-2"><a href="group-structured-populations-and-migration.html#cb309-2"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">4</span>, <span class="dt">POPSIZE=</span><span class="dv">100</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>, <span class="dt">MIGRATION=</span><span class="dv">1</span>)</span>
+<span id="cb309-3"><a href="group-structured-populations-and-migration.html#cb309-3"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb309-4"><a href="group-structured-populations-and-migration.html#cb309-4"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb309-5"><a href="group-structured-populations-and-migration.html#cb309-5"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb309-6"><a href="group-structured-populations-and-migration.html#cb309-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.11-1.png" width="672" /></p>
+<p>For rare migration, we can find occasional changes in the frequency but it usually bounces back again.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="group-structured-populations-and-migration.html#cb310-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb310-2"><a href="group-structured-populations-and-migration.html#cb310-2"></a>res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">4</span>, <span class="dt">POPSIZE=</span><span class="dv">100</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>, <span class="dt">MIGRATION=</span><span class="fl">0.01</span>)</span>
+<span id="cb310-3"><a href="group-structured-populations-and-migration.html#cb310-3"></a><span class="kw">ggplot</span>(res) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb310-4"><a href="group-structured-populations-and-migration.html#cb310-4"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>freq, <span class="dt">col=</span><span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb310-5"><a href="group-structured-populations-and-migration.html#cb310-5"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb310-6"><a href="group-structured-populations-and-migration.html#cb310-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Relative frequency of behaviour 1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.12-1.png" width="672" /></p>
+</div>
+<div id="varying-the-strength-of-migration-for-repeated-simulation-runs" class="section level2">
+<h2><span class="header-section-number">12.3</span> Varying the strength of migration for repeated simulation runs</h2>
+<p>As we have seen repeatedly in this book, it is often easier to understand how certain parameters affect simulation results when we run simulations many times. Therefore, let us now run our simulation repeatedly (100 times) for two clusters and a fixed migration probability (<span class="math inline">\(\mu=0.05\)</span>). We can then use these results to see how correlated the frequency of behaviour 1 is between the two populations.</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="group-structured-populations-and-migration.html#cb311-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb311-2"><a href="group-structured-populations-and-migration.html#cb311-2"></a>repeatedRun &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, </span>
+<span id="cb311-3"><a href="group-structured-populations-and-migration.html#cb311-3"></a>  <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="cf">function</span>(run){</span>
+<span id="cb311-4"><a href="group-structured-populations-and-migration.html#cb311-4"></a>    <span class="co"># run individual simulation</span></span>
+<span id="cb311-5"><a href="group-structured-populations-and-migration.html#cb311-5"></a>    res &lt;-<span class="st"> </span><span class="kw">migrationModel</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">100</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>, <span class="dt">MIGRATION=</span>.<span class="dv">05</span>)</span>
+<span id="cb311-6"><a href="group-structured-populations-and-migration.html#cb311-6"></a>    <span class="co"># return only the frequency for each cluster at the last time step</span></span>
+<span id="cb311-7"><a href="group-structured-populations-and-migration.html#cb311-7"></a>    resLast &lt;-<span class="st"> </span>res[res[,<span class="st">&quot;time&quot;</span>]<span class="op">==</span><span class="kw">max</span>(res[,<span class="st">&quot;time&quot;</span>]),<span class="st">&quot;freq&quot;</span>]</span>
+<span id="cb311-8"><a href="group-structured-populations-and-migration.html#cb311-8"></a>    <span class="kw">return</span>(resLast)</span>
+<span id="cb311-9"><a href="group-structured-populations-and-migration.html#cb311-9"></a>  })</span>
+<span id="cb311-10"><a href="group-structured-populations-and-migration.html#cb311-10"></a>  )</span>
+<span id="cb311-11"><a href="group-structured-populations-and-migration.html#cb311-11"></a></span>
+<span id="cb311-12"><a href="group-structured-populations-and-migration.html#cb311-12"></a><span class="co"># plot results</span></span>
+<span id="cb311-13"><a href="group-structured-populations-and-migration.html#cb311-13"></a><span class="kw">ggplot</span>(<span class="kw">as.data.frame</span>(repeatedRun)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb311-14"><a href="group-structured-populations-and-migration.html#cb311-14"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>V1, <span class="dt">y=</span>V2)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb311-15"><a href="group-structured-populations-and-migration.html#cb311-15"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Frequency in cluster 1&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb311-16"><a href="group-structured-populations-and-migration.html#cb311-16"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency in cluster 2&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/12.13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="group-structured-populations-and-migration.html#cb312-1"></a><span class="co"># return mean absolute difference of behaviour frequency between the two clusters</span></span>
+<span id="cb312-2"><a href="group-structured-populations-and-migration.html#cb312-2"></a><span class="kw">mean</span>(<span class="kw">abs</span>(repeatedRun[,<span class="dv">1</span>]<span class="op">-</span>repeatedRun[,<span class="dv">2</span>]))</span></code></pre></div>
+<pre><code>## [1] 0.3123796</code></pre>
+<p>The plot shows four possible outcomes of these simulations. In the extreme case, both clusters are fixed on behaviour 1 (top right) or both clusters are fixed on behaviour 2 (bottom left). And then there are two intermediate results where cluster 1 has a high frequency of behaviour 1 and migration to cluster 2 is slightly increasing its frequency in that cluster, and vice versa.</p>
+<p>Let us modify the code so that the simulation runs repeatedly and at the end returns the analysed results.</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="group-structured-populations-and-migration.html#cb314-1"></a>migrationModelAnalysed &lt;-<span class="st"> </span><span class="cf">function</span>(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRATION, REPETITIONS){</span>
+<span id="cb314-2"><a href="group-structured-populations-and-migration.html#cb314-2"></a>  totalpop &lt;-<span class="st"> </span>NPOP<span class="op">*</span>POPSIZE</span>
+<span id="cb314-3"><a href="group-structured-populations-and-migration.html#cb314-3"></a>  recbehavFreq &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol=</span>NPOP, <span class="dt">nrow=</span>REPETITIONS)</span>
+<span id="cb314-4"><a href="group-structured-populations-and-migration.html#cb314-4"></a>  <span class="co"># run repeated independent simulations</span></span>
+<span id="cb314-5"><a href="group-structured-populations-and-migration.html#cb314-5"></a>  <span class="cf">for</span>(repetitions <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>REPETITIONS){</span>
+<span id="cb314-6"><a href="group-structured-populations-and-migration.html#cb314-6"></a>    behaviours &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">sample</span>(NBEHAVIOUR,<span class="dt">size=</span>NPOP,<span class="dt">replace=</span>T), <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb314-7"><a href="group-structured-populations-and-migration.html#cb314-7"></a>    cluster &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">sample</span>(NPOP), <span class="dt">each=</span>POPSIZE)</span>
+<span id="cb314-8"><a href="group-structured-populations-and-migration.html#cb314-8"></a>    <span class="cf">for</span>(timestep <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>NTIMESTEPS){</span>
+<span id="cb314-9"><a href="group-structured-populations-and-migration.html#cb314-9"></a>      clusterid &lt;-<span class="st"> </span><span class="kw">sample</span>(NPOP, <span class="dv">1</span>)</span>
+<span id="cb314-10"><a href="group-structured-populations-and-migration.html#cb314-10"></a>      <span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb314-11"><a href="group-structured-populations-and-migration.html#cb314-11"></a>        observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F, </span>
+<span id="cb314-12"><a href="group-structured-populations-and-migration.html#cb314-12"></a>                                 <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb314-13"><a href="group-structured-populations-and-migration.html#cb314-13"></a>        behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span>
+<span id="cb314-14"><a href="group-structured-populations-and-migration.html#cb314-14"></a>      }</span>
+<span id="cb314-15"><a href="group-structured-populations-and-migration.html#cb314-15"></a>      <span class="cf">if</span>((<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>MIGRATION) <span class="op">&amp;</span><span class="st"> </span>(NPOP <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)){</span>
+<span id="cb314-16"><a href="group-structured-populations-and-migration.html#cb314-16"></a>        cluster[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span><span class="kw">sample</span>((<span class="dv">1</span><span class="op">:</span>NPOP)[<span class="op">-</span>clusterid], <span class="dv">1</span>)</span>
+<span id="cb314-17"><a href="group-structured-populations-and-migration.html#cb314-17"></a>      }</span>
+<span id="cb314-18"><a href="group-structured-populations-and-migration.html#cb314-18"></a>    }</span>
+<span id="cb314-19"><a href="group-structured-populations-and-migration.html#cb314-19"></a>    recbehavFreq[repetitions, ] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>NPOP, <span class="cf">function</span>(x) </span>
+<span id="cb314-20"><a href="group-structured-populations-and-migration.html#cb314-20"></a>      <span class="kw">sum</span>( behaviours[cluster<span class="op">==</span>x]<span class="op">==</span><span class="dv">1</span> ) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(cluster<span class="op">==</span>x))) </span>
+<span id="cb314-21"><a href="group-structured-populations-and-migration.html#cb314-21"></a>  }</span>
+<span id="cb314-22"><a href="group-structured-populations-and-migration.html#cb314-22"></a></span>
+<span id="cb314-23"><a href="group-structured-populations-and-migration.html#cb314-23"></a>  <span class="kw">return</span>(</span>
+<span id="cb314-24"><a href="group-structured-populations-and-migration.html#cb314-24"></a>  <span class="kw">data.frame</span>(<span class="dt">migration=</span>MIGRATION, </span>
+<span id="cb314-25"><a href="group-structured-populations-and-migration.html#cb314-25"></a>             <span class="dt">absdiff  =</span> (<span class="kw">abs</span>(recbehavFreq[,<span class="dv">1</span>]<span class="op">-</span>recbehavFreq[,<span class="dv">2</span>])))</span>
+<span id="cb314-26"><a href="group-structured-populations-and-migration.html#cb314-26"></a>  )</span>
+<span id="cb314-27"><a href="group-structured-populations-and-migration.html#cb314-27"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="group-structured-populations-and-migration.html#cb315-1"></a><span class="kw">migrationModelAnalysed</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">50</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">1000</span>, <span class="dt">MIGRATION=</span>.<span class="dv">05</span>, <span class="dt">REPETITIONS=</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   migration   absdiff
+## 1      0.05 0.0000000
+## 2      0.05 0.5539452
+## 3      0.05 0.5815972
+## 4      0.05 0.3038194
+## 5      0.05 0.0000000</code></pre>
+<p>As you can see, for some simulations these differences can be quite large, whereas in some the difference is zero. This will be the case where both populations randomly started monomorphic for the same behaviour, or where they ended up in that state.</p>
+<p>Using our <code>migrationModelAnalysed()</code> function we can easily run this simulation for various different migration rates and several repetitions:</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="group-structured-populations-and-migration.html#cb317-1"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb317-2"><a href="group-structured-populations-and-migration.html#cb317-2"></a>repeatedRun &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>,</span>
+<span id="cb317-3"><a href="group-structured-populations-and-migration.html#cb317-3"></a>  <span class="kw">lapply</span>(<span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">1</span>, <span class="dt">by=</span><span class="fl">0.05</span>), <span class="cf">function</span>(migration){</span>
+<span id="cb317-4"><a href="group-structured-populations-and-migration.html#cb317-4"></a>    <span class="kw">migrationModelAnalysed</span>(<span class="dt">NPOP=</span><span class="dv">2</span>, <span class="dt">POPSIZE=</span><span class="dv">50</span>, <span class="dt">NBEHAVIOUR=</span><span class="dv">2</span>, <span class="dt">NTIMESTEPS=</span><span class="dv">10000</span>, <span class="dt">MIGRATION=</span>migration, <span class="dt">REPETITIONS=</span><span class="dv">20</span>)</span>
+<span id="cb317-5"><a href="group-structured-populations-and-migration.html#cb317-5"></a>  })</span>
+<span id="cb317-6"><a href="group-structured-populations-and-migration.html#cb317-6"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="group-structured-populations-and-migration.html#cb318-1"></a><span class="kw">ggplot</span>(repeatedRun) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb318-2"><a href="group-structured-populations-and-migration.html#cb318-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>migration, <span class="dt">y=</span>absdiff)) <span class="op">+</span></span>
+<span id="cb318-3"><a href="group-structured-populations-and-migration.html#cb318-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x=</span>migration, <span class="dt">y=</span>absdiff)) <span class="op">+</span></span>
+<span id="cb318-4"><a href="group-structured-populations-and-migration.html#cb318-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Migration rate&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb318-5"><a href="group-structured-populations-and-migration.html#cb318-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Average frequency difference between clusters&quot;</span>) </span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/12.17-1.png" width="672" /></p>
+<p>When we plot the results (as a scatter-plot with an added loess trendline), we can see again for the case where there is no migration (<span class="math inline">\(\mu=0\)</span>) the two clusters either have entirely the same (difference <span class="math inline">\(=0\)</span>) or entirely different behaviours (difference <span class="math inline">\(=1\)</span>). We can also see that for all migration probabilities there is a chance that both clusters will end up being monomorphic in their behaviour. Conversely, the probability that the two clusters are entirely different in their behaviour decreases as <span class="math inline">\(\mu\)</span> increases. It is also interesting to see that for the parameters we have chosen here this happens most dramatically for <span class="math inline">\(\mu&lt;0.25\)</span>. For larger values of <span class="math inline">\(\mu\)</span> the difference between the two clusters is on average <span class="math inline">\(0\)</span>. This is what we would expect: when migration is high sub-populations are essentially becoming one large population again. Given enough time drift will lead to the fixation of one of the behaviours.</p>
+</div>
+<div id="model-extensions" class="section level2">
+<h2><span class="header-section-number">12.4</span> Model extensions</h2>
+<p>There are many ways in which we can analyse this basic model. For example, how population size affects the above result or the number of behaviours and clusters. Also, there are a few interesting ways to extend the base model. We list a couple of them below.</p>
+<div id="innovation-or-mutation" class="section level3 unnumbered">
+<h3>Innovation or mutation</h3>
+<p>An interesting extension to this model is the addition of innovation or mutation. For example, individuals could invent completely new behaviours (in this case we would not work with a fixed behaviour number <span class="math inline">\(b\)</span>), or with a certain probability, an individual might try to copy behaviour 2 but acquires behaviour 1. These are all mechanisms that would diversity to the model that in itself is interesting to study.</p>
+<!-- ### Acculturation {-} -->
+<!-- ### Fitness {-} -->
+</div>
+<div id="copy-m-models" class="section level3 unnumbered">
+<h3>Copy <span class="math inline">\(m\)</span> models</h3>
+<p>So far, an individual is changing its behaviour based on observing one other individual. However, instead of choosing from a single model, we can change the code such that the individual is considering the behaviours of <span class="math inline">\(m\)</span> other individuals. As we have seen in previous chapters, as the difference between <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> becomes smaller the more the dynamics will look like frequency biased copying.</p>
+<p>To achieve this behaviour we can change the <code>observer_model</code> selection part of our model and change it to:</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="group-structured-populations-and-migration.html#cb320-1"></a><span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span>m){</span>
+<span id="cb320-2"><a href="group-structured-populations-and-migration.html#cb320-2"></a>  observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span>m<span class="op">+</span><span class="dv">1</span>, <span class="dt">replace=</span>F,</span>
+<span id="cb320-3"><a href="group-structured-populations-and-migration.html#cb320-3"></a>                           <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb320-4"><a href="group-structured-populations-and-migration.html#cb320-4"></a>  behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-</span>
+<span id="cb320-5"><a href="group-structured-populations-and-migration.html#cb320-5"></a><span class="st">    </span>behaviours[ <span class="kw">sample</span>(observer_model[<span class="dv">2</span><span class="op">:</span>(m<span class="op">+</span><span class="dv">1</span>)], <span class="dt">size=</span><span class="dv">1</span>) ]</span>
+<span id="cb320-6"><a href="group-structured-populations-and-migration.html#cb320-6"></a>}</span></code></pre></div>
+<p>where <span class="math inline">\(m\)</span> is the number of models to observe. (Note, due to the peculiarities of the <code>sample()</code> function this code only works for <span class="math inline">\(m&gt;1\)</span>).</p>
+</div>
+<div id="learn-from-but-not-moving-to-another-sub-population" class="section level3 unnumbered">
+<h3>Learn from but not moving to another sub-population</h3>
+<p>Another extension of those model would be to have individuals not actually (physically) move between sub-populations, but rather do <em>expeditions</em> to another group, copy a behaviour, and bring it back to their original group. Let’s assume this happens with probability <span class="math inline">\(\alpha\)</span>.</p>
+<p>To do this, we would again make changes to the <code>observer_model</code> selection part of the code. We would now choose the cluster ID for the model and the observer independently.</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="group-structured-populations-and-migration.html#cb321-1"></a><span class="cf">if</span>(<span class="kw">runif</span>(<span class="dt">n=</span><span class="dv">1</span>,<span class="dt">min=</span><span class="dv">0</span>,<span class="dt">max=</span><span class="dv">1</span>) <span class="op">&lt;</span><span class="st"> </span>alpha){</span>
+<span id="cb321-2"><a href="group-structured-populations-and-migration.html#cb321-2"></a>  <span class="co"># learn from a different cluster</span></span>
+<span id="cb321-3"><a href="group-structured-populations-and-migration.html#cb321-3"></a>  <span class="cf">if</span>(<span class="kw">any</span>(cluster<span class="op">==</span>clusterid) <span class="op">&amp;</span><span class="st"> </span><span class="kw">any</span>(cluster<span class="op">!=</span>clusterid)){</span>
+<span id="cb321-4"><a href="group-structured-populations-and-migration.html#cb321-4"></a>    observer_model &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>),</span>
+<span id="cb321-5"><a href="group-structured-populations-and-migration.html#cb321-5"></a>                        <span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>(cluster<span class="op">!=</span>clusterid)<span class="op">*</span><span class="dv">1</span>))</span>
+<span id="cb321-6"><a href="group-structured-populations-and-migration.html#cb321-6"></a>  }</span>
+<span id="cb321-7"><a href="group-structured-populations-and-migration.html#cb321-7"></a>} <span class="cf">else</span> {</span>
+<span id="cb321-8"><a href="group-structured-populations-and-migration.html#cb321-8"></a>  <span class="co"># learn from same cluster</span></span>
+<span id="cb321-9"><a href="group-structured-populations-and-migration.html#cb321-9"></a>  <span class="cf">if</span>(<span class="kw">sum</span>(cluster<span class="op">==</span>clusterid)<span class="op">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb321-10"><a href="group-structured-populations-and-migration.html#cb321-10"></a>    observer_model &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span>totalpop, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">replace=</span>F,</span>
+<span id="cb321-11"><a href="group-structured-populations-and-migration.html#cb321-11"></a>                             <span class="dt">prob=</span>(cluster<span class="op">==</span>clusterid)<span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb321-12"><a href="group-structured-populations-and-migration.html#cb321-12"></a>  }</span>
+<span id="cb321-13"><a href="group-structured-populations-and-migration.html#cb321-13"></a>}</span>
+<span id="cb321-14"><a href="group-structured-populations-and-migration.html#cb321-14"></a>behaviours[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span>behaviours[ observer_model[<span class="dv">2</span>] ]</span></code></pre></div>
+<p>Note, this would also prohibit clusters from every being empty as no individual would ever leave their cluster. Depending on the objective of the model this could be useful.</p>
+</div>
+<div id="variable-migration-probability-among-sub-populations" class="section level3 unnumbered">
+<h3>Variable migration probability among sub-populations</h3>
+<p>Finally, this model can be extended to accommodate different population structures. In this chapter, we have only looked at symmetric connections between sub-populations (all sub-populations are connected and migration between them is equally likely). But the structure could also be a line, a circle, a star, and others, where not all sub-populations are connected (missing links) or where migration probability is low (using weighted connections). This can be useful to generally better understand how population structure will affect transmission. But it can also be used to model specific scenarios if there is existing data on population structure.</p>
+<p>For this iteration of the base model, we need to change the <code>migration</code> section. Instead of choosing randomly among other clusters, we would provide a probability vector to the <code>sample()</code> function that reflects the probabilities to move from one to another sub-population. As an example, let us assume we are looking at three sub-populations <span class="math inline">\(\{A, B, C\}\)</span>. A simple structure is a line, where <span class="math inline">\(A\)</span> is connected with <span class="math inline">\(B\)</span> and <span class="math inline">\(B\)</span> is connected with <span class="math inline">\(C\)</span>, or <code>A--B, B--C</code>. We can use an adjacency matrix to describe the probability to move from one sub-population to another:</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="group-structured-populations-and-migration.html#cb322-1"></a>adj &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,  <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,  <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="dt">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb322-2"><a href="group-structured-populations-and-migration.html#cb322-2"></a>adj</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    0    1    0
+## [2,]    1    1    1
+## [3,]    0    1    0</code></pre>
+<p>If rows are the starting and columns the destiny sub-populations, then this matrix tells us that an individual in sub-population <span class="math inline">\(A\)</span> (first row) can move to <span class="math inline">\(B\)</span> (second column entry is a one) but not to <span class="math inline">\(C\)</span> (last column entry is a zero). Now, when we determine that an individual is moving to a different group, we can simply recall the correct row of the <code>adj</code> matrix based on the individual’s <code>clusterid</code>:</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="group-structured-populations-and-migration.html#cb324-1"></a><span class="cf">if</span>((<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>MIGRATION) <span class="op">&amp;</span><span class="st"> </span>(NPOP <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)){</span>
+<span id="cb324-2"><a href="group-structured-populations-and-migration.html#cb324-2"></a>  cluster[ observer_model[<span class="dv">1</span>] ] &lt;-<span class="st"> </span><span class="kw">sample</span>((<span class="dv">1</span><span class="op">:</span>NPOP), <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>adj[clusterid,])</span>
+<span id="cb324-3"><a href="group-structured-populations-and-migration.html#cb324-3"></a>}</span></code></pre></div>
+<p>Also, this piece of code allows us to use non-binary values, where small values represent a low probability to move from one to another sub-population, and asymmetric matrices where the probability going from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> can be different from the probability for the reverse movement.</p>
+<hr />
+</div>
+</div>
+<div id="further-reading-6" class="section level2">
+<h2><span class="header-section-number">12.5</span> Further reading</h2>
+<p>There are a couple of interesting empirical studies on migration and the social transmission of locally adaptive behaviours in animals. For example, the study by <span class="citation">Luncz and Boesch (<a href="#ref-luncz_tradition_2014" role="doc-biblioref">2014</a>)</span> reports on the stability of tool traditions in neighbouring chimpanzee communities.</p>
+<p>There are also a few theoretical studies on the persistence or change of local traditions. <span class="citation">Boyd and Richerson (<a href="#ref-boyd_voting_2009" role="doc-biblioref">2009</a>)</span>, for example, focus on how adaptive a behaviour is, whereas <span class="citation">Mesoudi (<a href="#ref-mesoudi_migration_2018" role="doc-biblioref">2018</a>)</span> focusses on the strength of acculturation that is required to maintain cultural diversity between groups.</p>
+
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references">
+<div id="ref-boyd_voting_2009">
+<p>Boyd, Robert, and Peter J. 2009. “Voting with Your Feet: Payoff Biased Migration and the Evolution of Group Beneficial Behavior.” <em>Journal of Theoretical Biology</em> 257 (2): 331–39. <a href="https://doi.org/10.1016/j.jtbi.2008.12.007">https://doi.org/10.1016/j.jtbi.2008.12.007</a>.</p>
+</div>
+<div id="ref-luncz_tradition_2014">
+<p>Luncz, Lydia V., and Christophe Boesch. 2014. “Tradition over Trend: Neighboring Chimpanzee Communities Maintain Differences in Cultural Behavior Despite Frequent Immigration of Adult Females: Neighboring Chimpanzee Communities.” <em>American Journal of Primatology</em> 76 (7): 649–57. <a href="https://doi.org/10.1002/ajp.22259">https://doi.org/10.1002/ajp.22259</a>.</p>
+</div>
+<div id="ref-mesoudi_migration_2018">
+<p>Mesoudi, Alex. 2018. “Migration, Acculturation, and the Maintenance of Between-Group Cultural Variation.” Edited by Valerio Capraro. <em>PLOS ONE</em> 13 (10): e0205573. <a href="https://doi.org/10.1371/journal.pone.0205573">https://doi.org/10.1371/journal.pone.0205573</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="social-network-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reproduction-and-transformation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

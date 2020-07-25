@@ -33,7 +33,7 @@ Given this simple way of representing a "world" of compatibilities among traits,
 
 ```{r 15.2}
 traits_inter_dependence <- function(N, t_max, k, mu, p_death, world){
-  output <- tibble(trait = rep(c("A","B","C","D"), each = t_max), generation = rep(1:t_max, 4), p = rep(NA, t_max * 4))      
+  output <- tibble(trait = rep(c("A","B","C","D"), each = t_max), generation = rep(1:t_max, 4), p = as.numeric(rep(NA, t_max * 4)))      
   population <- matrix(0, ncol = 4, nrow = N)
   output[output$generation == 1 ,]$p <- colSums(population) / N
   for(t in 2:t_max){
@@ -230,7 +230,7 @@ Finally, we store the number of successful traits at the end of the simulation, 
 
 ```{r 15.14}
 r_max = 10
-test_inter_dependence <- tibble(gamma = rep(seq(0, 1, by = .1), r_max), run = as.factor(rep(1:r_max, each = 11)), C = NA)
+test_inter_dependence <- tibble(gamma = rep(seq(0, 1, by = .1), r_max), run = as.factor(rep(1:r_max, each = 11)), C = as.numeric(NA))
 for(condition in seq(0, 1, by = .1)){
   for(r in 1:r_max) {
     data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, mu = 0.001, p_death = 0.01, gamma = condition)

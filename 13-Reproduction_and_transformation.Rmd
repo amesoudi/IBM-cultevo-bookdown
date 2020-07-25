@@ -22,7 +22,7 @@ Now, we can write the familiar function where individuals copy the trait from th
 
 ```{r 13.2}
 reproduction <- function(N, t_max, r_max, mu) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -68,7 +68,7 @@ Now we can write another function where convergent transformation produces the s
 
 ```{r 13.5}
 transformation <- function(N, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -105,7 +105,7 @@ We can rewrite the `reproduction()` and `transformation()` functions adding as a
 
 ```{r 13.7}
 reproduction <- function(N, t_max, r_max, mu) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), d = rep(NA, t_max * r_max))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)), d = as.numeric(rep(NA, t_max * r_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -130,7 +130,7 @@ We do the same for the `transformation()` function, and we can run again both si
 
 ```{r 13.8}
 transformation <- function(N, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), d = rep(NA, t_max * r_max))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)), d = as.numeric(rep(NA, t_max * r_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -179,7 +179,7 @@ To calculate cultural fitness, and how it covaries with $P$, we need to modify a
 
 ```{r 13.11}
 reproduction <- function(N, t_max, r_max, mu) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = rep(NA, t_max * r_max))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = as.numeric(rep(NA, t_max * r_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation
@@ -208,7 +208,7 @@ Now we need to do the same for `transformation()`:
 
 ```{r 13.12}
 transformation <- function(N, t_max, r_max) {
-  output <- tibble(generation = rep(1:t_max, r_max), p = rep(NA, t_max * r_max), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = rep(NA, t_max * r_max))
+  output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)), cov_W_P = as.numeric(rep(NA, t_max * r_max)))
   for (r in 1:r_max) {
     population <- tibble(P = runif(N))
     # create first generation

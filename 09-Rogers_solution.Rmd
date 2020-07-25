@@ -21,7 +21,7 @@ rogers_model2 <- function(N, t_max, r_max, w = 1, b = 0.5, c, s = 0, mu, p, u) {
   
   # create output tibble
   # p.SL is the proportion of social learners in the population and W is the population mean fitness
-  output <- tibble(generation = rep(1:t_max, r_max), run = as.factor(rep(1:r_max, each = t_max)), p.SL = rep(NA, t_max * r_max), p.IL = rep(NA, t_max * r_max), p.CL = rep(NA, t_max * r_max), W = rep(NA, t_max * r_max))
+  output <- tibble(generation = rep(1:t_max, r_max), run = as.factor(rep(1:r_max, each = t_max)), p.SL = as.numeric(rep(NA, t_max * r_max)), p.IL = as.numeric(rep(NA, t_max * r_max)), p.CL = as.numeric(rep(NA, t_max * r_max)), W = as.numeric(rep(NA, t_max * r_max)))
   
   for (r in 1:r_max) {
     

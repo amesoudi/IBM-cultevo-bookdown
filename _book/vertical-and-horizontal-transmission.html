@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Vertical and horizontal transmission | Individual-based models of cultural evolution</title>
   <meta name="description" content="A minimal working structure for the book" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Vertical and horizontal transmission | Individual-based models of cultural evolution" />
   <meta property="og:type" content="book" />
@@ -26,15 +26,15 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2019-11-08" />
+<meta name="date" content="2020-07-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="biased-transmission-demonstrator-based-indirect-bias.html">
-<link rel="next" href="multiple-traits-models.html">
+<link rel="prev" href="biased-transmission-demonstrator-based-indirect-bias.html"/>
+<link rel="next" href="multiple-traits-models.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -42,6 +42,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -52,41 +55,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -126,7 +156,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5" data-path="unbiased-and-biased-mutation.html"><a href="unbiased-and-biased-mutation.html#further-reading-1"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html"><i class="fa fa-check"></i><b>3</b> Biased transmission: direct bias</a><ul>
-<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strentgh-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strentgh of selection</a></li>
+<li class="chapter" data-level="3.1" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#strength-of-selection"><i class="fa fa-check"></i><b>3.1</b> Strength of selection</a></li>
 <li class="chapter" data-level="3.2" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#summary-of-the-model-2"><i class="fa fa-check"></i><b>3.2</b> Summary of the model</a></li>
 <li class="chapter" data-level="3.3" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#analytical-appendix-2"><i class="fa fa-check"></i><b>3.3</b> Analytical appendix</a></li>
 <li class="chapter" data-level="3.4" data-path="biased-transmission-direct-bias.html"><a href="biased-transmission-direct-bias.html#further-reading-2"><i class="fa fa-check"></i><b>3.4</b> Further reading</a></li>
@@ -160,23 +190,65 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.5" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#analytical-appendix-6"><i class="fa fa-check"></i><b>7.5</b> Analytical appendix</a></li>
 <li class="chapter" data-level="7.6" data-path="multiple-traits-models.html"><a href="multiple-traits-models.html#further-readings-2"><i class="fa fa-check"></i><b>7.6</b> Further readings</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="group-structure.html"><a href="group-structure.html"><i class="fa fa-check"></i><b>8</b> Group structured populations and migration</a></li>
-<li class="chapter" data-level="9" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>9</b> Social network structure</a></li>
-<li class="chapter" data-level="10" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>10</b> Social learning of social learning rules</a><ul>
-<li class="chapter" data-level="10.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>10.1</b> Openness and conservatism</a></li>
-<li class="chapter" data-level="10.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>10.2</b> Maintaining open populations</a></li>
-<li class="chapter" data-level="10.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>10.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="10.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-7"><i class="fa fa-check"></i><b>10.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="10.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-3"><i class="fa fa-check"></i><b>10.5</b> Further readings</a></li>
+<li class="chapter" data-level="8" data-path="rogers-paradox.html"><a href="rogers-paradox.html"><i class="fa fa-check"></i><b>8</b> Rogers’ Paradox</a><ul>
+<li class="chapter" data-level="8.1" data-path="rogers-paradox.html"><a href="rogers-paradox.html#summary-of-the-model-7"><i class="fa fa-check"></i><b>8.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="8.2" data-path="rogers-paradox.html"><a href="rogers-paradox.html#further-reading-4"><i class="fa fa-check"></i><b>8.2</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>11</b> Traits inter-dependence</a><ul>
-<li class="chapter" data-level="11.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>11.1</b> Compatible and incompatible traits</a></li>
-<li class="chapter" data-level="11.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>11.2</b> Many-traits model</a></li>
-<li class="chapter" data-level="11.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>11.3</b> Summary of the model</a></li>
-<li class="chapter" data-level="11.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-8"><i class="fa fa-check"></i><b>11.4</b> Analytical appendix</a></li>
-<li class="chapter" data-level="11.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-4"><i class="fa fa-check"></i><b>11.5</b> Further readings</a></li>
+<li class="chapter" data-level="9" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html"><i class="fa fa-check"></i><b>9</b> Rogers’ Paradox: A Solution</a><ul>
+<li class="chapter" data-level="9.1" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#summary-of-the-model-8"><i class="fa fa-check"></i><b>9.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="9.2" data-path="rogers-paradox-a-solution.html"><a href="rogers-paradox-a-solution.html#further-reading-5"><i class="fa fa-check"></i><b>9.2</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12</b> References</a></li>
+<li class="chapter" data-level="10" data-path="demography.html"><a href="demography.html"><i class="fa fa-check"></i><b>10</b> Demography</a><ul>
+<li class="chapter" data-level="10.1" data-path="demography.html"><a href="demography.html#summary-of-the-model-9"><i class="fa fa-check"></i><b>10.1</b> Summary of the model</a></li>
+<li class="chapter" data-level="10.2" data-path="demography.html"><a href="demography.html#analytical-appendix-and-further-readings"><i class="fa fa-check"></i><b>10.2</b> Analytical appendix and further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="social-network-structure.html"><a href="social-network-structure.html"><i class="fa fa-check"></i><b>11</b> Social network structure</a><ul>
+<li class="chapter" data-level="11.1" data-path="social-network-structure.html"><a href="social-network-structure.html#the-basics"><i class="fa fa-check"></i><b>11.1</b> The Basics</a></li>
+<li class="chapter" data-level="11.2" data-path="social-network-structure.html"><a href="social-network-structure.html#plotting-networks"><i class="fa fa-check"></i><b>11.2</b> Plotting networks</a></li>
+<li class="chapter" data-level="11.3" data-path="social-network-structure.html"><a href="social-network-structure.html#analyse-social-networks"><i class="fa fa-check"></i><b>11.3</b> Analyse social networks</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="social-network-structure.html"><a href="social-network-structure.html#network-properties"><i class="fa fa-check"></i><b>11.3.1</b> Network properties</a></li>
+<li class="chapter" data-level="11.3.2" data-path="social-network-structure.html"><a href="social-network-structure.html#vertex-properties"><i class="fa fa-check"></i><b>11.3.2</b> Vertex properties</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="social-network-structure.html"><a href="social-network-structure.html#using-social-networks-to-model-information-transmission"><i class="fa fa-check"></i><b>11.4</b> Using social networks to model information transmission</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="social-network-structure.html"><a href="social-network-structure.html#gossip-transmission-on-networked-populations"><i class="fa fa-check"></i><b>11.4.1</b> Gossip transmission on networked populations</a></li>
+<li class="chapter" data-level="11.4.2" data-path="social-network-structure.html"><a href="social-network-structure.html#how-does-network-structure-affect-information-transmission"><i class="fa fa-check"></i><b>11.4.2</b> How does network structure affect information transmission?</a></li>
+<li class="chapter" data-level="11.4.3" data-path="social-network-structure.html"><a href="social-network-structure.html#complex-versus-simple-contagion"><i class="fa fa-check"></i><b>11.4.3</b> Complex versus simple contagion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html"><i class="fa fa-check"></i><b>12</b> Group structured populations and migration</a><ul>
+<li class="chapter" data-level="12.1" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#subdivided-population"><i class="fa fa-check"></i><b>12.1</b> Subdivided population</a></li>
+<li class="chapter" data-level="12.2" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#simulating-migration-between-sub-populations"><i class="fa fa-check"></i><b>12.2</b> Simulating migration between sub-populations</a></li>
+<li class="chapter" data-level="12.3" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#varying-the-strength-of-migration-for-repeated-simulation-runs"><i class="fa fa-check"></i><b>12.3</b> Varying the strength of migration for repeated simulation runs</a></li>
+<li class="chapter" data-level="12.4" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#model-extensions"><i class="fa fa-check"></i><b>12.4</b> Model extensions</a><ul>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#innovation-or-mutation"><i class="fa fa-check"></i>Innovation or mutation</a></li>
+<li><a href="group-structured-populations-and-migration.html#copy-m-models">Copy <span class="math inline">\(m\)</span> models</a></li>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#learn-from-but-not-moving-to-another-sub-population"><i class="fa fa-check"></i>Learn from but not moving to another sub-population</a></li>
+<li class="chapter" data-level="" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#variable-migration-probability-among-sub-populations"><i class="fa fa-check"></i>Variable migration probability among sub-populations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#further-reading-6"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html"><i class="fa fa-check"></i><b>13</b> Reproduction and transformation</a><ul>
+<li class="chapter" data-level="13.1" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#emergent-similarity"><i class="fa fa-check"></i><b>13.1</b> Emergent similarity</a></li>
+<li class="chapter" data-level="13.2" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#cultural-fitness"><i class="fa fa-check"></i><b>13.2</b> Cultural fitness</a></li>
+<li class="chapter" data-level="13.3" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#summary-of-the-model-10"><i class="fa fa-check"></i><b>13.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="13.4" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#analytical-appendix-7"><i class="fa fa-check"></i><b>13.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="13.5" data-path="reproduction-and-transformation.html"><a href="reproduction-and-transformation.html#further-readings-3"><i class="fa fa-check"></i><b>13.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>14</b> Social learning of social learning rules</a><ul>
+<li class="chapter" data-level="14.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>14.1</b> Openness and conservatism</a></li>
+<li class="chapter" data-level="14.2" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#maintaining-open-populations"><i class="fa fa-check"></i><b>14.2</b> Maintaining open populations</a></li>
+<li class="chapter" data-level="14.3" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#summary-of-the-model-11"><i class="fa fa-check"></i><b>14.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="14.4" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#analytical-appendix-8"><i class="fa fa-check"></i><b>14.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="14.5" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#further-readings-4"><i class="fa fa-check"></i><b>14.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html"><i class="fa fa-check"></i><b>15</b> Traits inter-dependence</a><ul>
+<li class="chapter" data-level="15.1" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#compatible-and-incompatible-traits"><i class="fa fa-check"></i><b>15.1</b> Compatible and incompatible traits</a></li>
+<li class="chapter" data-level="15.2" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#many-traits-model"><i class="fa fa-check"></i><b>15.2</b> Many-traits model</a></li>
+<li class="chapter" data-level="15.3" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#summary-of-the-model-12"><i class="fa fa-check"></i><b>15.3</b> Summary of the model</a></li>
+<li class="chapter" data-level="15.4" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#analytical-appendix-9"><i class="fa fa-check"></i><b>15.4</b> Analytical appendix</a></li>
+<li class="chapter" data-level="15.5" data-path="traits-inter-dependence.html"><a href="traits-inter-dependence.html#further-readings-5"><i class="fa fa-check"></i><b>15.5</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>16</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -208,58 +280,60 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For simplicity, we can assume that when both parents have the same trait, the child adopts that trait. When parents differ, the child faces a choice. To make things more interesting, let’s assume a bias for one trait over the other in such situations (otherwise we would be back to unbiased transmission, and no trait would reliably spread - remember we are interested in how quickly traits spread under vertical vs horizontal transmission).</p>
 <p>Hence we assume a probability <span class="math inline">\(b\)</span> that, when parents differ in their traits such that there is some uncertainty, the child adopts <span class="math inline">\(A\)</span>. With probability <span class="math inline">\(1-b\)</span> they adopt trait <span class="math inline">\(B\)</span>. When <span class="math inline">\(b=0.5\)</span>, transmission is unbiased. When <span class="math inline">\(b&gt;0.5\)</span>, <span class="math inline">\(A\)</span> should be favoured; when <span class="math inline">\(b&lt;0.5\)</span>, <span class="math inline">\(B\)</span> should be favoured. Let’s simulate this and test these predictions.</p>
 <p>The following function <code>vertical_transmission()</code> is very similar to previous simulation functions. The explanation follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">set.seed</span>(<span class="dv">111</span>)
-
-vertical_transmission &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, b, t_max, r_max) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
-  
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))
-    <span class="co"># create first generation</span>
-    
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      
-      mother &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick mothers</span>
-      father &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick fathers</span>
-      
-      population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, N))  <span class="co"># next generation</span>
-      
-      both_A &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>
-      <span class="cf">if</span> (<span class="kw">sum</span>(both_A) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
-        population[both_A, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># parents both A, adopt A</span>
-      }
-      
-      both_B &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>
-      <span class="cf">if</span> (<span class="kw">sum</span>(both_B) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
-        population[both_B, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># parents both B, adopt B</span>
-      }
-      
-      <span class="cf">if</span> (<span class="kw">anyNA</span>(population)) {  <span class="co"># if any empty NA slots (i.e. one A and one B parent) are present...</span>
-        population[<span class="kw">is.na</span>(population),]<span class="op">$</span>trait &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="kw">sum</span>(<span class="kw">is.na</span>(population)), <span class="dt">prob =</span> <span class="kw">c</span>(b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-        <span class="co"># ...make them A with probability b</span>
-      }
-      
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="vertical-and-horizontal-transmission.html#cb91-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb91-2"><a href="vertical-and-horizontal-transmission.html#cb91-2"></a><span class="kw">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb91-3"><a href="vertical-and-horizontal-transmission.html#cb91-3"></a></span>
+<span id="cb91-4"><a href="vertical-and-horizontal-transmission.html#cb91-4"></a>vertical_transmission &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, b, t_max, r_max) {</span>
+<span id="cb91-5"><a href="vertical-and-horizontal-transmission.html#cb91-5"></a>  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">as.numeric</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max)), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))</span>
+<span id="cb91-6"><a href="vertical-and-horizontal-transmission.html#cb91-6"></a>  </span>
+<span id="cb91-7"><a href="vertical-and-horizontal-transmission.html#cb91-7"></a>  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</span>
+<span id="cb91-8"><a href="vertical-and-horizontal-transmission.html#cb91-8"></a>    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))</span>
+<span id="cb91-9"><a href="vertical-and-horizontal-transmission.html#cb91-9"></a>    <span class="co"># create first generation</span></span>
+<span id="cb91-10"><a href="vertical-and-horizontal-transmission.html#cb91-10"></a>    </span>
+<span id="cb91-11"><a href="vertical-and-horizontal-transmission.html#cb91-11"></a>    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></span>
+<span id="cb91-12"><a href="vertical-and-horizontal-transmission.html#cb91-12"></a>    </span>
+<span id="cb91-13"><a href="vertical-and-horizontal-transmission.html#cb91-13"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</span>
+<span id="cb91-14"><a href="vertical-and-horizontal-transmission.html#cb91-14"></a>      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></span>
+<span id="cb91-15"><a href="vertical-and-horizontal-transmission.html#cb91-15"></a>      </span>
+<span id="cb91-16"><a href="vertical-and-horizontal-transmission.html#cb91-16"></a>      mother &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick mothers</span></span>
+<span id="cb91-17"><a href="vertical-and-horizontal-transmission.html#cb91-17"></a>      father &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick fathers</span></span>
+<span id="cb91-18"><a href="vertical-and-horizontal-transmission.html#cb91-18"></a>      </span>
+<span id="cb91-19"><a href="vertical-and-horizontal-transmission.html#cb91-19"></a>      population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">as.character</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, N))) <span class="co"># next generation</span></span>
+<span id="cb91-20"><a href="vertical-and-horizontal-transmission.html#cb91-20"></a>      </span>
+<span id="cb91-21"><a href="vertical-and-horizontal-transmission.html#cb91-21"></a>      both_A &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span></span>
+<span id="cb91-22"><a href="vertical-and-horizontal-transmission.html#cb91-22"></a>      <span class="cf">if</span> (<span class="kw">sum</span>(both_A) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb91-23"><a href="vertical-and-horizontal-transmission.html#cb91-23"></a>        population[both_A, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># parents both A, adopt A</span></span>
+<span id="cb91-24"><a href="vertical-and-horizontal-transmission.html#cb91-24"></a>      }</span>
+<span id="cb91-25"><a href="vertical-and-horizontal-transmission.html#cb91-25"></a>      </span>
+<span id="cb91-26"><a href="vertical-and-horizontal-transmission.html#cb91-26"></a>      both_B &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span></span>
+<span id="cb91-27"><a href="vertical-and-horizontal-transmission.html#cb91-27"></a>      <span class="cf">if</span> (<span class="kw">sum</span>(both_B) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb91-28"><a href="vertical-and-horizontal-transmission.html#cb91-28"></a>        population[both_B, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># parents both B, adopt B</span></span>
+<span id="cb91-29"><a href="vertical-and-horizontal-transmission.html#cb91-29"></a>      }</span>
+<span id="cb91-30"><a href="vertical-and-horizontal-transmission.html#cb91-30"></a>      </span>
+<span id="cb91-31"><a href="vertical-and-horizontal-transmission.html#cb91-31"></a>      <span class="cf">if</span> (<span class="kw">anyNA</span>(population)) {  <span class="co"># if any empty NA slots (i.e. one A and one B parent) are present...</span></span>
+<span id="cb91-32"><a href="vertical-and-horizontal-transmission.html#cb91-32"></a>        population[<span class="kw">is.na</span>(population),]<span class="op">$</span>trait &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="kw">sum</span>(<span class="kw">is.na</span>(population)), <span class="dt">prob =</span> <span class="kw">c</span>(b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb91-33"><a href="vertical-and-horizontal-transmission.html#cb91-33"></a>        <span class="co"># ...make them A with probability b</span></span>
+<span id="cb91-34"><a href="vertical-and-horizontal-transmission.html#cb91-34"></a>      }</span>
+<span id="cb91-35"><a href="vertical-and-horizontal-transmission.html#cb91-35"></a>      </span>
+<span id="cb91-36"><a href="vertical-and-horizontal-transmission.html#cb91-36"></a>      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></span>
+<span id="cb91-37"><a href="vertical-and-horizontal-transmission.html#cb91-37"></a>    }</span>
+<span id="cb91-38"><a href="vertical-and-horizontal-transmission.html#cb91-38"></a>  }</span>
+<span id="cb91-39"><a href="vertical-and-horizontal-transmission.html#cb91-39"></a>  output <span class="co"># export data from function</span></span>
+<span id="cb91-40"><a href="vertical-and-horizontal-transmission.html#cb91-40"></a>}</span></code></pre></div>
 <p>First we set up an output tibble to store the frequency of <span class="math inline">\(A\)</span> (<span class="math inline">\(p\)</span>) over <span class="math inline">\(t_{\text{max}}\)</span> generations and across <span class="math inline">\(r_{\text{max}}\)</span> runs. As before we create a <code>population</code> tibble to store our <span class="math inline">\(N\)</span> traits, one per individual.</p>
 <p>This time, however, in each generation we create two new tibbles, <code>mother</code> and <code>father</code>. These store the traits of two randomly chosen individuals from the <code>previous_population</code>, one pair for each new individual. Note that we are assuming random mating here: parents pair up entirely at random. Alternative mating rules are possible, such as assortative cultural mating, where parents preferentially assort based on their cultural trait. We will leave it to readers to create models of this.</p>
 <p>Once the <code>mother</code> and <code>father</code> tibbles are created, we can fill in the new individuals’ traits in <code>population</code>. <code>both_A</code> is used to mark with TRUE whether both mother and father have trait <span class="math inline">\(A\)</span>, and (assuming some such cases exist), sets all individuals in <code>population</code> for whom this is true to have trait <span class="math inline">\(A\)</span>. <code>both_B</code> works equivalently for parents who both possess trait <span class="math inline">\(B\)</span>.</p>
 <p>The remaining cases (identified as still being NA in the <code>population</code> tibble) must have one <span class="math inline">\(A\)</span> and one <span class="math inline">\(B\)</span> parent. We are not concerned with which parent has which in this simple model, so in each of these cases we set the individual’s trait to be <span class="math inline">\(A\)</span> with probability <span class="math inline">\(b\)</span> and <span class="math inline">\(B\)</span> with probability <span class="math inline">\(1-b\)</span>. Again, we leave it to readers to modify the code to have separate probabilities for maternal and paternal transmission.</p>
 <p>Once all generations are finished, we export the <code>output</code> tibble as our data. We can use our existing function <code>plot_multiple_runs()</code> from previous chapters to plot the results.</p>
 <p>And now run both functions to see what happens. Remember we are interested in how fast the favoured trait spreads, so let’s start it off at a low frequency (<span class="math inline">\(p_0=0.01\)</span>) so we can see it spreading from rarity. We use a small transmission bias <span class="math inline">\(b=0.6\)</span> favouring <span class="math inline">\(A\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">vertical_transmission</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.6</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="vertical-and-horizontal-transmission.html#cb92-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">vertical_transmission</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.6</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb92-2"><a href="vertical-and-horizontal-transmission.html#cb92-2"></a><span class="kw">plot_multiple_runs</span>(data_model)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.3-1.png" width="672" /></p>
 <p>Here we can see a gradual spread of the favoured trait <span class="math inline">\(A\)</span> from <span class="math inline">\(p=0.01\)</span> to <span class="math inline">\(p=1\)</span>. As in our <a href="biased-transmission-direct-bias.html#biased-transmission-direct-bias">directly biased transmission model</a>, the diffusion curve is s-shaped. To obtain the same result with two different models is encouraging! We can also test our prediction that when <span class="math inline">\(b=0.5\)</span>, we recreate our unbiased transmission model from <a href="unbiased-transmission.html#unbiased-transmission">Chapter 1</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">vertical_transmission</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_0 =</span> <span class="fl">0.1</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="vertical-and-horizontal-transmission.html#cb94-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">vertical_transmission</span>(<span class="dt">N =</span> <span class="dv">10000</span>, <span class="dt">p_0 =</span> <span class="fl">0.1</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb94-2"><a href="vertical-and-horizontal-transmission.html#cb94-2"></a><span class="kw">plot_multiple_runs</span>(data_model)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.4-1.png" width="672" /></p>
 <p>As predicted, there is no change in starting trait frequencies when <span class="math inline">\(b=0.5\)</span>. If you reduce the sample size, you will see much more fluctuation across the runs, with some runs losing <span class="math inline">\(A\)</span> altogether.</p>
 </div>
@@ -268,77 +342,81 @@ vertical_transmission &lt;-<span class="st"> </span><span class="cf">function</s
 <p>Now let’s add horizontal cultural transmission to our model. We will add it to vertical cultural transmission, rather than replace vertical with horizontal, so we can compare both in the same model.</p>
 <p>First there is vertical transmission as above, with random mating and the parental bias <span class="math inline">\(b\)</span>, to create a new generation. Then, the new generation learns from each other. The key difference between vertical and horizontal transmission is that horizontal cultural transmission can occur from more than two individuals. Let’s assume individuals pick <span class="math inline">\(n\)</span> other individuals from their generation. We also assume a bias in favour of <span class="math inline">\(A\)</span> during horizontal transmission. If the learner is <span class="math inline">\(B\)</span>, then for each of the <span class="math inline">\(n\)</span> demonstrators who have <span class="math inline">\(A\)</span>, there is an independent probability <span class="math inline">\(g\)</span> that the learner switches to <span class="math inline">\(A\)</span>. If the learner is already <span class="math inline">\(A\)</span>, or if the demonstrator is <span class="math inline">\(B\)</span>, then nothing happens.</p>
 <p>The following code implements this horizontal transmission in a new function <code>vertical_horizontal_transmission()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vertical_horizontal_transmission &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, b, n, g, t_max, r_max) {
-  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))
-  
-  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {
-    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))
-    <span class="co"># create first generation</span>
-    
-    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span>
-    
-    <span class="co"># vertical transmission</span>
-    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span>
-      
-      mother &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick mothers</span>
-      father &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick fathers</span>
-      
-      population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">rep</span>(<span class="ot">NA</span>, N))  <span class="co"># next generation</span>
-      
-      both_A &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>
-      <span class="cf">if</span> ( <span class="kw">sum</span>(both_A) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {
-        population[both_A, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># parents both A, adopt A</span>
-      }
-      
-      both_B &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>
-      <span class="cf">if</span> ( <span class="kw">sum</span>(both_B) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
-        population[both_B, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># parents both B, adopt B</span>
-      }
-      
-      <span class="cf">if</span> (<span class="kw">anyNA</span>(population)) {  <span class="co"># if any empty NA slots (i.e. one A and one B parent) are present...</span>
-        population[<span class="kw">is.na</span>(population),]<span class="op">$</span>trait &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="kw">sum</span>(<span class="kw">is.na</span>(population)), <span class="dt">prob =</span> <span class="kw">c</span>(b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-        <span class="co"># ...make them A with probability b</span>
-      }
-      
-      <span class="co"># horizontal transmission</span>
-      previous_population &lt;-<span class="st"> </span>population <span class="co"># previous_population are children before horizontal transmission, population are children after horizontal transmission</span>
-      
-      N_B &lt;-<span class="st"> </span><span class="kw">length</span>(previous_population<span class="op">$</span>trait[previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>])  <span class="co"># N_B = number of Bs</span>
-      
-      <span class="cf">if</span> (N_B <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {  <span class="co"># if there are B individuals to switch, and n is not zero</span>
-        
-        <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_B) {  <span class="co"># for each B individual...</span>
-          
-          demonstrator &lt;-<span class="st"> </span><span class="kw">sample</span>(previous_population<span class="op">$</span>trait, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># pick n demonstrators</span>
-          copy &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), n, <span class="dt">prob =</span> <span class="kw">c</span>(g, <span class="dv">1</span><span class="op">-</span>g), <span class="dt">replace =</span> <span class="ot">TRUE</span>)  <span class="co"># get probability g</span>
-          
-          <span class="cf">if</span> ( <span class="kw">sum</span>(demonstrator <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>copy <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {  <span class="co"># if any demonstrators with A are to be copied...</span>
-            population[previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>,]<span class="op">$</span>trait[i] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># ...the B individual switches to A</span>
-          }
-        
-        }
-      }
-      
-      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span>
-    }
-  }
-  output <span class="co"># export data from function</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="vertical-and-horizontal-transmission.html#cb96-1"></a>vertical_horizontal_transmission &lt;-<span class="st"> </span><span class="cf">function</span>(N, p_<span class="dv">0</span>, b, n, g, t_max, r_max) {</span>
+<span id="cb96-2"><a href="vertical-and-horizontal-transmission.html#cb96-2"></a>  output &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">generation =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>t_max, r_max), <span class="dt">p =</span> <span class="kw">as.numeric</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, t_max <span class="op">*</span><span class="st"> </span>r_max)), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> t_max)))</span>
+<span id="cb96-3"><a href="vertical-and-horizontal-transmission.html#cb96-3"></a>  </span>
+<span id="cb96-4"><a href="vertical-and-horizontal-transmission.html#cb96-4"></a>  <span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</span>
+<span id="cb96-5"><a href="vertical-and-horizontal-transmission.html#cb96-5"></a>    population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), N, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p_<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">0</span>)))</span>
+<span id="cb96-6"><a href="vertical-and-horizontal-transmission.html#cb96-6"></a>    <span class="co"># create first generation</span></span>
+<span id="cb96-7"><a href="vertical-and-horizontal-transmission.html#cb96-7"></a>    </span>
+<span id="cb96-8"><a href="vertical-and-horizontal-transmission.html#cb96-8"></a>    output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># add first generation&#39;s p for run r</span></span>
+<span id="cb96-9"><a href="vertical-and-horizontal-transmission.html#cb96-9"></a>    </span>
+<span id="cb96-10"><a href="vertical-and-horizontal-transmission.html#cb96-10"></a>    <span class="co"># vertical transmission</span></span>
+<span id="cb96-11"><a href="vertical-and-horizontal-transmission.html#cb96-11"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>t_max) {</span>
+<span id="cb96-12"><a href="vertical-and-horizontal-transmission.html#cb96-12"></a>      previous_population &lt;-<span class="st"> </span>population <span class="co"># copy individuals to previous_population tibble</span></span>
+<span id="cb96-13"><a href="vertical-and-horizontal-transmission.html#cb96-13"></a>      </span>
+<span id="cb96-14"><a href="vertical-and-horizontal-transmission.html#cb96-14"></a>      mother &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick mothers</span></span>
+<span id="cb96-15"><a href="vertical-and-horizontal-transmission.html#cb96-15"></a>      father &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">sample</span>(previous_population<span class="op">$</span>trait, N, <span class="dt">replace =</span> <span class="ot">TRUE</span>))  <span class="co"># randomly pick fathers</span></span>
+<span id="cb96-16"><a href="vertical-and-horizontal-transmission.html#cb96-16"></a>      </span>
+<span id="cb96-17"><a href="vertical-and-horizontal-transmission.html#cb96-17"></a>      population &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">trait =</span> <span class="kw">as.character</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, N)))  <span class="co"># next generation</span></span>
+<span id="cb96-18"><a href="vertical-and-horizontal-transmission.html#cb96-18"></a>      </span>
+<span id="cb96-19"><a href="vertical-and-horizontal-transmission.html#cb96-19"></a>      both_A &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span></span>
+<span id="cb96-20"><a href="vertical-and-horizontal-transmission.html#cb96-20"></a>      <span class="cf">if</span> ( <span class="kw">sum</span>(both_A) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</span>
+<span id="cb96-21"><a href="vertical-and-horizontal-transmission.html#cb96-21"></a>        population[both_A, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># parents both A, adopt A</span></span>
+<span id="cb96-22"><a href="vertical-and-horizontal-transmission.html#cb96-22"></a>      }</span>
+<span id="cb96-23"><a href="vertical-and-horizontal-transmission.html#cb96-23"></a>      </span>
+<span id="cb96-24"><a href="vertical-and-horizontal-transmission.html#cb96-24"></a>      both_B &lt;-<span class="st"> </span>mother<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">&amp;</span><span class="st"> </span>father<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span></span>
+<span id="cb96-25"><a href="vertical-and-horizontal-transmission.html#cb96-25"></a>      <span class="cf">if</span> ( <span class="kw">sum</span>(both_B) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb96-26"><a href="vertical-and-horizontal-transmission.html#cb96-26"></a>        population[both_B, ]<span class="op">$</span>trait &lt;-<span class="st"> &quot;B&quot;</span>  <span class="co"># parents both B, adopt B</span></span>
+<span id="cb96-27"><a href="vertical-and-horizontal-transmission.html#cb96-27"></a>      }</span>
+<span id="cb96-28"><a href="vertical-and-horizontal-transmission.html#cb96-28"></a>      </span>
+<span id="cb96-29"><a href="vertical-and-horizontal-transmission.html#cb96-29"></a>      <span class="cf">if</span> (<span class="kw">anyNA</span>(population)) {  <span class="co"># if any empty NA slots (i.e. one A and one B parent) are present...</span></span>
+<span id="cb96-30"><a href="vertical-and-horizontal-transmission.html#cb96-30"></a>        population[<span class="kw">is.na</span>(population),]<span class="op">$</span>trait &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="kw">sum</span>(<span class="kw">is.na</span>(population)), <span class="dt">prob =</span> <span class="kw">c</span>(b, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb96-31"><a href="vertical-and-horizontal-transmission.html#cb96-31"></a>        <span class="co"># ...make them A with probability b</span></span>
+<span id="cb96-32"><a href="vertical-and-horizontal-transmission.html#cb96-32"></a>      }</span>
+<span id="cb96-33"><a href="vertical-and-horizontal-transmission.html#cb96-33"></a>      </span>
+<span id="cb96-34"><a href="vertical-and-horizontal-transmission.html#cb96-34"></a>      <span class="co"># horizontal transmission</span></span>
+<span id="cb96-35"><a href="vertical-and-horizontal-transmission.html#cb96-35"></a>      previous_population &lt;-<span class="st"> </span>population <span class="co"># previous_population are children before horizontal transmission, population are children after horizontal transmission</span></span>
+<span id="cb96-36"><a href="vertical-and-horizontal-transmission.html#cb96-36"></a>      </span>
+<span id="cb96-37"><a href="vertical-and-horizontal-transmission.html#cb96-37"></a>      N_B &lt;-<span class="st"> </span><span class="kw">length</span>(previous_population<span class="op">$</span>trait[previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>])  <span class="co"># N_B = number of Bs</span></span>
+<span id="cb96-38"><a href="vertical-and-horizontal-transmission.html#cb96-38"></a>      </span>
+<span id="cb96-39"><a href="vertical-and-horizontal-transmission.html#cb96-39"></a>      <span class="cf">if</span> (N_B <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {  <span class="co"># if there are B individuals to switch, and n is not zero</span></span>
+<span id="cb96-40"><a href="vertical-and-horizontal-transmission.html#cb96-40"></a>        </span>
+<span id="cb96-41"><a href="vertical-and-horizontal-transmission.html#cb96-41"></a>        <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_B) {  <span class="co"># for each B individual...</span></span>
+<span id="cb96-42"><a href="vertical-and-horizontal-transmission.html#cb96-42"></a>          </span>
+<span id="cb96-43"><a href="vertical-and-horizontal-transmission.html#cb96-43"></a>          demonstrator &lt;-<span class="st"> </span><span class="kw">sample</span>(previous_population<span class="op">$</span>trait, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="co"># pick n demonstrators</span></span>
+<span id="cb96-44"><a href="vertical-and-horizontal-transmission.html#cb96-44"></a>          copy &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), n, <span class="dt">prob =</span> <span class="kw">c</span>(g, <span class="dv">1</span><span class="op">-</span>g), <span class="dt">replace =</span> <span class="ot">TRUE</span>)  <span class="co"># get probability g</span></span>
+<span id="cb96-45"><a href="vertical-and-horizontal-transmission.html#cb96-45"></a>          </span>
+<span id="cb96-46"><a href="vertical-and-horizontal-transmission.html#cb96-46"></a>          <span class="cf">if</span> ( <span class="kw">sum</span>(demonstrator <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>copy <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {  <span class="co"># if any demonstrators with A are to be copied...</span></span>
+<span id="cb96-47"><a href="vertical-and-horizontal-transmission.html#cb96-47"></a>            population[previous_population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;B&quot;</span>,]<span class="op">$</span>trait[i] &lt;-<span class="st"> &quot;A&quot;</span>  <span class="co"># ...the B individual switches to A</span></span>
+<span id="cb96-48"><a href="vertical-and-horizontal-transmission.html#cb96-48"></a>          }</span>
+<span id="cb96-49"><a href="vertical-and-horizontal-transmission.html#cb96-49"></a>        </span>
+<span id="cb96-50"><a href="vertical-and-horizontal-transmission.html#cb96-50"></a>        }</span>
+<span id="cb96-51"><a href="vertical-and-horizontal-transmission.html#cb96-51"></a>      }</span>
+<span id="cb96-52"><a href="vertical-and-horizontal-transmission.html#cb96-52"></a>      </span>
+<span id="cb96-53"><a href="vertical-and-horizontal-transmission.html#cb96-53"></a>      output[output<span class="op">$</span>generation <span class="op">==</span><span class="st"> </span>t <span class="op">&amp;</span><span class="st"> </span>output<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>p &lt;-<span class="st"> </span><span class="kw">sum</span>(population<span class="op">$</span>trait <span class="op">==</span><span class="st"> &quot;A&quot;</span>) <span class="op">/</span><span class="st"> </span>N <span class="co"># get p and put it into output slot for this generation t and run r</span></span>
+<span id="cb96-54"><a href="vertical-and-horizontal-transmission.html#cb96-54"></a>    }</span>
+<span id="cb96-55"><a href="vertical-and-horizontal-transmission.html#cb96-55"></a>  }</span>
+<span id="cb96-56"><a href="vertical-and-horizontal-transmission.html#cb96-56"></a>  output <span class="co"># export data from function</span></span>
+<span id="cb96-57"><a href="vertical-and-horizontal-transmission.html#cb96-57"></a>}</span></code></pre></div>
 <p>The first part of this code is identical to <code>vertical_transmission</code>. Then there is horizontal transmission. We put <code>population</code> into <code>previous_population</code> again, but now <code>population</code> contains the individuals after horizontal transmission, and <code>previous_population</code> contains the individuals before. <span class="math inline">\(N_B\)</span> holds the individuals in <code>previous_population</code> who are <span class="math inline">\(B\)</span>, as they are the only ones we need to concern ourselves with (<span class="math inline">\(A\)</span> individuals do not change). If there are such individuals (<span class="math inline">\(N_B&gt;0\)</span>), and individuals are learning from at least one individual (<span class="math inline">\(n&gt;0\)</span>), then for each individual we pick <span class="math inline">\(n\)</span> demonstrators, and if any of those demonstrators are <span class="math inline">\(A\)</span> plus probability <span class="math inline">\(g\)</span> is fulfilled, we set the individual to <span class="math inline">\(A\)</span>.</p>
 <p>Running horizontal transmission with <span class="math inline">\(n=5\)</span> and <span class="math inline">\(g=0.1\)</span> and without vertical transmission bias (<span class="math inline">\(b=0.5\)</span>) causes, as expected, <span class="math inline">\(A\)</span> to spread.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-<span class="kw">plot_multiple_runs</span>(data_model)</code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="vertical-and-horizontal-transmission.html#cb97-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb97-2"><a href="vertical-and-horizontal-transmission.html#cb97-2"></a><span class="kw">plot_multiple_runs</span>(data_model)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.6-1.png" width="672" /></p>
 <p>This plot above confirms that horizontal cultural transmission, with some direct bias in the form of <span class="math inline">\(g\)</span>, again generates an s-shaped curve and causes the favoured trait to spread. But we haven’t yet done what we set out to do, which is compare the speed of the different pathways. The following code generates three datasets, one with only vertical transmission and <span class="math inline">\(b=0.6\)</span>, one with only horizontal transmission with <span class="math inline">\(n=2\)</span> and <span class="math inline">\(g=0.1\)</span> which is roughly equivalent to two parents and a bias of <span class="math inline">\(b=0.6\)</span> (0.1 higher than unbiased), and one with only horizontal transmission with <span class="math inline">\(n=5\)</span> and <span class="math inline">\(g=0.1\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_model_v &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.6</span>, <span class="dt">n =</span> <span class="dv">0</span>, <span class="dt">g =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-data_model_hn2 &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-data_model_hn5 &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)
-<span class="kw">plot_multiple_runs</span>(data_model_v)</code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="vertical-and-horizontal-transmission.html#cb99-1"></a>data_model_v &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.6</span>, <span class="dt">n =</span> <span class="dv">0</span>, <span class="dt">g =</span> <span class="dv">0</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb99-2"><a href="vertical-and-horizontal-transmission.html#cb99-2"></a>data_model_hn2 &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb99-3"><a href="vertical-and-horizontal-transmission.html#cb99-3"></a>data_model_hn5 &lt;-<span class="st"> </span><span class="kw">vertical_horizontal_transmission</span>(<span class="dt">N =</span> <span class="dv">5000</span>, <span class="dt">p_0 =</span> <span class="fl">0.01</span>, <span class="dt">b =</span> <span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">g =</span> <span class="fl">0.1</span>, <span class="dt">t_max =</span> <span class="dv">50</span>, <span class="dt">r_max =</span> <span class="dv">5</span>)</span>
+<span id="cb99-4"><a href="vertical-and-horizontal-transmission.html#cb99-4"></a><span class="kw">plot_multiple_runs</span>(data_model_v)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.7-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_multiple_runs</span>(data_model_hn2)</code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="vertical-and-horizontal-transmission.html#cb101-1"></a><span class="kw">plot_multiple_runs</span>(data_model_hn2)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.7-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_multiple_runs</span>(data_model_hn5)</code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="vertical-and-horizontal-transmission.html#cb103-1"></a><span class="kw">plot_multiple_runs</span>(data_model_hn5)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <p><img src="_main_files/figure-html/6.7-3.png" width="672" /></p>
 <p>The first two plots should be very similar. Horizontal cultural transmission from <span class="math inline">\(n=2\)</span> demonstrators is equivalent to vertical cultural transmission, which of course also features two demonstrators, when both pathways have similarly strong direct biases. The third plot shows that increasing the number of demonstrators makes favoured traits spread more rapidly under horizontal transmission, without changing the strength of the biases. Of course, changing the relative strength of the vertical and horizontal biases (<span class="math inline">\(b\)</span> and <span class="math inline">\(g\)</span> respectively) also affects the relative speed. But all else being equal, horizontal transmission with <span class="math inline">\(n&gt;2\)</span> is faster than vertical transmission.</p>
 </div>
@@ -355,8 +433,8 @@ data_model_hn5 &lt;-<span class="st"> </span><span class="kw">vertical_horizonta
 </div>
 <div id="further-reading-3" class="section level2">
 <h2><span class="header-section-number">6.5</span> Further reading</h2>
-<p>The above models are based on those by <span class="citation">Cavalli-Sforza and Feldman (<a href="#ref-cavalli-sforza_cultural_1981">1981</a>)</span>. Their vertical cultural transmission models feature bias parameters for each combination of matings (<span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, <span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span>); our <span class="math inline">\(b\)</span> is their <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>. Their horizontal transmission model also features <span class="math inline">\(n\)</span> and <span class="math inline">\(g\)</span>, which have the same definitions as here. Subsequent models in that volume examine assortative cultural mating and oblique transmission, although the latter is similar to horizontal transmission.</p>
-<p>Empirically, there is a large literature trying to identify the relative roles of parents and non-parents on beliefs and behaviour. <span class="citation">Harris (<a href="#ref-harris_where_1995">1995</a>)</span> argued that parents have little influence on their children beyond keeping them alive and passing on genes. <span class="citation">Aunger (<a href="#ref-aunger_life_2000">2000</a>)</span> and <span class="citation">Henrich and Broesch (<a href="#ref-henrich_nature_2011">2011</a>)</span> argue for a 2-stage process, with children initially learning from parents, and then updating that knowledge in adolescence and adulthood by learning from successful others.</p>
+<p>The above models are based on those by <span class="citation">Cavalli-Sforza and Feldman (<a href="#ref-cavalli-sforza_cultural_1981" role="doc-biblioref">1981</a>)</span>. Their vertical cultural transmission models feature bias parameters for each combination of matings (<span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, <span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span>); our <span class="math inline">\(b\)</span> is their <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>. Their horizontal transmission model also features <span class="math inline">\(n\)</span> and <span class="math inline">\(g\)</span>, which have the same definitions as here. Subsequent models in that volume examine assortative cultural mating and oblique transmission, although the latter is similar to horizontal transmission.</p>
+<p>Empirically, there is a large literature trying to identify the relative roles of parents and non-parents on beliefs and behaviour. <span class="citation">Harris (<a href="#ref-harris_where_1995" role="doc-biblioref">1995</a>)</span> argued that parents have little influence on their children beyond keeping them alive and passing on genes. <span class="citation">Aunger (<a href="#ref-aunger_life_2000" role="doc-biblioref">2000</a>)</span> and <span class="citation">Henrich and Broesch (<a href="#ref-henrich_nature_2011" role="doc-biblioref">2011</a>)</span> argue for a 2-stage process, with children initially learning from parents, and then updating that knowledge in adolescence and adulthood by learning from successful others.</p>
 
 </div>
 </div>
@@ -369,10 +447,10 @@ data_model_hn5 &lt;-<span class="st"> </span><span class="kw">vertical_horizonta
 <p>Cavalli-Sforza, Luigi Luca, and Marcus W. Feldman. 1981. <em>Cultural Transmission and Evolution</em>. Princeton: Princeton Univ. Press.</p>
 </div>
 <div id="ref-harris_where_1995">
-<p>Harris, J.R. 1995. “Where Is the Child’s Environment? A Group Socialization Theory of Development.” <em>Psychological Review</em> 102: 458–89.</p>
+<p>Harris, J. R. 1995. “Where Is the Child’s Environment? A Group Socialization Theory of Development.” <em>Psychological Review</em> 102: 458–89.</p>
 </div>
 <div id="ref-henrich_nature_2011">
-<p>Henrich, Joseph, and James Broesch. 2011. “On the Nature of Cultural Transmission Networks: Evidence from Fijian Villages for Adaptive Learning Biases.” <em>Philosophical Transactions of the Royal Society of London B</em> 366 (1567): 1139–48. doi:<a href="https://doi.org/10.1098/rstb.2010.0323">10.1098/rstb.2010.0323</a>.</p>
+<p>Henrich, Joseph, and James Broesch. 2011. “On the Nature of Cultural Transmission Networks: Evidence from Fijian Villages for Adaptive Learning Biases.” <em>Philosophical Transactions of the Royal Society of London B</em> 366 (1567): 1139–48. <a href="https://doi.org/10.1098/rstb.2010.0323">https://doi.org/10.1098/rstb.2010.0323</a>.</p>
 </div>
 </div>
             </section>
@@ -386,11 +464,13 @@ data_model_hn5 &lt;-<span class="st"> </span><span class="kw">vertical_horizonta
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -398,12 +478,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -415,6 +494,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -431,10 +514,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
