@@ -8,10 +8,9 @@ author:
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-description: "A minimal working structure for the book"
 bibliography: "biblio.bib"
 link-citations: true
-
+self_contained: TRUE
 ---
 
 # Introduction {-#Introduction}
