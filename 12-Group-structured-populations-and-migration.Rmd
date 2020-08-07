@@ -412,8 +412,10 @@ if((runif(1,0,1) <= MIGRATION) & (NPOP > 1)){
 Also, this piece of code allows us to use non-binary values, where small values represent a low probability to move from one to another sub-population, and asymmetric matrices where the probability going from $A$ to $B$ can be different from the probability for the reverse movement. 
 
 
-***
+## Summary of the model
 
+
+***
 ## Further reading
 There are a couple of interesting empirical studies on migration and the social transmission of locally adaptive behaviours in animals. For example, the study by @luncz_tradition_2014 reports on the stability of tool traditions in neighbouring chimpanzee communities. 
 

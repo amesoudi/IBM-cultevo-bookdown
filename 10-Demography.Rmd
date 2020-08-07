@@ -11,20 +11,17 @@ Another well-known study is that by Joseph @henrich_demography_2004. His model t
 
 The principle idea is the following: information transmission from one generation to another (or from one individual to another, here it does not make a difference) has a random component (error rate) that will lead to most individuals failing to achieve the same skill level as their cultural model, whereas a few will match and - even fewer - exceed that skill level. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their cultural model. These 'new masters' will become the cultural models of the next generation. Fig. \@ref(fig:henrichGumbel) is showing this principle. 
 
-```{r henrichGumbel, fig.cap="Shown are the probability distributions to acquire a specific skill level for two different skills (one that is easy to learn and one that is more complex and therefore harder to learn). Given that learning is error-prone more individuals will acquire a skill level that is lower than that of a cultural model (its level is indicated by the vertical dashed line) through imitation (left of the dashed line). A few individauls will achieve higher skill levels (right of the dashed line). For the complex skill the probability to be above the skill level of the cultural model is lower (smaller area under the curve) than for simple skills."}
-# data <- data.frame(skill = rep(c("simple","complex"), each=6000),
-#                    z = c(rlogis(n=6000, location=-7, scale=1),
-#                          rlogis(n=6000, location=-9, scale=1)))
+```{r henrichGumbel, fig.cap="Shown are the probability distributions to acquire a specific skill level for two different skills (one that is easy to learn and one that is more complex and therefore harder to learn). Given that learning is error-prone more individuals will acquire a skill level that is lower than that of a cultural model (its level is indicated by the vertical dashed line) through imitation (left of the dashed line). A few individauls will achieve higher skill levels (right of the dashed line). For the complex skill the probability to be above the skill level of the cultural model is lower (smaller area under the curve) than for simple skills.", message=FALSE, warning=FALSE}
 library(extraDistr)
-data <- data.frame(skill = rep(c("simple","complex"), each=6000),
+data <- tibble(skill = rep(c("simple","complex"), each=6000),
                    z = c(rgumbel(n=6000, mu=-7, sigma=2),
                          rgumbel(n=6000, mu=-9, sigma=2)))
 ggplot(data, aes(x=z, col=skill)) +
   geom_density() + 
   geom_vline(xintercept=0, col="grey", linetype=2) + 
   theme_bw() +
-  theme(axis.text=element_blank(),
-        axis.ticks=element_blank()) +
+  # theme(axis.text=element_blank(),
+  #       axis.ticks=element_blank()) +
   xlab("imitator value z") + 
   ylab("probability imitatior acquires z") 
 ```
@@ -67,22 +64,19 @@ We let the simulation run for $5000$ rounds and plot the results.
 
 ```{r}
 plot(zbar, type="l", xlab="time", ylab="change in z")
+abline(h=mean(zbar), col="grey")
 ```
 
-We find that $\Delta \bar z$ quickly plateaus at about `r round(mean(zbar),2)`. On average the population would improve this skill over time. 
+We find that $\Delta \bar z$ quickly plateaus at about `r round(mean(zbar),2)` (grey horizontal line in plot). On average the population would improve this skill over time. 
 
 Let us now write a function that can perform this loop repeatedly and average $\Delta \bar z$ over all those repetitions to receive a more stable result. 
 
 ```{r}
-# automate process
 demography_model <- function(R, N, alpha, beta, repeats){
   res <- lapply(1:repeats, function(r){
     z <- runif(n=N, min=0, max=1)
     zbar <- rep(NA, R)
     for(r in 1:R){
-      # we simplify and ommit f and obs by assuming all individuals observe the best individual 
-      # znew <- rlogis(n=N, location=z[ which.max(z) ]-alpha, scale=beta)
-      # alternatively, use rgumbel function from the extraDistr package
       znew <- rgumbel(n=N, mu=max(z)-alpha, sigma=beta)
       zbar[r] <- mean(znew-z)
       z <- znew
@@ -93,10 +87,10 @@ demography_model <- function(R, N, alpha, beta, repeats){
 }
 ```
 
-With this function, we can now run the simulation repeatedly for a single set of parameters. 
+With this function, we can now run the simulation repeatedly for a single set of parameters, an get a more precise value:
 
 ```{r, cache=TRUE}
-demography_model(R=100, N=5000, alpha=7, beta=1, repeats=10)
+demography_model(R=5000, N=1000, alpha=7, beta=1, repeats=10)
 ```
 
 Now, we have everything we need to run simulations for different population sizes. We will also run it for two different skill complexities: simple ($\alpha/\beta=7$) and complex ($\alpha/\beta=9$). 

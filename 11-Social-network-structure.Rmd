@@ -16,7 +16,7 @@ colnames(m) <- c("A","B","C")
 m
 ```
 
-The matrix above is an example of such an adjacency matrix. Shown are the relationships between three individuals (A, B, and C). When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row, we see that B is only interacting with C, and the last row tells us that C interacting both with A and with B. This is an example for an asymmetric adjacency matrix because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper triangle of the matrix with the lower triangle of the matrix:
+The matrix above is an example of such an adjacency matrix. Shown are the relationships between three individuals A, B, and C.  When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row, we see that B is only interacting with C, and the last row tells us that C interacting both with A and with B. This is an example for an asymmetric adjacency matrix because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper triangle of the matrix with the lower triangle of the matrix:
 
 ```{r 11.2}
 all(m[upper.tri(m)] == m[lower.tri(m)])
@@ -522,10 +522,13 @@ gossip_model <- function(ADJM, PROP, TURNS, SIM=1){
 }
 ```
 
+By default, this function will return the maximum turn number, if the set target proportion is not reached (however, we could also let the function return a different value or a character expression, such as `MAX`).
+
 ```{r 11.40}
 adjm <- createNetwork(N=50, FRIENDSHIPRATIO=.25)
 gossip_model(ADJM=adjm, PROP=.75, TURNS=100, SIM=1)
 ```
+When you run d
 
 Now, let us run these functions for different group sizes and different connectivites, and let us repeat these simulations several times to get a better estimate:
 
@@ -707,3 +710,12 @@ ggplot(res) +
 ```
 
 This figure tells us that, while there is no apparent difference in the spread of information in clustered and random networks for simple contagion, we find that information spreads faster in clustered networks if the transmission is akin to complex contagion. The reason for this is that in clustered networks an individual's neighbours are more likely to also be connected. This increases the likelihood that the neighbours also share the same information, and, in turn, increases the individual's exposure to this information. 
+
+
+
+## Summary of the model
+
+
+***
+
+## Further Reading
