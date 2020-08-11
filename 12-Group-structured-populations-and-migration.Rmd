@@ -44,7 +44,8 @@ colnames(recbehav_d) <- c("time", "behaviour","freq")
 
 ggplot(recbehav_d) + 
   geom_line(aes(x=time, y=freq/n, col=factor(behaviour))) + 
-  scale_y_continuous(limits=c(0,1))
+  scale_y_continuous(limits=c(0,1)) + 
+  theme_bw()
 ```
 
 As we would have expected from an unbiased transmission, the frequency of the two traits will move around $0.5$. For smaller populations, more traits, or longer time drift will lead to the exclusion of one of the traits. We can test this by using a much smaller population. To do so, let us first wrap the simulation in a function called `migrationModel()`. 
@@ -78,7 +79,8 @@ colnames(recbehav_d) <- c("time", "behaviour","freq")
 # plot results
 ggplot(recbehav_d) + 
   geom_line(aes(x=time, y=freq, col=factor(behaviour))) + 
-  scale_y_continuous(limits=c(0,1))
+  scale_y_continuous(limits=c(0,1)) + 
+  theme_bw()
 ```
 
 As you can see, the two behaviours meander until, by chance, behaviour $1$ is completely replaced by behaviour $2$. 
@@ -118,7 +120,8 @@ res <- migrationModel(NPOP=2, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000)
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 Running this code repeatedly will show you two things. First, on average the frequency of each behaviour will still be around 0.5, and second that the frequency changes are highly correlated between the two sub-populations. This is expected because, with the current version of our model, individuals do not distinguish between or have different access to individuals of either cluster. 
@@ -156,7 +159,8 @@ res <- migrationModel(NPOP=2, POPSIZE=50, NBEHAVIOUR=2, NTIMESTEPS=1000)
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 When you run this simulation repeatedly, you will see that sometimes one of the behaviours gets lost in one, both, or neither of the clusters. Because in this iteration of our simulation there are no interactions between individuals of different clusters, we are essentially simulating two independent populations. You can see that this is the case when we start the simulation monomorphic clusters, i.e. all individuals in a cluster start with the same behaviour:
@@ -188,7 +192,8 @@ res <- migrationModel(NPOP=2, POPSIZE=50, NBEHAVIOUR=2, NTIMESTEPS=100)
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 As you can see, there is no interaction between the two clusters and the frequency of behaviour 1 remains unchanged. 
@@ -236,7 +241,8 @@ res <- migrationModel(NPOP=4, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRAT
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 Setting $\mu=1$, we find that the frequency of the behaviours become correlated as more and more individuals keep moving between the clusters. It is as if there were no clusters. 
@@ -246,7 +252,8 @@ res <- migrationModel(NPOP=4, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRAT
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 For rare migration, we can find occasional changes in the frequency but it usually bounces back again. 
@@ -256,7 +263,8 @@ res <- migrationModel(NPOP=4, POPSIZE=100, NBEHAVIOUR=2, NTIMESTEPS=1000, MIGRAT
 ggplot(res) + 
   geom_line(aes(x=time, y=freq, col=factor(cluster))) + 
   scale_y_continuous(limits=c(0,1)) + 
-  ylab("Relative frequency of behaviour 1")
+  ylab("Relative frequency of behaviour 1") + 
+  theme_bw()
 ```
 
 ## Varying the strength of migration for repeated simulation runs
@@ -279,7 +287,8 @@ repeatedRun <- do.call("rbind",
 ggplot(as.data.frame(repeatedRun)) + 
   geom_point(aes(x=V1, y=V2)) + 
   xlab("Frequency in cluster 1") + 
-  ylab("Frequency in cluster 2")
+  ylab("Frequency in cluster 2") + 
+  theme_bw()
 
 # return mean absolute difference of behaviour frequency between the two clusters
 mean(abs(repeatedRun[,1]-repeatedRun[,2]))
@@ -341,7 +350,8 @@ ggplot(repeatedRun) +
   geom_point(aes(x=migration, y=absdiff)) +
   geom_smooth(aes(x=migration, y=absdiff)) +
   xlab("Migration rate") + 
-  ylab("Average frequency difference between clusters") 
+  ylab("Average frequency difference between clusters") + 
+  theme_bw()
 ```
 
 When we plot the results (as a scatter-plot with an added loess trendline), we can see again for the case where there is no migration ($\mu=0$) the two clusters either have entirely the same (difference $=0$) or entirely different behaviours (difference $=1$). We can also see that for all migration probabilities there is a chance that both clusters will end up being monomorphic in their behaviour. Conversely, the probability that the two clusters are entirely different in their behaviour decreases as $\mu$ increases. It is also interesting to see that for the parameters we have chosen here this happens most dramatically for $\mu<0.25$. For larger values of $\mu$ the difference between the two clusters is on average $0$. This is what we would expect: when migration is high sub-populations are essentially becoming one large population again. Given enough time drift will lead to the fixation of one of the behaviours. 

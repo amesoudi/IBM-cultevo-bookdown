@@ -642,7 +642,7 @@ rand$network <- "random"
 
 res <- rbind(clu, rand)
 
-ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.9)
+ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.9) + theme_bw()
 ```
 
 For the simple contagion case we find very little differnce between the two network types. Let us now add the complex contagon case to the simulation:
@@ -706,7 +706,8 @@ res <- rbind(clu, rand)
 ggplot(res) + 
   stat_smooth(aes(x=round, y=frac, col=network, linetype=mode), size=.9, se=T) +
   ylab("Proportion of individuals with information") +
-  xlab("Round")
+  xlab("Round") + 
+  theme_bw()
 ```
 
 This figure tells us that, while there is no apparent difference in the spread of information in clustered and random networks for simple contagion, we find that information spreads faster in clustered networks if the transmission is akin to complex contagion. The reason for this is that in clustered networks an individual's neighbours are more likely to also be connected. This increases the likelihood that the neighbours also share the same information, and, in turn, increases the individual's exposure to this information. 
