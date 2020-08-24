@@ -1,4 +1,3 @@
-
 # Social learning of social learning rules
 
 In the models we explored so far, individuals decide whether to copy or not according to various rules, often called "transmission biases" in cultural evolution jargon. They may have a tendency to copy common traits, or to copy a subset of the population, or to prefer certain cultural traits with respect to others by virtue of their intrinsic characteristics, and so on. 

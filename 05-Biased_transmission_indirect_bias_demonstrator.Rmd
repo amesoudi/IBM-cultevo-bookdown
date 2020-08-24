@@ -1,4 +1,3 @@
-
 # Biased transmission: demonstrator-based indirect bias
 
 In the previous two chapters we examined two forms of biased transmission, one where the bias arises due to characteristics of the traits (or [direct bias][Biased transmission (direct bias)]) and another where the bias arises due to the characteristics of the population (or indirect bias). In the previous chapter we examined frequency-dependent indirect bias which takes into account the frequency of the trait (or [conformity][Biased transmission (indirect bias: frequency)]). Here we examine indirect bias that takes into account specific features of the demonstrators. This demonstrator-based bias is also called 'model bias' or 'context bias' in the cultural evolution literature.

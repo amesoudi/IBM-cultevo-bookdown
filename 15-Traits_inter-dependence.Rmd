@@ -1,4 +1,3 @@
-
 # Traits inter-dependence
 
 In real life, the relationship a cultural trait has with other, coexisting, cultural traits, is important to determine its success. Nails will enjoy much cultural success in a world where hammers are present, and less in a world where they are not. Being against abortion in contemporary US is strongly correlated to being religious, which, in turn, is (less strongly) correlated with not supporting same-sex marriage. Of course, not all these relationships are stable in time, and they can also be themselves subject to cultural change. In this chapter, we will explore how simple relationships between traits can be modeled, and how they can influence cultural evolution.

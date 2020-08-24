@@ -1,4 +1,3 @@
-
 # Multiple traits models
 
 In all previous models, individuals could possess one of only two cultural traits, $A$ or $B$. This is a useful simplification, and it represents cases in which cultural traits can be modeled as binary choices, such as voting Republican or Democrat, driving on the left or the right, or being vegetarian or meat-eating. In other cases, however, there are many options: in many countries there are multiple political parties to vote for, there may be many dietary choices (vegan, pescatarian, vegetarian, etc), and so on. What happens when we copy others' choices given more than two alternatives? To simplify this question, we again assume unbiased copying as in the [first chapter][Unbiased transmission]: all traits are functionally equivalent and other individuals are copied at random.

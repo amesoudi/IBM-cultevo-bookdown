@@ -1,4 +1,3 @@
-
 # Rogers' Paradox: A Solution
 
 In the previous chapter we saw how social learning does not increase the mean fitness of a population relative to a population entirely made up of individual learners, at least in a changing environment. This is colloquially known as Rogers' paradox, after Alan Rogers' model which originally showed this. It is a 'paradox' because it holds even though social learning is less costly than individual learning, and social learning is often argued to underpin our species' ecological success. The paradox occurs because social learning is frequency dependent: when environments change, the success of social learning depends on there being individual learners around to copy. Otherwise social learners are left copying each others' outdated behaviour.

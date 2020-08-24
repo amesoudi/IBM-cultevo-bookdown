@@ -1,4 +1,3 @@
-
 # Biased transmission: frequency-dependent indirect bias
 
 ## The logic of conformity 
