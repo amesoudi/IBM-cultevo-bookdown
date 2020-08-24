@@ -12,7 +12,7 @@ In Rogers' model there are $N$ individuals. Each individual has a fixed learning
 
 In each generation, individual learners directly sample the environment, and have a probability $p$ of acquiring the 'correct', adaptive behaviour that matches the environment (and therefore a probability $1-p$ of adopting the incorrect, maladaptive behaviour). Social learners choose a member of the previous generation at random and copy their behaviour, just like for unbiased transmission considered in Chapter 1.
 
-Unlike previous models, we are interested here not in the behaviours or traits, but in how the learning strategies evolve over time. We therefore want to track the proportion of social learners in the population, which we call $p.SL$ (with $1-p.SL$ being the proportion of individual learners). We assume these strategies are inherited (perhaps genetically, possibly culturally) from parent to offspring, and are affected by the fitness of the bearers of the strategies. Hence we need to specify fitness parameters.
+Unlike previous models, we are interested here not in the behaviours or traits, but in how the learning strategies evolve over time. We therefore want to track the proportion of social learners in the population, which we call $p_{SL}$ (with $1-p_{SL}$ being the proportion of individual learners). We assume these strategies are inherited (perhaps genetically, possibly culturally) from parent to offspring, and are affected by the fitness of the bearers of the strategies. Hence we need to specify fitness parameters.
 
 Each individual starts with a baseline fitness, $w$. This is typically set at 1, to avoid tricky-to-handle negative fitnesses. Individuals who have behaviour that matches the environment receive a fitness boost of $+b$. Individuals who have behaviour that does not match the environment receive a fitness penalty of $-b$. Explicit in the above verbal outline is that social learning is less costly than individual learning. Therefore, individual learners receive a fitness cost of $-b*c$, and social learners receive a fitness cost of $-b*s$, where $c>s$. For simplicity, we can set $s=0$ (social learning is free) and set $c>0$, so we only have to change one parameter.
 
@@ -22,7 +22,7 @@ We also assume some mutation during reproduction. With probability $mu$, the new
 
 Finally, Rogers was interested in the effect of environmental change. Each generation, there is a probability $u$ of the environment changing to a new state. In Rogers' original model, the environment flipped between the same two states, back and forth. However, this is problematic when environmental change is very fast, because an individual with out-dated behaviour can receive a fitness benefit if the environment flips back to the previous state. Hence we assume that when environments change, they change to a new value never previously experienced by any individual.
 
-This is a complex model but let's go step by step. First we create and initialise tibbles to store the output and the population of individuals, just like in previous chapters. The output here needs to be big enough to store data from $r_max$ runs and $t_max$ generations, like before. We then need to create NA placeholders for $p.SL$ (the proportion of social learners) and $W$ (the mean population fitness). The `population` dataframe stores the characteristics of the individuals: learning strategy ('individual' or 'social'), behaviour (initially all NA) and fitness (initially all NA). Finally, we initialise the environment $E$ at zero, which will subsequently increment.
+This is a complex model but let's go step by step. First we create and initialise tibbles to store the output and the population of individuals, just like in previous chapters. The output here needs to be big enough to store data from $r_{max}$ runs and $t_{max}$ generations, like before. We then need to create NA placeholders for $p_{SL}$ (the proportion of social learners) and $W$ (the mean population fitness). The `population` dataframe stores the characteristics of the individuals: learning strategy ('individual' or 'social'), behaviour (initially all NA) and fitness (initially all NA). Finally, we initialise the environment $E$ at zero, which will subsequently increment.
 
 ```{r 8.1, message = FALSE}
 
@@ -59,7 +59,7 @@ if (sum(population$learning == "social") > 0) {
 
 ```
 
-The following code implements individual learning. This *does* apply to the first generation. We first create a vector of TRUE and FALSE values dependent on $p$, the probability of individual learning resulting in a correct match with the environment. With this probability, individual learners have their behaviour set to the correct $E$ value. Otherwise, they are given the incorrect behaviour $E-1$. Note the use of the ! before $learn_correct$ to give a match when this vector is FALSE (i.e. they do *not* learn the correct behaviour). Run this and check that the behaviour column of the population tibble changes.
+The following code implements individual learning. This *does* apply to the first generation. We first create a vector of TRUE and FALSE values dependent on $p$, the probability of individual learning resulting in a correct match with the environment. With this probability, individual learners have their behaviour set to the correct $E$ value. Otherwise, they are given the incorrect behaviour $E-1$. Note the use of the ! before `learn_correct` to give a match when this vector is FALSE (i.e. they do *not* learn the correct behaviour). Run this and check that the behaviour column of the population tibble changes.
 
 ```{r 8.3}
 
@@ -93,8 +93,7 @@ population$fitness[population$learning == "individual"] <- population$fitness[po
 population$fitness[population$learning == "social"] <- population$fitness[population$learning == "social"] - b*s 
 
 ```
-
-The fourth stage is recording the resulting data into the output tibble. Ultimately this will be put into a position indexed by a generation ($t$) loop and a run ($r$) loop, but here we create dummy $t$ and $r$ values for illustration. First we calculate $p.SL$ as the number of social learners divided by the total population size. Then we calculate $W$, the mean fitness in the entire population. All of these are done with the standard R mean command. 
+The fourth stage is recording the resulting data into the output tibble. Ultimately this will be put into a position indexed by a generation ($t$) loop and a run ($r$) loop, but here we create dummy $t$ and $r$ values for illustration. First we calculate $p_{SL}$ as the number of social learners divided by the total population size. Then we calculate $W$, the mean fitness in the entire population. All of these are done with the standard R mean command. 
 
 ```{r 8.5}
 
@@ -108,7 +107,7 @@ output[output$generation == t & output$run == r, ]$W <- mean(population$fitness)
 
 The fifth stage is reproduction. Here we put the current population tibble into a new tibble, called previous_population, as we have done before. This acts as both a record to now calculate fitnesses, as well as a source of demonstrators for the social learning stage we covered above. After doing this, we reset the behaviour and fitness of the current population. We then over-write the learning strategies based on fitness.
 
-First we get $fitness_IL$, the fitness of individual learners relative to the fitness of the entire population (assuming there are any individual learners, otherwise we set this to zero). This then serves as the probability of setting $produce_IL$ to TRUE. We do something similar with $mutation$, denoting the probability of an individual mutating their learning strategy. Finally, we have four statements for all combinations of inherited learning strategy and mutation: if an individual inherits an individual learning strategy and does not mutate, they are an individual learner; if they inherit a social learning strategy and do not mutate, they are a social learner; if they inherit individual learning and mutate, they are a social learner; and if they inherit social learning and mutate, they are an individual learner. 
+First we get $fitness_{IL}$, the fitness of individual learners relative to the fitness of the entire population (assuming there are any individual learners, otherwise we set this to zero). This then serves as the probability of setting $produce_{IL}$ to TRUE. We do something similar with $mutation$, denoting the probability of an individual mutating their learning strategy. Finally, we have four statements for all combinations of inherited learning strategy and mutation: if an individual inherits an individual learning strategy and does not mutate, they are an individual learner; if they inherit a social learning strategy and do not mutate, they are a social learner; if they inherit individual learning and mutate, they are a social learner; and if they inherit social learning and mutate, they are an individual learner. 
 
 ```{r 8.6}
 
@@ -252,7 +251,7 @@ data_model <- rogers_model(N = 1000, t_max = 500, r_max = 10, c = 0.9, mu = 0.01
 
 ```
 
-You can inspect the data_model tibble, but so much data is hard to make sense of. Let's write plotting functions like in previous chapters. First we can plot $p.SL$, the frequency of social learners. This is similar to the plots in previous chapters, but instead of plotting each run as a different colour, we plot them in grey, to show the range across runs as well as the mean.
+You can inspect the data_model tibble, but so much data is hard to make sense of. Let's write plotting functions like in previous chapters. First we can plot $p_{SL}$, the frequency of social learners. This is similar to the plots in previous chapters, but instead of plotting each run as a different colour, we plot them in grey, to show the range across runs as well as the mean.
 
 ```{r 8.10}
 
