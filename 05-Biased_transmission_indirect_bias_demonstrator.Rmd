@@ -219,12 +219,6 @@ We also saw how it is important to modify the output of a model depending on the
 
 ***
 
-## Analytical appendix
-
-IS THERE ANYHTIHG WE CAN DO HERE?
-
-***
-
 ## Further readings
 
 Examples of simulation models implementing indirect, demonstrator-based, biased transmission include @mesoudi_cultural_2009, an individual-based model that explores how prestige bias can generate clusters of recurring behaviours, applied to the case of copycat suicides. @henrich_joseph_big_2015 presents a population-level model that links prestige to the emergence of whithin-group cooperation. @henrich_demography_2004 describes an analytical, population-level, model, where individuals copy the most succesfull demonstrator in the population.  

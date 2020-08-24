@@ -207,5 +207,3 @@ Todo, or omit. Equations are in Cavalli-Sforza & Feldman chapters on vertical & 
 
 The above models are based on those by @cavalli-sforza_cultural_1981. Their vertical cultural transmission models feature bias parameters for each combination of matings ($b_0$, $b_1$, $b_2$ and $b_3$); our $b$ is their $b_1$ and $b_2$. Their horizontal transmission model also features $n$ and $g$, which have the same definitions as here. Subsequent models in that volume examine assortative cultural mating and oblique transmission, although the latter is similar to horizontal transmission.
 
-Empirically, there is a large literature trying to identify the relative roles of parents and non-parents on beliefs and behaviour. @harris_where_1995 argued that parents have little influence on their children beyond keeping them alive and passing on genes. @aunger_life_2000 and @henrich_nature_2011 argue for a 2-stage process, with children initially learning from parents, and then updating that knowledge in adolescence and adulthood by learning from successful others.
-

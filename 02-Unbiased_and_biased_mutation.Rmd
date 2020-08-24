@@ -7,15 +7,11 @@ Evolution doesn't work without a source of variation that introduces new variati
 
 First, we will simulate unbiased mutation in the same basic model as used in the previous chapter. We'll remove unbiased transmission to see the effect of unbiased mutation alone. 
 
-As in the previous model, we assume $N$ individuals each of whom possesses one of two non-overlapping cultural traits, denoted $A$ and $B$. In each generation, from $t = 1$ to $t = t_{\text{max}}$, the $N$ individuals are replaced with $N$ new individuals. Instead of random copying, each individual now gives rise to a new individual with the same cultural trait as them. (Another way of looking at this is in terms of timesteps, such as years: the same $N$ individual live for $t_{\text{max}}$ years and keep their cultural trait from one year to the next.)
+As in the previous model, we assume $N$ individuals each of whom possesses one of two discrete cultural traits, denoted $A$ and $B$. In each generation, from $t = 1$ to $t = t_{\text{max}}$, the $N$ individuals are replaced with $N$ new individuals. Instead of random copying, each individual now gives rise to a new individual with the same cultural trait as them. (Another way of looking at this is in terms of timesteps, such as years: the same $N$ individual live for $t_{\text{max}}$ years and keep their cultural trait from one year to the next.)
 
 At each generation, however, there is a probability $\mu$ that each individual mutates from their current trait to the other trait (the Greek letter Mu is the standard notation for the mutation rate in genetic evolution, and it has an analogous function here). For example, vegetarian individuals can decide to eat animal products, and vice versa. Remember, this is not copied from other individuals, as in the previous model, but can be thought of as an individual decision. Another way to see this is that the probability of changing trait applies to each individual independently; whether an individual mutates has no bearing on whether or how many other individuals have mutated. On average, this means that $\mu N$ individuals mutate each generation. Like in the previous model, we are interested in tracking the proportion $p$ of agents with trait $A$ over time.
 
 We'll wrap this in a function called `unbiased_mutation()`, using much of the same code as `unbiased_transmission_3()`. As before, we need to call the tidyverse library and set a seed for the random number generator, so the results will be the same each time we rerun the code. Of course, if you want to see the stochasticity inherent in the simulation, you can remove the set.seed command, or set it to a different number.
-
-<!-- AA 24/07/2020 I had to add "as.numeric" when defining the output data structure to make the code 
-compile. Otherwise it considered it logical and it was giving an error when assigning to it 
-sum(population$trait == "A") / N. This must be something that changed with the more recent version of the tidyverse. This may need to be changed everywhere. -->
 
 ```{r 2.1, message = FALSE}
 library(tidyverse)

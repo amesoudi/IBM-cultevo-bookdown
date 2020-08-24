@@ -239,11 +239,11 @@ plot_multiple_traits_matrix(data_model)
 end_time - start_time
 ```
 
-The results are equivalent, but the simulation is almost 100 times faster! This shows that implementation details are very important when building individual based models. When one needs to run the same simulation many times, or test many different parameter values, implementation choices can make drastic differences.
+The results are equivalent, but the simulation should be hundreds of times faster! This shows that implementation details are very important when building individual based models. When one needs to run the same simulation many times, or test many different parameter values, implementation choices can make drastic differences.
 
 ## The distribution of popularity
 
-An interesting aspect of these simulations is that, even if all traits are functionally equivalent and transmission is unbiased, a few traits, for random reasons, are more successful than the others. A way to visualise this is to plot their cumulative popularity, i.e. the sum of their quantities over all generations. Given our matrix, it is easy to calculate this by summing each column and multiplying by *N* (remember they are frequencies, whereas now we want to visualise their actual quantities). We also need to keep only the values that are higher than zero: values equal to zero are in fact the empty slots created in the initial matrix that were never filled wiht actual traits.
+An interesting aspect of these simulations is that, even if all traits are functionally equivalent and transmission is unbiased, a few traits, for random reasons, are more successful than the others. A way to visualise this is to plot their cumulative popularity, i.e. the sum of their quantities over all generations. Given our matrix, it is easy to calculate this by summing each column and multiplying by *N* (remember they are frequencies, whereas now we want to visualise their actual quantities). We also need to keep only the values that are higher than zero: values equal to zero are in fact the empty slots created in the initial matrix that were never filled with actual traits.
 
 ```{r 7.17}
 cumulative <- colSums(data_model) * N 

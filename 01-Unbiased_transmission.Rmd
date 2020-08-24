@@ -71,7 +71,7 @@ output$p[1] <- sum(population$trait == "A") / N
 output
 ```
 
-This first value of $p$ is 0.51, meaning that 51 individuals have trait $A$, and 49 have trait $B$. Even though `sample()` returns either trait with equal probability, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, re-run the above code with different values of the random number seed.
+This first value of $p$ should be around $0.5$, meaning that around 50 individuals have trait $A$, and 50 have trait $B$. Even though `sample()` returns either trait with equal probability, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, re-run the above code with different values of the random number seed.
 
 ## Execute generation turn-over many times
 
@@ -114,9 +114,8 @@ ggplot(data = output, aes(y = p, x = generation)) +
   theme_bw() +
   labs(y = "p (proportion of individuals with trait A)")
 ```
-<!-- This descriptions depend on the random generation. This changes with different R version, so we need to change it -->
 
-The proportion of individuals with trait $A$ starts off hovering around 0.5, and after around 120 generations drops to 0. Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code, trying different seeds of the random number generator, you will get something different. In all likelihood, $p$ might go to 0 or 1 at some point. At $p = 0$ there are no $A$s and every individual possesses $B$. At $p = 1$ there are no $B$s and every individual possesses $A$. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance after some generations.
+The proportion of individuals with trait $A$ should start off hovering around 0.5, and then oscillating randomly (it may be, in some cases, also reach 0, meaning that all $A$s disappeared, or 1, meaning that all $B$s disappeared).  Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code, trying different seeds of the random number generator, you will get something different. In all likelihood, $p$ might go to 0 or 1 at some point. At $p = 0$ there are no $A$s and every individual possesses $B$. At $p = 1$ there are no $B$s and every individual possesses $A$. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance after some generations.
 
 ## Write a function to wrap the model code
 
@@ -168,7 +167,7 @@ At this point, we can visualise the results:
 plot_single_run(data_model)
 ```
 
-As anticipated, the plot is different from the simulation we ran before, even though the code is exactly the same. This is due to the stochastic nature of the simulation. Assuming you haven't changed the set.seed value earlier, this time trait $A$ reaches a frequency of 1, meaning that all individuals have it, and trait $B$ has disappeared.
+As anticipated, the plot is different from the simulation we ran before, even though the code is exactly the same. This is due to the stochastic nature of the simulation. 
 
 Now let's try changing the parameters. We can call the simulation and the plotting functions together. The code below reruns and plots the simulation with a much larger $N$.
 
@@ -184,10 +183,6 @@ You should see much less fluctuation. Rarely in a population of $N = 10000$ will
 Wrapping a simulation in a function like this is good because we can easily re-run it with just a single command. However, it's a bit laborious to manually re-run it. Say we wanted to re-run the simulation 10 times with the same parameter values to see how many times $A$ goes to fixation, and how many times $B$ goes to fixation. Currently, we'd have to manually run the `unbiased_transmission_1()` function 10 times and record somewhere else what happened in each run. It would be better to automatically re-run the simulation several times and plot each run as a separate line on the same plot. We could also add a line showing the mean value of $p$ across all runs.
 
 Let's use a new parameter $r_{\text{max}}$ to specify the number of independent runs, and use another for-loop to cycle over the $r_{\text{max}}$ runs. Let's rewrite the `unbiased_transmission_1()` function to handle multiple runs. We will call the new function `unbiased_transmission_2()`.
-
-<!-- AA 24/07/2020 I had to add "as.numeric" when defining the output data structure to make the code 
-compile. Otherwise it considered it logical and it was giving an error when assigning to it 
-sum(population$trait == "A") / N. This must be something that changed with the more recent version of the tidyverse. This may need to be changed everywhere. -->
 
 ```{r 1.14}
 unbiased_transmission_2 <- function(N, t_max, r_max) {
@@ -224,7 +219,7 @@ The plotting function is also changed to handle multiple runs:
 plot_multiple_runs <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
     geom_line(aes(colour = run)) +
-    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    stat_summary(fun = mean, geom = "line", size = 1) +
     ylim(c(0, 1)) +
     theme_bw() +
     labs(y = "p (proportion of individuals with trait A)")
@@ -329,8 +324,6 @@ Second, the smaller the population size, the more likely traits are to be lost b
 Furthermore, generating expectations about cultural change under simple assumptions like random cultural drift can be useful for detecting non-random patterns like selection. If we don't have a baseline, we won't know selection or other directional processes when we see them.
 
 We also have introduced several programming techniques that will be useful in later simulations. We have seen how to use tibbles to hold characteristics of individuals and the outputs of simulations, how to use loops to cycle through generations and simulation runs, how to use `sample()` to pick randomly from sets of elements, how to wrap simulations in functions to easily re-run them with different parameter values, and how to use `ggplot()` to plot the results of simulations.
-
-***
 
 ## Analytical appendix
 

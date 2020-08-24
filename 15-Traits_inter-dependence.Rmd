@@ -100,7 +100,7 @@ Two of the four traits diffuse in the population. We can check whether these are
 data_model[data_model$generation==1000,]
 ```
 
-They are indeed trait C and D. If you run the simulation again and again the results are likely to change, with sometime A and B being the successful traits, but it will be practically impossible that one or three traits will be successful, with this "world" of compatibilities. 
+Depending on random factors, the successful traits will be A and B or C and D. If you run the simulation again and again you would see that in around half of the simulations A and B are the successful traits, and in another half C and D are, but it will be practically impossible that one or three traits will be successful, with this "world" of compatibilities. 
 
 What happens if we change the world? We can run a new simulation where the traits A, B, and C are all compatible, but not D (remember, you can visualise the matrix of compatibilities by typing its name to be sure to have entered the compatibilities correctly).
 
@@ -211,7 +211,7 @@ data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, m
 plot_multiple_traits_matrix(data_model)
 ```
 
-The simulation generates a complex dynamic in which some of the traits spread in the population, while others do not. The success of a trait depends on its general compatibility with other traits but also on which traits are present at a certain point in time in the population. Some traits (see, for example, the trait starting to grow in popularity after around 1,500 time steps in the plot above) succeed to spread only after the traits they are compatible with have sufficiently spread in the population. 
+The simulation generates a complex dynamic in which some of the traits spread in the population, while others do not. The success of a trait depends on its general compatibility with other traits but also on which traits are present at a certain point in time in the population. Some traits succeed to spread only after the traits they are compatible with have sufficiently spread in the population. 
 
 Let's change $\gamma$ to be $1$, i.e. when all traits are compatible with each other.
 
@@ -230,7 +230,7 @@ Finally, we store the number of successful traits at the end of the simulation, 
 
 ```{r 15.14}
 r_max = 10
-test_inter_dependence <- tibble(gamma = rep(seq(0, 1, by = .1), r_max), run = as.factor(rep(1:r_max, each = 11)), C = as.numeric(NA))
+test_inter_dependence <- tibble(gamma = as.factor(rep(seq(0, 1, by = .1), r_max)), run = as.factor(rep(1:r_max, each = 11)), C = as.numeric(NA))
 for(condition in seq(0, 1, by = .1)){
   for(r in 1:r_max) {
     data_model <- traits_inter_dependence_2(N = 100, M = 20, t_max = 2000, k = 10, mu = 0.001, p_death = 0.01, gamma = condition)
@@ -239,13 +239,12 @@ for(condition in seq(0, 1, by = .1)){
 }
 ```
 
-To plot the results, we use `geom_jitter()`, another ggplot 'geom' that adds a small amount of random variation to the location of each point in the x and y dimension of the plot (indicated by values to the `width` and `height` argument). In our case, we want a small sideways variation, i.e. the width. This is useful to show data points that would otherwise overlap. We also use the usual `stat_summary()` to plot the mean of the data in red. 
+To plot the results, we combine boxplots and `geom_jitter()` so we can see the actual data points. `geom_jitter()` is another ggplot 'geom' that adds a small amount of random variation to the location of each point in the x and y dimension of the plot (indicated by values to the `width` and `height` argument). In our case, we want a small sideways variation, i.e. the width. This is useful to show data points that would otherwise overlap.
 
 ```{r 15.15}
 ggplot(data = test_inter_dependence, aes(x = gamma, y = C)) +
-  geom_jitter(width = 0.01, height = 0, alpha = 0.5) +
-  stat_summary(fun.y = mean, geom = "point", colour = "red") +
-  stat_summary(fun.y = mean, geom = "line", colour = "red") +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, height = 0, alpha = 0.5) +
   theme_bw() +
   labs(x = "Average compatibility", y = "C (number of common traits)")
 ```
