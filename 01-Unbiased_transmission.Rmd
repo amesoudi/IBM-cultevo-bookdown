@@ -27,11 +27,10 @@ Now we need to create our individuals. The only information we need to keep abou
 
 Initially, we'll give each individual either an $A$ or $B$ at random, using the `sample()` command. This can be seen in the code chunk below. The `sample()` command takes three arguments (i.e. inputs or options). The first argument lists the elements to pick at random, in our case, the traits $A$ and $B$. The second argument gives the number of times to pick, in our case $N$ times, once for each individual. The final argument says to replace or reuse the elements specified in the first argument after they've been picked (otherwise there would only be one copy of $A$ and one copy of $B$, so we could only give two individuals traits before running out). Within the tibble command, the word $trait$ denotes the name of the variable within the tibble that contains the random $A$s and $B$s, and the whole tibble is assigned the name **population**.
 
-There are two lines before `sample()` in the chunk below. First, we need to call the `tidyverse` library. We will use this throughout the chapter. Here, it allows us to create a tibble using the tibble command. Second, we use the function `set.seed()` to set the seed of the random number generator. This ensures that the results shown in the book are the same you obtain in your session. The number $111$ has no special meaning. You can replace it with any other number and you will see how the traits of the individuals will be created differently.
+There are one line before `sample()` in the chunk below. First, we need to call the `tidyverse` library. We will use this throughout the chapter. Here, it allows us to create a tibble using the tibble command. 
 
 ```{r 1.2, message = FALSE}
 library(tidyverse)
-set.seed(111)
 population <- tibble(trait = sample(c("A", "B"), N, replace = TRUE))
 ```
 
