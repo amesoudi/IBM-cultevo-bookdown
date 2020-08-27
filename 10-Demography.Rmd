@@ -3,18 +3,21 @@
 
 # Demography
 
-In the previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have also seen the importance of the characteristics of individuals (e.g. for success and prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how: population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.
+*In the previous chapters, we have looked at the transmission of information between individuals. We have seen that relatively simple mechanisms at the individual level can lead to population-level outcomes (e.g. the fixation of a rare cultural trait). We have also seen the importance of the characteristics of individuals (e.g. for success and prestige bias) in cultural processes. What we have not yet looked at is how the characteristics of the population may affect the outcome of cultural dynamics. In the following three chapters we will have a closer look at how: population size (demography), population structure (social networks), and group structured populations (with migration) can influence cultural evolution.*
 
-To start, why would demography matter to cultural evolution? As long as information is transmitted among individuals and between generations, the size of the population should not play a role. In theory, this statement is true but it relies on a crucial assumption: information transfer is not only complete (all information from the previous generation is transmitted to the next generation) but also error-free. However, from many lab experiments, we know that copying information is an error-prone process. In this chapter, we will look at how those errors affect information accumulation and how population size is augmenting this process. 
+Why would demography matter to cultural evolution? As long as information is transmitted among individuals and between generations, the size of the population should not play a role. In theory, this statement is true but it relies on a crucial assumption: information transfer is not only complete (all information from the previous generation is transmitted to the next generation) but also error-free. However, from many lab experiments, we know that copying information is an error-prone process. In this chapter, we will look at how those errors affect information accumulation and how population size is augmenting this process. 
 
 Several studies have looked at population effects. @shennan_demography_2015 provide a good overview of a variety of approaches and questions. For example, in their model, @ghirlanda_sustainability_2010, investigate the interplay between cultural innovations and cultural loss. While it would be trivial to say that culture accumulates where the rate of cultural innovation is higher than the rate of cultural loss, this model allows for two additional complicating mechanisms: (1) it lets innovations affect carrying capacity (and so the number of innovators), and (2) it allows trait corruption (i.e. a trait that was adaptive before can become maladaptive later, e.g. because it allows the over-exploitation of a resource). 
 
-Another well-known study is that by Joseph @henrich_demography_2004. His model takes inspiration from the archaeological record of Tasmania, which shows a deterioration of some and the persistence of other cultural traits after Tasmania was cut-off from Australia at the end of the last ice age. Henrich develops a compelling analytical model to show that the same adaptive processes in cultural evolution can result in the improvement and retention of simple skills but also the deterioration and even loss of complex skills. 
+Another well-known study is that by Joseph @henrich_demography_2004. His model takes inspiration from the archaeological record of Tasmania, which shows a deterioration of some and the persistence of other cultural traits after Tasmania was cut-off from Australia at the end of the last ice age. Henrich develops a compelling analytical model to show that the same adaptive processes in cultural evolution can result in the improvement and retention of simple skills but also the deterioration and even loss of complex skills. In the following section we will take a closer look at this model.
 
-The principle idea is the following: information transmission from one generation to another (or from one individual to another, here it does not make a difference) has a random component (error rate) that will lead to most individuals failing to achieve the same skill level as their cultural model, whereas a few will match and - even fewer - exceed that skill level. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their cultural model. These 'new masters' will become the cultural models of the next generation. Fig. \@ref(fig:henrichGumbel) is showing this principle. 
+## Background on demography-mediated cultural loss
+
+The principle idea of this model is the following: information transmission from one generation to another (or from one individual to another, here it does not make a difference) has a random component (error rate) that will lead to most individuals failing to achieve the same skill level (denoted with $z$) as their cultural model, whereas a few will match and - even fewer - exceed that skill level. Imagine a group of students who try to acquire the skills to manufacture a spear. As imitation is imperfect, and memorising and recalling action sequences is error-prone some students will end up with a spear that is inferior to the one of their cultural model. A few individuals might achieve a similar or even higher skill level than their cultural model. These 'new masters' will become the cultural models of the next generation. Fig. \@ref(fig:henrichGumbel) is showing this principle. 
 
 ```{r henrichGumbel, fig.cap="Shown are the probability distributions to acquire a specific skill level for two different skills (one that is easy to learn and one that is more complex and therefore harder to learn). Given that learning is error-prone more individuals will acquire a skill level that is lower than that of a cultural model (its level is indicated by the vertical dashed line) through imitation (left of the dashed line). A few individauls will achieve higher skill levels (right of the dashed line). For the complex skill the probability to be above the skill level of the cultural model is lower (smaller area under the curve) than for simple skills.", message=FALSE, warning=FALSE}
 library(extraDistr)
+library(tidyverse)
 data <- tibble(skill = rep(c("simple","complex"), each=6000),
                    z = c(rgumbel(n=6000, mu=-7, sigma=2),
                          rgumbel(n=6000, mu=-9, sigma=2)))
@@ -29,6 +32,8 @@ ggplot(data, aes(x=z, col=skill)) +
 ```
 
 Given that the new skill level is essentially drawn from a probability distribution around the value of the individual that is imitated, the new average skill value of the population will not only depend on how frequent and severe copying errors are (that is, how skewed the distribution is to the right) but also on how many individuals try to imitate. The smaller the pool of imitators, the fewer individuals will achieve a higher skill level and so, over time the skill will deteriorate. Henrich provides an analytical model to explain how societies below a critical size (of cultural learners) might lose complex (or even simple) cultural traits over time. We will attempt to re-create his results using an individual-based model. 
+
+## The Tasmania case model
 
 We begin with a very simple learning loop. We have a population of $N=1000$ individuals, each with a skill level $z$ for a particular skill (which we initiate with random values drawn from a uniform distribution, $U(0,1)$). The average skill level is $\bar{z}$. We want to calculate what the new average skill level is after all individuals attempt to imitate the most successful individual (the one where $z$ is the largest). Each individual then receives a new $z$-value that is drawn from a Gumbel distribution (which we can get from the `extraDistr` package). This distribution is controlled by two values, $\mu$ (location) and $\beta$ (scale). To model imperfect imitation, we can vary $\beta$ and we can subtract an amount $\alpha$ from $\mu$. If learning was perfect $\alpha$ and $\beta$ would be zero. If something is easy to learn, $\alpha$ is small (and large if it is hard to learn). If people make very similar mistakes, $\beta$ is small (and large if people make widely different mistakes). Once we have drawn new values for $z$, we calculate the average change in $z$, $\Delta \bar{z}$, and then replace the original $z$-values to restart the loop. 
 
@@ -69,13 +74,13 @@ plot(zbar, type="l", xlab="time", ylab="change in z")
 abline(h=mean(zbar), col="grey")
 ```
 
-We find that $\Delta \bar z$ quickly plateaus at about `r round(mean(zbar),2)` (grey horizontal line in plot). On average the population would improve this skill over time. 
+We find that $\Delta \bar z$ quickly plateaus at about `r round(mean(zbar),2)` (grey horizontal line in the previous plot). On average the population would improve this skill over time (as this value is positive). 
 
 Let us now write a function that can perform this loop repeatedly and average $\Delta \bar z$ over all those repetitions to receive a more stable result. 
 
 ```{r}
 demography_model <- function(R, N, alpha, beta, repeats){
-  res <- lapply(1:repeats, function(r){
+  res <- lapply(1:reps, function(REPS){
     z <- runif(n=N, min=0, max=1)
     zbar <- rep(NA, R)
     for(r in 1:R){
@@ -89,22 +94,22 @@ demography_model <- function(R, N, alpha, beta, repeats){
 }
 ```
 
-With this function, we can now run the simulation repeatedly for a single set of parameters, an get a more precise value:
+In the previous code section, we use a new function, `lapply()`. There is a series of apply functions in $R$ that 'apply' a function to a given data structure. Generally, these functions take an argument `X` (a vector or a list of elements) and then apply a function `FUN` to all elements. In our case, we want to execute our simulation $r$ times (whereby $r$ stands for the number of repetitions). Alternatively, we could use an outer `for` loop (over all repetitions, `reps`) around the inner `for` loop (over all rounds `R`). The problem with this latter approach is that nested loops (like any looped execution) happen sequentially. Thus, the third repetition of our simulation will not be executed before the first and the second simulation have completed. With an apply function, each simulation can be executed independent from each other (using parallel computing) and so speeding up the calculation. We initiate the `lapply()` function with a vector (here, `1:reps`), which indiciates the number individual runs. Then we define the function that we want to execute. We need to make sure to return the averaged $\bar z$ at the end of the function. The `lapply()` function then returns a list of all $\bar z$ values. To calculate the average across all of these values, we first need to turn the `list` back into a vector, which we can do using the `unlist()` function. 
 
-```{r, cache=TRUE}
-demography_model(R=5000, N=1000, alpha=7, beta=1, repeats=10)
-```
+With the `demography_model()` function, we can easily run our simulation repeatedly for a single set of parameters (e.g. by running `demography_model(R=5000, N=1000, alpha=7, beta=1, repeats=10)`). 
 
-Now, we have everything we need to run simulations for different population sizes. We will also run it for two different skill complexities: simple ($\alpha/\beta=7$) and complex ($\alpha/\beta=9$). 
+In the next step, let us use the function to run simulations for different population sizes, as well as for two different skill complexities: simple ($\alpha/\beta=7$) and complex ($\alpha/\beta=9$). 
 
 ```{r, cache = TRUE}
 sizes <- c(2, seq(100,6100,by=250))
 res <- lapply(sizes, demography_model, R=200, alpha=7, beta=1, repeats=20)
 res2 <- lapply(sizes, demography_model, R=200, alpha=9, beta=1, repeats=20)
-df <- data.frame(N = sizes, zbar = c(unlist(res), unlist(res2)), trait=rep(c("simple","complex"), each=length(sizes)))
+df <- tibble(N    = rep(sizes, 2), 
+             zbar = c(unlist(res), unlist(res2)), 
+             trait=rep(c("simple","complex"), each=length(sizes)))
 ```
 
-In the last line of this chunk, we have created a data.frame with the results for both skills and the different population sizes. Now, we can plot the results. 
+Note, that we are again using `lapply()` here. Similar to what we do within `demography_model()`, we provide an argument (different population `sizes`) which should be applied to a function (here, `demography_model`). Arguments that follow the function description are directly handed over to the function. In the last line of this chunk, we have created a `tibble` with the results for both skills and the different population sizes. Now, we can plot the results. 
 
 ```{r effectivePopSize, fig.cap="The effect of population size on the average change in skill level in the population."}
 library(ggplot2)
@@ -147,7 +152,7 @@ res <- do.call("rbind", lapply(seq(4,9,.5), function(alpha){
   tmp_z <- unlist(lapply(X=sizes, FUN=demography_model, R=200, alpha=alpha, beta=1, repeats=5))
   fit <- lm(tmp_z ~ log(sizes))
   n_star <- exp(solve(coef(fit)[-1], -coef(fit)[1]))
-  data.frame(n_star=n_star, alpha=alpha)
+  tibble(n_star=n_star, alpha=alpha)
 }))
 res
 ```
@@ -158,7 +163,7 @@ And finally, we can print the critical population sizes as a function of the tra
 ggplot(res, aes(x=alpha, y=n_star)) + 
   geom_line() + 
   xlab(expression(alpha/beta)) +
-  ylab("N*") + 
+  ylab("Critical populaton size, N*") + 
   theme_bw()
 ```
 
@@ -171,7 +176,7 @@ Similar to the model in the chapter on Rogers' paradox, the present model is ver
 
 ***
 
-## Analytical appendix and further readings
+## Analytical model and further readings
 
 It is important to note that Henrich's paper provides an analytical model, which can give precise results without the need for modelling learning. The paper is well worth a read as it explains this analytical approach in clear terms. 
 
