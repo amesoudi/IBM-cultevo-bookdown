@@ -18,7 +18,6 @@ The following function `vertical_transmission()` is very similar to previous sim
 
 ```{r 6.1, message=FALSE}
 library(tidyverse)
-set.seed(111)
 
 vertical_transmission <- function(N, p_0, b, t_max, r_max) {
   output <- tibble(generation = rep(1:t_max, r_max), p = as.numeric(rep(NA, t_max * r_max)), run = as.factor(rep(1:r_max, each = t_max)))
@@ -48,7 +47,7 @@ vertical_transmission <- function(N, p_0, b, t_max, r_max) {
       }
       
       if (anyNA(population)) {  # if any empty NA slots (i.e. one A and one B parent) are present...
-        population[is.na(population),]$trait <- sample(c("A", "B"), sum(is.na(population)), prob = c(b, 1 - b), replace = TRUE)
+        population[is.na(population)[,1],]$trait <- sample(c("A", "B"), sum(is.na(population)), prob = c(b, 1 - b), replace = TRUE)
         # ...make them A with probability b
       }
       
@@ -74,7 +73,7 @@ Once all generations are finished, we export the `output` tibble as our data. We
 plot_multiple_runs <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
     geom_line(aes(colour = run)) +
-    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    stat_summary(fun = mean, geom = "line", size = 1) +
     ylim(c(0, 1)) +
     theme_bw() +
     labs(y = "p (proportion of individuals with trait A)")
@@ -83,14 +82,14 @@ plot_multiple_runs <- function(data_model) {
 
 And now run both functions to see what happens. Remember we are interested in how fast the favoured trait spreads, so let's start it off at a low frequency ($p_0=0.01$) so we can see it spreading from rarity. We use a small transmission bias $b=0.6$ favouring $A$.
 
-```{r 6.3}
+```{r 6.3, fig.cap = "The favourite trait, A, spreads in the population under vertical transmission."}
 data_model <- vertical_transmission(N = 10000, p_0 = 0.01, b = 0.6, t_max = 50, r_max = 5)
 plot_multiple_runs(data_model)
 ```
 
 Here we can see a gradual spread of the favoured trait $A$ from $p=0.01$ to $p=1$. As in our [directly biased transmission model][Biased transmission: direct bias], the diffusion curve is s-shaped. To obtain the same result with two different models is encouraging! We can also test our prediction that when $b=0.5$, we recreate our unbiased transmission model from [Chapter 1][Unbiased transmission]:
 
-```{r 6.4}
+```{r 6.4, fig.cap = "When no trait is favoured, there is no change in the frequency of trait A under vertical transmission."}
 data_model <- vertical_transmission(N = 10000, p_0 = 0.1, b = 0.5, t_max = 50, r_max = 5)
 plot_multiple_runs(data_model)
 ```
@@ -135,7 +134,7 @@ vertical_horizontal_transmission <- function(N, p_0, b, n, g, t_max, r_max) {
       }
       
       if (anyNA(population)) {  # if any empty NA slots (i.e. one A and one B parent) are present...
-        population[is.na(population),]$trait <- sample(c("A", "B"), sum(is.na(population)), prob = c(b, 1 - b), replace = TRUE)
+        population[is.na(population)[,1],]$trait <- sample(c("A", "B"), sum(is.na(population)), prob = c(b, 1 - b), replace = TRUE)
         # ...make them A with probability b
       }
       
@@ -170,7 +169,7 @@ The first part of this code is identical to `vertical_transmission`. Then there 
 
 Running horizontal transmission with $n=5$ and $g=0.1$ and without vertical transmission bias ($b=0.5$) causes, as expected, $A$ to spread.
 
-```{r 6.6}
+```{r 6.6, fig.cap = "The favourite trait, A, spreads in the population under horizontal transmission."}
 data_model <- vertical_horizontal_transmission(N = 5000, p_0 = 0.01, b = 0.5, n = 5, g = 0.1, t_max = 50, r_max = 5)
 plot_multiple_runs(data_model)
 ```
@@ -181,8 +180,17 @@ This plot above confirms that horizontal cultural transmission, with some direct
 data_model_v <- vertical_horizontal_transmission(N = 5000, p_0 = 0.01, b = 0.6, n = 0, g = 0, t_max = 50, r_max = 5)
 data_model_hn2 <- vertical_horizontal_transmission(N = 5000, p_0 = 0.01, b = 0.5, n = 2, g = 0.1, t_max = 50, r_max = 5)
 data_model_hn5 <- vertical_horizontal_transmission(N = 5000, p_0 = 0.01, b = 0.5, n = 5, g = 0.1, t_max = 50, r_max = 5)
+```
+
+```{r 6.8, fig.cap = "The favourite trait, A, spreads in the population under vertical transmission only."}
 plot_multiple_runs(data_model_v)
+```
+
+```{r 6.9, fig.cap = "Given an equivalent bias strength and two demonstrators, the favourite trait, A, spreads under horizontal transmission at the same speed than in the vertical transmission scenario."}
 plot_multiple_runs(data_model_hn2)
+```
+
+```{r 6.10, fig.cap = "Given an equivalent bias strength and five demonstrators, the favourite trait, A, spreads under horizontal transmission faster than in the vertical transmission scenario."}
 plot_multiple_runs(data_model_hn5)
 ```
 
