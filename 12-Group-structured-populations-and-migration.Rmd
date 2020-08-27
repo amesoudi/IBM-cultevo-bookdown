@@ -304,6 +304,7 @@ migrationModelAnalysed <- function(NPOP, POPSIZE, NBEHAVIOUR, NTIMESTEPS, MIGRAT
   totalpop <- NPOP*POPSIZE
   recbehavFreq <- matrix(NA, ncol=NPOP, nrow=REPETITIONS)
   # run repeated independent simulations
+#ALTERNATIVLEY USE LAPPLY FUNCTION HERE!!:
   for(repetitions in 1:REPETITIONS){
     behaviours <- rep(sample(NBEHAVIOUR,size=NPOP,replace=T), each=POPSIZE)
     cluster <- rep(sample(NPOP), each=POPSIZE)

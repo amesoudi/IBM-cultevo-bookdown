@@ -6,7 +6,7 @@ Henrich's model, for example, has shown that a populations ability to maintain a
 In this chapter, we will cover the basics of social networks, how to create, analyse, and use them. Finally, we will use all of that to find an answer to the question: how do individual-level interaction patterns affect population-level cultural dynamics?
 
 ## The Basics
-Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as socially transmitted information. Say, we want to better understand how gossip is spreading through this group. At the simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spread in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix. It is a square matrix where all individuals of a population are represented as columns and rows. 
+Let us start with a small group of colleagues who see each other on a regular base in the office, some are friends, and some are not (sometimes the friendships might not even be reciprocal). For this example, we use gossip as socially transmitted information. Say, we want to better understand how gossip is spreading through this group. At the simplest level, we might assume that: any two colleagues will exchange gossip whenever they meet. This would reduce the group of colleagues to a well-mixed population, where information can flow freely. However, assume that gossip is only transmitted if two friends interact. Now we have a situation, where information flow is constrained by the underlying friendship network. To explore, how information can spread in that friendship network, we first need to find a way to represent it in R. One way to represent networks is an adjacency matrix, $A$. It is a square matrix where all possible dyadic interactions of individuals in a population are represented as entries in its rows ($i$) and columns ($j$). Commonly, rows indicate interacting individuals, and columns are individuals who are recipients of this interaction. For example:
 
 ```{r 11.1}
 m <- matrix(c(0,1,1, 0,0,1, 1,1,0), nrow=3, byrow=T)
@@ -15,7 +15,7 @@ colnames(m) <- c("A","B","C")
 m
 ```
 
-The matrix above is an example of such an adjacency matrix. Shown are the relationships between three individuals A, B, and C.  When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row, we see that B is only interacting with C, and the last row tells us that C interacting both with A and with B. This is an example for an asymmetric adjacency matrix because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper triangle of the matrix with the lower triangle of the matrix:
+Shown are the relationships between three individuals A, B, and C.  When we look at the first row, we see that A has no interaction with itself (indicated by the zero), but interacts both with B and C (indicated by the ones). From the next row, we see that B is only interacting with C, and the last row tells us that C interacting both with A and with B. This is an example for an asymmetric adjacency matrix because not all interactions are reciprocal (A is interacting with B but B is not interacting with A). We can test this by comparing the upper triangle of the matrix with the lower triangle of the matrix:
 
 ```{r 11.2}
 all(m[upper.tri(m)] == m[lower.tri(m)])
@@ -186,19 +186,19 @@ There is a variety of measures to describe the structure of our graph (another t
 We can retrieve the most basic information about our network using:
 ```{r 11.15}
 # vertex information
-V(net)
+V(net2)
 
 # edge information
-E(net)
+E(net2)
 ```
 
 If our networks have attributes stored (for the vertices or edges), we can retrieve them with the following two functions: 
 ```{r 11.16}
 # vertex attributes
-get.vertex.attribute(graph=net)
+get.vertex.attribute(graph=net2)
 
 # edge attributes
-get.edge.attribute(net)
+get.edge.attribute(net2)
 ```
 
 With `vcount()` and `ecount()`, we can return the number of vertices (`r vcount(net)`) and edges (`r ecount(net)`) in our graph. 
@@ -332,7 +332,7 @@ Now we can use this simpler version of the sampling function (which is directly 
 Turns <- 50
 
 # a matrix to record how many individuals have the gossip at time x
-res <- data.frame(turn=1:Turns, gossipers=rep(0, Turns))
+res <- tibble(turn=1:Turns, gossipers=rep(0, Turns))
 
 # set up gossip indicator
 gossip_meter <- rep(F, n)
@@ -373,7 +373,7 @@ Let us adapt the code so that we can run it repeatedly, to get a better feeling 
 gossip_model <- function(ADJM, TURNS, SIM=1){
   n <- nrow(ADJM)
   # a matrix to record how many individuals have the gossip at time x
-  res <- data.frame(turn=1:TURNS, gossipers=rep(0, TURNS))
+  res <- tibble(turn=1:TURNS, gossipers=rep(0, TURNS))
   # set up gossip indicator
   gossip_meter <- rep(F, n)
   # choose a random individual to start gossipping
@@ -529,7 +529,7 @@ gossip_model(ADJM=adjm, PROP=.75, TURNS=100, SIM=1)
 ```
 When you run d
 
-Now, let us run these functions for different group sizes and different connectivites, and let us repeat these simulations several times to get a better estimate:
+Now, let us run these functions for different group sizes and different connectivities, and let us repeat these simulations several times to get a better estimate:
 
 ```{r 11.41, cache=TRUE}
 parameters <- expand.grid(groupSize=c(10,50),#c(10,30,50,70,90),
@@ -539,7 +539,7 @@ tmp <- lapply(1:nrow(parameters), function(p){
   net <- watts.strogatz.game(dim=1, size=parameters[p,"groupSize"], nei=2, p=parameters[p,"reconnections"], loops=F, multiple=F)
   adjm <- get.adjacency(net)
   model <- gossip_model(ADJM=adjm, PROP=.5, TURNS=500, SIM=parameters[p,"repetition"])
-  data.frame(time=model, 
+  tibble(time=model, 
              degree=mean(degree(net)), 
              path=average.path.length(net))
 })
@@ -551,7 +551,7 @@ parameters <- cbind(parameters, tmp2)
 To plot the average time of our repeated simulations, we need to first calculate this average:
 
 ```{r 11.42}
-library(dplyr)
+library(tidyverse)
 parameters %>% group_by(groupSize, reconnections) %>% summarise(meanTime=mean(time), 
                                                                 meanDegree=mean(degree),
                                                                 meanPath=mean(path)) -> data
@@ -563,13 +563,14 @@ Let us have a look at both the average network degree and the average path lengt
 parameters$groupSize <- factor(parameters$groupSize)
 
 ggplot(parameters, aes(x=reconnections, y=degree, col=groupSize)) + 
-  geom_point() + 
+  geom_jitter(height=.01, alpha=.5) +
+  scale_y_continuous(limits=c(3.5,4.5)) +
   xlab("Prob. of reconnection") +
   ylab("Average Degree") +
   theme_bw()
 ```
 
-Note, the average network degree is constant at $k =$ `r mean(parameters$degree)`. This is due to the way Small World networks are created. We start with a regular lattice network and then randomly select an edge and change the vertex on one end (e.g. from A--B to A--C). Thus, while some individuals might now have fewer (or even zero) edges and others might have more, the average number of edges and so the average degree remains fixed an independent of the number of rewired edges.
+Note, the average network degree is constant at $k =$ `r mean(parameters$degree)` (the plotting function uses `geom_jitter()` which works just like `geom_point()` but is also adding a little y-axis jitter to the data points so that we can see overlapping points). This is due to the way Small World Networks are created. We start with a regular lattice network and then randomly select an edge and change the vertex on one end (e.g. from A--B to A--C). Thus, while some individuals might now have fewer (or even zero) edges and others might have more, the average number of edges and so the average degree remains fixed an independent of the number of rewired edges.
 
 ```{r 11.44}
 ggplot(parameters, aes(x=reconnections, y=path, col=groupSize)) + 
@@ -624,7 +625,9 @@ informationSpread <- function(ADJM, MODE="simple", ROUNDS=100, CONTACTS=1){
     }
     
   }
-  return(data.frame(mode=MODE, frac=fraction, round=1:ROUNDS))
+  return(tibble(mode=MODE, 
+                frac=fraction, 
+                round=1:ROUNDS))
 }
 
 # Simulations with clustered (lattice) networks
@@ -644,7 +647,7 @@ res <- rbind(clu, rand)
 ggplot(res) + geom_line(aes(x=round, y=frac, col=network, linetype=mode), size=.9) + theme_bw()
 ```
 
-For the simple contagion case we find very little differnce between the two network types. Let us now add the complex contagon case to the simulation:
+For the simple contagion case we find very little difference between the two network types. Let us now add the complex contagion case to the simulation:
 
 ```{r 11.47, cache=TRUE}
 # for repeated interactions 
@@ -680,7 +683,10 @@ informationSpread <- function(NET, MODE="simple", ROUNDS=100, CONTACTS=1){
     }
     
   }
-  return(data.frame(network=NET, mode=MODE, frac=fraction, round=1:ROUNDS))
+  return(tibble(network=NET, 
+                mode=MODE, 
+                frac=fraction, 
+                round=1:ROUNDS))
 }
 
 # repeated runs
