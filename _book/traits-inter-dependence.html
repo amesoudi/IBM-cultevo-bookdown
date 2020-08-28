@@ -379,28 +379,43 @@ where <em>C</em> represents the compatibility score between observer and demonst
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="traits-inter-dependence.html#cb4-1"></a>my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
 <span id="cb4-2"><a href="traits-inter-dependence.html#cb4-2"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)</span>
 <span id="cb4-3"><a href="traits-inter-dependence.html#cb4-3"></a><span class="kw">plot_multiple_traits</span>(data_model)</span></code></pre></div>
-<p><img src="_main_files/figure-html/15.4-1.png" width="672" /></p>
+<div class="figure">
+<img src="_main_files/figure-html/15.4-1.png" alt="Frequency of traits in a world with four traits and pairwise compatibilities." width="672" />
+<p class="caption">
+(#fig:15.4)Frequency of traits in a world with four traits and pairwise compatibilities.
+</p>
+</div>
 <p>In the great majority of the runs, two out of the four traits diffuse in the population. We can check whether these are in fact one of the couple of compatible traits, having a look at the last line of the output produced by the simulation.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="traits-inter-dependence.html#cb5-1"></a>data_model[data_model<span class="op">$</span>generation<span class="op">==</span><span class="dv">1000</span>,]</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   trait generation     p
 ##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
-## 1 A           1000  0.94
-## 2 B           1000  0.96
-## 3 C           1000  0   
+## 1 A           1000  0.93
+## 2 B           1000  0.89
+## 3 C           1000  0.02
 ## 4 D           1000  0</code></pre>
 <p>Depending on random factors, the successful traits will be A and B or C and D. If you run the simulation again and again you would see that in around half of the simulations A and B are the successful traits, and in another half C and D are, and very few other possible cases with this “world” of compatibilities.</p>
 <p>What happens if we change the world? We can run a new simulation where the traits A, B, and C are all compatible, but not D (remember, you can visualise the matrix of compatibilities by typing its name to be sure to have entered the compatibilities correctly).</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="traits-inter-dependence.html#cb7-1"></a>my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
 <span id="cb7-2"><a href="traits-inter-dependence.html#cb7-2"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)</span>
 <span id="cb7-3"><a href="traits-inter-dependence.html#cb7-3"></a><span class="kw">plot_multiple_traits</span>(data_model)</span></code></pre></div>
-<p><img src="_main_files/figure-html/15.6-1.png" width="672" /></p>
+<div class="figure">
+<img src="_main_files/figure-html/15.6-1.png" alt="Frequency of traits in a world with four traits and three traits compatibile with each other, but not compatible with the fourth." width="672" />
+<p class="caption">
+(#fig:15.6)Frequency of traits in a world with four traits and three traits compatibile with each other, but not compatible with the fourth.
+</p>
+</div>
 <p>As expected, now three traits have high frequencies in the population, while one is unsuccessful. As before, you can check that the unsuccessful trait is actually D by inspecting manually the last line of the output.</p>
 <p>Not surprisingly, if all traits are compatible, they all spread equally in the population.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="traits-inter-dependence.html#cb8-1"></a>my_world &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
 <span id="cb8-2"><a href="traits-inter-dependence.html#cb8-2"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.0005</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">world =</span> my_world)</span>
 <span id="cb8-3"><a href="traits-inter-dependence.html#cb8-3"></a><span class="kw">plot_multiple_traits</span>(data_model)</span></code></pre></div>
-<p><img src="_main_files/figure-html/15.7-1.png" width="672" /></p>
+<div class="figure">
+<img src="_main_files/figure-html/15.7-1.png" alt="Frequency of traits in a world with four traits all compatibles with each other." width="672" />
+<p class="caption">
+(#fig:15.7)Frequency of traits in a world with four traits all compatibles with each other.
+</p>
+</div>
 <p>Notice that the opposite—when none of the traits is compatible with each other—is an extreme case that produces a situation similar to the <a href="multiple-traits-models.html#multiple-traits-models">unbiased transmission model with multiple traits</a> we explored earlier in the book. Note, that individuals will almost only copy once in their life when they do not have any trait. At this time, they copy whatever trait they observe with 50% chance, since the logistically transformed compatibility score of <span class="math inline">\(0\)</span> will always yield <span class="math inline">\(0.5\)</span>. Subsequently, any encounter with ademonstrators with other traits will result in a very low copying probability, whereas any encounter with a demonstrator with the same trait will lead to a high copying probability, however, the observer already possesses that trait.</p>
 </div>
 <div id="many-traits-model" class="section level2">
@@ -417,13 +432,13 @@ where <em>C</em> represents the compatibility score between observer and demonst
 <p>Have a look at the the matrix we just generated.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="traits-inter-dependence.html#cb10-1"></a>my_world</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
-## [1,]    1    1    1   -1    1   -1   -1
-## [2,]    1    1   -1    1    1    1    1
-## [3,]    1   -1    1    1    1   -1   -1
-## [4,]   -1    1    1    1   -1   -1   -1
-## [5,]    1    1    1   -1    1    1   -1
-## [6,]   -1    1   -1   -1    1    1    1
-## [7,]   -1    1   -1   -1   -1    1    1</code></pre>
+## [1,]    1    1    1   -1    1    1   -1
+## [2,]    1    1    1    1    1   -1    1
+## [3,]    1    1    1    1    1    1    1
+## [4,]   -1    1    1    1    1    1    1
+## [5,]    1    1    1    1    1    1   -1
+## [6,]    1   -1    1    1    1    1   -1
+## [7,]   -1    1    1    1   -1   -1    1</code></pre>
 <p>The function to run the simulation is very similar to the previous one, once we account for the difference in how the compatibility matrix is created and for the two new parameters (<span class="math inline">\(M\)</span> and <span class="math inline">\(\gamma\)</span>) needed in the function call. Another difference is that the output data structure is a matrix and not a tibble. Since we want to be able to run the simulations with an arbitrary large number of traits, we need to speed up the computation, exactly in the same way as we did for the multiple traits model in <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="traits-inter-dependence.html#cb12-1"></a>traits_inter_dependence_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(N, M, t_max, k, mu, p_death, gamma){</span>
 <span id="cb12-2"><a href="traits-inter-dependence.html#cb12-2"></a>  output &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="ot">NA</span>, <span class="dt">nrow =</span> t_max, <span class="dt">ncol =</span> M)</span>
@@ -467,35 +482,46 @@ where <em>C</em> represents the compatibility score between observer and demonst
 <p>We can now use the <code>plot_multiple_traits_matrix()</code> function (see <a href="multiple-traits-models.html#multiple-traits-models">chapter 7</a>) to visualise the model results. Let’s have a look at what happens when we have 20 traits and an intermediate probability of compatibility.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="traits-inter-dependence.html#cb13-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="fl">.5</span>)</span>
 <span id="cb13-2"><a href="traits-inter-dependence.html#cb13-2"></a><span class="kw">plot_multiple_traits_matrix</span>(data_model)</span></code></pre></div>
-<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
-## Using compatibility `.name_repair`.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<p><img src="_main_files/figure-html/15.12-1.png" width="672" /></p>
+<div class="figure">
+<img src="_main_files/figure-html/15.12-1.png" alt="Frequency of traits in a world with 20 traits and compatiblity randomly generated. Each trait has 50% of probability of being compatible with each other trait." width="672" />
+<p class="caption">
+(#fig:15.12)Frequency of traits in a world with 20 traits and compatiblity randomly generated. Each trait has 50% of probability of being compatible with each other trait.
+</p>
+</div>
 <p>The simulation generates a complex dynamic in which some of the traits spread in the population, while others do not. The success of a trait depends on its general compatibility with other traits but also on which traits are present at a certain point in time in the population. Some traits succeed to spread only after the traits they are compatible with have sufficiently spread in the population.</p>
 <p>Let’s change <span class="math inline">\(\gamma\)</span> to be <span class="math inline">\(1\)</span>, i.e. when all traits are compatible with each other.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="traits-inter-dependence.html#cb15-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="dv">1</span>)</span>
-<span id="cb15-2"><a href="traits-inter-dependence.html#cb15-2"></a><span class="kw">plot_multiple_traits_matrix</span>(data_model)</span></code></pre></div>
-<p><img src="_main_files/figure-html/15.13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="traits-inter-dependence.html#cb14-1"></a>data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> <span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="traits-inter-dependence.html#cb14-2"></a><span class="kw">plot_multiple_traits_matrix</span>(data_model)</span></code></pre></div>
+<div class="figure">
+<img src="_main_files/figure-html/15.13-1.png" alt="Frequency of traits in a world with 20 traits and compatiblity randomly generated. Each trait is compatible with all other traits." width="672" />
+<p class="caption">
+(#fig:15.13)Frequency of traits in a world with 20 traits and compatiblity randomly generated. Each trait is compatible with all other traits.
+</p>
+</div>
 <p>As expected, all traits spread in the population.</p>
-<p>We leave to the reader to explore further what drives the dynamic, especially in the interesting cases with intermediate values of <span class="math inline">\(gamma\)</span>. In order to do this, we suggest to add further outputs to the function <code>traits_inter_dependence_2()</code>, such as the compatibility world generated by the simulation, or the actual composition of the population, perhaps only at the end, or every 100, or 500, time steps.</p>
+<p>We leave to the reader to explore further what drives the dynamic, especially in the interesting cases with intermediate values of <span class="math inline">\(\gamma\)</span>. In order to do this, we suggest to add further outputs to the function <code>traits_inter_dependence_2()</code>, such as the compatibility world generated by the simulation, or the actual composition of the population, perhaps only at the end, or every 100, or 500, time steps.</p>
 <p>As an example, we can try to confirm the intuition that the final number of traits depends on the value of <span class="math inline">\(\gamma\)</span>: if it is more likely that traits are compatible with each other, we expect more traits to spread in the population. We can choose values of <span class="math inline">\(\gamma\)</span> between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> (with steps of <span class="math inline">\(0.1\)</span>), and use a <code>for</code> cycle to run our function for each value. In fact, we are running another <code>for</code> cycle within the main one, as to have more runs for each value of <span class="math inline">\(\gamma\)</span> (an alternative would be to rewrite the function <code>traits_inter_dependence_2()</code> to accept an additional argument that indicates the number of simulation repetitions, as we did in previous chapters).</p>
 <p>Finally, we store the number of successful traits at the end of the simulation, that is, the traits that spread in at least half of the population (<code>data_model[2000,]&gt;.5</code>).</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="traits-inter-dependence.html#cb16-1"></a>r_max =<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb16-2"><a href="traits-inter-dependence.html#cb16-2"></a>test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">gamma =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">.1</span>), r_max)), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> <span class="dv">11</span>)), <span class="dt">C =</span> <span class="kw">as.numeric</span>(<span class="ot">NA</span>))</span>
-<span id="cb16-3"><a href="traits-inter-dependence.html#cb16-3"></a><span class="cf">for</span>(condition <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">.1</span>)){</span>
-<span id="cb16-4"><a href="traits-inter-dependence.html#cb16-4"></a>  <span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</span>
-<span id="cb16-5"><a href="traits-inter-dependence.html#cb16-5"></a>    data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> condition)</span>
-<span id="cb16-6"><a href="traits-inter-dependence.html#cb16-6"></a>    test_inter_dependence[test_inter_dependence<span class="op">$</span>gamma <span class="op">==</span><span class="st"> </span>condition <span class="op">&amp;</span><span class="st"> </span>test_inter_dependence<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>C &lt;-<span class="st"> </span><span class="kw">sum</span>(data_model[<span class="dv">2000</span>,]<span class="op">&gt;</span>.<span class="dv">5</span>)</span>
-<span id="cb16-7"><a href="traits-inter-dependence.html#cb16-7"></a>  }</span>
-<span id="cb16-8"><a href="traits-inter-dependence.html#cb16-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="traits-inter-dependence.html#cb15-1"></a>r_max =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb15-2"><a href="traits-inter-dependence.html#cb15-2"></a>test_inter_dependence &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">gamma =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">.1</span>), r_max)), <span class="dt">run =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>r_max, <span class="dt">each =</span> <span class="dv">11</span>)), <span class="dt">C =</span> <span class="kw">as.numeric</span>(<span class="ot">NA</span>))</span>
+<span id="cb15-3"><a href="traits-inter-dependence.html#cb15-3"></a><span class="cf">for</span>(condition <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">.1</span>)){</span>
+<span id="cb15-4"><a href="traits-inter-dependence.html#cb15-4"></a>  <span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>r_max) {</span>
+<span id="cb15-5"><a href="traits-inter-dependence.html#cb15-5"></a>    data_model &lt;-<span class="st"> </span><span class="kw">traits_inter_dependence_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">M =</span> <span class="dv">20</span>, <span class="dt">t_max =</span> <span class="dv">2000</span>, <span class="dt">k =</span> <span class="dv">10</span>, <span class="dt">mu =</span> <span class="fl">0.001</span>, <span class="dt">p_death =</span> <span class="fl">0.01</span>, <span class="dt">gamma =</span> condition)</span>
+<span id="cb15-6"><a href="traits-inter-dependence.html#cb15-6"></a>    test_inter_dependence[test_inter_dependence<span class="op">$</span>gamma <span class="op">==</span><span class="st"> </span>condition <span class="op">&amp;</span><span class="st"> </span>test_inter_dependence<span class="op">$</span>run <span class="op">==</span><span class="st"> </span>r, ]<span class="op">$</span>C &lt;-<span class="st"> </span><span class="kw">sum</span>(data_model[<span class="dv">2000</span>,]<span class="op">&gt;</span>.<span class="dv">5</span>)</span>
+<span id="cb15-7"><a href="traits-inter-dependence.html#cb15-7"></a>  }</span>
+<span id="cb15-8"><a href="traits-inter-dependence.html#cb15-8"></a>}</span></code></pre></div>
 <p>To plot the results, we combine boxplots and <code>geom_jitter()</code> so we can see the actual data points. <code>geom_jitter()</code> is another ggplot ‘geom’ that adds a small amount of random variation to the location of each point in the x and y dimension of the plot (indicated by values to the <code>width</code> and <code>height</code> argument). In our case, we want a small sideways variation, i.e. the width. This is useful to show data points that would otherwise overlap.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="traits-inter-dependence.html#cb17-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> test_inter_dependence, <span class="kw">aes</span>(<span class="dt">x =</span> gamma, <span class="dt">y =</span> C)) <span class="op">+</span></span>
-<span id="cb17-2"><a href="traits-inter-dependence.html#cb17-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb17-3"><a href="traits-inter-dependence.html#cb17-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb17-4"><a href="traits-inter-dependence.html#cb17-4"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb17-5"><a href="traits-inter-dependence.html#cb17-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Average compatibility&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;C (number of common traits)&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/15.15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="traits-inter-dependence.html#cb16-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> test_inter_dependence, <span class="kw">aes</span>(<span class="dt">x =</span> gamma, <span class="dt">y =</span> C)) <span class="op">+</span></span>
+<span id="cb16-2"><a href="traits-inter-dependence.html#cb16-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb16-3"><a href="traits-inter-dependence.html#cb16-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb16-4"><a href="traits-inter-dependence.html#cb16-4"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb16-5"><a href="traits-inter-dependence.html#cb16-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Average compatibility&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;C (number of common traits)&quot;</span>)</span></code></pre></div>
+<div class="figure">
+<img src="_main_files/figure-html/15.15-1.png" alt="Increasing the probability of traits being compatible with each others produces bigger populations." width="672" />
+<p class="caption">
+(#fig:15.15)Increasing the probability of traits being compatible with each others produces bigger populations.
+</p>
+</div>
 <p>The results broadly confirm our intuitions. Interestingly, we do not need that all traits are compatible with each other to produce the outcome of all traits being successful. Already with <span class="math inline">\(\gamma=0.8\)</span>, all the 20 traits spread in more than half of the population in almost all runs of the simulation. Even with few incompatibilities, the “compatibility score” between observers and demonstrators is, given a sufficient number of compatible traits, a positive number, resulting in high probabilities to copy.</p>
 </div>
 <div id="summary-of-the-model-14" class="section level2">
