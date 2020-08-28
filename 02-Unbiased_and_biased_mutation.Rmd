@@ -141,18 +141,9 @@ plot_multiple_runs(data_model)
 Now trait $A$ reaches fixation around generation $t = 50$. Play around with $N$ and $\mu_b$ to confirm that the latter determines the rate of diffusion of trait $A$, and that it takes the same form each time - roughly an 'r' shape with an initial steep increase followed by a plateauing at $p = 1$.
 
 ***
-
-## Summary of the model
-
-With this simple model, we can draw the following insights. Unbiased mutation, which resembles genetic mutation in being non-directional, always leads to an equal mix of the two traits. It introduces and maintains cultural variation in the population. It is interesting to compare unbiased mutation to unbiased transmission from Model 1. While unbiased transmission did not change $p$ over time, unbiased mutation always converges on $p^* = 0.5$, irrespective of the starting frequency. (NB $p^* = 0.5$ assuming there are two traits; more generally, $p^* = 1/v$, where $v$ is the number of traits.) 
-
-Biased mutation, which is far more common - perhaps even typical - in cultural evolution, shows different dynamics. Novel traits favoured by biased mutation spread in a characteristic fashion - an r-shaped diffusion curve - with a speed characterised by the mutation rate $\mu_b$. Population size has little effect, whether $N = 100$ or $N = 10000$. Whenever biased mutation is present ($\mu_b > 0$), the favoured trait goes to fixation, even if it is not initially present.
-
-In terms of programming techniques, the major novelty in Model 2 is the use of `sample()` to determine which individuals should undergo whatever the fixed probability specifies (in our case, mutation). This could be done with a loop, but vectorising code in the way we did here is much faster in R than loops.
-
 ***
 
-## Analytical appendix
+## Analytical model {-}
 
 If $p$ is the frequency of $A$ in one generation, we are interested in calculating $p'$, the frequency of $A$ in the next generation under the assumption of unbiased mutation. The next generation retains the cultural traits of the previous generation, except that $\mu$ of them switch to the other trait. There are therefore two sources of $A$ in the next generation: members of the previous generation who had $A$ and didn't mutate, therefore staying $A$, and members of the previous generation who had $B$ and did mutate, therefore switching to $A$. The frequency of $A$ in the next generation is therefore:
 
@@ -233,6 +224,15 @@ Seeing this helps explain two things. First, the $1 - p$ part explains the r-sha
 Second, it says that the rate of increase is proportional to $\mu_b$. This explains our observation in the simulations that larger values of $\mu_b$ cause $p$ to reach its maximum value faster.
 
 ***
+***
+
+## Summary of the model
+
+With this simple model, we can draw the following insights. Unbiased mutation, which resembles genetic mutation in being non-directional, always leads to an equal mix of the two traits. It introduces and maintains cultural variation in the population. It is interesting to compare unbiased mutation to unbiased transmission from Model 1. While unbiased transmission did not change $p$ over time, unbiased mutation always converges on $p^* = 0.5$, irrespective of the starting frequency. (NB $p^* = 0.5$ assuming there are two traits; more generally, $p^* = 1/v$, where $v$ is the number of traits.) 
+
+Biased mutation, which is far more common - perhaps even typical - in cultural evolution, shows different dynamics. Novel traits favoured by biased mutation spread in a characteristic fashion - an r-shaped diffusion curve - with a speed characterised by the mutation rate $\mu_b$. Population size has little effect, whether $N = 100$ or $N = 10000$. Whenever biased mutation is present ($\mu_b > 0$), the favoured trait goes to fixation, even if it is not initially present.
+
+In terms of programming techniques, the major novelty in Model 2 is the use of `sample()` to determine which individuals should undergo whatever the fixed probability specifies (in our case, mutation). This could be done with a loop, but vectorising code in the way we did here is much faster in R than loops.
 
 ## Further reading
 

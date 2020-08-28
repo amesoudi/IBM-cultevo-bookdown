@@ -307,19 +307,10 @@ plot_multiple_runs(data_model)
 
 With $p_0 = 0.2$, trait frequencies stay at $p = 0.2$. Unbiased transmission is truly non-directional: it maintains trait frequencies at whatever they were in the previous generation, barring random fluctuations caused by small population sizes.
 
+*** 
 ***
 
-## Summary of the model
-
-Even this extremely simple model provides some valuable insights. First, unbiased transmission does not in itself change trait frequencies. As long as populations are large, trait frequencies remain the same. 
-
-Second, the smaller the population size, the more likely traits are to be lost by chance. This is a basic insight from population genetics, known there as genetic drift, but it can also be applied to cultural evolution. Many studies have tested (and some supported) the idea that population size and other demographic factors can shape cultural diversity. 
-
-Furthermore, generating expectations about cultural change under simple assumptions like random cultural drift can be useful for detecting non-random patterns like selection. If we don't have a baseline, we won't know selection or other directional processes when we see them.
-
-We also have introduced several programming techniques that will be useful in later simulations. We have seen how to use tibbles to hold characteristics of individuals and the outputs of simulations, how to use loops to cycle through generations and simulation runs, how to use `sample()` to pick randomly from sets of elements, how to wrap simulations in functions to easily re-run them with different parameter values, and how to use `ggplot()` to plot the results of simulations.
-
-## Analytical appendix
+## Analytical model {-}
 
 If $p$ is the frequency of $A$ in one generation, we are interested in calculating $p'$, the frequency of $A$ in the next generation under the assumption of unbiased transmission. Each new individual in the next generation picks a demonstrator at random from among the previous generation. The demonstrator will have $A$ with probability $p$. The frequency of $A$ in the next generation, then, is simply the frequency of $A$ in the previous generation:
 
@@ -355,6 +346,19 @@ Don't worry, it gets more complicated than this in later chapters. The key point
 More generally, creating deterministic recursion-based models can be a good way of verifying simulation models, and vice versa: if the same dynamics occur in both individuals-based and recursion-based models, then we can be more confident that those dynamics are genuine and not the result of a programming error or mathematical mistake. 
 
 ***
+***
+
+## Summary of the model
+
+Even this extremely simple model provides some valuable insights. First, unbiased transmission does not in itself change trait frequencies. As long as populations are large, trait frequencies remain the same. 
+
+Second, the smaller the population size, the more likely traits are to be lost by chance. This is a basic insight from population genetics, known there as genetic drift, but it can also be applied to cultural evolution. Many studies have tested (and some supported) the idea that population size and other demographic factors can shape cultural diversity. 
+
+Furthermore, generating expectations about cultural change under simple assumptions like random cultural drift can be useful for detecting non-random patterns like selection. If we don't have a baseline, we won't know selection or other directional processes when we see them.
+
+We also have introduced several programming techniques that will be useful in later simulations. We have seen how to use tibbles to hold characteristics of individuals and the outputs of simulations, how to use loops to cycle through generations and simulation runs, how to use `sample()` to pick randomly from sets of elements, how to wrap simulations in functions to easily re-run them with different parameter values, and how to use `ggplot()` to plot the results of simulations.
+
+
 
 ## Further reading
 

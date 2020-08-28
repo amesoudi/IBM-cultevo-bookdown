@@ -189,15 +189,12 @@ plot_W(data_model, c = 0.9, p = 1)
 
 Yes: critical learners clearly outperform the dotted line indicating a hypothetical 100% individual learning population. Rogers' paradox is solved.
 
-***
-
 ## Summary of the model
 
 Several 'solutions' have been demonstrated to Rogers' paradox. Here we have explored one of them. Critical learners can flexibly employ both social and individual learning, and do this in an adaptive manner (i.e. only individually learn if social learning is unsuccessful). Critical learners outperform the pure individual learning and pure social learning strategies. They therefore solve Rogers' paradox by exceeding the mean fitness of a population entirely composed of individual learning.
 
 One might complain that all this is obvious. Of course real organisms can learn both socially and individually, and adaptively employ both during their lifetimes. But hindsight is a wonderful thing. Before Rogers' model, scholars did not fully recognise this, and simply argued that social learning is adaptive because it has lower costs than individual learning. We now know this argument is faulty. But it took a simple model to realise it, and to realise the reasons why.
 
-***
 
 ## Further reading
 

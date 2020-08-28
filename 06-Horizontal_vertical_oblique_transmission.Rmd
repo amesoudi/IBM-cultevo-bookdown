@@ -202,13 +202,6 @@ This model has combined directly biased transmission with vertical and horizonta
 
 Our horizontal transmission model is similar to the conformist bias simulated in [Chapter 4][Biased transmission: frequency-dependent indirect bias], but slightly different - there is no disproportionate majority copying, and instead one trait is favoured when learning from $n$ demonstrators. Comparing the two pathways, we can see that horizontal cultural transmission is faster than vertical cultural transmission largely because it allows individuals to learn from more than two demonstrators.
 
-***
-
-## Analytical appendix
-
-Todo, or omit. Equations are in Cavalli-Sforza & Feldman chapters on vertical & horizontal transmission.
-
-***
 
 ## Further reading
 

@@ -97,14 +97,9 @@ As we might expect, increasing the strength of selection increases the speed wit
 
 
 ***
-
-## Summary of the model
-
-We have seen how biased transmission causes a trait favoured by cultural selection to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of $A$ and $B$ at $p = 0.5$), and weakest when there is little variation (when $p$ is close to 0 or 1).
-
 ***
 
-## Analytical appendix
+## Analytical model {-}
 
 As before, we have $p$ individuals with trait $A$, and $1 - p$ individuals with trait $B$. As we saw that what is important is the relative difference between the two probabilities of being copied associated to the two traits and not their absolute value, we consider always $s_b=0$ and vary $s_a$, which we can call simply $s$. Thus, the $p$ individuals with trait $A$ always keep their $A$s. The $1 - p$ individuals with trait $B$ pick another individual at random, hence with probability $p$, and with probability $s$, they switch to trait $A$. We can, therefore, write the recursion for $p$ under biased transmission as:
 
@@ -145,6 +140,12 @@ There are three ways in which the left-hand side can equal zero: when $p = 0$, w
 We can also say that $p = 0$ is an unstable equilibrium, meaning that any slight perturbation away from $p = 0$ moves $p$ away from that value. This is essentially what we simulated above: a slight perturbation up to $p = 0.01$ went all the way up to $p = 1$. In contrast, $p = 1$ is a stable equilibrium: any slight perturbation from $p = 1$ immediately goes back to $p = 1$.
 
 ***
+***
+
+## Summary of the model
+
+We have seen how biased transmission causes a trait favoured by cultural selection to spread and go to fixation in a population, even when it is initially very rare. Biased transmission differs in its dynamics from biased mutation. Its action is proportional to the variation in the population at the time at which it acts. It is strongest when there is lots of variation (in our model, when there are equal numbers of $A$ and $B$ at $p = 0.5$), and weakest when there is little variation (when $p$ is close to 0 or 1).
+
 
 ## Further reading
 

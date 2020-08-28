@@ -300,13 +300,6 @@ To simulate multiple traits and innovation we also needed to deal with a few tec
 
 Our results showed that unbiased copying produces long-tailed distributions where very few traits are very popular and the great majority are not. An interesting insight from this model is that these `extreme` distributions do not necessarily result from extreme tendencies at the individual level. Some traits become hugely more popular than others without individuals being biased, for example, towards popular traits. Cultural transmission generates these distributions without biases, but simply because popular traits have the intrinsic advantage of being more likely to be randomly copied. We also introduced a new technique, the log-log plot of binned popularity distributions, to visualise this outcome.
 
-***
-
-## Analytical appendix
-
-ANYHTING TO DO HERE?
-
-***
 
 ## Further readings
 

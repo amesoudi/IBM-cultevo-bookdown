@@ -255,14 +255,7 @@ Using simple models, we formalised the intuitive idea that cultural traits (can)
   
 We also introduced a few new modelling devices, such as the logistic function, that transform unbounded positive and negative values into probabilities ranging from $0$ to $1$, and the ggplot geom `geom_jitter()`, which is useful to visualise overlapping data points. 
 
-***
 
-## Analytical appendix
-
-I do not know of analytical treatments of this, probably omit.
-
-***
-  
 ## Further readings
   
 A broader treatment of models of cultural evolution where the outcomes depend on the relationships between traits, defined by the authors 'cultural systems', is in @buskell_systems_2019. More complex relationships between traits, including the possibility that some trait will facilitate the appearance of new traits, generating cascade of innovations are explored in @enquist_modelling_2011.   

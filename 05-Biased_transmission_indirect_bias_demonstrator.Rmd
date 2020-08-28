@@ -208,15 +208,12 @@ ggplot(data = data_model, aes(x = p, y = status_A, fill = p)) +
 
 With $N=10000$ and around 50 high-status individuals, the traits are more equally distributed among 'influential' demonstrators at the beginning, and there is hardly any difference in the two outcomes.   
 
-***
-
 ## Summary of the model
 
 In this chapter we modeled an example of indirect, demonstrator-based, biased transmission. We assumed that a fraction of individuals in the population was 'high-status' and thus more likely to be selected as demonstrators. The results show that in this situation a trait is likely to become predominant even when populations are large. This is due to the fact that a demonstrator bias effectively reduces the pool of demonstrators and accelerates convergence through a similar process as drift / unbiased transmission. We also saw that the possibility of predicting which trait will become predominant depends on the number of high-status demonstrators. When there are few high-status demonstrators, then the most common trait amongst these high-status demonstrators will likely go to fixation. When their number increases, it is more difficult to make such a prediction.
 
 We also saw how it is important to modify the output of a model depending on the question we are interested in. We used a novel ggplot aesthetic to produce a boxplot, a convenient way of displaying the distribution of data among different groups.
 
-***
 
 ## Further readings
 

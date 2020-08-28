@@ -180,13 +180,6 @@ You can easily check by yourself that decreasing $p_\text{death}$ has a similar 
   
 In this chapter we explored the idea that we can learn from others not only beliefs and skills, but also the rules that govern how and when we learn from others. The models we presented just scratch the surface of what the consequences of the "social learning of social learning rules" could be, and we invite the readers to explore other possibilities. The models still provide some interesting insights: successful cultural models need to integrate openness (to acquire cultural traits liked by others) and, at the same time, conservativeness (to remain stable and repeatedly show the same traits to copy). This also suggests that successful cultural traits should not only be liked by many, but they also should promote conservativeness, as we defined it here, in their bearers. After all, the first commandment in the Abrahamic religions is "Thou shalt have no other gods before me" rather then "Check the other gods, and you'll see I am the better one"! Regardless of the particular results, however, these models mostly highlight how unexpected cultural dynamics can emerge from systems in which the rules governing social learning are not fixed, but they are themselves subject of cultural evolution.
 
-***
-
-## Analytical appendix
-  
-Todo, or omit. Equations, for the first model (single trait $P$) are in @ghirlanda_cultural_2006
-
-***
   
 ## Further readings
   

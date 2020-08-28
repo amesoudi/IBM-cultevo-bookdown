@@ -174,9 +174,8 @@ It is interesting to observe that the critical population size increases exponen
 ## Summary of the model
 Similar to the model in the chapter on Rogers' paradox, the present model is very simple and is making many simplifications. Nevertheless, it provides an intuitive understanding of how changes (up and down) in population size can affect the cultural repertoire of a population, and how it can be that simple traits thrive, while complex ones disappear. In the next chapter, we will discuss the importance of social networks, i.e. who can interact with whom. We will see that this will also have an effect (additional to the population size).
 
-***
 
-## Analytical model and further readings
+## Further readings
 
 It is important to note that Henrich's paper provides an analytical model, which can give precise results without the need for modelling learning. The paper is well worth a read as it explains this analytical approach in clear terms. 
 

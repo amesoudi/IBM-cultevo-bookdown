@@ -427,7 +427,6 @@ Also, this piece of code allows us to use non-binary values, where small values 
 ## Summary of the model
 
 
-***
 ## Further reading
 There are a couple of interesting empirical studies on migration and the social transmission of locally adaptive behaviours in animals. For example, the study by @luncz_tradition_2014 reports on the stability of tool traditions in neighbouring chimpanzee communities. 
 

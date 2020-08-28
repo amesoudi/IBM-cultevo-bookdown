@@ -247,18 +247,9 @@ plot_multiple_runs(data_model)
 When $A$ starts off in a minority ($p_0 = 0.45$), all runs result in $A$ disappearing. These last two graphs show how initial conditions affect conformity. Whichever trait is more common is favoured by conformist transmission.
 
 ***
-
-## Summary of the model
-
-In this chapter, we explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this indirect bias with the direct (or content) biased transmission from [Chapter 3][Biased transmission (direct bias)], where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.
-
-We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This, in turn, makes stochasticity important, which in small populations can affect initial frequencies.
-
-We also discussed the subtle but fundamental difference between unbiased copying and conformity. In both, majority traits are favoured, but it is only with conformity that they are *disproportionally* favoured. In large populations, unbiased transmission rarely leads to trait fixation, whereas conformist transmission often does. Furthermore, as we will see later, conformity also makes majority traits resistant to external disturbances, such as the introduction of other traits via innovation or migration. 
-
 ***
 
-## Analytical appendix
+## Analytical model {-}
 
 Let's revise Table 1 to add the probabilities of each combination of three demonstrators coming together, assuming they are picked at random. These probabilities can be expressed in terms of $p$, the frequency of $A$, and $(1 - p)$, the frequency of $B$. Table 2 adds this column.
 
@@ -326,6 +317,16 @@ ggplot(data = conformity_p_adopt, aes(y = p_next, x = p)) +
 This plot encapsulates the process of conformity. The dotted line shows unbiased transmission: the probability of adopting $A$ is exactly equal to the frequency of $A$ in the population. The s-shaped solid curve shows conformist transmission. When $A$ is common ($p > 0.5$), then the curve is higher than the dotted line: there is a disproportionately higher probability of adopting $A$. When $A$ is uncommon ($p < 0.5$), then the curve is lower than the dotted line: there is a disproportionately lower probability of adopting $A$.
 
 ***
+***
+
+## Summary of the model
+
+In this chapter, we explored conformist biased cultural transmission. This is where individuals are disproportionately more likely to adopt the most common trait among a set of demonstrators. We can contrast this indirect bias with the direct (or content) biased transmission from [Chapter 3][Biased transmission (direct bias)], where one trait is intrinsically more likely to be copied. With conformity, the traits have no intrinsic attractiveness and are preferentially copied simply because they are common.
+
+We saw how conformity increases the frequency of whichever trait is more common. Initial trait frequencies are important here: traits that are initially more common typically go to fixation. This, in turn, makes stochasticity important, which in small populations can affect initial frequencies.
+
+We also discussed the subtle but fundamental difference between unbiased copying and conformity. In both, majority traits are favoured, but it is only with conformity that they are *disproportionally* favoured. In large populations, unbiased transmission rarely leads to trait fixation, whereas conformist transmission often does. Furthermore, as we will see later, conformity also makes majority traits resistant to external disturbances, such as the introduction of other traits via innovation or migration. 
+
 
 ## Further readings
 

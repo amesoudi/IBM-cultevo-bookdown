@@ -254,14 +254,6 @@ In the "reproduction" condition, the covariance is indeed positive, and decrease
 ## Summary of the model
 
 Cultural traditions can survive intact through long and wide transmission chains because cultural traits are copied faithfully, because some of them are copied more than others (cultural selection), and because everybody involved in the episodes of transmission tend to reproduce them in a similar way. All these forces are likely to be important, to a various degree, in different domains and for different features of cultural traits. While in the rest of the book we have focused on copying and selection, in this chapter we have considered transformation. We have shown that both copying plus selection and convergent transformation create stable cultural systems, where all individuals in the population converge on similar cultural traits. We also explored how these forces can be distinguished. One possible way is to chart the similarity between the cultural traits observed and the cultural traits reproduces: in the case of transformation depends on the specific feature of the traits (the closer to the end-point of the convergence, the higher the similarity), whereas for reproduction we should expect similarity to be constant, depending on how, generally, copying is precise. Another way is to detect whether demonstrators with certain traits (or certain features of a trait) are copied more: this is the sign of selection, that characterised our "reproduction"" model, but not the "transformation" one.   
-
-***
-
-## Analytical appendix
-  
-Nothing to do here?
-
-***
   
 ## Further readings
 

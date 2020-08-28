@@ -721,7 +721,4 @@ This figure tells us that, while there is no apparent difference in the spread o
 
 ## Summary of the model
 
-
-***
-
 ## Further Reading
