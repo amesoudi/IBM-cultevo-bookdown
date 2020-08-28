@@ -26,7 +26,7 @@
 <meta name="author" content="Marco Smolla" />
 
 
-<meta name="date" content="2020-08-27" />
+<meta name="date" content="2020-08-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -233,11 +233,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.7" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#further-reading-7"><i class="fa fa-check"></i><b>9.7</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>Advanced topics - Cultural inheritance</b></span><ul>
-<li class="chapter" data-level="9.8" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#emergent-similarity"><i class="fa fa-check"></i><b>9.8</b> Emergent similarity</a></li>
-<li class="chapter" data-level="9.9" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#cultural-fitness"><i class="fa fa-check"></i><b>9.9</b> Cultural fitness</a></li>
-<li class="chapter" data-level="9.10" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#summary-of-the-model-12"><i class="fa fa-check"></i><b>9.10</b> Summary of the model</a></li>
-<li class="chapter" data-level="9.11" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#analytical-appendix-6"><i class="fa fa-check"></i><b>9.11</b> Analytical appendix</a></li>
-<li class="chapter" data-level="9.12" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#further-readings-3"><i class="fa fa-check"></i><b>9.12</b> Further readings</a></li>
+<li class="chapter" data-level="9.8" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#copying-and-selection"><i class="fa fa-check"></i><b>9.8</b> Copying and selection</a></li>
+<li class="chapter" data-level="9.9" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#convergent-transformation"><i class="fa fa-check"></i><b>9.9</b> Convergent transformation</a></li>
+<li class="chapter" data-level="9.10" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#emergent-similarity"><i class="fa fa-check"></i><b>9.10</b> Emergent similarity</a></li>
+<li class="chapter" data-level="9.11" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#cultural-fitness"><i class="fa fa-check"></i><b>9.11</b> Cultural fitness</a></li>
+<li class="chapter" data-level="9.12" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#summary-of-the-model-12"><i class="fa fa-check"></i><b>9.12</b> Summary of the model</a></li>
+<li class="chapter" data-level="9.13" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#analytical-appendix-6"><i class="fa fa-check"></i><b>9.13</b> Analytical appendix</a></li>
+<li class="chapter" data-level="9.14" data-path="group-structured-populations-and-migration.html"><a href="group-structured-populations-and-migration.html#further-readings-3"><i class="fa fa-check"></i><b>9.14</b> Further readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html"><i class="fa fa-check"></i><b>10</b> Social learning of social learning rules</a><ul>
 <li class="chapter" data-level="10.1" data-path="social-learning-of-social-learning-rules.html"><a href="social-learning-of-social-learning-rules.html#openness-and-conservatism"><i class="fa fa-check"></i><b>10.1</b> Openness and conservatism</a></li>
@@ -287,16 +289,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 100 x 1
 ##    trait
 ##    &lt;int&gt;
-##  1    10
-##  2    78
-##  3    50
-##  4    61
-##  5    80
-##  6    61
-##  7    68
-##  8    44
-##  9    36
-## 10    17
+##  1    35
+##  2    84
+##  3    49
+##  4    23
+##  5    77
+##  6    34
+##  7    67
+##  8    95
+##  9    73
+## 10    97
 ## # … with 90 more rows</code></pre>
 <p>The basic code of the simulation is similar to the code in the [first chapter][Unbiased transmission], but what should the <code>output</code> be? Until now, we just needed to save the frequency of one of the two traits, because the frequency of the other was always one minus the first’s frequency. Now we need the frequencies of all <span class="math inline">\(N\)</span> traits. (Technically, we only need to track <span class="math inline">\(N-1\)</span> frequencies, with the last inferred by substracting the other frequencies from 1. But for simplicity we’ll track all of the frequencies.)</p>
 <p>Second, how do we measure the frequency of the traits in each generation? The base R function <code>tabulate()</code> does this for us. <code>tabulate()</code> counts the number of times each element of a vector (<code>population$trait</code> in our case) occurs in the bins that we also pass to the function. In our case the bins are <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>. Since we want the frequencies, and not the absolute number, we divide the result by <span class="math inline">\(N\)</span>.</p>
@@ -427,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-2"><a href="multiple-traits-models.html#cb16-2"></a>data_model &lt;-<span class="st"> </span><span class="kw">multiple_traits_2</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">t_max =</span> <span class="dv">1000</span>, <span class="dt">mu =</span> <span class="fl">0.01</span>)</span>
 <span id="cb16-3"><a href="multiple-traits-models.html#cb16-3"></a>end_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb16-4"><a href="multiple-traits-models.html#cb16-4"></a>end_time <span class="op">-</span><span class="st"> </span>start_time</span></code></pre></div>
-<pre><code>## Time difference of 25.87485 secs</code></pre>
+<pre><code>## Time difference of 21.80534 secs</code></pre>
 <p>While this varies from computer to computer, it may take several seconds to finsh. To store the output, we are using a tibble with <span class="math inline">\(1100000\)</span> data points, as <em>max_traits</em> is equal to <span class="math inline">\(1100\)</span>, which needs to be updated in each of the <span class="math inline">\(1000\)</span> generations. One way of speeding up the simulation is to record our output in a different data structure.</p>
 <p>So far, we have been using tibbles to store our simulation output. R, as with all programming languages, can store data in different structures. Depending on what the data are and what one wants to do with them, different structures are more or less suitable. The advantage of tibbles is that they can contain heterogeneous data, depending on what we need to store: for example, in our <code>output</code> tibble, the <span class="math inline">\(trait\)</span> column was specified as a factor, whereas the others two columns, <span class="math inline">\(generation\)</span> and <span class="math inline">\(p\)</span>, were numeric.</p>
 <p>An alternative is to use vectors and matrices. A vector is a list of data points that are all of the same type, e.g. logical (TRUE/FALSE), integer (whole numbers), numeric (any numbers), or character (text). Matrices are just two-dimensional vectors: they must also contain all the same type of data, but they have rows and columns similar to a tibble, dataframe or Excel spreadsheet. The advantage of vectors and matrices is efficiency: they make simulations much faster than identical code running with tibbles.</p>
@@ -486,7 +488,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="multiple-traits-models.html#cb21-1"></a>end_time <span class="op">-</span><span class="st"> </span>start_time</span></code></pre></div>
-<pre><code>## Time difference of 0.06371307 secs</code></pre>
+<pre><code>## Time difference of 0.05629706 secs</code></pre>
 <p>The results are equivalent, but the simulation should be hundreds of times faster! This shows that implementation details are very important when building individual based models. When one needs to run the same simulation many times, or test many different parameter values, implementation choices can make drastic differences.</p>
 </div>
 <div id="the-distribution-of-popularity" class="section level2">

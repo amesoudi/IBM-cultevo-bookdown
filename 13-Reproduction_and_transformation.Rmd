@@ -2,11 +2,13 @@
 
 # Reproduction and transformation
 
-To be considered "cultural", ideas, behaviours, and artifacts need to be sufficiently stable in time. The version of *Little Red Riding Hood* we heard now is part of a long cultural transmission chain that includes all the other versions of the tale because they all share *enough* features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider all of them as one cultural trait: *lasagne*. Boundaries are muddled for many traits: while some artifacts can be the exact replica of each other, no two identical lasagne exist. In any case, the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a relative stability. This is a useful assumption and, in many case, a good approximation of what happens in reality. 
+To be considered "cultural", ideas, behaviours, and artefacts need to be sufficiently stable in time. The version of *Little Red Riding Hood* we heard now is part of a long cultural transmission chain that includes all the other versions of the tale because they all share *enough* features to be considered the same tale. Similarly, the lasagne I cooked yesterday are part of a long, intricate, chain of cultural transmission events, where all the products are stable enough that we can consider all of them as one cultural trait: *lasagne*. Boundaries are muddled for many traits: while some artefacts can be the exact replica of each other, no two identical lasagne exist. In any case, the question we explore in this chapter is: how does this stability is brought about? In the models so far, as much as in the majority of models in cultural evolution, we assumed that traits are copied from one (cultural) generation to another with enough fidelity to assure a relative stability. This is a useful assumption and, in many case, a good approximation of what happens in reality. 
 
 However, cultural traits can be stable not because they are copied with high-fidelity, but because, when passing from an individual to another, they are independently reconstructed in the same way or, another way to say it, they become similar to each other through a process of convergent transformation. Think about whistling. We do learn to whistle from each other through a process of cultural transmission (we want to reproduce what others do), but the configuration of the muscles in the mouth is not something that we copy directly. Still, there are few ways to effectively whistle, so that we likely end up with the same - or similar - configuration. (Notice we can also actually copy the exact configuration and, indeed, there are specialised whistling techniques for which it is required. As we will mention again later, copying and reconstructing are not two alternative processes, but they both concur to cultural evolution.)
 
 Evolutionary psychologists and some anthropologists emphasise how certain cultural traditions are similar in many societies, such as supernatural beliefs, types of musics, or what people find or not disgusting. These similarities do not need to be produced by genetically encoded preferences, but it suffices that some general tendencies make more likely that people everywhere will converge on these quasi-universal forms. A psychological tendency to interpret the behaviour of an entity as intentional (even if this entity is an inanimate object) could give rise to similarity in supernatural beliefs, as much as the physical property of the mouth give rise to similarity in how people whistle everywhere.    
+
+## Copying and selection
 
 To have a better grasp of the consequence of this idea we can, as usual, try to model a very simple case, where cultural stability can be obtained with a process of copying and selection of a model, as we did in many of the previous chapters, or with convergent transformation, where individuals are not very good at copying, or at selecting models, but they tend to transform the trait in the same way.
 
@@ -14,7 +16,6 @@ Let's imagine a population with a single trait, a continuous trait $P$, that can
 
 ```{r 13.1, message=FALSE}
 library(tidyverse)
-set.seed(111)
 N <- 1000
 population <- tibble(P = runif(N))
 ```
@@ -51,19 +52,21 @@ We can now run the simulation, and plot it with a slightly modified function `pl
 plot_multiple_runs_p <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
     geom_line(aes(colour = run)) +
-    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    stat_summary(fun = mean, geom = "line", size = 1) +
     ylim(c(0, 1)) +
     theme_bw() +
     labs(y = "p (average value of P)")
 }
 ```
 
-```{r 13.4}
+```{r 13.4, fig.cap = "The populations reach the optimal trait value with cultural selection."}
 data_model <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
 plot_multiple_runs_p(data_model)
 ```
 
 Even with a weak form of selection (sampling two traits and choosing the better one) the population converges on the optimal value quickly, in only around ten cultural generations.
+
+## Convergent transformation
 
 Now we can write another function where convergent transformation produces the same effect.
 
@@ -89,7 +92,7 @@ transformation <- function(N, t_max, r_max) {
 
 There is only a line we need to pay attention to: the values of $P$ of the new generation are calculated as `demonstrators$P + runif(N, max = 1-demonstrators$P)`. This means that the individuals of the new population copy the old generation, but they are not particularly good. They take a value of $P$ randomly drawn between the value of the demonstrator and the optimal $P=1$. Thus, if they attempt to copy a demonstrator with $P=0.1$, their "error" can be as large as 0.9. While errors can be big, they are all in the same direction, contributing to increase $P$. Let's run the simulations.
 
-```{r 13.6}
+```{r 13.6, fig.cap = "The population reach the optimal trait value when transformations converge towards the optimal value."}
 data_model <- transformation(N = 1000, t_max = 20, r_max = 5)
 plot_multiple_runs_p(data_model)
 ```
@@ -157,7 +160,7 @@ data_model_transformation <- transformation(N = 1000, t_max = 20, r_max = 5)
 
 We already know the results with respect to the value of $P$, but now we are interested in comparing if and how the values for *d* change in time in the two conditions. For this, we write an *ad hoc* plotting function, that takes the data from the two outputs and plot them in the same graph. Notice the `na.omit()` function in the first line: the data on *d* is NA for the first generation, because there is no previous generation from which to take the measure, so we want to exclude it from our plot, and start from generation number 2. For this reason, all the other values are rescaled and, in particular, the variable *generation* starts from 2. 
 
-```{r 13.10}
+```{r 13.10, fig.cap = "When convergent transformation is the driving force, the similarity between original and copied items starts high and decreases with time. When cultural selection is the driving force, the similarity is constant."}
 data_to_plot <- tibble(distance = c(na.omit(data_model_reproduction$d), na.omit(data_model_transformation$d)), 
                        condition = rep(c("reproduction", "transformation"), each = 95),
                        generation = rep(2:20,10),
@@ -232,7 +235,7 @@ transformation <- function(N, t_max, r_max) {
 
 The logic is exactly the same, only we do not need to use the indexes to retrieve the $P$ values, as they are not needed to choose demonstrators. At this point, as before, we can run the simulations in the two conditions, and plot the results (the code for the plot is also the same, only the label for the y-axes changes).
 
-```{r 13.13}
+```{r 13.13, fig.cap = "When cultural selection is the driving force, better cultural items are more likely to be copied (until the population converges to optimal values). When convergent transformation is the driving force, there is no relationship between quality and cultural success."}
 data_model_reproduction <- reproduction(N = 1000, t_max = 20, r_max = 5, mu = 0.05)
 data_model_transformation <- transformation(N = 1000, t_max = 20, r_max = 5)
 

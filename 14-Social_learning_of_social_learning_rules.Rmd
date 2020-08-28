@@ -10,7 +10,6 @@ How can we approach the social learning of social learning rules with simple mod
 
 ```{r 14.1, message=FALSE}
 library(tidyverse)
-set.seed(111)
 N <- 1000
 population <- tibble(P = runif(N))
 ```
@@ -40,20 +39,20 @@ openness_conservatism <- function(N, t_max, r_max) {
 
 Everything should be familiar in this function. The only new instruction is in the line `copy <- previous_population$P > runif(N)`. This simply compares each individual's *P* value with a random number extracted between $0$ and $1$. If the *P* value is higher, the individual will copy, otherwise it will not. 
 
-We can now run the simulation, and plot it with the `plot_multiple_runs_p()` function for continuos traits we wrote in the previous chapter.
+We can now run the simulation, and plot it with the `plot_multiple_runs_p()` function for continuous traits we wrote in the previous chapter.
 
 ```{r 14.3}
 plot_multiple_runs_p <- function(data_model) {
   ggplot(data = data_model, aes(y = p, x = generation)) +
     geom_line(aes(colour = run)) +
-    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    stat_summary(fun = mean, geom = "line", size = 1) +
     ylim(c(0, 1)) +
     theme_bw() +
     labs(y = "p (average value of P)")
 }
 ```
 
-```{r 14.4}
+```{r 14.4, fig.cap = "After few generations, the popualtion is composed by conservative individuals."}
 data_model <- openness_conservatism(N = 1000, t_max = 50, r_max = 5)
 plot_multiple_runs_p(data_model)
 ```
@@ -64,7 +63,7 @@ At the risk of ruining the surprise, the main result of populations converging t
 
 ## Maintaining open populations
 
-The result above highlights a possibly interesting aspect of what could happen when social learning rules are themselves subject to social learning, but it does not represent, of course, what happens in reality. Some models, such as the Rogers' model we explored in [chapter 8][Rogers' model], are useful exactly because they force us to think how reality differs from the modeled situation. Individuals, in real life, remain open because learning from others is, on average, effective, and increases their fitness. 
+The result above highlights a possibly interesting aspect of what could happen when social learning rules are themselves subject to social learning, but it does not represent, of course, what happens in reality. Some models, such as the Rogers' model we explored in [chapter 8][Rogers' model], are useful exactly because they force us to think how reality differs from the modelled situation. Individuals, in real life, remain open because learning from others is, on average, effective, and increases their fitness. 
 
 However, even without considering the possible fitness advantages of copying from others, there may be other reasons why individuals remain open to cultural influences. We can add a bit of complexity to the previous model and see what happens. For example, instead of having a single *P* value, individuals can be "open" or "conservative" depending on the specific cultural trait they observe. One can be open to try exotic recipes, while another may like only its local cuisine; one want to know everything about combat sports, while another prefers watching them in TV. We can say that, instead of a single *P*, we have many preferences associated to cultural traits and, as before, they can be transmitted from one individual to another. Second, we decide to copy other individuals depending on our preferences for the traits they show us. Finally, individuals are born [AS BEFORE, IF BIRTH/DEATH PROCESSES ARE NOT INTRODUCED BEFORE, WE NEED TO SAY SOMETHING HERE] without cultural traits, and they acquire them during the course of their life, by copying them from others, or by introducing them through innovation. The new function `openness_conservatims_2()` does all the above.   
 
@@ -112,21 +111,21 @@ The main novelties of the code are in the copying procedure. After selecting ran
 
 We can start with a situation similar to the previous model, with only a single trait ($M=1$). We set a relatively high innovation rate ($\mu=0.1$) so that the initial population is quickly populated by cultural traits, and $p_\text{death}=0.01$, meaning that, with a population of 100 individuals, every time step there will be on average one newborn. (As usual, you are invited to explore the effect of these parameters.) 
 
-```{r 14.6}
+```{r 14.6, fig.cap = "Simlarly to the previous model, the popualtion converges to conservatism, even if the descent is less steep as individuals need some time to acquire traits."}
 data_model <- openness_conservatism_2(N = 1000, M = 1, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
 plot_multiple_runs_p(data_model)
 ```
 
 The plot is fairly similar to what we saw before. The average openness of the population converges towards lower values in few generations, in all runs. The descent is less steep since at the beginning of the simulations individuals need to acquire cultural traits to kick start social transmission. We can now try with an higher number of possible traits, for example $M=10$.  
 
-```{r 14.7}
+```{r 14.7, fig.cap = "With 10 possible traits, convergence to conservatism is slower."}
 data_model <- openness_conservatism_2(N = 1000, M = 10, mu = 0.1, p_death = 0.01, t_max = 50, r_max = 5)
 plot_multiple_runs_p(data_model)
 ```
 
 Now the convergence seems slower. We can try with longer simulations, fixing $t_\text{max}=1000$.
 
-```{r 14.8}
+```{r 14.8, fig.cap = "Even after 1,000 generations, with 10 possible traits, individuals are not completely conservative."}
 data_model <- openness_conservatism_2(N = 1000, M = 10, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
 plot_multiple_runs_p(data_model)
 ```
@@ -137,20 +136,20 @@ Even after $1000$ generations, population openness did not go to 0, but it stabi
 plot_multiple_runs_m <- function(data_model, M) {
   ggplot(data = data_model, aes(y = m, x = generation)) +
     geom_line(aes(colour = run)) +
-    stat_summary(fun.y = mean, geom = "line", size = 1) +
+    stat_summary(fun = mean, geom = "line", size = 1) +
     ylim(c(0, M)) +
     theme_bw() +
     labs(y = "m (average number of traits)")
 }
 ```
 
-```{r 14.10}
+```{r 14.10, fig.cap = "Individuals, on average, do not acquire all the possible traits during the lifetime."}
 plot_multiple_runs_m(data_model, M = 10)
 ```
 
 On average, individuals do not have all 10 possible traits. Remember that individuals are replaced with a birth/death process, and they are born with no cultural traits so that they need time to acquire them. Let's try now with a bigger possible cultural repertoire, say $M=50$, and plot the average openness as well as the average number of traits.
 
-```{r 14.11}
+```{r 14.11, fig.cap = "Individuals, on average, acquire less then half of the available traits, when there are 50 possible traits."}
 data_model <- openness_conservatism_2(N = 1000, M = 50, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 5)
 plot_multiple_runs_p(data_model)
 plot_multiple_runs_m(data_model, M = 50)
@@ -160,7 +159,7 @@ This time the average openness stabilises to an even higher value (around $0.4$)
 
 We can explicitly visualise the relationship between $M$ and population openness after $1000$ generations for few representative values of $M$. We consider only a single run for each condition as, from the previous results, we know that different runs give very similar results.
   
-```{r 14.12}
+```{r 14.12, fig.cap = "Relationhsip between the number of possible cultural traits and the average openness of the population: when there are more traits possible to acquire, populations remain more open."}
 test_openness <- tibble(M = c(1,5,10,20,50,100), p = as.numeric(rep(NA, 6)))
 for(condition in test_openness$M){
   data_model <- openness_conservatism_2(N = 1000, M = condition, mu = 0.1, p_death = 0.01, t_max = 1000, r_max = 1)
@@ -179,7 +178,7 @@ You can easily check by yourself that decreasing $p_\text{death}$ has a similar 
   
 ## Summary of the model
   
-In this chapter we explored the idea that we can learn from others not only beliefs and skills, but also the rules that govern how and when we learn from others. The models we presented just scratch the surface of what the consequences of the "social learning of social learning rules" could be, and we invite the readers to explore other possibilities. The models still provide some interesting insights: successful cultural models need to integrate openness (to acquire cultural traits liked by others) and, at the same time, conservativenness (to remain stable and repeatedly show the same traits to copy). This also suggests that successful cultural traits should not only be liked by many, but they also should promote conservativenness, as we defined it here, in their bearers. After all, the first commandment in the Abrahamic religions is "Thou shalt have no other gods before me" rather then "Check the other gods, and you'll see I am the better one"! Regardless of the particular results, however, these models mostly highlight how unexpected cultural dynamics can emerge from systems in which the rules governing social learning are not fixed, but they are themselves subject of cultural evolution.
+In this chapter we explored the idea that we can learn from others not only beliefs and skills, but also the rules that govern how and when we learn from others. The models we presented just scratch the surface of what the consequences of the "social learning of social learning rules" could be, and we invite the readers to explore other possibilities. The models still provide some interesting insights: successful cultural models need to integrate openness (to acquire cultural traits liked by others) and, at the same time, conservativeness (to remain stable and repeatedly show the same traits to copy). This also suggests that successful cultural traits should not only be liked by many, but they also should promote conservativeness, as we defined it here, in their bearers. After all, the first commandment in the Abrahamic religions is "Thou shalt have no other gods before me" rather then "Check the other gods, and you'll see I am the better one"! Regardless of the particular results, however, these models mostly highlight how unexpected cultural dynamics can emerge from systems in which the rules governing social learning are not fixed, but they are themselves subject of cultural evolution.
 
 ***
 
