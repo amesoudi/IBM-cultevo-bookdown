@@ -23,11 +23,9 @@ N <- 100
 t_max <- 200
 ```
 
-Now we need to create our individuals. The only information we need to keep about our individuals is their cultural trait ($A$ or $B$). We'll make **population** the data structure containing the individuals. The type of data structure we have chosen here is a tibble. This is a more user-friendly version of a dataframe.
+Now we need to create our individuals. The only information we need to keep about our individuals is their cultural trait ($A$ or $B$). We'll make **population** the data structure containing the individuals. The type of data structure we have chosen here is a tibble. This is a more user-friendly version of a dataframe. Tibbles, and the tibble command, are part of the `tidyverse` library, which we need to call before creating the **population** tibble. We will use other commands from the `tidyverse` throughout the chapter.
 
 Initially, we'll give each individual either an $A$ or $B$ at random, using the `sample()` command. This can be seen in the code chunk below. The `sample()` command takes three arguments (i.e. inputs or options). The first argument lists the elements to pick at random, in our case, the traits $A$ and $B$. The second argument gives the number of times to pick, in our case $N$ times, once for each individual. The final argument says to replace or reuse the elements specified in the first argument after they've been picked (otherwise there would only be one copy of $A$ and one copy of $B$, so we could only give two individuals traits before running out). Within the tibble command, the word $trait$ denotes the name of the variable within the tibble that contains the random $A$s and $B$s, and the whole tibble is assigned the name **population**.
-
-There are one line before `sample()` in the chunk below. First, we need to call the `tidyverse` library. We will use this throughout the chapter. Here, it allows us to create a tibble using the tibble command. 
 
 ```{r 1.2, message = FALSE}
 library(tidyverse)
@@ -50,9 +48,9 @@ population$trait[4]
 
 This should match the fourth row in the table above.
 
-We also need a tibble to record the output of our simulation, that is, to track the trait frequency $p$ in each generation. This will have two columns with $t_{\text{max}}$ rows, one row for each generation. The first column is simply a counter of the generations, from 1 to $t_{\text{max}}$. This will be useful to plot the output later. The other column contains the values of $p$ for each generation. 
+We also need a tibble to record the output of our simulation, that is, to track the trait frequency $p$ in each generation. This will have two columns with $t_{\text{max}}$ rows, one row for each generation. The first column is simply a counter of the generations, from 1 to $t_{\text{max}}$. This will be useful for plotting the output later. The other column should contain the values of $p$ for each generation. 
 
-At this stage we don't know what $p$ will be in each generation, so, for now, let's fill the **output** tibble with lots of NAs, which is R's symbol for Not Available, or missing value. We can use the `rep()` (repeat) command to repeat NA $t_{\text{max}}$ times. We're using NA rather than, say, zero, because zero could be misinterpreted as $p = 0$, which would mean that all individuals have trait $B$. This would be misleading, because at the moment we haven't yet calculated $p$, so it's nonexistent, rather than zero.
+At this stage we don't know what $p$ will be in each generation, so for now let's fill the **output** tibble with lots of NAs, which is R's symbol for Not Available, or missing value. We can use the `rep()` (repeat) command to repeat NA $t_{\text{max}}$ times. We're using NA rather than, say, zero, because zero could be misinterpreted as $p = 0$, which would mean that all individuals have trait $B$. This would be misleading, because at the moment we haven't yet calculated $p$, so it's nonexistent, rather than zero.
 
 ```{r 1.5}
 output <- tibble(generation = 1:t_max, p = rep(NA, t_max))
@@ -65,7 +63,7 @@ output$p[1] <- sum(population$trait == "A") / N
 output
 ```
 
-This first value of $p$ should be around $0.5$, meaning that around 50 individuals have trait $A$, and 50 have trait $B$. Even though `sample()` returns either trait with equal probability, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, re-run the above code with different values of the random number seed.
+This first value of $p$ should be around $0.5$, meaning that around 50 individuals have trait $A$, and 50 have trait $B$. Even though `sample()` returns either trait with equal probability, this does not necessarily mean that we will get exactly 50 $A$s and 50 $B$s. This happens with simulations and finite population sizes: they are probabilistic (or stochastic), not deterministic. Analogously, flipping a coin 100 times will not always give exactly 50 heads and 50 tails. Sometimes we will get 51 heads, sometimes 49, etc. To see this in our simulation, you can re-run all of the above code and you should get a different $p$.
 
 ## Execute generation turn-over many times
 
@@ -93,15 +91,15 @@ Now we should have 200 values of $p$ stored in **output**, one for each generati
 
 ## Plotting the model results
 
-We use `ggplot()` to plot our data. The syntax of ggplot may be slightly obscure at the beginning, but it forces us to have a clear picture of the data before plotting.
+We use `ggplot()` to plot our data. The syntax of ggplot may be slightly obscure at first, but it forces us to have a clear picture of the data before plotting.
 
-In the first line in the code below, we are telling ggplot that the data we want to plot is in the tibble **output**. Then, with the command `aes()` we declare the 'aesthetics' of the plot, that is, how we want our data mapped in our plot. In this case, we want the values of $p$ on the y-axis, and the values of $generation$ on the x-axis (this is why we created earlier, in the tibble **output**, a column to keep the count of generations).
+In the first line in the code below, we are telling ggplot that the data we want to plot is in the tibble **output**. Then, with the command `aes()` we declare the 'aesthetics' of the plot, that is, how we want our data mapped in our plot. In this case, we want the values of $p$ on the y-axis, and the values of $generation$ on the x-axis (this is why earlier we created, in the tibble **output**, a column to keep the count of generations).
 
-We then use `geom_line()`. In ggplot, 'geoms' describe what kind of visual representation should be plotted: lines, bars, boxes and so on. This visual representation is independent of the mapping that we declared before with `aes()`. The same data, with the same mapping, can be visually represented in many different ways. In this case, we are asking ggplot to represent the data as a line. You can change `geom_line()` in the code below to `geom_point()`, and see what happens (other geoms have less obvious effects, and we will see some of them in the later chapters).
+We then use `geom_line()`. In ggplot, 'geoms' describe what kind of visual representation should be plotted: lines, bars, boxes and so on. This visual representation is independent of the mapping that we declared before with `aes()`. The same data, with the same mapping, can be visually represented in many different ways. In this case, we are asking ggplot to represent the data as a line. You can change `geom_line()` in the code below to `geom_point()` and see what happens (other geoms have less obvious effects, and we will see some of them in the later chapters).
 
-The other commands are mainly to make the plot look nicer. We want the y-axis to span all the possible values of $p$, from 0 to 1, and we use a particular 'theme' for our plot, in this case, a standard theme with white background. With the command `labs()` we give a more informative label to the y-axis (ggplot automatically labels the axis with the name of the tibble columns that are plotted: this is good for $generation$, but less so for $p$).
+The other commands are mainly to make the plot look nicer. We want the y-axis to span all the possible values of $p$, from 0 to 1, and we use a particular 'theme' for our plot, in this case, a simple black and white (bw) theme. With the command `labs()` we can provide a more informative label for the y-axis. ggplot automatically labels the axis with the name of the tibble columns that are plotted: this is good for $generation$, but less so for $p$.
 
-```{r 1.8}
+```{r 1.8, fig.cap = "Random fluctuations of the proportion of trait A under unbiased cultural transmission"}
 ggplot(data = output, aes(y = p, x = generation)) +
   geom_line() +
   ylim(c(0, 1)) +
@@ -109,7 +107,7 @@ ggplot(data = output, aes(y = p, x = generation)) +
   labs(y = "p (proportion of individuals with trait A)")
 ```
 
-The proportion of individuals with trait $A$ should start off hovering around 0.5, and then oscillating randomly (it may be, in some cases, also reach 0, meaning that all $A$s disappeared, or 1, meaning that all $B$s disappeared).  Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code, trying different seeds of the random number generator, you will get something different. In all likelihood, $p$ might go to 0 or 1 at some point. At $p = 0$ there are no $A$s and every individual possesses $B$. At $p = 1$ there are no $B$s and every individual possesses $A$. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance after some generations.
+The proportion of individuals with trait $A$ should start off hovering around 0.5, and then oscillate randomly (it may, in some cases, also reach 0, meaning that all $A$s have disappeared, or 1, meaning that all $B$s have disappeared). Unbiased transmission, or random copying, is by definition random, so different runs of this simulation will generate different plots. If you rerun all the code you will get something different. In all likelihood, $p$ might go to 0 or 1 at some point. At $p = 0$ there are no $A$s and every individual possesses $B$. At $p = 1$ there are no $B$s and every individual possesses $A$. This is a typical feature of cultural drift, analogous to genetic drift: in small populations, with no selection or other directional processes operating, traits can be lost purely by chance after some generations.
 
 ## Write a function to wrap the model code
 
@@ -137,7 +135,7 @@ unbiased_transmission_1 <- function(N, t_max) {
 
 This is just all of the code snippets that we already ran above, but all within a function with parameters $N$ and $t_{\text{max}}$ as arguments to the function. In addition, `unbiased_transmission_1()`  ends with the line `output`. This means that this tibble will be exported from the function when it is run. This is useful for storing data from simulations wrapped in functions, otherwise that data is lost after the function is executed. 
 
-Nothing will happen when you run the above code, because all you have done is define the function but not actually run it. The point is that we can now call the function in one go, easily changing the values of $N$ and $t_{\text{max}}$. Let's try first with the same values of $N$ and $t_{\text{max}}$ as before, and save the output from the simulation into **data_model**, as a record of what happened.
+Nothing will happen when you run the above code, because all you have done is define the function and not actually run it. The point is that we can now call the function in one go, easily changing the values of $N$ and $t_{\text{max}}$. Let's try first with the same values of $N$ and $t_{\text{max}}$ as before, and save the output from the simulation into **data_model**, as a record of what happened.
 
 ```{r 1.10}
 data_model <- unbiased_transmission_1(N = 100, t_max = 200)
@@ -157,7 +155,7 @@ plot_single_run <- function(data_model) {
 
 At this point, we can visualise the results:
 
-```{r 1.12}
+```{r 1.12, fig.cap = "Random fluctuations of the proportion of trait A under unbiased cultural transmission"}
 plot_single_run(data_model)
 ```
 
@@ -165,7 +163,7 @@ As anticipated, the plot is different from the simulation we ran before, even th
 
 Now let's try changing the parameters. We can call the simulation and the plotting functions together. The code below reruns and plots the simulation with a much larger $N$.
 
-```{r 1.13}
+```{r 1.13, fig.cap = "Random fluctuations of the proportion of trait A under unbiased cultural transmission and a large population size"}
 data_model <- unbiased_transmission_1(N = 10000, t_max = 200)
 plot_single_run(data_model)
 ```
@@ -234,7 +232,7 @@ ggplot(data = output) +
   geom_line(aes(y = p, x = generation))
 ```
 
-We can use this property to make more complex plots. The plot created in `plot_multiple_runs` has a first geom, `geom_line()`. This inherits the aesthetics specified in the initial call to `ggplot()` but also has a new mapping specific to `geom_line()`, `colour = run`. This tells ggplot to plot each run line with a different colour. The following command, `stat_summary()`, calculates the mean of all runs. However, this only inherits the mapping specified in the initial `ggplot()` call. If in the aesthetic of `stat_summary()` we had also specified `colour = run`, it would separate the data by run, and it would calculate the mean of each run. This, though, is just the lines we have already plotted with the `geom_line()` command. For this reason, we did not put `colour = run` in the `ggplot()` call, only in `geom_line()`. As always, there are various ways to obtain the same result. This code:
+We can use this property to make more complex plots. The plot created in `plot_multiple_runs` has a first geom, `geom_line()`. This inherits the aesthetics specified in the initial call to `ggplot()` but also has a new mapping specific to `geom_line()`, `colour = run`. This tells ggplot to plot each run line with a different colour. The next command, `stat_summary()`, calculates the mean of all runs. However, this only inherits the mapping specified in the initial `ggplot()` call. If in the aesthetic of `stat_summary()` we had also specified `colour = run`, it would separate the data by run, and it would calculate the mean of each run. This, though, is just the lines we have already plotted with the `geom_line()` command. For this reason, we did not put `colour = run` in the `ggplot()` call, only in `geom_line()`. As always, there are various ways to obtain the same result. This code:
 
 ```{r 1.18, eval=FALSE}
 ggplot(data = output) +
@@ -244,11 +242,11 @@ ggplot(data = output) +
 
 is equivalent to the code we wrapped in the function above. However, the original code is clearer, as it distinguishes the global mapping, and the mappings specific to each visual representation. 
 
-`stat_summary()` is a generic ggplot function which can be used to plot different statistics to summarise our data. In this case, we want to calculate the mean on the data mapped in $y$, we want to plot them with a line, and we want this line to be thicker than the lines for the single runs. The default line size for geom_line is 0.5, so `size = 1` doubles the thickness.
+`stat_summary()` is a generic ggplot function which can be used to plot different statistics to summarise our data. In this case, we want to calculate the mean of the data mapped in $y$, we want to plot them with a line, and we want this line to be thicker than the lines for the single runs. The default line size for geom_line is 0.5, so `size = 1` doubles the thickness.
 
 Let's now run the function and plot the results for five runs with the same parameters we used at the beginning ($N=100$ and $t_{\text{max}}=200$):
 
-```{r 1.19}
+```{r 1.19, fig.cap = "Unbiased cultural transmission generates different dynamics in multiple runs"}
 data_model <- unbiased_transmission_2(N = 100, t_max = 200, r_max = 5)
 plot_multiple_runs(data_model)
 ```
@@ -261,7 +259,7 @@ data_model
 
 Now let's run the `unbiased_transmission_2()` model with $N = 10000$, to compare with $N = 100$.
 
-```{r 1.21}
+```{r 1.21, fig.cap = "Unbiased cultural transmission generates similar dynamics in multiple runs when population sizes are very large"}
 data_model <- unbiased_transmission_2(N = 10000, t_max = 200, r_max = 5)
 plot_multiple_runs(data_model)
 ```
@@ -300,7 +298,7 @@ unbiased_transmission_3 <- function(N, p_0, t_max, r_max) {
 
 `unbiased_transmission_3()` is almost identical to the previous function. The only changes are the addition of $p_0$ as an argument to the function, and the $prob$ argument in the `sample()` command. The $prob$ argument gives the probability of picking each option, in our case $A$ and $B$, in the first generation. The probability of $A$ is now $p_0$, and the probability of $B$ is now $1 - p_0$. We can use the same plotting function as before to visualise the result. Let's see what happens with a different value of $p_0$, for example $p_0 = 0.2$.
 
-```{r 1.23}
+```{r 1.23, fig.cap = "Unbiased transmission does not change trait frequencies from the starting conditions, barring random fluctuations"}
 data_model <- unbiased_transmission_3(N = 10000, p_0 = 0.2, t_max = 200, r_max = 5)
 plot_multiple_runs(data_model)
 ```
@@ -356,7 +354,7 @@ Second, the smaller the population size, the more likely traits are to be lost b
 
 Furthermore, generating expectations about cultural change under simple assumptions like random cultural drift can be useful for detecting non-random patterns like selection. If we don't have a baseline, we won't know selection or other directional processes when we see them.
 
-We also have introduced several programming techniques that will be useful in later simulations. We have seen how to use tibbles to hold characteristics of individuals and the outputs of simulations, how to use loops to cycle through generations and simulation runs, how to use `sample()` to pick randomly from sets of elements, how to wrap simulations in functions to easily re-run them with different parameter values, and how to use `ggplot()` to plot the results of simulations.
+We have also introduced several programming techniques that will be useful in later simulations. We have seen how to use tibbles to hold characteristics of individuals and the outputs of simulations, how to use loops to cycle through generations and simulation runs, how to use `sample()` to pick randomly from sets of elements, how to wrap simulations in functions to easily re-run them with different parameter values, and how to use `ggplot()` to plot the results of simulations.
 
 
 
